@@ -1,0 +1,251 @@
+{
+  "4": {
+    "inputs": {
+      "ckpt_name": "sd_xl_turbo_1.0_fp16.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple"
+  },
+  "5": {
+    "inputs": {
+      "width": 512,
+      "height": 512,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage"
+  },
+  "6": {
+    "inputs": {
+      "text": "Dreamscape . Surreal, ethereal, dreamy, mysterious, fantasy, highly detailed, Flower, agriculture,glowing,no_humans",
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "7": {
+    "inputs": {
+      "text": "nsfw,nuda,realistic, concrete, ordinary, mundane",
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode"
+  },
+  "8": {
+    "inputs": {
+      "samples": [
+        "67",
+        0
+      ],
+      "vae": [
+        "4",
+        2
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "10": {
+    "inputs": {
+      "add_noise": true,
+      "noise_seed": 892267960567011,
+      "cfg": 1,
+      "model": [
+        "4",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "sampler": [
+        "14",
+        0
+      ],
+      "sigmas": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "SamplerCustom"
+  },
+  "13": {
+    "inputs": {
+      "steps": 4,
+      "model": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "SDTurboScheduler"
+  },
+  "14": {
+    "inputs": {
+      "sampler_name": "dpmpp_2m_sde"
+    },
+    "class_type": "KSamplerSelect"
+  },
+  "16": {
+    "inputs": {
+      "images": [
+        "72",
+        0
+      ]
+    },
+    "class_type": "PreviewImage"
+  },
+  "25": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "72",
+        0
+      ]
+    },
+    "class_type": "SaveImage"
+  },
+  "56": {
+    "inputs": {
+      "samples": [
+        "10",
+        0
+      ],
+      "vae": [
+        "4",
+        2
+      ]
+    },
+    "class_type": "VAEDecode"
+  },
+  "57": {
+    "inputs": {
+      "upscale_model": [
+        "58",
+        0
+      ],
+      "image": [
+        "56",
+        0
+      ]
+    },
+    "class_type": "ImageUpscaleWithModel"
+  },
+  "58": {
+    "inputs": {
+      "model_name": "ESRGAN_4x.pth"
+    },
+    "class_type": "UpscaleModelLoader"
+  },
+  "61": {
+    "inputs": {
+      "pixels": [
+        "71",
+        0
+      ],
+      "vae": [
+        "4",
+        2
+      ]
+    },
+    "class_type": "VAEEncode"
+  },
+  "62": {
+    "inputs": {
+      "model_name": "SwinIR_4x.pth"
+    },
+    "class_type": "UpscaleModelLoader"
+  },
+  "63": {
+    "inputs": {
+      "upscale_model": [
+        "62",
+        0
+      ],
+      "image": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "ImageUpscaleWithModel"
+  },
+  "67": {
+    "inputs": {
+      "add_noise": true,
+      "noise_seed": 433600937763293,
+      "cfg": 1,
+      "model": [
+        "4",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "sampler": [
+        "14",
+        0
+      ],
+      "sigmas": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "73",
+        0
+      ]
+    },
+    "class_type": "SamplerCustom"
+  },
+  "71": {
+    "inputs": {
+      "upscale_method": "lanczos",
+      "width": 1024,
+      "height": 1024,
+      "crop": "disabled",
+      "image": [
+        "57",
+        0
+      ]
+    },
+    "class_type": "ImageScale"
+  },
+  "72": {
+    "inputs": {
+      "upscale_method": "lanczos",
+      "width": 4096,
+      "height": 4096,
+      "crop": "disabled",
+      "image": [
+        "63",
+        0
+      ]
+    },
+    "class_type": "ImageScale"
+  },
+  "73": {
+    "inputs": {
+      "upscale_method": "bilinear",
+      "width": 2048,
+      "height": 2048,
+      "crop": "disabled",
+      "samples": [
+        "61",
+        0
+      ]
+    },
+    "class_type": "LatentUpscale"
+  }
+}

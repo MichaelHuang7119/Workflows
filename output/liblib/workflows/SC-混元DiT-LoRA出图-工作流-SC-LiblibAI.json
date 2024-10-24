@@ -1,0 +1,733 @@
+{
+  "last_node_id": 81,
+  "last_link_id": 105,
+  "nodes": [
+    {
+      "id": 37,
+      "type": "HYDiTCheckpointLoader",
+      "pos": [
+        -690,
+        -30
+      ],
+      "size": {
+        "0": 340,
+        "1": 82
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            38
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "HYDiTCheckpointLoader"
+      },
+      "widgets_values": [
+        "HyDit\\HunyuanDistillation-v1.2.pt",
+        "G/2-1.2"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 35,
+      "type": "HYDiTTextEncoderLoader",
+      "pos": [
+        -270,
+        270
+      ],
+      "size": {
+        "0": 360,
+        "1": 150
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            22,
+            25
+          ],
+          "shape": 3,
+          "label": "CLIP",
+          "slot_index": 0
+        },
+        {
+          "name": "T5",
+          "type": "T5",
+          "links": [
+            19,
+            26
+          ],
+          "shape": 3,
+          "label": "T5",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "HYDiTTextEncoderLoader"
+      },
+      "widgets_values": [
+        "chinese-roberta-wwm-ext-large.bin",
+        "mT5.bin",
+        "gpu",
+        "FP16"
+      ]
+    },
+    {
+      "id": 42,
+      "type": "VAELoader",
+      "pos": [
+        -690,
+        110
+      ],
+      "size": {
+        "0": 330,
+        "1": 60
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            44
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "sdxl_vae_fp16fix.safetensors"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 51,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        -270,
+        100
+      ],
+      "size": {
+        "0": 360,
+        "1": 82
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 40,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            47
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "HyLoras\\PCM-SD3(kolors-Hunyuan)-Accelerater-PAseer.safetensors",
+        1
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 53,
+      "type": "HighRes-Fix Script",
+      "pos": [
+        710,
+        -40
+      ],
+      "size": [
+        330,
+        250
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "script",
+          "type": "SCRIPT",
+          "link": null,
+          "label": "脚本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SCRIPT",
+          "type": "SCRIPT",
+          "links": [
+            48
+          ],
+          "shape": 3,
+          "label": "脚本"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "HighRes-Fix Script"
+      },
+      "widgets_values": [
+        "latent",
+        "(use same)",
+        "nearest-exact",
+        "16xPSNR.pth",
+        1.25,
+        true,
+        -1,
+        null,
+        12,
+        0.56,
+        1,
+        false,
+        "TTPLANET_Controlnet_Tile_realistic_v2_rank256.safetensors",
+        1,
+        "none",
+        false
+      ],
+      "color": "#443322",
+      "bgcolor": "#665533",
+      "shape": 1,
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 50,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        -270,
+        -30
+      ],
+      "size": {
+        "0": 360,
+        "1": 82
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 38,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            40
+          ],
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "HyLoras\\SC-SCMIXFACE-HyLora-000004.safetensors",
+        0.8
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 27,
+      "type": "EmptyLatentImage",
+      "pos": [
+        710,
+        290
+      ],
+      "size": {
+        "0": 318.8523864746094,
+        "1": 106
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            101
+          ],
+          "shape": 3,
+          "label": "Latent",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        688,
+        1024,
+        1
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 39,
+      "type": "HYDiTTextEncodeSimple",
+      "pos": [
+        200,
+        -30
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "link": 22,
+          "label": "CLIP"
+        },
+        {
+          "name": "T5",
+          "type": "T5",
+          "link": 19,
+          "label": "T5"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            45
+          ],
+          "shape": 3,
+          "label": "CONDITIONING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "HYDiTTextEncodeSimple"
+      },
+      "widgets_values": [
+        "scgirl, solo, realistic, portrait, 中景镜头，小红书文案：给网恋对象发了这张照片后，他就失联了。姐妹们，我哪里做错了"
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 41,
+      "type": "HYDiTTextEncodeSimple",
+      "pos": [
+        200,
+        230
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "link": 25,
+          "label": "CLIP"
+        },
+        {
+          "name": "T5",
+          "type": "T5",
+          "link": 26,
+          "label": "T5"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            46
+          ],
+          "shape": 3,
+          "label": "CONDITIONING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "HYDiTTextEncodeSimple"
+      },
+      "widgets_values": [
+        "变错误的眼睛,糟糕的人脸,disfigured,糟糕的艺术,变形,多余的肢体,模糊的颜色,blurry,重复,病态,残缺,watermark,昏暗的照片"
+      ],
+      "color": "#322",
+      "bgcolor": "#533",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 60,
+      "type": "PreviewImage",
+      "pos": [
+        1530,
+        -100
+      ],
+      "size": {
+        "0": 610,
+        "1": 920
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 54,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 81,
+      "type": "SaveImage",
+      "pos": [
+        2190,
+        -100
+      ],
+      "size": {
+        "0": 330,
+        "1": 390
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 104,
+          "label": "图像"
+        }
+      ],
+      "properties": {},
+      "widgets_values": [
+        "HunYuanDit_Photos"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 52,
+      "type": "KSampler (Efficient)",
+      "pos": [
+        1100,
+        -50
+      ],
+      "size": [
+        330,
+        560
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 47,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 45,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 46,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 101,
+          "label": "Latent"
+        },
+        {
+          "name": "optional_vae",
+          "type": "VAE",
+          "link": 44,
+          "label": "VAE(可选)"
+        },
+        {
+          "name": "script",
+          "type": "SCRIPT",
+          "link": 48,
+          "label": "脚本",
+          "slot_index": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "CONDITIONING+",
+          "type": "CONDITIONING",
+          "links": [],
+          "shape": 3,
+          "label": "正面条件",
+          "slot_index": 1
+        },
+        {
+          "name": "CONDITIONING-",
+          "type": "CONDITIONING",
+          "links": [],
+          "shape": 3,
+          "label": "负面条件",
+          "slot_index": 2
+        },
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3,
+          "label": "Latent"
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [],
+          "shape": 3,
+          "label": "VAE",
+          "slot_index": 4
+        },
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            54,
+            104
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 5
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler (Efficient)"
+      },
+      "widgets_values": [
+        -1,
+        null,
+        25,
+        3.5,
+        "dpmpp_2m_sde_gpu",
+        "sgm_uniform",
+        1,
+        "auto",
+        "true"
+      ],
+      "color": "#443322",
+      "bgcolor": "#665533",
+      "shape": 1,
+      "category": "Custom Nodes"
+    }
+  ],
+  "links": [
+    [
+      15,
+      31,
+      0,
+      24,
+      0,
+      "MODEL"
+    ],
+    [
+      19,
+      35,
+      1,
+      39,
+      1,
+      "T5"
+    ],
+    [
+      22,
+      35,
+      0,
+      39,
+      0,
+      "CLIP"
+    ],
+    [
+      25,
+      35,
+      0,
+      41,
+      0,
+      "CLIP"
+    ],
+    [
+      26,
+      35,
+      1,
+      41,
+      1,
+      "T5"
+    ],
+    [
+      38,
+      37,
+      0,
+      50,
+      0,
+      "MODEL"
+    ],
+    [
+      40,
+      50,
+      0,
+      51,
+      0,
+      "MODEL"
+    ],
+    [
+      44,
+      42,
+      0,
+      52,
+      4,
+      "VAE"
+    ],
+    [
+      45,
+      39,
+      0,
+      52,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      46,
+      41,
+      0,
+      52,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      47,
+      51,
+      0,
+      52,
+      0,
+      "MODEL"
+    ],
+    [
+      48,
+      53,
+      0,
+      52,
+      5,
+      "SCRIPT"
+    ],
+    [
+      54,
+      52,
+      5,
+      60,
+      0,
+      "IMAGE"
+    ],
+    [
+      101,
+      27,
+      0,
+      52,
+      3,
+      "LATENT"
+    ],
+    [
+      104,
+      52,
+      5,
+      81,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "Img-Gen",
+      "bounding": [
+        -700,
+        -124,
+        2141,
+        682
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1.0152559799477838,
+      "offset": [
+        367.10902094922807,
+        406.0512986698492
+      ]
+    },
+    "workspace_info": {
+      "id": "qjkCx_gnMX4LUDLXFN1Ed"
+    }
+  },
+  "version": 0.4
+}

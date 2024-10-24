@@ -1,0 +1,2357 @@
+{
+  "last_node_id": 68,
+  "last_link_id": 126,
+  "nodes": [
+    {
+      "id": 52,
+      "type": "ConcatText_Zho",
+      "pos": [
+        -2390,
+        200
+      ],
+      "size": {
+        "0": 210,
+        "1": 50
+      },
+      "flags": {},
+      "order": 27,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text_1",
+          "type": "STRING",
+          "link": 103,
+          "widget": {
+            "name": "text_1"
+          },
+          "label": "text_1"
+        },
+        {
+          "name": "text_2",
+          "type": "STRING",
+          "link": 104,
+          "widget": {
+            "name": "text_2"
+          },
+          "label": "text_2"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            102
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "text"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ConcatText_Zho"
+      },
+      "widgets_values": [
+        "",
+        ""
+      ],
+      "color": "#346434"
+    },
+    {
+      "id": 49,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -2130,
+        210
+      ],
+      "size": {
+        "0": 210,
+        "1": 50
+      },
+      "flags": {},
+      "order": 28,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 108,
+          "label": "CLIP"
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 102,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            110
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#346434"
+    },
+    {
+      "id": 47,
+      "type": "CR Apply LoRA Stack",
+      "pos": [
+        -3160,
+        390
+      ],
+      "size": {
+        "0": 300,
+        "1": 80
+      },
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 101,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 100,
+          "label": "CLIP",
+          "slot_index": 1
+        },
+        {
+          "name": "lora_stack",
+          "type": "LORA_STACK",
+          "link": 99,
+          "label": "LoRA堆"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            113
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            108,
+            109
+          ],
+          "shape": 3,
+          "label": "CLIP",
+          "slot_index": 1
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Apply LoRA Stack"
+      },
+      "color": "#c09430"
+    },
+    {
+      "id": 48,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        -3160,
+        200
+      ],
+      "size": {
+        "0": 300,
+        "1": 130
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            101
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            100
+          ],
+          "shape": 3,
+          "label": "CLIP"
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            114
+          ],
+          "shape": 3,
+          "label": "VAE",
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "xl\\cinematicredmond_v10.safetensors",
+        null
+      ],
+      "color": "#c09430"
+    },
+    {
+      "id": 39,
+      "type": "Automatic CFG",
+      "pos": [
+        -1320,
+        220
+      ],
+      "size": {
+        "0": 210,
+        "1": 80
+      },
+      "flags": {},
+      "order": 30,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 87,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            91
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Automatic CFG"
+      },
+      "widgets_values": [
+        true,
+        true
+      ],
+      "color": "#422342"
+    },
+    {
+      "id": 45,
+      "type": "KSamplerSelect",
+      "pos": [
+        -1320,
+        370
+      ],
+      "size": {
+        "0": 210,
+        "1": 60
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            94
+          ],
+          "shape": 3,
+          "label": "采样器"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "dpmpp_2m"
+      ],
+      "color": "#422342"
+    },
+    {
+      "id": 43,
+      "type": "AlignYourStepsScheduler",
+      "pos": [
+        -1320,
+        500
+      ],
+      "size": {
+        "0": 210,
+        "1": 110
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            95
+          ],
+          "shape": 3,
+          "label": "Sigmas",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "AlignYourStepsScheduler"
+      },
+      "widgets_values": [
+        "SDXL",
+        10,
+        1
+      ],
+      "color": "#422342"
+    },
+    {
+      "id": 44,
+      "type": "SamplerCustom",
+      "pos": [
+        -1070,
+        220
+      ],
+      "size": {
+        "0": 270,
+        "1": 440
+      },
+      "flags": {},
+      "order": 31,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 91,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 92,
+          "label": "正面条件",
+          "slot_index": 1
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 93,
+          "label": "负面条件",
+          "slot_index": 2
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 94,
+          "label": "采样器",
+          "slot_index": 3
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 95,
+          "label": "Sigmas"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 112,
+          "label": "Latent",
+          "slot_index": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            88
+          ],
+          "shape": 3,
+          "label": "输出",
+          "slot_index": 0
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3,
+          "label": "降噪输出"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustom"
+      },
+      "widgets_values": [
+        true,
+        15185445801443,
+        "randomize",
+        6
+      ],
+      "color": "#422342"
+    },
+    {
+      "id": 40,
+      "type": "VAEDecode",
+      "pos": [
+        -780,
+        220
+      ],
+      "size": {
+        "0": 210,
+        "1": 50
+      },
+      "flags": {},
+      "order": 32,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 88,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 114,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            97,
+            98
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "color": "#422342"
+    },
+    {
+      "id": 46,
+      "type": "PreviewImage",
+      "pos": [
+        -780,
+        350
+      ],
+      "size": {
+        "0": 210,
+        "1": 250
+      },
+      "flags": {},
+      "order": 33,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 97,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "color": "#422342"
+    },
+    {
+      "id": 34,
+      "type": "InstantIDModelLoader",
+      "pos": [
+        -1780,
+        550
+      ],
+      "size": {
+        "0": 320,
+        "1": 60
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "INSTANTID",
+          "type": "INSTANTID",
+          "links": [
+            79
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "InstantIDModelLoader"
+      },
+      "widgets_values": [
+        "ip-adapter.bin"
+      ],
+      "color": "#38291f"
+    },
+    {
+      "id": 35,
+      "type": "InstantIDFaceAnalysis",
+      "pos": [
+        -1780,
+        680
+      ],
+      "size": {
+        "0": 320,
+        "1": 60
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "FACEANALYSIS",
+          "type": "FACEANALYSIS",
+          "links": [
+            80
+          ],
+          "shape": 3,
+          "label": "面部分析"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "InstantIDFaceAnalysis"
+      },
+      "widgets_values": [
+        "CPU"
+      ],
+      "color": "#38291f"
+    },
+    {
+      "id": 36,
+      "type": "ControlNetLoader",
+      "pos": [
+        -1770,
+        830
+      ],
+      "size": {
+        "0": 320,
+        "1": 80
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "links": [
+            81
+          ],
+          "shape": 3,
+          "label": "ControlNet"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetLoader"
+      },
+      "widgets_values": [
+        "instantid\\diffusion_pytorch_model.safetensors",
+        null
+      ],
+      "color": "#38291f"
+    },
+    {
+      "id": 19,
+      "type": "ImageResizeKJ",
+      "pos": [
+        -360,
+        650
+      ],
+      "size": {
+        "0": 320,
+        "1": 240
+      },
+      "flags": {},
+      "order": 35,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 30,
+          "label": "图像"
+        },
+        {
+          "name": "get_image_size",
+          "type": "IMAGE",
+          "link": 68,
+          "label": "参考图像大小"
+        },
+        {
+          "name": "width_input",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "width_input"
+          },
+          "label": "宽度"
+        },
+        {
+          "name": "height_input",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "height_input"
+          },
+          "label": "高度"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            70
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "图像"
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null,
+          "shape": 3,
+          "label": "宽度"
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null,
+          "shape": 3,
+          "label": "高度"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageResizeKJ"
+      },
+      "widgets_values": [
+        512,
+        768,
+        "nearest-exact",
+        false,
+        2,
+        0,
+        0
+      ],
+      "color": "#006691"
+    },
+    {
+      "id": 30,
+      "type": "LivePortraitProcess",
+      "pos": [
+        -370,
+        290
+      ],
+      "size": {
+        "0": 370,
+        "1": 290
+      },
+      "flags": {},
+      "order": 34,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pipeline",
+          "type": "LIVEPORTRAITPIPE",
+          "link": 58,
+          "label": "pipeline"
+        },
+        {
+          "name": "source_image",
+          "type": "IMAGE",
+          "link": 98,
+          "label": "source_image"
+        },
+        {
+          "name": "driving_images",
+          "type": "IMAGE",
+          "link": 60,
+          "label": "driving_images"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "cropped_images",
+          "type": "IMAGE",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "cropped_images"
+        },
+        {
+          "name": "full_images",
+          "type": "IMAGE",
+          "links": [
+            68,
+            115,
+            120
+          ],
+          "shape": 3,
+          "slot_index": 1,
+          "label": "full_images"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LivePortraitProcess"
+      },
+      "widgets_values": [
+        512,
+        2.3,
+        0,
+        -0.125,
+        true,
+        false,
+        false,
+        true,
+        true
+      ],
+      "color": "#006691"
+    },
+    {
+      "id": 1,
+      "type": "DownloadAndLoadLivePortraitModels",
+      "pos": [
+        -360,
+        200
+      ],
+      "size": {
+        "0": 250,
+        "1": 30
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "live_portrait_pipe",
+          "type": "LIVEPORTRAITPIPE",
+          "links": [
+            58
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "live_portrait_pipe"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DownloadAndLoadLivePortraitModels"
+      },
+      "color": "#006691"
+    },
+    {
+      "id": 18,
+      "type": "ImageConcatMulti",
+      "pos": [
+        130,
+        240
+      ],
+      "size": {
+        "0": 210,
+        "1": 150
+      },
+      "flags": {},
+      "order": 37,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_1",
+          "type": "IMAGE",
+          "link": 120,
+          "label": "image_1"
+        },
+        {
+          "name": "image_2",
+          "type": "IMAGE",
+          "link": 70,
+          "label": "image_2"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            121
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "images"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageConcatMulti"
+      },
+      "widgets_values": [
+        2,
+        "right",
+        false,
+        null
+      ],
+      "color": "#006691"
+    },
+    {
+      "id": 58,
+      "type": "Reroute",
+      "pos": [
+        10,
+        210
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 36,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 115
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "IMAGE",
+          "links": [
+            119
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false
+      },
+      "color": "#006691"
+    },
+    {
+      "id": 23,
+      "type": "VHS_VideoCombine",
+      "pos": [
+        -1890,
+        -880
+      ],
+      "size": [
+        480,
+        920
+      ],
+      "flags": {},
+      "order": 38,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 119,
+          "label": "图像"
+        },
+        {
+          "name": "audio",
+          "type": "VHS_AUDIO",
+          "link": null,
+          "label": "音频"
+        },
+        {
+          "name": "meta_batch",
+          "type": "VHS_BatchManager",
+          "link": null,
+          "label": "批次管理"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": null,
+          "shape": 3,
+          "label": "文件名"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VHS_VideoCombine"
+      },
+      "widgets_values": {
+        "frame_rate": 24,
+        "loop_count": 0,
+        "filename_prefix": "Claymation-For-You",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "pingpong": false,
+        "save_output": false,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "Claymation-For-You_00038.mp4",
+            "subfolder": "",
+            "type": "temp",
+            "format": "video/h264-mp4"
+          }
+        }
+      }
+    },
+    {
+      "id": 38,
+      "type": "LoadImage",
+      "pos": [
+        -2760,
+        -640
+      ],
+      "size": {
+        "0": 350,
+        "1": 460
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            86
+          ],
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "Poses.png",
+        "image"
+      ]
+    },
+    {
+      "id": 8,
+      "type": "VHS_LoadVideo",
+      "pos": [
+        -2380,
+        -640
+      ],
+      "size": [
+        220,
+        540
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "meta_batch",
+          "type": "VHS_BatchManager",
+          "link": null,
+          "label": "批次管理"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            30,
+            60
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "图像"
+        },
+        {
+          "name": "frame_count",
+          "type": "INT",
+          "links": null,
+          "shape": 3,
+          "label": "帧计数"
+        },
+        {
+          "name": "audio",
+          "type": "VHS_AUDIO",
+          "links": [],
+          "shape": 3,
+          "label": "音频",
+          "slot_index": 2
+        },
+        {
+          "name": "video_info",
+          "type": "VHS_VIDEOINFO",
+          "links": null,
+          "shape": 3,
+          "label": "视频信息"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VHS_LoadVideo"
+      },
+      "widgets_values": {
+        "video": "8.mp4",
+        "force_rate": 24,
+        "force_size": "Disabled",
+        "custom_width": 512,
+        "custom_height": 512,
+        "frame_load_cap": 0,
+        "skip_first_frames": 0,
+        "select_every_nth": 1,
+        "choose video to upload": "image",
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "frame_load_cap": 0,
+            "skip_first_frames": 0,
+            "force_rate": 24,
+            "filename": "8.mp4",
+            "type": "input",
+            "format": "video/mp4",
+            "select_every_nth": 1
+          }
+        }
+      }
+    },
+    {
+      "id": 63,
+      "type": "Note",
+      "pos": [
+        -2730,
+        -40
+      ],
+      "size": {
+        "0": 270,
+        "1": 90
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 9,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "姿势控制/pose control"
+      ],
+      "color": "#af3535"
+    },
+    {
+      "id": 64,
+      "type": "Note",
+      "pos": [
+        -2390,
+        -40
+      ],
+      "size": {
+        "0": 270,
+        "1": 90
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 10,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "参考视频/Reference Video"
+      ],
+      "color": "#af3535"
+    },
+    {
+      "id": 57,
+      "type": "EmptyLatentImage",
+      "pos": [
+        -1320,
+        690
+      ],
+      "size": {
+        "0": 210,
+        "1": 110
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            112
+          ],
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        864,
+        1152,
+        1
+      ],
+      "color": "#422342"
+    },
+    {
+      "id": 54,
+      "type": "LayerUtility: QWenImage2Prompt",
+      "pos": [
+        -2730,
+        210
+      ],
+      "size": {
+        "0": 250,
+        "1": 60
+      },
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 107,
+          "label": "image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            105
+          ],
+          "shape": 3,
+          "label": "text",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LayerUtility: QWenImage2Prompt"
+      },
+      "widgets_values": [
+        "describe this character,Gender, skin colour, hairstyle,dresses."
+      ],
+      "color": "#346434"
+    },
+    {
+      "id": 33,
+      "type": "ApplyInstantID",
+      "pos": [
+        -1790,
+        200
+      ],
+      "size": {
+        "0": 320,
+        "1": 270
+      },
+      "flags": {},
+      "order": 29,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "instantid",
+          "type": "INSTANTID",
+          "link": 79,
+          "slot_index": 0,
+          "label": "InstantID"
+        },
+        {
+          "name": "insightface",
+          "type": "FACEANALYSIS",
+          "link": 80,
+          "slot_index": 1,
+          "label": "InsightFace"
+        },
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 81,
+          "slot_index": 2,
+          "label": "ControlNet"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 126,
+          "slot_index": 3,
+          "label": "图像"
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 113,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 110,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 111,
+          "label": "负面条件"
+        },
+        {
+          "name": "image_kps",
+          "type": "IMAGE",
+          "link": 86,
+          "slot_index": 7,
+          "label": "图像_kps"
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": null,
+          "label": "遮罩"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            87
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            92
+          ],
+          "shape": 3,
+          "slot_index": 1,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            93
+          ],
+          "shape": 3,
+          "slot_index": 2,
+          "label": "负面条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ApplyInstantID"
+      },
+      "widgets_values": [
+        0.8,
+        0,
+        1
+      ],
+      "color": "#38291f"
+    },
+    {
+      "id": 50,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -2130,
+        310
+      ],
+      "size": [
+        220,
+        240
+      ],
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 109,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            111
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "nsfw, paintings, cartoon, anime, sketches, worst quality, low quality, normal quality, lowres, watermark, monochrome, grayscale, ugly, blurry, Tan skin, dark skin, black skin, skin spots, skin blemishes, age spot, glans, disabled, distorted, bad anatomy, morbid, malformation, amputation, bad proportions, twins, missing body, fused body, extra head, poorly drawn face, bad eyes, deformed eye, unclear eyes, cross-eyed, long neck, malformed limbs, extra limbs, extra arms, missing arms, bad tongue, strange fingers, mutated hands, missing hands, poorly drawn hands, extra hands, fused hands, connected hand, bad hands, wrong fingers, missing fingers, extra fingers, 4 fingers, 3 fingers, deformed hands, extra legs, bad legs, many legs, more than two legs, bad feet, wrong feet, extra feets,"
+      ],
+      "color": "#346434"
+    },
+    {
+      "id": 53,
+      "type": "ShowText|pysssss",
+      "pos": [
+        -2740,
+        340
+      ],
+      "size": {
+        "0": 320,
+        "1": 140
+      },
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 105,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            104
+          ],
+          "shape": 6,
+          "label": "字符串",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        [
+          "a woman with long dark hair and a white shirt"
+        ],
+        "The character is Asian, has black hair, a pink shirt, and a black jacket."
+      ],
+      "color": "#346434"
+    },
+    {
+      "id": 51,
+      "type": "CR Text",
+      "pos": [
+        -2370,
+        340
+      ],
+      "size": {
+        "0": 210,
+        "1": 210
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "text",
+          "type": "*",
+          "links": [
+            103
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "文本"
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "显示帮助"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Text"
+      },
+      "widgets_values": [
+        "((claymotion:1.2)), made-of-clay, stopmotion, polymer clay,((ultra light clay)), High quality, details, cartoonish, 8k，"
+      ],
+      "color": "#346434"
+    },
+    {
+      "id": 55,
+      "type": "Note",
+      "pos": [
+        -2750,
+        530
+      ],
+      "size": {
+        "0": 310,
+        "1": 140
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 13,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "使用Layerstyle的Qwen节点来反推提示词：\nhttps://github.com/chflame163/ComfyUI_LayerStyle"
+      ],
+      "color": "#346434"
+    },
+    {
+      "id": 67,
+      "type": "Load RetinaFace",
+      "pos": [
+        -2710,
+        860
+      ],
+      "size": {
+        "0": 150,
+        "1": 30
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "RETINAFACE",
+          "links": [
+            123
+          ],
+          "shape": 3,
+          "label": "MODEL"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Load RetinaFace"
+      },
+      "color": "rgba(0,0,0,.8)"
+    },
+    {
+      "id": 65,
+      "type": "Crop Face",
+      "pos": [
+        -2720,
+        960
+      ],
+      "size": {
+        "0": 210,
+        "1": 120
+      },
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "RETINAFACE",
+          "link": 123,
+          "label": "model",
+          "slot_index": 0
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 125,
+          "label": "image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "face_image",
+          "type": "IMAGE",
+          "links": [
+            124,
+            126
+          ],
+          "shape": 3,
+          "label": "face_image",
+          "slot_index": 0
+        },
+        {
+          "name": "preview",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "preview"
+        },
+        {
+          "name": "bbox",
+          "type": "BBOX",
+          "links": null,
+          "shape": 3,
+          "label": "bbox"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Crop Face"
+      },
+      "widgets_values": [
+        0.1,
+        100
+      ],
+      "color": "rgba(0,0,0,.8)"
+    },
+    {
+      "id": 66,
+      "type": "PreviewImage",
+      "pos": [
+        -2420,
+        860
+      ],
+      "size": [
+        200,
+        250
+      ],
+      "flags": {},
+      "order": 26,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 124,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "color": "rgba(0,0,0,.8)"
+    },
+    {
+      "id": 56,
+      "type": "DF_Image_scale_to_side",
+      "pos": [
+        -3150,
+        850
+      ],
+      "size": {
+        "0": 290,
+        "1": 130
+      },
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 106,
+          "label": "image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            107,
+            125
+          ],
+          "shape": 3,
+          "label": "IMAGE",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DF_Image_scale_to_side"
+      },
+      "widgets_values": [
+        1024,
+        "Longest",
+        "nearest-exact",
+        "disabled"
+      ],
+      "color": "#c09430"
+    },
+    {
+      "id": 68,
+      "type": "Note",
+      "pos": [
+        -3580,
+        800
+      ],
+      "size": [
+        340,
+        190
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Checkpoint：\nhttps://civitai.com/api/download/models/402346\n\n\nLora：\nhttps://civitai.com/api/download/models/236248\nhttps://civitai.com/api/download/models/207020\nhttps://sliders.baulab.info/weights/xl_sliders/clay_style.pt"
+      ],
+      "color": "#af3535"
+    },
+    {
+      "id": 59,
+      "type": "Note",
+      "pos": [
+        50,
+        470
+      ],
+      "size": {
+        "0": 310,
+        "1": 140
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 16,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "可选择生成单视频和对比视频\nOption to generate single and comparison videos\n\n节点地址/node address\nhttps://github.com/kijai/ComfyUI-LivePortrait.git"
+      ],
+      "color": "#af3535"
+    },
+    {
+      "id": 61,
+      "type": "Note",
+      "pos": [
+        -3130,
+        -40
+      ],
+      "size": [
+        270,
+        90
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 17,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "人脸照片/face photo"
+      ],
+      "color": "#af3535"
+    },
+    {
+      "id": 60,
+      "type": "VHS_VideoCombine",
+      "pos": [
+        -1370,
+        -880
+      ],
+      "size": [
+        940,
+        920
+      ],
+      "flags": {},
+      "order": 39,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 121,
+          "label": "图像"
+        },
+        {
+          "name": "audio",
+          "type": "VHS_AUDIO",
+          "link": null,
+          "label": "音频"
+        },
+        {
+          "name": "meta_batch",
+          "type": "VHS_BatchManager",
+          "link": null,
+          "label": "批次管理"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": null,
+          "shape": 3,
+          "label": "文件名"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VHS_VideoCombine"
+      },
+      "widgets_values": {
+        "frame_rate": 24,
+        "loop_count": 0,
+        "filename_prefix": "Claymation-For-You",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "pingpong": false,
+        "save_output": false,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "Claymation-For-You_00039.mp4",
+            "subfolder": "",
+            "type": "temp",
+            "format": "video/h264-mp4"
+          }
+        }
+      }
+    },
+    {
+      "id": 37,
+      "type": "LoadImage",
+      "pos": [
+        -3190,
+        -630
+      ],
+      "size": {
+        "0": 410,
+        "1": 460
+      },
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            106
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "d4993f79119c1d4a03d2695dec5dd29a(1).jpg",
+        "image"
+      ]
+    },
+    {
+      "id": 42,
+      "type": "easy loraStack",
+      "pos": [
+        -3160,
+        540
+      ],
+      "size": [
+        300,
+        250
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "optional_lora_stack",
+          "type": "LORA_STACK",
+          "link": null,
+          "label": "LoRA堆（可选）"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "lora_stack",
+          "type": "LORA_STACK",
+          "links": [
+            99
+          ],
+          "shape": 3,
+          "label": "LoRA堆",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy loraStack"
+      },
+      "widgets_values": [
+        true,
+        "simple",
+        3,
+        "xl\\CLAYMATE_V2.03_.safetensors",
+        0.9500000000000001,
+        1,
+        1,
+        "xl\\DD-made-of-clay-XL-v2.safetensors",
+        0.45,
+        1,
+        1,
+        "pt\\clay_style.pt",
+        2,
+        1,
+        1,
+        "None",
+        1,
+        1,
+        1,
+        "None",
+        1,
+        1,
+        1,
+        "None",
+        1,
+        1,
+        1,
+        "None",
+        1,
+        1,
+        1,
+        "None",
+        1,
+        1,
+        1,
+        "None",
+        1,
+        1,
+        1,
+        "None",
+        1,
+        1,
+        1
+      ],
+      "color": "#c09430"
+    }
+  ],
+  "links": [
+    [
+      30,
+      8,
+      0,
+      19,
+      0,
+      "IMAGE"
+    ],
+    [
+      58,
+      1,
+      0,
+      30,
+      0,
+      "LIVEPORTRAITPIPE"
+    ],
+    [
+      60,
+      8,
+      0,
+      30,
+      2,
+      "IMAGE"
+    ],
+    [
+      68,
+      30,
+      1,
+      19,
+      1,
+      "IMAGE"
+    ],
+    [
+      70,
+      19,
+      0,
+      18,
+      1,
+      "IMAGE"
+    ],
+    [
+      79,
+      34,
+      0,
+      33,
+      0,
+      "INSTANTID"
+    ],
+    [
+      80,
+      35,
+      0,
+      33,
+      1,
+      "FACEANALYSIS"
+    ],
+    [
+      81,
+      36,
+      0,
+      33,
+      2,
+      "CONTROL_NET"
+    ],
+    [
+      86,
+      38,
+      0,
+      33,
+      7,
+      "IMAGE"
+    ],
+    [
+      87,
+      33,
+      0,
+      39,
+      0,
+      "MODEL"
+    ],
+    [
+      88,
+      44,
+      0,
+      40,
+      0,
+      "LATENT"
+    ],
+    [
+      91,
+      39,
+      0,
+      44,
+      0,
+      "MODEL"
+    ],
+    [
+      92,
+      33,
+      1,
+      44,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      93,
+      33,
+      2,
+      44,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      94,
+      45,
+      0,
+      44,
+      3,
+      "SAMPLER"
+    ],
+    [
+      95,
+      43,
+      0,
+      44,
+      4,
+      "SIGMAS"
+    ],
+    [
+      97,
+      40,
+      0,
+      46,
+      0,
+      "IMAGE"
+    ],
+    [
+      98,
+      40,
+      0,
+      30,
+      1,
+      "IMAGE"
+    ],
+    [
+      99,
+      42,
+      0,
+      47,
+      2,
+      "LORA_STACK"
+    ],
+    [
+      100,
+      48,
+      1,
+      47,
+      1,
+      "CLIP"
+    ],
+    [
+      101,
+      48,
+      0,
+      47,
+      0,
+      "MODEL"
+    ],
+    [
+      102,
+      52,
+      0,
+      49,
+      1,
+      "STRING"
+    ],
+    [
+      103,
+      51,
+      0,
+      52,
+      0,
+      "STRING"
+    ],
+    [
+      104,
+      53,
+      0,
+      52,
+      1,
+      "STRING"
+    ],
+    [
+      105,
+      54,
+      0,
+      53,
+      0,
+      "STRING"
+    ],
+    [
+      106,
+      37,
+      0,
+      56,
+      0,
+      "IMAGE"
+    ],
+    [
+      107,
+      56,
+      0,
+      54,
+      0,
+      "IMAGE"
+    ],
+    [
+      108,
+      47,
+      1,
+      49,
+      0,
+      "CLIP"
+    ],
+    [
+      109,
+      47,
+      1,
+      50,
+      0,
+      "CLIP"
+    ],
+    [
+      110,
+      49,
+      0,
+      33,
+      5,
+      "CONDITIONING"
+    ],
+    [
+      111,
+      50,
+      0,
+      33,
+      6,
+      "CONDITIONING"
+    ],
+    [
+      112,
+      57,
+      0,
+      44,
+      5,
+      "LATENT"
+    ],
+    [
+      113,
+      47,
+      0,
+      33,
+      4,
+      "MODEL"
+    ],
+    [
+      114,
+      48,
+      2,
+      40,
+      1,
+      "VAE"
+    ],
+    [
+      115,
+      30,
+      1,
+      58,
+      0,
+      "*"
+    ],
+    [
+      119,
+      58,
+      0,
+      23,
+      0,
+      "IMAGE"
+    ],
+    [
+      120,
+      30,
+      1,
+      18,
+      0,
+      "IMAGE"
+    ],
+    [
+      121,
+      18,
+      0,
+      60,
+      0,
+      "IMAGE"
+    ],
+    [
+      123,
+      67,
+      0,
+      65,
+      0,
+      "RETINAFACE"
+    ],
+    [
+      124,
+      65,
+      0,
+      66,
+      0,
+      "IMAGE"
+    ],
+    [
+      125,
+      56,
+      0,
+      65,
+      1,
+      "IMAGE"
+    ],
+    [
+      126,
+      65,
+      0,
+      33,
+      3,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "Checkpoint & Lora",
+      "bounding": [
+        -3200,
+        100,
+        390,
+        900
+      ],
+      "color": "#b58b2a",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "Prompt",
+      "bounding": [
+        -2780,
+        100,
+        900,
+        640
+      ],
+      "color": "#8A8",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "ksampler",
+      "bounding": [
+        -1380,
+        100,
+        870,
+        900
+      ],
+      "color": "#88A",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "InstantID",
+      "bounding": [
+        -1860,
+        100,
+        450,
+        900
+      ],
+      "color": "#A88",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "LivePortraitModels",
+      "bounding": [
+        -480,
+        100,
+        870,
+        900
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "Input area",
+      "bounding": [
+        -3200,
+        -740,
+        1090,
+        800
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "            Claymation-For-You",
+      "bounding": [
+        -1960,
+        -1090,
+        1600,
+        1160
+      ],
+      "color": "#3f789e",
+      "font_size": 100,
+      "locked": false
+    },
+    {
+      "title": "Coap Face",
+      "bounding": [
+        -2780,
+        750,
+        900,
+        420
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.5989500000000103,
+      "offset": {
+        "0": 3962.031842299315,
+        "1": 1049.6722785927363
+      }
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

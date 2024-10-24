@@ -1,0 +1,779 @@
+{
+  "last_node_id": 25,
+  "last_link_id": 37,
+  "nodes": [
+    {
+      "id": 10,
+      "type": "UltralyticsDetectorProvider",
+      "pos": [
+        2191.920068760128,
+        576.0482387077619
+      ],
+      "size": {
+        "0": 315,
+        "1": 78
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "BBOX_DETECTOR",
+          "type": "BBOX_DETECTOR",
+          "links": [
+            10
+          ],
+          "shape": 3,
+          "label": "BBox检测"
+        },
+        {
+          "name": "SEGM_DETECTOR",
+          "type": "SEGM_DETECTOR",
+          "links": null,
+          "shape": 3,
+          "label": "SEGM检测"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UltralyticsDetectorProvider"
+      },
+      "widgets_values": [
+        "bbox/face_yolov8m"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 9,
+      "type": "CLIPTextEncode",
+      "pos": [
+        2075.9200687601274,
+        289.0482387077617
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 12,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            9
+          ],
+          "shape": 3,
+          "label": "条件",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "deformity"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 8,
+      "type": "CLIPTextEncode",
+      "pos": [
+        2091,
+        3
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 11,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            8
+          ],
+          "shape": 3,
+          "label": "条件",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "A girl, with a pretty face."
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 7,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        1615,
+        78
+      ],
+      "size": {
+        "0": 380.5632019042969,
+        "1": 98.39017486572266
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            5
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            6,
+            11,
+            12
+          ],
+          "shape": 3,
+          "label": "CLIP",
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            7
+          ],
+          "shape": 3,
+          "label": "VAE",
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "majicMIX realistic 麦橘写实_v7"
+      ],
+      "_widget_cache_map": {
+        "majicMIX realistic 麦橘写实_v7": {
+          "name": "majicMIX realistic 麦橘写实_v7",
+          "value": 125488
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 24,
+      "type": "PreviewImage",
+      "pos": [
+        121,
+        -220
+      ],
+      "size": {
+        "0": 238.3358917236328,
+        "1": 322.9060974121094
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 35,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 1,
+      "type": "ReActorFaceSwap",
+      "pos": [
+        808,
+        -121
+      ],
+      "size": {
+        "0": 315,
+        "1": 358
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input_image",
+          "type": "IMAGE",
+          "link": 1,
+          "label": "目标图像",
+          "slot_index": 0
+        },
+        {
+          "name": "source_image",
+          "type": "IMAGE",
+          "link": 34,
+          "label": "源图像",
+          "slot_index": 1
+        },
+        {
+          "name": "face_model",
+          "type": "FACE_MODEL",
+          "link": null,
+          "label": "面部模型"
+        },
+        {
+          "name": "face_boost",
+          "type": "FACE_BOOST",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            13
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "FACE_MODEL",
+          "type": "FACE_MODEL",
+          "links": null,
+          "shape": 3,
+          "label": "面部模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ReActorFaceSwap"
+      },
+      "widgets_values": [
+        true,
+        "inswapper_128.onnx",
+        "retinaface_resnet50",
+        "codeformer.pth",
+        1,
+        1,
+        "female",
+        "female",
+        "0,1",
+        "0,1",
+        1
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 23,
+      "type": "LoadImage",
+      "pos": [
+        387,
+        11
+      ],
+      "size": {
+        "0": 315,
+        "1": 314
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            34
+          ],
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "1024 1375_1_1.jpg",
+        "image"
+      ],
+      "_widget_cache_map": {
+        "ComfyUI_00009_.png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/0375d18196777c22115e03824ba61af548af01f327dbfa0d8a56dc9b55221783.png",
+          "name": "ComfyUI_00009_.png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/0375d18196777c22115e03824ba61af548af01f327dbfa0d8a56dc9b55221783.png"
+        },
+        "1024 1375_1_1.jpg": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/6758d1558fd6238d21e83406464e67cf4fa547f5fb302f52760f193e0cb2dd61.jpg",
+          "name": "1024 1375_1_1.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/6758d1558fd6238d21e83406464e67cf4fa547f5fb302f52760f193e0cb2dd61.jpg"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 6,
+      "type": "FaceDetailer",
+      "pos": [
+        2646.9200687601256,
+        -299.95176129223853
+      ],
+      "size": {
+        "0": 506.4000244140625,
+        "1": 900
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 13,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 5,
+          "label": "模型"
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 6,
+          "label": "CLIP"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 7,
+          "label": "VAE"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 8,
+          "label": "正面条件",
+          "slot_index": 4
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 9,
+          "label": "负面条件",
+          "slot_index": 5
+        },
+        {
+          "name": "bbox_detector",
+          "type": "BBOX_DETECTOR",
+          "link": 10,
+          "label": "BBox检测",
+          "slot_index": 6
+        },
+        {
+          "name": "sam_model_opt",
+          "type": "SAM_MODEL",
+          "link": null,
+          "label": "SAM模型"
+        },
+        {
+          "name": "segm_detector_opt",
+          "type": "SEGM_DETECTOR",
+          "link": null,
+          "label": "Segm检测"
+        },
+        {
+          "name": "detailer_hook",
+          "type": "DETAILER_HOOK",
+          "link": null,
+          "label": "细化约束"
+        },
+        {
+          "name": "scheduler_func_opt",
+          "type": "SCHEDULER_FUNC",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            35
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "cropped_refined",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 6,
+          "label": "细化图像"
+        },
+        {
+          "name": "cropped_enhanced_alpha",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 6,
+          "label": "细化部分"
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        },
+        {
+          "name": "detailer_pipe",
+          "type": "DETAILER_PIPE",
+          "links": null,
+          "shape": 3,
+          "label": "细化节点束"
+        },
+        {
+          "name": "cnet_images",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 6,
+          "label": "ControlNet图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FaceDetailer"
+      },
+      "widgets_values": [
+        512,
+        true,
+        1024,
+        87203872669350,
+        "randomize",
+        30,
+        8,
+        "dpmpp_2m",
+        "karras",
+        0.45,
+        4,
+        true,
+        true,
+        0.5,
+        10,
+        3,
+        "center-1",
+        0,
+        0.93,
+        0,
+        0.7,
+        "False",
+        10,
+        "",
+        1,
+        false,
+        20
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 2,
+      "type": "LoadImage",
+      "pos": [
+        398,
+        -346
+      ],
+      "size": {
+        "0": 315,
+        "1": 314
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1
+          ],
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "output (10) (1).png",
+        "image"
+      ],
+      "_widget_cache_map": {
+        "output (5).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/4259019d91aa9f22ffc77f2b611e09ba23c62f41cefc8236ae2d6210dc0fa44d.png",
+          "name": "output (5).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/4259019d91aa9f22ffc77f2b611e09ba23c62f41cefc8236ae2d6210dc0fa44d.png"
+        },
+        "baby.jpeg": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/242088c62e0a228fc6b75035020a3944dfc115fab30a1a39884ba17d30aab7dc.jpeg",
+          "name": "baby.jpeg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/242088c62e0a228fc6b75035020a3944dfc115fab30a1a39884ba17d30aab7dc.jpeg"
+        },
+        "b3.png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/83b7110ac49552d75cd93bb4cca4e1a4dbef3b8dc9a25f1abf62313fc7b169e6.png",
+          "name": "b3.png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/83b7110ac49552d75cd93bb4cca4e1a4dbef3b8dc9a25f1abf62313fc7b169e6.png"
+        },
+        "c4.png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/17467d139246fd8c65279ded6c989492a6d5c3392d3d0a9fea8b83d154b0b856.png",
+          "name": "c4.png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/17467d139246fd8c65279ded6c989492a6d5c3392d3d0a9fea8b83d154b0b856.png"
+        },
+        "output (13).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/7f415d5b422e473c494c8c301ff359648fd318026e47e27e6559d86f2c642ae3.png",
+          "name": "output (13).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/7f415d5b422e473c494c8c301ff359648fd318026e47e27e6559d86f2c642ae3.png"
+        },
+        "output (1).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/14ccf84efc9276049d1ed8f7cc5dad0ec5568f0145584b0c171643b069657254.png",
+          "name": "output (1).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/14ccf84efc9276049d1ed8f7cc5dad0ec5568f0145584b0c171643b069657254.png"
+        },
+        "output (10).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/f914c52bdb2bed091069b14aedb416bd62a6dc4990dbdafe7ca487ccb589aff1.png",
+          "name": "output (10).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/f914c52bdb2bed091069b14aedb416bd62a6dc4990dbdafe7ca487ccb589aff1.png"
+        },
+        "output (3).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/6c5afd8ece27549b71a53ae5542d98e3cd1e854f0a3bbfeca5ca5610f8823918.png",
+          "name": "output (3).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/6c5afd8ece27549b71a53ae5542d98e3cd1e854f0a3bbfeca5ca5610f8823918.png"
+        },
+        "output (7).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/ba0c1235d129fe38fe5f5480a73c964061c386675f504a66f25ee459dea8cad2.png",
+          "name": "output (7).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/ba0c1235d129fe38fe5f5480a73c964061c386675f504a66f25ee459dea8cad2.png"
+        },
+        "output (9).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/8bacd06cad34220cbd96eda45d00e83667bffe25b4103a78f5355097656f82f6.png",
+          "name": "output (9).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/8bacd06cad34220cbd96eda45d00e83667bffe25b4103a78f5355097656f82f6.png"
+        },
+        "output (11).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/652320cb0676876aa79e5aac9fdab57ce002eb424cff2d3b6d970ed379c684bd.png",
+          "name": "output (11).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/652320cb0676876aa79e5aac9fdab57ce002eb424cff2d3b6d970ed379c684bd.png"
+        },
+        "output (12).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/a3c1854c44918f84e45c311840c84e75c6f2cf3d35b79e2967f0425364052f10.png",
+          "name": "output (12).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/a3c1854c44918f84e45c311840c84e75c6f2cf3d35b79e2967f0425364052f10.png"
+        },
+        "2_1.jpg": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/c85b902fc7279312585ce124f8aec5562bf7359ad2201fea55b4cd63bbdfa979.jpg",
+          "name": "2_1.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/c85b902fc7279312585ce124f8aec5562bf7359ad2201fea55b4cd63bbdfa979.jpg"
+        },
+        "1.jpg": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/865a7f06f892ddb3fbbbf72e5a86189319f38e1811c418b54c268edcf8c99440.jpg",
+          "name": "1.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/865a7f06f892ddb3fbbbf72e5a86189319f38e1811c418b54c268edcf8c99440.jpg"
+        },
+        "output (10) (1).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/f914c52bdb2bed091069b14aedb416bd62a6dc4990dbdafe7ca487ccb589aff1.png",
+          "name": "output (10) (1).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/f914c52bdb2bed091069b14aedb416bd62a6dc4990dbdafe7ca487ccb589aff1.png"
+        }
+      },
+      "category": "Primitive Nodes"
+    }
+  ],
+  "links": [
+    [
+      1,
+      2,
+      0,
+      1,
+      0,
+      "IMAGE"
+    ],
+    [
+      5,
+      7,
+      0,
+      6,
+      1,
+      "MODEL"
+    ],
+    [
+      6,
+      7,
+      1,
+      6,
+      2,
+      "CLIP"
+    ],
+    [
+      7,
+      7,
+      2,
+      6,
+      3,
+      "VAE"
+    ],
+    [
+      8,
+      8,
+      0,
+      6,
+      4,
+      "CONDITIONING"
+    ],
+    [
+      9,
+      9,
+      0,
+      6,
+      5,
+      "CONDITIONING"
+    ],
+    [
+      10,
+      10,
+      0,
+      6,
+      6,
+      "BBOX_DETECTOR"
+    ],
+    [
+      11,
+      7,
+      1,
+      8,
+      0,
+      "CLIP"
+    ],
+    [
+      12,
+      7,
+      1,
+      9,
+      0,
+      "CLIP"
+    ],
+    [
+      13,
+      1,
+      0,
+      6,
+      0,
+      "IMAGE"
+    ],
+    [
+      34,
+      23,
+      0,
+      1,
+      1,
+      "IMAGE"
+    ],
+    [
+      35,
+      6,
+      0,
+      24,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "换脸",
+      "bounding": [
+        222,
+        -303,
+        989,
+        624
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "面部细化",
+      "bounding": [
+        1519,
+        -450,
+        1862,
+        1253
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.49500000000000605,
+      "offset": {
+        "0": 741.0824353993628,
+        "1": 469.65116687169
+      }
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

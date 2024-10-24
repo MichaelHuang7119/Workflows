@@ -1,0 +1,568 @@
+{
+  "last_node_id": 37,
+  "last_link_id": 57,
+  "nodes": [
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        27,
+        302
+      ],
+      "size": {
+        "0": 464.3875427246094,
+        "1": 194.46705627441406
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 45,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            56
+          ],
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "A grand villa situated in the heart of a winter forest, right by the edge of a calm, frozen sea. The entire house is pristine white, inspired by the majestic form of a white eagle, with two enormous wings on either side of the house, designed as though they are the house’s protective embrace. The wings stretch from the ground to the rooftop, intricately carved, giving the house a dynamic, soaring appearance. The ground is covered in thick, untouched snow, and tall trees dusted with snowflakes surround the house, with the sea glistening under the cold winter sun. All the elements create a serene, dreamlike atmosphere.\n\n"
+      ],
+      "_widget_cache_map": {},
+      "color": "#322",
+      "bgcolor": "#533",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [
+        894,
+        63
+      ],
+      "size": {
+        "0": 140.41586303710938,
+        "1": 46
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 52,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 46,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            9
+          ],
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 9,
+      "type": "SaveImage",
+      "pos": [
+        879,
+        163
+      ],
+      "size": {
+        "0": 306.66680908203125,
+        "1": 469.8581237792969
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 9,
+          "label": "图像"
+        }
+      ],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 27,
+      "type": "EmptySD3LatentImage",
+      "pos": [
+        274,
+        541
+      ],
+      "size": {
+        "0": 214.02188110351562,
+        "1": 111.92343139648438
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            51
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptySD3LatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        2
+      ],
+      "_widget_cache_map": {},
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 31,
+      "type": "KSampler",
+      "pos": [
+        567,
+        171
+      ],
+      "size": {
+        "0": 244.51278686523438,
+        "1": 474
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 47,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 57,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 55,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 51,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            52
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        123456,
+        "fixed",
+        40,
+        1,
+        "euler",
+        "simple",
+        1
+      ],
+      "_widget_cache_map": {},
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 33,
+      "type": "CLIPTextEncode",
+      "pos": [
+        77,
+        638
+      ],
+      "size": {
+        "0": 422.84503173828125,
+        "1": 164.31304931640625
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 54,
+          "slot_index": 0,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            55
+          ],
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 35,
+      "type": "FluxGuidance",
+      "pos": [
+        572,
+        61
+      ],
+      "size": {
+        "0": 232.41441345214844,
+        "1": 58
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 56,
+          "label": "conditioning"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            57
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CONDITIONING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FluxGuidance"
+      },
+      "widgets_values": [
+        3.5
+      ],
+      "_widget_cache_map": {},
+      "color": "#322",
+      "bgcolor": "#533",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 37,
+      "type": "Note",
+      "pos": [
+        -680,
+        10
+      ],
+      "size": {
+        "0": 654.495849609375,
+        "1": 745.1446533203125
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "text": "说明"
+      },
+      "widgets_values": [
+        "********************************\n工作流功能 Workflow function\n********************************\n使用FLUX FP8 comfy org版模型文字生成图片，简称T2I，共8个节点\nGenerate images using FLUX FP8 comfy org model text, abbreviated as T2I, with a total of 8 nodes\n\n********************************\n使用方法  HOW TO USE\n********************************\n第1组，红色框：加载FP8大模型(16GB)，无需加载clip模型和VAE模型。\n第3组，红色框：填写提示词；绿色框：设置生成图片大小和数量.\n第4组，红色框：设置引导参数，2~5；绿色框：设置步数，CFG切记设置1，采样器和调度器按喜好设置。\n第4组，等待AI出图。\nGroup 1, red box: Load FP8 large model (16GB) without loading clip model and VAE model.\nGroup 3, red box: fill in prompt words; Green box: Set the size and quantity of generated images\nGroup 4, red box: Set guidance parameters, 2-5; Green box: Set the number of steps, remember to set CFG to 1, and set the sampler and scheduler according to preference.\nGroup 4, wait for AI to generate the image.\n\n\n**********************************\n下载工作流 Download workflows \n**********************************\n你可以从这里找到更多“来来”制作的工作流下载\nYou can find more \"LAILAI\" production workflows here to download\n\n1、Openart\nhttps://openart.ai/workflows/@lailai\n2、LIBLIB\nhttps://www.liblib.art/userpage/246223f3718d400d980019ede42e6912/publish/workflow\n\n\n********************************\n联系方式 Contact information\n********************************\n如果您在使用过程中遇到任何问题，请通过下述联系方式与我联系,全网同名：来来说AI\nIf you encounter any problems during the use, Please contact me through the following contact information,Same name across the internet: lailai talk AI\n\n1、推特/Twitter\nhttps://x.com/6Lailai\n\n2、油管/youtube\nhttps://www.youtube.com/@laiAIGC\n\n3、TikTok\nhttps://www.tiktok.com/@laiaidesign\n\n4、微信/Wechat\nlaiweb3\n\n1、个人网站/Website\nhttps://lailai.club/\n\n2、微信公众号/Official Account WeChat\n搜索：来来说AI\n\n3、小红书/Red book\nhttps://www.xiaohongshu.com/user/profile/5d552549000000001103c036\n\n4、B站/blibli\nhttps://space.bilibili.com/503941258\n\n5、抖音/douyin\n搜索：来来说AI"
+      ],
+      "_widget_cache_map": {},
+      "color": "#dbd414",
+      "bgcolor": "#c7c000",
+      "category": "Official"
+    },
+    {
+      "id": 30,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        58.73685836791992,
+        72.40351104736328
+      ],
+      "size": {
+        "0": 431.5279235839844,
+        "1": 100.88790893554688
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            47
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            45,
+            54
+          ],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "CLIP"
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            46
+          ],
+          "slot_index": 2,
+          "shape": 3,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "F.1-dev-fp8 F.1 Org版dev模型_flux1-dev-fp8"
+      ],
+      "_widget_cache_map": {
+        "F.1-dev-fp8 F.1 Org版dev模型_flux1-dev-fp8": {
+          "name": "F.1-dev-fp8 F.1 Org版dev模型_flux1-dev-fp8",
+          "value": "747bfa371ded4e3db83235165d2a0f3f"
+        }
+      },
+      "color": "#322",
+      "bgcolor": "#533",
+      "category": "Primitive Nodes"
+    }
+  ],
+  "links": [
+    [
+      9,
+      8,
+      0,
+      9,
+      0,
+      "IMAGE"
+    ],
+    [
+      45,
+      30,
+      1,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      46,
+      30,
+      2,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      47,
+      30,
+      0,
+      31,
+      0,
+      "MODEL"
+    ],
+    [
+      51,
+      27,
+      0,
+      31,
+      3,
+      "LATENT"
+    ],
+    [
+      52,
+      31,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      54,
+      30,
+      1,
+      33,
+      0,
+      "CLIP"
+    ],
+    [
+      55,
+      33,
+      0,
+      31,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      56,
+      6,
+      0,
+      35,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      57,
+      35,
+      0,
+      31,
+      1,
+      "CONDITIONING"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "步骤4（AI自动出图）",
+      "bounding": [
+        870,
+        -24,
+        348,
+        697
+      ],
+      "color": "#8A8",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "步骤3（设置参数）",
+      "bounding": [
+        537,
+        -27,
+        316,
+        700
+      ],
+      "color": "#b58b2a",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "步骤2（设置提示词+图片大小）",
+      "bounding": [
+        11,
+        228,
+        509,
+        452
+      ],
+      "color": "#b06634",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "步骤1（加载FLUX模型）",
+      "bounding": [
+        18,
+        -22,
+        505,
+        223
+      ],
+      "color": "#A88",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8769226950000005,
+      "offset": [
+        854.0654842410197,
+        129.67911695198552
+      ]
+    },
+    "workspace_info": {
+      "id": "ffb275a9-8ea7-4d54-917c-3908166228d7",
+      "saveLock": false,
+      "cloudID": null,
+      "coverMediaPath": null
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

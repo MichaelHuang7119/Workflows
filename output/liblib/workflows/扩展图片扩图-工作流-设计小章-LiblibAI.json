@@ -1,0 +1,495 @@
+{
+  "last_node_id": 9,
+  "last_link_id": 11,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "brushnet_model_loader",
+      "pos": [
+        2934.1827295898443,
+        772.5757874511721
+      ],
+      "size": {
+        "0": 390.77789306640625,
+        "1": 118
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 1,
+          "slot_index": 0,
+          "label": "model"
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 2,
+          "label": "clip"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 3,
+          "label": "vae"
+        },
+        {
+          "name": "ip_adapter",
+          "type": "DIFFUSERSIPADAPTER",
+          "link": null,
+          "label": "ip_adapter"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "brushnet",
+          "type": "BRUSHNET",
+          "links": [
+            8
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "brushnet"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "brushnet_model_loader"
+      },
+      "widgets_values": [
+        "brushnet_segmentation_mask"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        2559,
+        767
+      ],
+      "size": {
+        "0": 351.8843078613281,
+        "1": 98
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            1
+          ],
+          "shape": 3,
+          "label": "模型"
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            2
+          ],
+          "shape": 3,
+          "slot_index": 1,
+          "label": "CLIP"
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            3
+          ],
+          "shape": 3,
+          "slot_index": 2,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "1111\\SD15真实realisticVisionV60B1_v51VAE.safetensors"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 7,
+      "type": "ImagePadForOutpaintMasked",
+      "pos": [
+        3009.1827295898443,
+        939.5757874511721
+      ],
+      "size": {
+        "0": 315,
+        "1": 174
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 7,
+          "label": "image"
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": null,
+          "label": "mask"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            9
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "IMAGE"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            6,
+            10
+          ],
+          "shape": 3,
+          "slot_index": 1,
+          "label": "MASK"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImagePadForOutpaintMasked"
+      },
+      "widgets_values": [
+        256,
+        256,
+        256,
+        0,
+        2
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 4,
+      "type": "ImageResize+",
+      "pos": [
+        2681,
+        932
+      ],
+      "size": {
+        "0": 315,
+        "1": 218
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 4,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            7
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "图像"
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null,
+          "shape": 3,
+          "label": "宽度"
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null,
+          "shape": 3,
+          "label": "高度"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageResize+"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        "lanczos",
+        true,
+        "always",
+        2
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 6,
+      "type": "MaskPreview+",
+      "pos": [
+        3147,
+        1215
+      ],
+      "size": {
+        "0": 195.38958740234375,
+        "1": 343.27093505859375
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 6,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MaskPreview+"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 8,
+      "type": "brushnet_sampler",
+      "pos": [
+        3343,
+        771
+      ],
+      "size": {
+        "0": 391.8879089355469,
+        "1": 422.8043212890625
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "brushnet",
+          "type": "BRUSHNET",
+          "link": 8,
+          "label": "brushnet"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 9,
+          "label": "image"
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 10,
+          "label": "mask"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            11
+          ],
+          "shape": 3,
+          "label": "images",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "brushnet_sampler"
+      },
+      "widgets_values": [
+        25,
+        7.5,
+        1,
+        0,
+        1,
+        false,
+        0,
+        393511935335776,
+        "randomize",
+        "UniPCMultistepScheduler",
+        "buildings, grass, sky\n",
+        "bad quality"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "LoadImage",
+      "pos": [
+        3810,
+        792
+      ],
+      "size": {
+        "0": 340.3472900390625,
+        "1": 637.775634765625
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            4
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [],
+          "shape": 3,
+          "slot_index": 1,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "172033.png",
+        "image"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 9,
+      "type": "SaveImage",
+      "pos": [
+        4170,
+        794
+      ],
+      "size": {
+        "0": 604.3161010742188,
+        "1": 805.4775390625
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 11,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "category": "Primitive Nodes"
+    }
+  ],
+  "links": [
+    [
+      1,
+      2,
+      0,
+      1,
+      0,
+      "MODEL"
+    ],
+    [
+      2,
+      2,
+      1,
+      1,
+      1,
+      "CLIP"
+    ],
+    [
+      3,
+      2,
+      2,
+      1,
+      2,
+      "VAE"
+    ],
+    [
+      4,
+      3,
+      0,
+      4,
+      0,
+      "IMAGE"
+    ],
+    [
+      6,
+      7,
+      1,
+      6,
+      0,
+      "MASK"
+    ],
+    [
+      7,
+      4,
+      0,
+      7,
+      0,
+      "IMAGE"
+    ],
+    [
+      8,
+      1,
+      0,
+      8,
+      0,
+      "BRUSHNET"
+    ],
+    [
+      9,
+      7,
+      0,
+      8,
+      1,
+      "IMAGE"
+    ],
+    [
+      10,
+      7,
+      1,
+      8,
+      2,
+      "MASK"
+    ],
+    [
+      11,
+      8,
+      0,
+      9,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

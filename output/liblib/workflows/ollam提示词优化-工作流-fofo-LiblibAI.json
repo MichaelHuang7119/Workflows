@@ -1,0 +1,766 @@
+{
+  "last_node_id": 46,
+  "last_link_id": 62,
+  "nodes": [
+    {
+      "id": 10,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1180,
+        1245
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 62,
+          "label": "CLIP"
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 11,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            14
+          ],
+          "shape": 3,
+          "label": "条件",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 45,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        835,
+        1013
+      ],
+      "size": {
+        "0": 315,
+        "1": 98
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            59
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            61,
+            62
+          ],
+          "shape": 3,
+          "label": "CLIP",
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            60
+          ],
+          "shape": 3,
+          "label": "VAE",
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "sdxl\\dreamshaperXL_lightningDPMSDE.safetensors"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 12,
+      "type": "EmptyLatentImage",
+      "pos": [
+        1999,
+        980
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            15
+          ],
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 13,
+      "type": "VAEDecode",
+      "pos": [
+        2344,
+        972
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 16,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 60,
+          "label": "VAE",
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            18
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 42,
+      "type": "StringFunction|pysssss",
+      "pos": [
+        1355.3163370257566,
+        369.83801989624
+      ],
+      "size": {
+        "0": 408.73046875,
+        "1": 281.7611083984375
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text_b",
+          "type": "STRING",
+          "link": 55,
+          "widget": {
+            "name": "text_b"
+          },
+          "label": "文本_B"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            57
+          ],
+          "shape": 3,
+          "label": "字符串",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "StringFunction|pysssss"
+      },
+      "widgets_values": [
+        "append",
+        "yes",
+        "",
+        "",
+        "",
+        "fisheye lens, ultra wide distortion, curved horizons Enchanting scene: A captivating woman, radiant smile, raven hair cascading down her back, porcelain skin, delicate features, sapphire eyes sparkling with mischief, velvet cloak wrapped around her slender frame, lace gloves adorning her hands. Amidst a whimsical setting of twinkling candles, ornate mirrors, and antique furniture, she sits poised on a plush armchair, surrounded by books, scrolls, and mysterious artifacts. A hint of magic lingers in the air, as if she weaves spells with her words alone. Film grain, vintage, retro, nostalgic, imperfect,"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 7,
+      "type": "IF_DisplayText",
+      "pos": [
+        1363.3163370257566,
+        723.8380198962394
+      ],
+      "size": {
+        "0": 351.68988037109375,
+        "1": 129.17735290527344
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 7,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            11
+          ],
+          "shape": 3,
+          "label": "字符串",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "IF_DisplayText"
+      },
+      "widgets_values": [
+        "",
+        "EasyNegative, fat, paintings, sketches, (worst quality:2), (low quality:2), (normal quality:2), lowres, ((monochrome)), ((grayscale)), bad anatomy, text, error, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, bad feet, poorly drawn face, bad proportions, gross proportions, ng_deepnegative_v1_75t, badhandsv5-neg, clothes, girl, loli, young,"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 11,
+      "type": "KSampler",
+      "pos": [
+        1638,
+        987
+      ],
+      "size": {
+        "0": 315,
+        "1": 474
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 59,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 13,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 14,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 15,
+          "label": "Latent",
+          "slot_index": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            16
+          ],
+          "shape": 3,
+          "label": "Latent",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        883135868341364,
+        "randomize",
+        30,
+        2,
+        "dpmpp_3m_sde",
+        "karras",
+        1
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 9,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1193,
+        966
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 61,
+          "label": "CLIP"
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 58,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            13
+          ],
+          "shape": 3,
+          "label": "条件",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 1,
+      "type": "IF_PromptMkr",
+      "pos": [
+        933,
+        380
+      ],
+      "size": {
+        "0": 400,
+        "1": 452
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "Question",
+          "type": "STRING",
+          "links": [
+            6
+          ],
+          "shape": 3,
+          "label": "问题",
+          "slot_index": 0
+        },
+        {
+          "name": "Response",
+          "type": "STRING",
+          "links": [
+            55
+          ],
+          "shape": 3,
+          "label": "回复",
+          "slot_index": 1
+        },
+        {
+          "name": "Negative",
+          "type": "STRING",
+          "links": [
+            7
+          ],
+          "shape": 3,
+          "label": "负面文本",
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "IF_PromptMkr"
+      },
+      "widgets_values": [
+        "a charming woman",
+        "localhost",
+        "11434",
+        "ollama",
+        "impactframes/llama3_ifai_sd_prompt_mkr_q4km:latest",
+        "IF_PromptMKR",
+        "FishEye",
+        "Analog",
+        "ReliberateNeg",
+        0.5,
+        256,
+        572265585639247,
+        "randomize",
+        false,
+        false
+      ]
+    },
+    {
+      "id": 46,
+      "type": "Note",
+      "pos": [
+        701,
+        382
+      ],
+      "size": [
+        212.67144397073537,
+        446.30732903598744
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "端口号为11434这个务必输入正确。当切换引擎时模型会自动切换。\n\n\n温度此参数控制生成文本的随机性。较低的值（接近 0.0）使输出更具确定性，而较高的值（最高 2.0）会增加随机性。默认值为 0.7.\n\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 6,
+      "type": "IF_DisplayText",
+      "pos": [
+        1760,
+        -192
+      ],
+      "size": [
+        381.4181296081538,
+        178.25128090576158
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 6,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "IF_DisplayText"
+      },
+      "widgets_values": [
+        "",
+        "a charming woman"
+      ]
+    },
+    {
+      "id": 43,
+      "type": "IF_DisplayText",
+      "pos": [
+        2191,
+        -200
+      ],
+      "size": [
+        374.3690505944819,
+        173.98009620300263
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 57,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            58
+          ],
+          "shape": 3,
+          "label": "字符串",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "IF_DisplayText"
+      },
+      "widgets_values": [
+        "",
+        "fisheye lens, ultra wide distortion, curved horizons Enchanting scene: A captivating woman, radiant smile, raven hair cascading down her back, porcelain skin, delicate features, sapphire eyes sparkling with mischief, velvet cloak wrapped around her slender frame, lace gloves adorning her hands. Amidst a whimsical setting of twinkling candles, ornate mirrors, and antique furniture, she sits poised on a plush armchair, surrounded by books, scrolls, and mysterious artifacts. A hint of magic lingers in the air, as if she weaves spells with her words alone. Film grain, vintage, retro, nostalgic, imperfect,"
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 14,
+      "type": "PreviewImage",
+      "pos": [
+        1833,
+        35
+      ],
+      "size": [
+        758.5906959773238,
+        905.008685127789
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 18,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    }
+  ],
+  "links": [
+    [
+      6,
+      1,
+      0,
+      6,
+      0,
+      "STRING"
+    ],
+    [
+      7,
+      1,
+      2,
+      7,
+      0,
+      "STRING"
+    ],
+    [
+      11,
+      7,
+      0,
+      10,
+      1,
+      "STRING"
+    ],
+    [
+      13,
+      9,
+      0,
+      11,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      14,
+      10,
+      0,
+      11,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      15,
+      12,
+      0,
+      11,
+      3,
+      "LATENT"
+    ],
+    [
+      16,
+      11,
+      0,
+      13,
+      0,
+      "LATENT"
+    ],
+    [
+      18,
+      13,
+      0,
+      14,
+      0,
+      "IMAGE"
+    ],
+    [
+      55,
+      1,
+      1,
+      42,
+      0,
+      "STRING"
+    ],
+    [
+      57,
+      42,
+      0,
+      43,
+      0,
+      "STRING"
+    ],
+    [
+      58,
+      43,
+      0,
+      9,
+      1,
+      "STRING"
+    ],
+    [
+      59,
+      45,
+      0,
+      11,
+      0,
+      "MODEL"
+    ],
+    [
+      60,
+      45,
+      2,
+      13,
+      1,
+      "VAE"
+    ],
+    [
+      61,
+      45,
+      1,
+      9,
+      0,
+      "CLIP"
+    ],
+    [
+      62,
+      45,
+      1,
+      10,
+      0,
+      "CLIP"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "ollama",
+      "bounding": [
+        843,
+        169,
+        956,
+        697
+      ],
+      "color": "#b58b2a",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.42409761837248483,
+      "offset": {
+        "0": 759.4363403320312,
+        "1": 776.0236206054688
+      }
+    }
+  },
+  "version": 0.4
+}

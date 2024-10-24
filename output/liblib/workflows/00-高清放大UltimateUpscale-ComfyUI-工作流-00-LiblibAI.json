@@ -1,0 +1,481 @@
+{
+  "last_node_id": 8,
+  "last_link_id": 13,
+  "nodes": [
+    {
+      "id": 8,
+      "type": "ControlNetApply",
+      "pos": [
+        -33,
+        235
+      ],
+      "size": {
+        "0": 317.4000244140625,
+        "1": 98
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 11,
+          "label": "conditioning"
+        },
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 9,
+          "label": "control_net"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 10,
+          "label": "image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            12
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "CONDITIONING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetApply"
+      },
+      "widgets_values": [
+        1
+      ]
+    },
+    {
+      "id": 7,
+      "type": "ControlNetLoader",
+      "pos": [
+        -31,
+        129
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "links": [
+            9
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "CONTROL_NET"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetLoader"
+      },
+      "widgets_values": [
+        "control_v11f1e_sd15_tile.pth"
+      ]
+    },
+    {
+      "id": 6,
+      "type": "LoadImage",
+      "pos": [
+        -449,
+        321
+      ],
+      "size": {
+        "0": 315,
+        "1": 314
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            8,
+            10
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "IMAGE"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "MASK"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "ComfyUI_temp_ptbfu_00042_ (1).png",
+        "image"
+      ]
+    },
+    {
+      "id": 1,
+      "type": "UltimateSDUpscale",
+      "pos": [
+        327,
+        254
+      ],
+      "size": {
+        "0": 315,
+        "1": 590
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 8,
+          "label": "image"
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 3,
+          "label": "model"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 12,
+          "label": "positive"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 13,
+          "label": "negative"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 7,
+          "label": "vae"
+        },
+        {
+          "name": "upscale_model",
+          "type": "UPSCALE_MODEL",
+          "link": 2,
+          "label": "upscale_model"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "IMAGE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UltimateSDUpscale"
+      },
+      "widgets_values": [
+        2,
+        762503057211295,
+        "randomize",
+        20,
+        8,
+        "dpmpp_2m_sde_gpu",
+        "normal",
+        0.25,
+        "Linear",
+        512,
+        512,
+        8,
+        32,
+        "None",
+        1,
+        64,
+        8,
+        16,
+        "enable"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "UpscaleModelLoader",
+      "pos": [
+        -16,
+        985
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "UPSCALE_MODEL",
+          "type": "UPSCALE_MODEL",
+          "links": [
+            2
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "UPSCALE_MODEL"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UpscaleModelLoader"
+      },
+      "widgets_values": [
+        "RealESRGAN_x4plus.pth"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "Efficient Loader",
+      "pos": [
+        -107,
+        374
+      ],
+      "size": {
+        "0": 400,
+        "1": 606
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "lora_stack",
+          "type": "LORA_STACK",
+          "link": null,
+          "label": "lora_stack"
+        },
+        {
+          "name": "cnet_stack",
+          "type": "CONTROL_NET_STACK",
+          "link": null,
+          "label": "cnet_stack"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            3
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "MODEL"
+        },
+        {
+          "name": "CONDITIONING+",
+          "type": "CONDITIONING",
+          "links": [
+            11
+          ],
+          "shape": 3,
+          "slot_index": 1,
+          "label": "CONDITIONING+"
+        },
+        {
+          "name": "CONDITIONING-",
+          "type": "CONDITIONING",
+          "links": [
+            13
+          ],
+          "shape": 3,
+          "slot_index": 2,
+          "label": "CONDITIONING-"
+        },
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3,
+          "label": "LATENT"
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            7
+          ],
+          "shape": 3,
+          "slot_index": 4,
+          "label": "VAE"
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": null,
+          "shape": 3,
+          "label": "CLIP"
+        },
+        {
+          "name": "DEPENDENCIES",
+          "type": "DEPENDENCIES",
+          "links": null,
+          "shape": 3,
+          "label": "DEPENDENCIES"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Efficient Loader"
+      },
+      "widgets_values": [
+        "SD1.5\\revAnimated_v121.safetensors",
+        "vae-ft-mse-840000-ema-pruned.safetensors",
+        -1,
+        "SD1.5\\Add More Details_TweakerLoRA_v1.0.safetensors",
+        0.3,
+        1,
+        "best quality, 8k, exquisite detail, UHD",
+        "embedding:EasyNegative, embedding:坏图修复DeepNegativeV1.x_V175T, ",
+        "none",
+        "comfy",
+        512,
+        512,
+        1
+      ],
+      "color": "#332222",
+      "bgcolor": "#553333",
+      "shape": 1
+    },
+    {
+      "id": 2,
+      "type": "PreviewImage",
+      "pos": [
+        665,
+        250
+      ],
+      "size": {
+        "0": 746.5670166015625,
+        "1": 766.1839599609375
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 1,
+          "label": "images"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      2,
+      0,
+      "IMAGE"
+    ],
+    [
+      2,
+      4,
+      0,
+      1,
+      5,
+      "UPSCALE_MODEL"
+    ],
+    [
+      3,
+      3,
+      0,
+      1,
+      1,
+      "MODEL"
+    ],
+    [
+      7,
+      3,
+      4,
+      1,
+      4,
+      "VAE"
+    ],
+    [
+      8,
+      6,
+      0,
+      1,
+      0,
+      "IMAGE"
+    ],
+    [
+      9,
+      7,
+      0,
+      8,
+      1,
+      "CONTROL_NET"
+    ],
+    [
+      10,
+      6,
+      0,
+      8,
+      2,
+      "IMAGE"
+    ],
+    [
+      11,
+      3,
+      1,
+      8,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      12,
+      8,
+      0,
+      1,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      13,
+      3,
+      2,
+      1,
+      3,
+      "CONDITIONING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

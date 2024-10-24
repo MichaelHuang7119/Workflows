@@ -1,0 +1,823 @@
+{
+  "last_node_id": 37,
+  "last_link_id": 56,
+  "nodes": [
+    {
+      "id": 7,
+      "type": "ToBasicPipe",
+      "pos": [
+        5980,
+        5630
+      ],
+      "size": {
+        "0": 241.79998779296875,
+        "1": 106
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 56,
+          "label": "模型"
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 6,
+          "label": "CLIP"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 7,
+          "label": "VAE"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 10,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 11,
+          "label": "负面条件"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "basic_pipe",
+          "type": "BASIC_PIPE",
+          "links": [
+            12
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "基础节点束"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ToBasicPipe"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 2,
+      "type": "VAELoader",
+      "pos": [
+        5060,
+        5750
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            7
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "sdxl_vae.safetensors"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 26,
+      "type": "JWImageResizeByLongerSide",
+      "pos": [
+        6330,
+        5360
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 34,
+          "label": "image",
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            35
+          ],
+          "shape": 3,
+          "label": "IMAGE",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "JWImageResizeByLongerSide"
+      },
+      "widgets_values": [
+        1536,
+        "bicubic"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 1,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        5050,
+        5610
+      ],
+      "size": {
+        "0": 315,
+        "1": 98
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            56
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "模型"
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            3,
+            4,
+            6
+          ],
+          "shape": 3,
+          "slot_index": 1,
+          "label": "CLIP"
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": null,
+          "shape": 3,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "4XL\\SDXL极致写实摄影MAX_v1.0.safetensors"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 3,
+      "type": "SDXLPromptStyler",
+      "pos": [
+        5004,
+        6002
+      ],
+      "size": {
+        "0": 400,
+        "1": 242.0001678466797
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "text_positive",
+          "type": "STRING",
+          "links": [
+            1
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "正面条件"
+        },
+        {
+          "name": "text_negative",
+          "type": "STRING",
+          "links": [
+            2
+          ],
+          "shape": 3,
+          "slot_index": 1,
+          "label": "负面条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SDXLPromptStyler"
+      },
+      "widgets_values": [
+        "most detail,realstic face,A little girl,elementary school student,about 7 years old",
+        "",
+        "sai-photographic",
+        true,
+        true,
+        true
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 11,
+      "type": "FaceDetailerPipe",
+      "pos": [
+        7399,
+        5430
+      ],
+      "size": {
+        "0": 460,
+        "1": 994
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 35,
+          "slot_index": 0,
+          "label": "图像"
+        },
+        {
+          "name": "detailer_pipe",
+          "type": "DETAILER_PIPE",
+          "link": 15,
+          "label": "细化节点束"
+        },
+        {
+          "name": "scheduler_func_opt",
+          "type": "SCHEDULER_FUNC",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            17
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "图像"
+        },
+        {
+          "name": "cropped_refined",
+          "type": "IMAGE",
+          "links": [],
+          "shape": 6,
+          "slot_index": 1,
+          "label": "细化图像"
+        },
+        {
+          "name": "cropped_enhanced_alpha",
+          "type": "IMAGE",
+          "links": [],
+          "shape": 6,
+          "slot_index": 2,
+          "label": "细化部分"
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        },
+        {
+          "name": "detailer_pipe",
+          "type": "DETAILER_PIPE",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "cnet_images",
+          "type": "IMAGE",
+          "links": [],
+          "shape": 6,
+          "slot_index": 5,
+          "label": "ControlNet图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FaceDetailerPipe"
+      },
+      "widgets_values": [
+        512,
+        true,
+        1024,
+        325851674345080,
+        "increment",
+        30,
+        8,
+        "euler",
+        "ddim_uniform",
+        0.74,
+        5,
+        true,
+        true,
+        0.5,
+        10,
+        3,
+        "center-1",
+        0,
+        0.93,
+        0,
+        0.7,
+        "False",
+        10,
+        0.2,
+        1,
+        true,
+        20
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 13,
+      "type": "PreviewImage",
+      "pos": [
+        6893,
+        5489
+      ],
+      "size": {
+        "0": 470,
+        "1": 670
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 17,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 8,
+      "type": "BasicPipeToDetailerPipe",
+      "pos": [
+        6195,
+        6423
+      ],
+      "size": {
+        "0": 400,
+        "1": 204
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "basic_pipe",
+          "type": "BASIC_PIPE",
+          "link": 12,
+          "label": "基础节点束"
+        },
+        {
+          "name": "bbox_detector",
+          "type": "BBOX_DETECTOR",
+          "link": 13,
+          "slot_index": 1,
+          "label": "BBox检测"
+        },
+        {
+          "name": "sam_model_opt",
+          "type": "SAM_MODEL",
+          "link": 14,
+          "slot_index": 2,
+          "label": "SAM模型"
+        },
+        {
+          "name": "segm_detector_opt",
+          "type": "SEGM_DETECTOR",
+          "link": null,
+          "label": "Segm检测"
+        },
+        {
+          "name": "detailer_hook",
+          "type": "DETAILER_HOOK",
+          "link": null,
+          "label": "细化约束"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "detailer_pipe",
+          "type": "DETAILER_PIPE",
+          "links": [
+            15
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "细化节点束"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicPipeToDetailerPipe"
+      },
+      "widgets_values": [
+        "",
+        "Select the LoRA to add to the text",
+        "Select the Wildcard to add to the text"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 12,
+      "type": "LoadImage",
+      "pos": [
+        6345,
+        5479
+      ],
+      "size": [
+        514.0840971938178,
+        696.054394215068
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            34
+          ],
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "00002-367260503.png",
+        "image"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 4,
+      "type": "CLIPTextEncode",
+      "pos": [
+        5492,
+        5686
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 3,
+          "label": "CLIP"
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 1,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            10
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 5,
+      "type": "CLIPTextEncode",
+      "pos": [
+        5478,
+        5983
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 4,
+          "label": "CLIP"
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 2,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            11
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 10,
+      "type": "SAMLoader",
+      "pos": [
+        5986,
+        5989
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "SAM_MODEL",
+          "type": "SAM_MODEL",
+          "links": [
+            14
+          ],
+          "shape": 3,
+          "label": "SAM模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SAMLoader"
+      },
+      "widgets_values": [
+        "sam_vit_b_01ec64.pth",
+        "Prefer GPU"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 9,
+      "type": "UltralyticsDetectorProvider",
+      "pos": [
+        5928,
+        5838
+      ],
+      "size": {
+        "0": 315,
+        "1": 78
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "BBOX_DETECTOR",
+          "type": "BBOX_DETECTOR",
+          "links": [
+            13
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "BBox检测"
+        },
+        {
+          "name": "SEGM_DETECTOR",
+          "type": "SEGM_DETECTOR",
+          "links": [],
+          "shape": 3,
+          "label": "SEGM检测",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UltralyticsDetectorProvider"
+      },
+      "widgets_values": [
+        "bbox/face_yolov8m.pt"
+      ],
+      "category": "Custom Nodes"
+    }
+  ],
+  "links": [
+    [
+      1,
+      3,
+      0,
+      4,
+      1,
+      "STRING"
+    ],
+    [
+      2,
+      3,
+      1,
+      5,
+      1,
+      "STRING"
+    ],
+    [
+      3,
+      1,
+      1,
+      4,
+      0,
+      "CLIP"
+    ],
+    [
+      4,
+      1,
+      1,
+      5,
+      0,
+      "CLIP"
+    ],
+    [
+      6,
+      1,
+      1,
+      7,
+      1,
+      "CLIP"
+    ],
+    [
+      7,
+      2,
+      0,
+      7,
+      2,
+      "VAE"
+    ],
+    [
+      10,
+      4,
+      0,
+      7,
+      3,
+      "CONDITIONING"
+    ],
+    [
+      11,
+      5,
+      0,
+      7,
+      4,
+      "CONDITIONING"
+    ],
+    [
+      12,
+      7,
+      0,
+      8,
+      0,
+      "BASIC_PIPE"
+    ],
+    [
+      13,
+      9,
+      0,
+      8,
+      1,
+      "BBOX_DETECTOR"
+    ],
+    [
+      14,
+      10,
+      0,
+      8,
+      2,
+      "SAM_MODEL"
+    ],
+    [
+      15,
+      8,
+      0,
+      11,
+      1,
+      "DETAILER_PIPE"
+    ],
+    [
+      17,
+      11,
+      0,
+      13,
+      0,
+      "IMAGE"
+    ],
+    [
+      34,
+      12,
+      0,
+      26,
+      0,
+      "IMAGE"
+    ],
+    [
+      35,
+      26,
+      0,
+      11,
+      0,
+      "IMAGE"
+    ],
+    [
+      56,
+      1,
+      0,
+      7,
+      0,
+      "MODEL"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.5989500000000126,
+      "offset": [
+        -4308.309658592977,
+        -5109.377543058905
+      ]
+    }
+  },
+  "version": 0.4
+}

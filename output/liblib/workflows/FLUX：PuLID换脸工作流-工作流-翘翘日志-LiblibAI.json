@@ -1,0 +1,925 @@
+{
+  "last_node_id": 71,
+  "last_link_id": 104,
+  "nodes": [
+    {
+      "id": 57,
+      "type": "BasicGuider",
+      "pos": [
+        764.5790675488506,
+        194.30762467458788
+      ],
+      "size": {
+        "0": 317.47467041015625,
+        "1": 48.507537841796875
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 99,
+          "slot_index": 0,
+          "label": "模型"
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 94,
+          "slot_index": 1,
+          "label": "条件"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            83
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "引导"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicGuider"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 55,
+      "type": "KSamplerSelect",
+      "pos": [
+        764.5790675488506,
+        284.3076246745876
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            84
+          ],
+          "shape": 3,
+          "label": "采样器"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "euler"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 56,
+      "type": "BasicScheduler",
+      "pos": [
+        764.5790675488506,
+        389.3076246745876
+      ],
+      "size": {
+        "0": 320.7243347167969,
+        "1": 106
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 104,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            85
+          ],
+          "shape": 3,
+          "label": "Sigmas"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicScheduler"
+      },
+      "widgets_values": [
+        "simple",
+        30,
+        1
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 54,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        1134.57906754885,
+        273.3076246745876
+      ],
+      "size": {
+        "0": 197.30331420898438,
+        "1": 326
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 82,
+          "slot_index": 0,
+          "label": "噪波生成"
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 83,
+          "slot_index": 1,
+          "label": "引导"
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 84,
+          "slot_index": 2,
+          "label": "采样器"
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 85,
+          "slot_index": 3,
+          "label": "Sigmas"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 86,
+          "slot_index": 4,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            90
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "输出"
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "shape": 3,
+          "label": "降噪输出"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 59,
+      "type": "VAEDecode",
+      "pos": [
+        1351.57906754885,
+        278.3076246745876
+      ],
+      "size": {
+        "0": 140,
+        "1": 46
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 90,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 91,
+          "label": "VAE",
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            93
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 62,
+      "type": "SaveImage",
+      "pos": [
+        1531.57906754885,
+        136.30762467458786
+      ],
+      "size": {
+        "0": 336.85540771484375,
+        "1": 379.85540771484375
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 93,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 58,
+      "type": "RandomNoise",
+      "pos": [
+        760.5790675488506,
+        71.3076246745878
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            82
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "噪波生成"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        1038431633907895,
+        "randomize"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 53,
+      "type": "UNETLoader",
+      "pos": [
+        31.02953157612197,
+        98.06661899991994
+      ],
+      "size": {
+        "0": 368.0447998046875,
+        "1": 103.42379760742188
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            98
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "FLUX\\flux1-dev-fp8-e4m3fn.safetensors",
+        "fp8_e4m3fn"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 52,
+      "type": "DualCLIPLoader",
+      "pos": [
+        37.02953157612197,
+        245.0666189999202
+      ],
+      "size": {
+        "0": 361.08148193359375,
+        "1": 116.32977294921875
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            95
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "clip_l.safetensors",
+        "t5xxl_fp8_e4m3fn.safetensors",
+        "flux"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 51,
+      "type": "VAELoader",
+      "pos": [
+        44.02953157612191,
+        406.06661899991946
+      ],
+      "size": {
+        "0": 355.0447998046875,
+        "1": 69.54832458496094
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            91
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.safetensors"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 64,
+      "type": "PulidFluxModelLoader",
+      "pos": [
+        360.1846860575831,
+        810.0160101291352
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "PULIDFLUX",
+          "type": "PULIDFLUX",
+          "links": [
+            97
+          ],
+          "shape": 3,
+          "label": "PULIDFLUX",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PulidFluxModelLoader"
+      },
+      "widgets_values": [
+        "pulid_flux_v0.9.0.safetensors"
+      ]
+    },
+    {
+      "id": 66,
+      "type": "PulidFluxEvaClipLoader",
+      "pos": [
+        365.1846860575831,
+        922.0160101291352
+      ],
+      "size": {
+        "0": 309.6985778808594,
+        "1": 27.55864906311035
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "EVA_CLIP",
+          "type": "EVA_CLIP",
+          "links": [
+            101
+          ],
+          "shape": 3,
+          "label": "EVA_CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PulidFluxEvaClipLoader"
+      }
+    },
+    {
+      "id": 67,
+      "type": "PulidFluxInsightFaceLoader",
+      "pos": [
+        363.1846860575831,
+        1001.0160101291356
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "FACEANALYSIS",
+          "type": "FACEANALYSIS",
+          "links": [
+            102
+          ],
+          "shape": 3,
+          "label": "FACEANALYSIS"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PulidFluxInsightFaceLoader"
+      },
+      "widgets_values": [
+        "CPU"
+      ]
+    },
+    {
+      "id": 68,
+      "type": "LoadImage",
+      "pos": [
+        30.18468605758332,
+        803.0160101291352
+      ],
+      "size": {
+        "0": 300.959716796875,
+        "1": 365.92919921875
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            103
+          ],
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "e04ac271cc6c3197b5b8cd43eaf4be3e.jpeg",
+        "image"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 65,
+      "type": "ApplyPulidFlux",
+      "pos": [
+        710.1846860575833,
+        823.1899291369804
+      ],
+      "size": {
+        "0": 322.6319274902344,
+        "1": 244.54319763183594
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 98,
+          "label": "model"
+        },
+        {
+          "name": "pulid_flux",
+          "type": "PULIDFLUX",
+          "link": 97,
+          "label": "pulid_flux"
+        },
+        {
+          "name": "eva_clip",
+          "type": "EVA_CLIP",
+          "link": 101,
+          "label": "eva_clip",
+          "slot_index": 2
+        },
+        {
+          "name": "face_analysis",
+          "type": "FACEANALYSIS",
+          "link": 102,
+          "label": "face_analysis",
+          "slot_index": 3
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 103,
+          "label": "image",
+          "slot_index": 4
+        },
+        {
+          "name": "attn_mask",
+          "type": "MASK",
+          "link": null,
+          "label": "attn_mask",
+          "slot_index": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            99,
+            104
+          ],
+          "shape": 3,
+          "label": "MODEL",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ApplyPulidFlux"
+      },
+      "widgets_values": [
+        0.8,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 60,
+      "type": "EmptyLatentImage",
+      "pos": [
+        765.5790675488506,
+        541.3076246745875
+      ],
+      "size": {
+        "0": 308.5608215332031,
+        "1": 156.0615692138672
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 9,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            86
+          ],
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        768,
+        1024,
+        1
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 63,
+      "type": "CLIPTextEncodeFlux",
+      "pos": [
+        420.5790675488508,
+        112.30762467458786
+      ],
+      "size": {
+        "0": 322.01837158203125,
+        "1": 355.2315368652344
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 95,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            94
+          ],
+          "shape": 3,
+          "label": "条件",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeFlux"
+      },
+      "widgets_values": [
+        "Han Chinese Clothing，A beautiful woman in white Chinese Hanfu, quiet and sweet，Front, facing the audience,The hair is whole",
+        "Han Chinese Clothing，A beautiful woman in white Chinese Hanfu, quiet and sweet，Front, facing the audience,The hair is whole",
+        3.5
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 69,
+      "type": "Note",
+      "pos": [
+        366,
+        1102
+      ],
+      "size": [
+        308.26849676566894,
+        98.38560787100255
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "上传人物照片\n\n工作流为本地搭建，哩布可能没有适配的节点\n\n日常教程更新在公众号【翘翘日志】"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    }
+  ],
+  "links": [
+    [
+      82,
+      58,
+      0,
+      54,
+      0,
+      "NOISE"
+    ],
+    [
+      83,
+      57,
+      0,
+      54,
+      1,
+      "GUIDER"
+    ],
+    [
+      84,
+      55,
+      0,
+      54,
+      2,
+      "SAMPLER"
+    ],
+    [
+      85,
+      56,
+      0,
+      54,
+      3,
+      "SIGMAS"
+    ],
+    [
+      86,
+      60,
+      0,
+      54,
+      4,
+      "LATENT"
+    ],
+    [
+      90,
+      54,
+      0,
+      59,
+      0,
+      "LATENT"
+    ],
+    [
+      91,
+      51,
+      0,
+      59,
+      1,
+      "VAE"
+    ],
+    [
+      93,
+      59,
+      0,
+      62,
+      0,
+      "IMAGE"
+    ],
+    [
+      94,
+      63,
+      0,
+      57,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      95,
+      52,
+      0,
+      63,
+      0,
+      "CLIP"
+    ],
+    [
+      97,
+      64,
+      0,
+      65,
+      1,
+      "PULIDFLUX"
+    ],
+    [
+      98,
+      53,
+      0,
+      65,
+      0,
+      "MODEL"
+    ],
+    [
+      99,
+      65,
+      0,
+      57,
+      0,
+      "MODEL"
+    ],
+    [
+      101,
+      66,
+      0,
+      65,
+      2,
+      "EVA_CLIP"
+    ],
+    [
+      102,
+      67,
+      0,
+      65,
+      3,
+      "FACEANALYSIS"
+    ],
+    [
+      103,
+      68,
+      0,
+      65,
+      4,
+      "IMAGE"
+    ],
+    [
+      104,
+      65,
+      0,
+      56,
+      0,
+      "MODEL"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "FLUX文生图",
+      "bounding": [
+        15,
+        14,
+        1870,
+        701
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "换脸",
+      "bounding": [
+        15,
+        726,
+        1057,
+        484
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.598950000000006,
+      "offset": [
+        358.3059249986931,
+        182.75273829629052
+      ]
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

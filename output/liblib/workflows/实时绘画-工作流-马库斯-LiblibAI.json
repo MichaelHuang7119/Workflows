@@ -1,0 +1,615 @@
+{
+  "last_node_id": 44,
+  "last_link_id": 51,
+  "nodes": [
+    {
+      "id": 17,
+      "type": "PainterNode",
+      "pos": [
+        2100,
+        -200
+      ],
+      "size": [
+        665.2338351078142,
+        755.2338351078142
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            21
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "title": "PainterNode - 500x500",
+      "properties": {
+        "Node name for S&R": "PainterNode"
+      },
+      "widgets_values": [
+        "Paint_17.png",
+        true,
+        "clear_painer",
+        null
+      ]
+    },
+    {
+      "id": 39,
+      "type": "PreviewImage",
+      "pos": [
+        2770,
+        -200
+      ],
+      "size": {
+        "0": 640,
+        "1": 770
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 48,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 20,
+      "type": "ImageScale",
+      "pos": [
+        1650,
+        390
+      ],
+      "size": [
+        210,
+        150
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 21,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            22
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageScale"
+      },
+      "widgets_values": [
+        "nearest-exact",
+        512,
+        512,
+        "disabled"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 21,
+      "type": "VAEEncode",
+      "pos": [
+        1870,
+        390
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 22,
+          "label": "图像"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 50,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            49
+          ],
+          "shape": 3,
+          "label": "Latent",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 44,
+      "type": "easy loraStack",
+      "pos": [
+        1270,
+        -180
+      ],
+      "size": {
+        "0": 360,
+        "1": 154
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "optional_lora_stack",
+          "type": "LORA_STACK",
+          "link": null,
+          "label": "LoRA堆（可选）"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "lora_stack",
+          "type": "LORA_STACK",
+          "links": [
+            51
+          ],
+          "shape": 3,
+          "label": "LoRA堆"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy loraStack"
+      },
+      "widgets_values": [
+        true,
+        "simple",
+        1,
+        "LCM_LoRA_SDv15.safetensors",
+        1,
+        1,
+        1,
+        "None",
+        1,
+        1,
+        1,
+        "None",
+        1,
+        1,
+        1,
+        "None",
+        1,
+        1,
+        1,
+        "None",
+        1,
+        1,
+        1,
+        "None",
+        1,
+        1,
+        1,
+        "None",
+        1,
+        1,
+        1,
+        "None",
+        1,
+        1,
+        1,
+        "None",
+        1,
+        1,
+        1,
+        "None",
+        1,
+        1,
+        1
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 43,
+      "type": "easy fullkSampler",
+      "pos": [
+        1270,
+        30
+      ],
+      "size": {
+        "0": 360,
+        "1": 420
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pipe",
+          "type": "PIPE_LINE",
+          "link": 47,
+          "label": "节点束"
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": null,
+          "label": "模型（可选）"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": null,
+          "label": "正面条件（可选）"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": null,
+          "label": "负面条件（可选）"
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "link": 49,
+          "label": "Latent（可选）"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": null
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": null
+        },
+        {
+          "name": "xyPlot",
+          "type": "XYPLOT",
+          "link": null
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "pipe",
+          "type": "PIPE_LINE",
+          "links": null,
+          "shape": 3,
+          "label": "节点束"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            48
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 1
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": null,
+          "shape": 3,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "links": null,
+          "shape": 3,
+          "label": "随机种"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy fullkSampler"
+      },
+      "widgets_values": [
+        5,
+        1.3,
+        "lcm",
+        "ddim_uniform",
+        0.8,
+        "Hide",
+        0,
+        "ComfyUI",
+        875404050933274,
+        "randomize"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 42,
+      "type": "easy fullLoader",
+      "pos": [
+        1670,
+        -200
+      ],
+      "size": {
+        "0": 400,
+        "1": 534
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model_override",
+          "type": "MODEL",
+          "link": null,
+          "label": "模型（可选）"
+        },
+        {
+          "name": "clip_override",
+          "type": "CLIP",
+          "link": null,
+          "label": "CLIP（可选）"
+        },
+        {
+          "name": "vae_override",
+          "type": "VAE",
+          "link": null,
+          "label": "VAE（可选）"
+        },
+        {
+          "name": "optional_lora_stack",
+          "type": "LORA_STACK",
+          "link": 51,
+          "label": "LoRA堆（可选）",
+          "slot_index": 3
+        },
+        {
+          "name": "optional_controlnet_stack",
+          "type": "CONTROL_NET_STACK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "pipe",
+          "type": "PIPE_LINE",
+          "links": [
+            47
+          ],
+          "shape": 3,
+          "label": "节点束",
+          "slot_index": 0
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": null,
+          "shape": 3,
+          "label": "模型"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "links": [
+            50
+          ],
+          "shape": 3,
+          "slot_index": 2
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy fullLoader"
+      },
+      "widgets_values": [
+        "·动漫\\3dCartoon_v10.safetensors",
+        "Default",
+        "Baked VAE",
+        -1,
+        "None",
+        1,
+        1,
+        "512 x 512",
+        512,
+        512,
+        "1boy,Color photograph,black hat,Earrings,Middle division bangs",
+        "none",
+        "comfy",
+        "embedding:造型\\EasyNegativeV2, ",
+        "none",
+        "comfy",
+        1,
+        false
+      ]
+    }
+  ],
+  "links": [
+    [
+      21,
+      17,
+      0,
+      20,
+      0,
+      "IMAGE"
+    ],
+    [
+      22,
+      20,
+      0,
+      21,
+      0,
+      "IMAGE"
+    ],
+    [
+      47,
+      42,
+      0,
+      43,
+      0,
+      "PIPE_LINE"
+    ],
+    [
+      48,
+      43,
+      1,
+      39,
+      0,
+      "IMAGE"
+    ],
+    [
+      49,
+      21,
+      0,
+      43,
+      4,
+      "LATENT"
+    ],
+    [
+      50,
+      42,
+      2,
+      21,
+      1,
+      "VAE"
+    ],
+    [
+      51,
+      44,
+      0,
+      42,
+      3,
+      "LORA_STACK"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "实时绘画",
+      "bounding": [
+        1240,
+        -310,
+        2200,
+        890
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7247295000000016,
+      "offset": {
+        "0": -1066.808458392397,
+        "1": 321.78766185685726
+      }
+    }
+  },
+  "version": 0.4
+}

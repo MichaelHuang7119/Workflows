@@ -1,0 +1,651 @@
+{
+  "last_node_id": 16,
+  "last_link_id": 9,
+  "nodes": [
+    {
+      "id": 9,
+      "type": "VHS_LoadVideo",
+      "pos": [
+        1545,
+        450
+      ],
+      "size": [
+        235.1999969482422,
+        491.1999969482422
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "meta_batch",
+          "type": "VHS_BatchManager",
+          "link": null,
+          "label": "批次管理"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            7
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "图像"
+        },
+        {
+          "name": "frame_count",
+          "type": "INT",
+          "links": null,
+          "shape": 3,
+          "label": "帧计数"
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": null,
+          "shape": 3,
+          "label": "音频"
+        },
+        {
+          "name": "video_info",
+          "type": "VHS_VIDEOINFO",
+          "links": null,
+          "shape": 3,
+          "label": "视频信息"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VHS_LoadVideo"
+      },
+      "widgets_values": {
+        "video": "driving_video.mp4",
+        "force_rate": 0,
+        "force_size": "Disabled",
+        "custom_width": 512,
+        "custom_height": 512,
+        "frame_load_cap": 0,
+        "skip_first_frames": 0,
+        "select_every_nth": 2,
+        "choose video to upload": "image",
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "frame_load_cap": 0,
+            "skip_first_frames": 0,
+            "force_rate": 0,
+            "filename": "driving_video.mp4",
+            "type": "input",
+            "format": "video/mp4",
+            "select_every_nth": 2
+          }
+        }
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 7,
+      "type": "AdvancedLivePortrait",
+      "pos": [
+        1823,
+        301
+      ],
+      "size": {
+        "0": 289.72344970703125,
+        "1": 513.248779296875
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "src_images",
+          "type": "IMAGE",
+          "link": null,
+          "label": "src_images"
+        },
+        {
+          "name": "motion_link",
+          "type": "EDITOR_LINK",
+          "link": 6,
+          "label": "motion_link"
+        },
+        {
+          "name": "driving_images",
+          "type": "IMAGE",
+          "link": 7,
+          "label": "driving_images"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            8
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "images"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "AdvancedLivePortrait"
+      },
+      "widgets_values": [
+        0,
+        0,
+        true,
+        "1 = 1:10\n2 = 5:10\n0 = 2:50\n1 = 2:0"
+      ]
+    },
+    {
+      "id": 10,
+      "type": "VHS_VideoCombine",
+      "pos": [
+        2150,
+        307
+      ],
+      "size": [
+        261.79998779296875,
+        565.7999877929688
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 8,
+          "label": "图像"
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": null,
+          "label": "音频"
+        },
+        {
+          "name": "meta_batch",
+          "type": "VHS_BatchManager",
+          "link": null,
+          "label": "批次管理"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": null,
+          "shape": 3,
+          "label": "文件名"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VHS_VideoCombine"
+      },
+      "widgets_values": {
+        "frame_rate": 15,
+        "loop_count": 0,
+        "filename_prefix": "AnimateDiff",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "pingpong": false,
+        "save_output": false,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "AnimateDiff_00127.mp4",
+            "subfolder": "",
+            "type": "temp",
+            "format": "video/h264-mp4",
+            "frame_rate": 15
+          }
+        }
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 8,
+      "type": "ExpressionEditor",
+      "pos": [
+        1210,
+        278
+      ],
+      "size": {
+        "0": 315,
+        "1": 642
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "src_image",
+          "type": "IMAGE",
+          "link": null,
+          "label": "src_image"
+        },
+        {
+          "name": "motion_link",
+          "type": "EDITOR_LINK",
+          "link": 5,
+          "label": "motion_link"
+        },
+        {
+          "name": "sample_image",
+          "type": "IMAGE",
+          "link": null,
+          "label": "sample_image"
+        },
+        {
+          "name": "add_exp",
+          "type": "EXP_DATA",
+          "link": null,
+          "label": "add_exp"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        },
+        {
+          "name": "motion_link",
+          "type": "EDITOR_LINK",
+          "links": [
+            6
+          ],
+          "shape": 3,
+          "slot_index": 1,
+          "label": "motion_link"
+        },
+        {
+          "name": "save_exp",
+          "type": "EXP_DATA",
+          "links": null,
+          "shape": 3,
+          "label": "save_exp"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ExpressionEditor"
+      },
+      "widgets_values": [
+        -3.5,
+        5.5,
+        0,
+        0,
+        0,
+        0,
+        15,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "id": 11,
+      "type": "PreviewImage",
+      "pos": [
+        569,
+        756
+      ],
+      "size": [
+        210,
+        246
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 9,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 6,
+      "type": "ExpressionEditor",
+      "pos": [
+        815,
+        379
+      ],
+      "size": {
+        "0": 315,
+        "1": 642
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "src_image",
+          "type": "IMAGE",
+          "link": 3,
+          "label": "src_image"
+        },
+        {
+          "name": "motion_link",
+          "type": "EDITOR_LINK",
+          "link": null,
+          "label": "motion_link"
+        },
+        {
+          "name": "sample_image",
+          "type": "IMAGE",
+          "link": null,
+          "label": "sample_image"
+        },
+        {
+          "name": "add_exp",
+          "type": "EXP_DATA",
+          "link": null,
+          "label": "add_exp"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            9
+          ],
+          "shape": 3,
+          "label": "image",
+          "slot_index": 0
+        },
+        {
+          "name": "motion_link",
+          "type": "EDITOR_LINK",
+          "links": [
+            5
+          ],
+          "shape": 3,
+          "slot_index": 1,
+          "label": "motion_link"
+        },
+        {
+          "name": "save_exp",
+          "type": "EXP_DATA",
+          "links": null,
+          "shape": 3,
+          "label": "save_exp",
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ExpressionEditor"
+      },
+      "widgets_values": [
+        5.5,
+        -6.9,
+        8,
+        5,
+        -6.5,
+        25,
+        1,
+        0,
+        28,
+        4.5,
+        15,
+        1.01,
+        0.3,
+        1
+      ]
+    },
+    {
+      "id": 12,
+      "type": "Label (rgthree)",
+      "pos": {
+        "0": 672,
+        "1": 126,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        1530.322265625,
+        60
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "AdvancedLivePortrait实时控制图片五官表情的工作流来了",
+      "properties": {
+        "fontSize": 60,
+        "fontFamily": "Arial",
+        "fontColor": "#ffff00\n",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 16,
+      "type": "Label (rgthree)",
+      "pos": {
+        "0": 672,
+        "1": 61,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        240,
+        40
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "猪丫师兄推荐",
+      "properties": {
+        "fontSize": 40,
+        "fontFamily": "Arial",
+        "fontColor": "#ffffff\n",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    },
+    {
+      "id": 3,
+      "type": "LoadImage",
+      "pos": [
+        445,
+        354
+      ],
+      "size": {
+        "0": 315,
+        "1": 314
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            3
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "slot_index": 1,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "source_image.png",
+        "image"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 13,
+      "type": "Label (rgthree)",
+      "pos": {
+        "0": 670,
+        "1": 125,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        1530.322265625,
+        60
+      ],
+      "flags": {
+        "allow_interaction": true
+      },
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "AdvancedLivePortrait实时控制图片五官表情的工作流来了",
+      "properties": {
+        "fontSize": 60,
+        "fontFamily": "Arial",
+        "fontColor": "#ff00ff\n",
+        "textAlign": "left",
+        "backgroundColor": "transparent",
+        "padding": 0,
+        "borderRadius": 0
+      },
+      "color": "#fff0",
+      "bgcolor": "#fff0"
+    }
+  ],
+  "links": [
+    [
+      3,
+      3,
+      0,
+      6,
+      0,
+      "IMAGE"
+    ],
+    [
+      5,
+      6,
+      1,
+      8,
+      1,
+      "EDITOR_LINK"
+    ],
+    [
+      6,
+      8,
+      1,
+      7,
+      1,
+      "EDITOR_LINK"
+    ],
+    [
+      7,
+      9,
+      0,
+      7,
+      2,
+      "IMAGE"
+    ],
+    [
+      8,
+      7,
+      0,
+      10,
+      0,
+      "IMAGE"
+    ],
+    [
+      9,
+      6,
+      0,
+      11,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.620921323059155,
+      "offset": [
+        379.97927173326684,
+        207.1252802955247
+      ]
+    }
+  },
+  "version": 0.4
+}

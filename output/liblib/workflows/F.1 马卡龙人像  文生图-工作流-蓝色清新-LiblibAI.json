@@ -1,0 +1,713 @@
+{
+  "last_node_id": 73,
+  "last_link_id": 123,
+  "nodes": [
+    {
+      "id": 69,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -9,
+        -200
+      ],
+      "size": {
+        "0": 303.56353759765625,
+        "1": 124.83257293701172
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 113,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            114
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "_widget_cache_map": {},
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 60,
+      "type": "FluxGuidance",
+      "pos": [
+        452,
+        -506
+      ],
+      "size": {
+        "0": 317.4000244140625,
+        "1": 58
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 112,
+          "label": "conditioning"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            106
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CONDITIONING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FluxGuidance"
+      },
+      "widgets_values": [
+        3.5
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 59,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        -63,
+        -695
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 105,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            119
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        null,
+        0.18
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 61,
+      "type": "KSampler",
+      "pos": [
+        1025,
+        -558
+      ],
+      "size": {
+        "0": 315,
+        "1": 474
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 123,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 106,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 114,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 110,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            109
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        1002216864601427,
+        "randomize",
+        16,
+        1,
+        "euler",
+        "normal",
+        1
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 9,
+      "type": "SaveImage",
+      "pos": [
+        1716,
+        -458
+      ],
+      "size": {
+        "0": 701.7893676757812,
+        "1": 660.8809204101562
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 9,
+          "label": "图像"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "_widget_cache_map": {},
+      "color": "#223",
+      "bgcolor": "#335",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [
+        1431,
+        -521
+      ],
+      "size": {
+        "0": 208.57322692871094,
+        "1": 46
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 109,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 108,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            9
+          ],
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "color": "#223",
+      "bgcolor": "#335",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 68,
+      "type": "EmptyLatentImage",
+      "pos": [
+        473,
+        -212
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            110
+          ],
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1480,
+        1960,
+        1
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 57,
+      "type": "CLIPTextEncode",
+      "pos": [
+        45,
+        -434
+      ],
+      "size": {
+        "0": 303.56353759765625,
+        "1": 124.83257293701172
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 111,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            112
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "Candy-colored style, cinematography, texture, portrait of a lady with background [beach parasol, sand, waves :0.1, small shell, sunset, epic landscape, coconut tree, shell, blue sky, cloudy], foreground is (a (upper body :0.6) girl (Amber Heard:0.9), graceful pose, hands behind body, (Big boobs :4.5), bikini, blonde wavy hair, pearl necklace), wind, exaggerated Angle of view, ultra wide lens, 4k,35mm film, sharp focus, smile,"
+      ],
+      "_widget_cache_map": {},
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 58,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        -468,
+        -553
+      ],
+      "size": {
+        "0": 315,
+        "1": 98
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            105
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            111,
+            113
+          ],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "CLIP"
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            108
+          ],
+          "slot_index": 2,
+          "shape": 3,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "F.1-dev-fp8 F.1 Org版dev模型_flux1-dev-fp8"
+      ],
+      "_widget_cache_map": {
+        "F.1-dev-fp8 F.1 Org版dev模型_flux1-dev-fp8": {
+          "name": "F.1-dev-fp8 F.1 Org版dev模型_flux1-dev-fp8",
+          "value": "747bfa371ded4e3db83235165d2a0f3f"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 71,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        367,
+        -787
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 119,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            120
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "美学艺术 | Aesthetics art  2.0_v1.0",
+        0.59
+      ],
+      "_widget_cache_map": {
+        "美学艺术 | Aesthetics art  2.0_v1.0": {
+          "name": "美学艺术 | Aesthetics art  2.0_v1.0",
+          "value": "dd3aeb5bc30242c6884a2722381e71ff"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 72,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        754,
+        -810
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 120,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            122
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "F.1--细节质感提升--F.1 DETAILER_V1.0",
+        0.41000000000000003
+      ],
+      "_widget_cache_map": {
+        "F.1--细节质感提升--F.1 DETAILER_V1.0": {
+          "name": "F.1--细节质感提升--F.1 DETAILER_V1.0",
+          "value": "3913ef46f0e749478ebac9a8f1cd03b9"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 73,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        1115,
+        -816
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 122,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            123
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "墨幽-F.1-Lora-网图_dev",
+        0.58
+      ],
+      "_widget_cache_map": {
+        "墨幽-F.1-Lora-网图_dev": {
+          "name": "墨幽-F.1-Lora-网图_dev",
+          "value": "7d759b8f360d4925b528db8847dfd44c"
+        }
+      },
+      "category": "Primitive Nodes"
+    }
+  ],
+  "links": [
+    [
+      9,
+      8,
+      0,
+      9,
+      0,
+      "IMAGE"
+    ],
+    [
+      105,
+      58,
+      0,
+      59,
+      0,
+      "MODEL"
+    ],
+    [
+      106,
+      60,
+      0,
+      61,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      108,
+      58,
+      2,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      109,
+      61,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      110,
+      68,
+      0,
+      61,
+      3,
+      "LATENT"
+    ],
+    [
+      111,
+      58,
+      1,
+      57,
+      0,
+      "CLIP"
+    ],
+    [
+      112,
+      57,
+      0,
+      60,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      113,
+      58,
+      1,
+      69,
+      0,
+      "CLIP"
+    ],
+    [
+      114,
+      69,
+      0,
+      61,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      119,
+      59,
+      0,
+      71,
+      0,
+      "MODEL"
+    ],
+    [
+      120,
+      71,
+      0,
+      72,
+      0,
+      "MODEL"
+    ],
+    [
+      122,
+      72,
+      0,
+      73,
+      0,
+      "MODEL"
+    ],
+    [
+      123,
+      73,
+      0,
+      61,
+      0,
+      "MODEL"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8769226950000033,
+      "offset": [
+        -428.51847013495467,
+        639.9365155795267
+      ]
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

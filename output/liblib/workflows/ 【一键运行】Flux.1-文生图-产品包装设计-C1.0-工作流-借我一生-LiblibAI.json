@@ -1,0 +1,796 @@
+{
+  "last_node_id": 95,
+  "last_link_id": 119,
+  "nodes": [
+    {
+      "id": 25,
+      "type": "RandomNoise",
+      "pos": [
+        417,
+        542
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise_seed",
+          "type": "INT",
+          "link": 42,
+          "widget": {
+            "name": "noise_seed"
+          },
+          "label": "随机种",
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "label": "噪波生成",
+          "links": [
+            60
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        316951342227172,
+        "randomize"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 16,
+      "type": "KSamplerSelect",
+      "pos": [
+        415,
+        688
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "label": "采样器",
+          "links": [
+            62
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "euler"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 12,
+      "type": "UNETLoader",
+      "pos": [
+        14,
+        204
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "label": "模型",
+          "links": [
+            38,
+            68
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "产品写实｜F.1简朴归真-电商_V1",
+        "fp8_e4m3fn"
+      ],
+      "_widget_cache_map": {
+        "黑暗森林工作室-FLUX.1_FLUX.1-dev-fp8": {
+          "name": "黑暗森林工作室-FLUX.1_FLUX.1-dev-fp8",
+          "value": 2295774
+        },
+        "M精华融合2.5D_V2版本": {
+          "name": "M精华融合2.5D_V2版本",
+          "value": 743667
+        },
+        "产品写实｜F.1简朴归真-电商_V1": {
+          "name": "产品写实｜F.1简朴归真-电商_V1",
+          "value": "482888bc17374beda48b74532cf74668"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 42,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        1259,
+        11
+      ],
+      "size": {
+        "0": 360,
+        "1": 110
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "link": 60,
+          "name": "noise",
+          "type": "NOISE",
+          "label": "噪波生成",
+          "slot_index": 0
+        },
+        {
+          "link": 61,
+          "name": "guider",
+          "type": "GUIDER",
+          "label": "引导",
+          "slot_index": 1
+        },
+        {
+          "link": 62,
+          "name": "sampler",
+          "type": "SAMPLER",
+          "label": "采样器",
+          "slot_index": 2
+        },
+        {
+          "link": 63,
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "label": "Sigmas",
+          "slot_index": 3
+        },
+        {
+          "link": 64,
+          "name": "latent_image",
+          "type": "LATENT",
+          "label": "Latent",
+          "slot_index": 4
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "label": "输出",
+          "links": [
+            58
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "label": "降噪输出",
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 41,
+      "type": "VAELoader",
+      "pos": [
+        1269,
+        208
+      ],
+      "size": {
+        "0": 320,
+        "1": 60
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "label": "VAE",
+          "links": [
+            59
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 11,
+      "type": "DualCLIPLoader",
+      "pos": [
+        19,
+        369
+      ],
+      "size": {
+        "0": 300.5578918457031,
+        "1": 106
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "label": "CLIP",
+          "links": [
+            57
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp8_e4m3fn",
+        "clip_l",
+        "flux"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 5,
+      "type": "EmptyLatentImage",
+      "pos": [
+        412,
+        355
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "label": "Latent",
+          "links": [
+            64
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        3
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 39,
+      "type": "CLIPTextEncode",
+      "pos": [
+        786,
+        158
+      ],
+      "size": {
+        "0": 386.03759765625,
+        "1": 479.8323974609375
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "link": 57,
+          "name": "clip",
+          "type": "CLIP",
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "label": "条件",
+          "links": [
+            114
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "**Horizontal rectangular packaging design of five-in-one nutritional supplement**, showing simplicity and refinement from the perspective of a senior visual artist, suitable for e-commerce display. The design ratio is 16:9.\n\nOverall design:\nColor scheme: The main color is \"pure white\", which symbolizes simplicity and purity, supplemented by \"dark blue\" and \"gold\" embellishments to add a sense of refinement. The contrast between the white bottle and the dark blue and gold highlights the freshness. The surface adopts a \"silky matte texture\" combined with a \"delicate gloss effect\" to create a modern and high-end feel.\n\nTypography and text design:\nProduct name: \"Five-in-one nutritional supplement\" uses a \"dark blue rounded sans serif font\", **largely bold**, centered layout, showing a dynamic effect, ensuring that the visual focus is prominent. The layout is slightly tilted, breaking the traditional layout and increasing the visual impact.\nFunctional description:\nMain ingredients such as \"multi-dimensional mineral tablets\", \"blueberry zeaxanthin tablets\", \"deep-sea fish oil gel candy\", \"fish collagen tablets\" and \"haematococcus pluvialis astaxanthin tablets\" are displayed in \"dark blue fonts\" and arranged in a \"horizontal arrangement\" form around the product name to form a novel layout.\nDetailed descriptions are arranged in \"slim fonts\" and placed below the functional descriptions, which are concise, clear and supplementary.\n\nLogo and core design elements:\nLogo: The logo uses \"oversized gold foil fonts\" and is marked with \"high-efficiency multi-dimensional nutritional support\" and \"five core ingredients\". It is placed on the top or side of the box and bottle, **bold and enlarged**, and biased to one side to highlight the brand image. The logo is decorated with a \"dark blue thin line\" pattern around it to increase the sense of refinement.\nDesign elements:\nThe front of the package displays \"icons of five nutrients\", such as \"mineral tablets\", \"blueberries\", \"fish oil\", \"collagen\" and \"astaxanthin\", arranged in a clear icon form.\nThe center is decorated with a \"golden nutrient drop\" pattern to symbolize the core nutrients.\nThe edges and corners are decorated with \"dark blue simple lines\" to coordinate with the overall design.\n\"Gold trim\" highlights the outline of the package and adds a high-end feel.\nThe box surface uses \"embossing treatment\" and \"gloss effect\" to enhance the touch and visual richness.\n\nE-commerce display environment:\nThe background combines \"white\" with \"exquisite wood grain\" or \"natural texture\" to create a simple and high-end atmosphere. The light is soft, highlighting the \"silky matte texture\" and the glossy reflection of the \"gold element\", strengthening the sense of refinement.\nClose-up shots show the \"five nutrients icon\", \"golden nutrition drop\" pattern, and **largely bold dark blue font** to ensure that the product has a strong visual appeal in the e-commerce environment."
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 93,
+      "type": "Note",
+      "pos": [
+        821,
+        686
+      ],
+      "size": [
+        314.79249433067775,
+        58
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "提示词很关键，可以自己写提示词，也可以直接翻译修改对应的内容，建议丢gpt或其他AI处理软件中让Ai修改和创新：产品排版元素风格等等"
+      ],
+      "_widget_cache_map": {},
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 95,
+      "type": "Note",
+      "pos": [
+        126,
+        689
+      ],
+      "size": [
+        210,
+        58
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "点击随机种子，"
+      ],
+      "_widget_cache_map": {},
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 45,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        422,
+        197
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 68,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            69
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "Flux.1|产品包装设计_C1.0",
+        1
+      ],
+      "_widget_cache_map": {
+        "undefined_0002": {
+          "name": "undefined_0002"
+        },
+        "undefined_0003": {
+          "name": "undefined_0003"
+        },
+        "Flux.1|产品包装设计_C1.0": {
+          "name": "Flux.1|产品包装设计_C1.0",
+          "value": "55be1c4658ad4529b80c2cb3ec73edc3"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 29,
+      "type": "easy seed",
+      "pos": [
+        118,
+        544
+      ],
+      "size": {
+        "0": 210,
+        "1": 106
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "seed",
+          "type": "INT",
+          "links": [
+            42
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy seed"
+      },
+      "widgets_values": [
+        1005605845986186,
+        "fixed",
+        null
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 17,
+      "type": "BasicScheduler",
+      "pos": [
+        422,
+        808
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "link": 38,
+          "name": "model",
+          "type": "MODEL",
+          "label": "模型",
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "label": "Sigmas",
+          "links": [
+            63
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicScheduler"
+      },
+      "widgets_values": [
+        "simple",
+        25,
+        1
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 44,
+      "type": "PreviewImage",
+      "pos": [
+        1928,
+        -2
+      ],
+      "size": {
+        "0": 657.1707153320312,
+        "1": 698.8811645507812
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 67,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 40,
+      "type": "VAEDecode",
+      "pos": [
+        1671,
+        97
+      ],
+      "size": {
+        "0": 210,
+        "1": 50
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "link": 58,
+          "name": "samples",
+          "type": "LATENT",
+          "label": "Latent"
+        },
+        {
+          "link": 59,
+          "name": "vae",
+          "type": "VAE",
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "label": "图像",
+          "links": [
+            67
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 43,
+      "type": "BasicGuider",
+      "pos": [
+        875,
+        33
+      ],
+      "size": {
+        "0": 240,
+        "1": 50
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "link": 69,
+          "name": "model",
+          "type": "MODEL",
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "link": 114,
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "label": "条件",
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "label": "引导",
+          "links": [
+            61
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicGuider"
+      },
+      "category": "Custom Nodes"
+    }
+  ],
+  "links": [
+    [
+      38,
+      12,
+      0,
+      17,
+      0,
+      "MODEL"
+    ],
+    [
+      42,
+      29,
+      0,
+      25,
+      0,
+      "INT"
+    ],
+    [
+      57,
+      11,
+      0,
+      39,
+      0,
+      "CLIP"
+    ],
+    [
+      58,
+      42,
+      0,
+      40,
+      0,
+      "LATENT"
+    ],
+    [
+      59,
+      41,
+      0,
+      40,
+      1,
+      "VAE"
+    ],
+    [
+      60,
+      25,
+      0,
+      42,
+      0,
+      "NOISE"
+    ],
+    [
+      61,
+      43,
+      0,
+      42,
+      1,
+      "GUIDER"
+    ],
+    [
+      62,
+      16,
+      0,
+      42,
+      2,
+      "SAMPLER"
+    ],
+    [
+      63,
+      17,
+      0,
+      42,
+      3,
+      "SIGMAS"
+    ],
+    [
+      64,
+      5,
+      0,
+      42,
+      4,
+      "LATENT"
+    ],
+    [
+      67,
+      40,
+      0,
+      44,
+      0,
+      "IMAGE"
+    ],
+    [
+      68,
+      12,
+      0,
+      45,
+      0,
+      "MODEL"
+    ],
+    [
+      69,
+      45,
+      0,
+      43,
+      0,
+      "MODEL"
+    ],
+    [
+      114,
+      39,
+      0,
+      43,
+      1,
+      "CONDITIONING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6588450000000018,
+      "offset": {
+        "0": 403.295481430825,
+        "1": 140.40908393621524
+      }
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

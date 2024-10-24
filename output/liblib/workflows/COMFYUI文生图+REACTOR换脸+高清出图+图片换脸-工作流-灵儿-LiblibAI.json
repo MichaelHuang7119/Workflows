@@ -1,0 +1,863 @@
+{
+  "last_node_id": 48,
+  "last_link_id": 80,
+  "nodes": [
+    {
+      "id": 21,
+      "type": "VAEDecode",
+      "pos": [
+        939,
+        62
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 31,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 42,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            32
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "color": "#2a363b",
+      "bgcolor": "#3f5159",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 3,
+      "type": "KSampler",
+      "pos": [
+        501,
+        48
+      ],
+      "size": {
+        "0": 368.2023010253906,
+        "1": 625.4072875976562
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 57,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 39,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 40,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 41,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            31
+          ],
+          "slot_index": 0,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        367290032276492,
+        "randomize",
+        30,
+        7,
+        "dpmpp_2m",
+        "karras",
+        1
+      ],
+      "_widget_cache_map": {},
+      "color": "#2a363b",
+      "bgcolor": "#3f5159",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 10,
+      "type": "ReActorFaceSwapOpt",
+      "pos": [
+        1183,
+        61
+      ],
+      "size": {
+        "0": 313.2209167480469,
+        "1": 258
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input_image",
+          "type": "IMAGE",
+          "link": 32,
+          "label": "目标图像"
+        },
+        {
+          "name": "source_image",
+          "type": "IMAGE",
+          "link": 11,
+          "label": "源图像"
+        },
+        {
+          "name": "face_model",
+          "type": "FACE_MODEL",
+          "link": null,
+          "label": "面部模型"
+        },
+        {
+          "name": "options",
+          "type": "OPTIONS",
+          "link": null,
+          "label": "ReActor设置组"
+        },
+        {
+          "name": "face_boost",
+          "type": "FACE_BOOST",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            76
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "FACE_MODEL",
+          "type": "FACE_MODEL",
+          "links": null,
+          "shape": 3,
+          "label": "面部模型",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ReActorFaceSwapOpt"
+      },
+      "widgets_values": [
+        true,
+        "inswapper_128.onnx",
+        "YOLOv5l",
+        "none",
+        1,
+        1
+      ],
+      "_widget_cache_map": {},
+      "color": "#2a363b",
+      "bgcolor": "#3f5159",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 43,
+      "type": "ImageUpscaleWithModel",
+      "pos": [
+        1547,
+        190
+      ],
+      "size": {
+        "0": 241.79998779296875,
+        "1": 46
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "upscale_model",
+          "type": "UPSCALE_MODEL",
+          "link": 75,
+          "label": "放大模型"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 76,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            77
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageUpscaleWithModel"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 44,
+      "type": "UpscaleModelLoader",
+      "pos": [
+        1522,
+        48
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "UPSCALE_MODEL",
+          "type": "UPSCALE_MODEL",
+          "links": [
+            75
+          ],
+          "shape": 3,
+          "label": "放大模型",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UpscaleModelLoader"
+      },
+      "widgets_values": [
+        "ESRGAN_4x"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 48,
+      "type": "SaveImage",
+      "pos": [
+        2996.959286390555,
+        62.613572737744335
+      ],
+      "size": {
+        "0": 363.88739013671875,
+        "1": 362.4117736816406
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 80,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 47,
+      "type": "ReActorFaceSwap",
+      "pos": [
+        2507.9592863905536,
+        63.613572737744335
+      ],
+      "size": {
+        "0": 374.27178955078125,
+        "1": 358
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input_image",
+          "type": "IMAGE",
+          "link": 78,
+          "label": "目标图像"
+        },
+        {
+          "name": "source_image",
+          "type": "IMAGE",
+          "link": 79,
+          "label": "源图像"
+        },
+        {
+          "name": "face_model",
+          "type": "FACE_MODEL",
+          "link": null,
+          "label": "面部模型"
+        },
+        {
+          "name": "face_boost",
+          "type": "FACE_BOOST",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            80
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "FACE_MODEL",
+          "type": "FACE_MODEL",
+          "links": null,
+          "shape": 3,
+          "label": "面部模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ReActorFaceSwap"
+      },
+      "widgets_values": [
+        true,
+        "inswapper_128.onnx",
+        "retinaface_resnet50",
+        "none",
+        1,
+        1,
+        "no",
+        "no",
+        "0",
+        "0",
+        1
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 11,
+      "type": "LoadImage",
+      "pos": [
+        931,
+        180
+      ],
+      "size": {
+        "0": 221.43380737304688,
+        "1": 356.02716064453125
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            11
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "KR.png",
+        "image"
+      ],
+      "_widget_cache_map": {
+        "KR.png": {
+          "value": "img/e98e107e454846a592baa34b93169bf3/3e1baf2a17242631b4a0ddb8100688d5443133f39af73d957cccb91c46edfe8f.png",
+          "name": "KR.png",
+          "url": "https://liblibai-tmp-image.vibrou.com/img/e98e107e454846a592baa34b93169bf3/3e1baf2a17242631b4a0ddb8100688d5443133f39af73d957cccb91c46edfe8f.png"
+        }
+      },
+      "color": "#322",
+      "bgcolor": "#533",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 46,
+      "type": "LoadImage",
+      "pos": [
+        2024.9997653130163,
+        458.2047039574629
+      ],
+      "size": {
+        "0": 304.5347595214844,
+        "1": 381.0487060546875
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            79
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "KR.png",
+        "image"
+      ],
+      "_widget_cache_map": {
+        "KR.png": {
+          "value": "img/e98e107e454846a592baa34b93169bf3/3e1baf2a17242631b4a0ddb8100688d5443133f39af73d957cccb91c46edfe8f.png",
+          "name": "KR.png",
+          "url": "https://liblibai-tmp-image.vibrou.com/img/e98e107e454846a592baa34b93169bf3/3e1baf2a17242631b4a0ddb8100688d5443133f39af73d957cccb91c46edfe8f.png"
+        }
+      },
+      "color": "#322",
+      "bgcolor": "#533",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 45,
+      "type": "LoadImage",
+      "pos": [
+        2017,
+        57
+      ],
+      "size": {
+        "0": 315,
+        "1": 314
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            78
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "TEST.png",
+        "image"
+      ],
+      "_widget_cache_map": {
+        "TEST.png": {
+          "value": "img/e98e107e454846a592baa34b93169bf3/1d28538baac03aa4c8b21922a8cb64dad824896ae1d14ab2c3f504918050429f.png",
+          "name": "TEST.png",
+          "url": "https://liblibai-tmp-image.vibrou.com/img/e98e107e454846a592baa34b93169bf3/1d28538baac03aa4c8b21922a8cb64dad824896ae1d14ab2c3f504918050429f.png"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 26,
+      "type": "Efficient Loader",
+      "pos": [
+        24,
+        46
+      ],
+      "size": {
+        "0": 388.2781982421875,
+        "1": 813.4066772460938
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "lora_stack",
+          "type": "LORA_STACK",
+          "link": null,
+          "label": "LoRA堆",
+          "slot_index": 0
+        },
+        {
+          "name": "cnet_stack",
+          "type": "CONTROL_NET_STACK",
+          "link": null,
+          "label": "ControlNet堆"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            57
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "CONDITIONING+",
+          "type": "CONDITIONING",
+          "links": [
+            39
+          ],
+          "shape": 3,
+          "label": "正面条件",
+          "slot_index": 1
+        },
+        {
+          "name": "CONDITIONING-",
+          "type": "CONDITIONING",
+          "links": [
+            40
+          ],
+          "shape": 3,
+          "label": "负面条件",
+          "slot_index": 2
+        },
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            41
+          ],
+          "shape": 3,
+          "label": "Latent",
+          "slot_index": 3
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            42
+          ],
+          "shape": 3,
+          "label": "VAE",
+          "slot_index": 4
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": null,
+          "shape": 3,
+          "label": "CLIP",
+          "slot_index": 5
+        },
+        {
+          "name": "DEPENDENCIES",
+          "type": "DEPENDENCIES",
+          "links": null,
+          "shape": 3,
+          "label": "依赖"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Efficient Loader"
+      },
+      "widgets_values": [
+        "极氪写实MAX-白白酱_V6剪树枝版",
+        "Baked VAE",
+        -1,
+        "性感白色蕾丝睡裙_V1",
+        0.9,
+        1,
+        "highly detailed,best quality,masterpiece,highres,original,extremely detailed 8K wallpaper,masterpiece,best quality,beautifully detailed eyes,1girl,solo,long dress,jewelry,earrings,full body,brown hair,looking at viewer,standing,arms at sides,bracelet,brown eyes,short hair,(large breasts:1.4),(covered nipples:1.2),necklace,lips,outdoors,walking,china dress,(pointed toe high-heele:1.4),",
+        "text, watermark,bad anatomy,EasyNegative,negative_hand-neg,low quality,bad hands,error,extra digit,fewer digits,missing arms,anatomy,(worst quality, low quality:1.3),mole under eye,mole,logo,watermark,text,blurry,bad hands,deformed,minigirl,loli,child,teenage,extra hands,username,(malformed limbs),poorly drawn,mutated,(too many fingers),(fused fingers),(malformed limbs),(((mutation))),(malformed limbs),((bad anatomy)),2girl,multiple girls,badhand-v5,badhandv4,verybadimagenegative_v1.3,(unhealthy-deformed-joints:2),(unhealthy-hands:2),watermark,",
+        "none",
+        "comfy",
+        512,
+        768,
+        1
+      ],
+      "_widget_cache_map": {
+        "性感白色蕾丝睡裙_V1": {
+          "name": "性感白色蕾丝睡裙_V1",
+          "value": 2149806
+        },
+        "极氪写实MAX-白白酱_V6剪树枝版": {
+          "name": "极氪写实MAX-白白酱_V6剪树枝版",
+          "value": 159169
+        }
+      },
+      "color": "#2a363b",
+      "bgcolor": "#3f5159",
+      "shape": 1,
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 33,
+      "type": "SaveImage",
+      "pos": [
+        1543,
+        417
+      ],
+      "size": {
+        "0": 282.74847412109375,
+        "1": 357.5154113769531
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 77,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "_widget_cache_map": {},
+      "color": "#2a363b",
+      "bgcolor": "#3f5159",
+      "category": "Primitive Nodes"
+    }
+  ],
+  "links": [
+    [
+      11,
+      11,
+      0,
+      10,
+      1,
+      "IMAGE"
+    ],
+    [
+      31,
+      3,
+      0,
+      21,
+      0,
+      "LATENT"
+    ],
+    [
+      32,
+      21,
+      0,
+      10,
+      0,
+      "IMAGE"
+    ],
+    [
+      39,
+      26,
+      1,
+      3,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      40,
+      26,
+      2,
+      3,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      41,
+      26,
+      3,
+      3,
+      3,
+      "LATENT"
+    ],
+    [
+      42,
+      26,
+      4,
+      21,
+      1,
+      "VAE"
+    ],
+    [
+      57,
+      26,
+      0,
+      3,
+      0,
+      "MODEL"
+    ],
+    [
+      75,
+      44,
+      0,
+      43,
+      0,
+      "UPSCALE_MODEL"
+    ],
+    [
+      76,
+      10,
+      0,
+      43,
+      1,
+      "IMAGE"
+    ],
+    [
+      77,
+      43,
+      0,
+      33,
+      0,
+      "IMAGE"
+    ],
+    [
+      78,
+      45,
+      0,
+      47,
+      0,
+      "IMAGE"
+    ],
+    [
+      79,
+      46,
+      0,
+      47,
+      1,
+      "IMAGE"
+    ],
+    [
+      80,
+      47,
+      0,
+      48,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "文生图+REACTOR+高清出图",
+      "bounding": [
+        14,
+        -28,
+        1842,
+        904
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "图片换脸",
+      "bounding": [
+        2007,
+        -17,
+        1364,
+        866
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "workspace_info": {
+      "id": "GCpfsFogCdvg_BTcOgP-y"
+    },
+    "ds": {
+      "scale": 0.307356054914286,
+      "offset": [
+        1026.5269411127401,
+        512.7292815620794
+      ]
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

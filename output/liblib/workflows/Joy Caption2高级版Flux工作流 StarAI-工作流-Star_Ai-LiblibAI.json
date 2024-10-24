@@ -1,0 +1,1936 @@
+{
+  "last_node_id": 63,
+  "last_link_id": 74,
+  "nodes": [
+    {
+      "id": 21,
+      "type": "KSamplerAdvanced",
+      "pos": [
+        1515.2435777452163,
+        1269.6365695529514
+      ],
+      "size": {
+        "0": 281.5023498535156,
+        "1": 572.3439331054688
+      },
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 18,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 29,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 30,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 21,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            14
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerAdvanced"
+      },
+      "widgets_values": [
+        "enable",
+        501975816183145,
+        "fixed",
+        16,
+        1,
+        "euler",
+        "simple",
+        0,
+        10000,
+        "disable"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 2,
+      "type": "Joy_caption_two_load",
+      "pos": [
+        510.9582864039393,
+        1257.7512322763548
+      ],
+      "size": {
+        "0": 339.36083984375,
+        "1": 59.22163391113281
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "JoyTwoPipeline",
+          "type": "JoyTwoPipeline",
+          "links": [
+            1
+          ],
+          "label": "JoyCaptionTwo"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Joy_caption_two_load"
+      },
+      "widgets_values": [
+        "unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit"
+      ]
+    },
+    {
+      "id": 20,
+      "type": "VAEEncode",
+      "pos": [
+        1180.132921006935,
+        1753.2664523654514
+      ],
+      "size": {
+        "0": 307.7688293457031,
+        "1": 46
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 58,
+          "label": "图像"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 17,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            21
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 16,
+      "type": "VAEDecode",
+      "pos": [
+        1185.132921006935,
+        1835.2664523654514
+      ],
+      "size": {
+        "0": 298.4355773925781,
+        "1": 46
+      },
+      "flags": {},
+      "order": 26,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 14,
+          "slot_index": 0,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 15,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            23,
+            53
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 51,
+      "type": "LayerUtility: PurgeVRAM",
+      "pos": [
+        1182.132921006935,
+        1921.2664523654514
+      ],
+      "size": {
+        "0": 315.9724426269531,
+        "1": 82
+      },
+      "flags": {},
+      "order": 31,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "type": "*",
+          "link": 53,
+          "label": "anything"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "LayerUtility: PurgeVRAM"
+      },
+      "widgets_values": [
+        true,
+        true
+      ],
+      "color": "rgba(38, 73, 116, 0.7)",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 19,
+      "type": "UNETLoader",
+      "pos": [
+        1175.9972703721694,
+        1262.2093234592014
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            22
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "flux1-dev-fp8.safetensors",
+        "default"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 17,
+      "type": "VAELoader",
+      "pos": [
+        1176.132921006935,
+        1384.2664523654514
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            15,
+            17
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 22,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        1176.132921006935,
+        1488.2664523654514
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 22,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            18
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "Hyper-FLUX.1-dev-16steps-lora.safetensors",
+        0.13
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 14,
+      "type": "DualCLIPLoader",
+      "pos": [
+        1177.132921006935,
+        1611.2664523654514
+      ],
+      "size": {
+        "0": 313.8299865722656,
+        "1": 106
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            28
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp16.safetensors",
+        "clip_l.safetensors",
+        "flux"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 23,
+      "type": "PreviewImage",
+      "pos": [
+        1815.1329210069355,
+        1274.2664523654514
+      ],
+      "size": {
+        "0": 341.1708068847656,
+        "1": 719.7415771484375
+      },
+      "flags": {},
+      "order": 30,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 23,
+          "label": "图像"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 29,
+      "type": "Miaoshouai_Flux_CLIPTextEncode",
+      "pos": [
+        1512.132921006935,
+        1887.2664523654514
+      ],
+      "size": {
+        "0": 285.6000061035156,
+        "1": 118
+      },
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 28,
+          "label": "clip"
+        },
+        {
+          "name": "caption",
+          "type": "STRING",
+          "link": 71,
+          "widget": {
+            "name": "caption"
+          },
+          "label": "caption"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            29
+          ],
+          "label": "CONDITIONING",
+          "slot_index": 0
+        },
+        {
+          "name": "EMPTY CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            30
+          ],
+          "label": "EMPTY CONDITIONING",
+          "slot_index": 1
+        },
+        {
+          "name": "t5xxl",
+          "type": "STRING",
+          "links": null,
+          "label": "t5xxl"
+        },
+        {
+          "name": "clip_l",
+          "type": "STRING",
+          "links": null,
+          "label": "clip_l"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Miaoshouai_Flux_CLIPTextEncode"
+      },
+      "widgets_values": [
+        "",
+        3.5
+      ]
+    },
+    {
+      "id": 46,
+      "type": "LayerUtility: PurgeVRAM",
+      "pos": [
+        527,
+        1918
+      ],
+      "size": {
+        "0": 320.05804443359375,
+        "1": 82
+      },
+      "flags": {},
+      "order": 29,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "type": "*",
+          "link": 56,
+          "label": "anything"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "LayerUtility: PurgeVRAM"
+      },
+      "widgets_values": [
+        true,
+        true
+      ],
+      "color": "rgba(38, 73, 116, 0.7)",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 1,
+      "type": "Joy_caption_two",
+      "pos": [
+        517,
+        1383
+      ],
+      "size": {
+        "0": 328.05804443359375,
+        "1": 126
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "joy_two_pipeline",
+          "type": "JoyTwoPipeline",
+          "link": 1,
+          "label": "JoyCaptionTwo"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 2,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            3,
+            71
+          ],
+          "slot_index": 0,
+          "label": "提示词"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Joy_caption_two"
+      },
+      "widgets_values": [
+        "Descriptive",
+        "140",
+        false
+      ]
+    },
+    {
+      "id": 4,
+      "type": "ShowText|pysssss",
+      "pos": [
+        869,
+        1264
+      ],
+      "size": {
+        "0": 247.8349609375,
+        "1": 365.719482421875
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 3,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            32
+          ],
+          "slot_index": 0,
+          "shape": 6,
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "This is a highly detailed, digitally created hyper-realistic portrait of a young woman with a strikingly ethereal appearance. She has long, wavy, platinum blonde hair that cascades around her shoulders, illuminated with vibrant hues of pink and blue. Her skin is fair and smooth, with a slight sheen, giving her an almost otherworldly glow. She is wearing large, futuristic, rose-tinted glasses that reflect light and add to the surreal atmosphere. Her eyes are large and expressive, framed by dramatic, metallic pink eyeshadow and thick, dark eyelashes. She is dressed in a shimmering, sequined outfit that catches the light, creating a dazzling effect. The background is a gradient of deep purples and blues, with soft, glowing orbs adding to the dreamlike quality of the image. The overall aesthetic is a blend of futuristic and fantasy elements."
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 43,
+      "type": "ShowText|pysssss",
+      "pos": [
+        796.3643883863259,
+        2128.5980008157703
+      ],
+      "size": {
+        "0": 311.137939453125,
+        "1": 329.3389587402344
+      },
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 44,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            45
+          ],
+          "shape": 6,
+          "label": "字符串",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "The image is a hyper-realistic digital artwork featuring a striking young woman with an ethereal, almost otherworldly appearance. She has fair, porcelain skin and voluminous, wavy hair that transitions from platinum blonde at the roots to a vivid pink at the tips. Her hair cascades around her face and shoulders, adding to her mystical aura. Her eyes are large and captivating, with a deep blue hue that seems to glow in the light, reflecting a sense of mystery and allure. She wears oversized, futuristic glasses with a reflective, metallic frame that mirrors the surrounding neon lights, adding a sci-fi element to her appearance.\n\nHer lips are full and slightly parted, painted in a soft, glossy pink that complements her hair. She is dressed in a shimmering, sequined top that catches the light, creating a dazzling effect. The background is a blend of deep purples and pinks, with soft, glowing lights that give the scene a dreamy, almost surreal quality. The lighting is dramatic, with neon highlights that accentuate her features and create a sense of depth and dimension. The overall style of the artwork is a blend of fantasy and futuristic elements, with a strong emphasis on vibrant colors and intricate details. The image exudes a sense of elegance and otherworldliness, making the subject appear both captivating and enigmatic."
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 47,
+      "type": "LayerUtility: PurgeVRAM",
+      "pos": [
+        790.3643883863259,
+        2900.5980008157703
+      ],
+      "size": {
+        "0": 319.6905517578125,
+        "1": 82
+      },
+      "flags": {},
+      "order": 32,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "type": "*",
+          "link": 49,
+          "label": "anything"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "LayerUtility: PurgeVRAM"
+      },
+      "widgets_values": [
+        true,
+        true
+      ],
+      "color": "rgba(38, 73, 116, 0.7)",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 62,
+      "type": "LayerUtility: PurgeVRAM",
+      "pos": [
+        1182.8242541698557,
+        2776.027657329874
+      ],
+      "size": {
+        "0": 246.3917694091797,
+        "1": 83.3687515258789
+      },
+      "flags": {},
+      "order": 34,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "type": "*",
+          "link": 69,
+          "label": "anything"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "LayerUtility: PurgeVRAM"
+      },
+      "widgets_values": [
+        true,
+        true
+      ],
+      "color": "rgba(38, 73, 116, 0.7)",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 54,
+      "type": "VAEDecode",
+      "pos": [
+        1182.8242541698557,
+        2686.027657329874
+      ],
+      "size": {
+        "0": 243.72047424316406,
+        "1": 46
+      },
+      "flags": {},
+      "order": 28,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 59,
+          "slot_index": 0,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 60,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            67,
+            69
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 57,
+      "type": "VAEEncode",
+      "pos": [
+        1182.8242541698557,
+        2606.027657329874
+      ],
+      "size": {
+        "0": 245.05612182617188,
+        "1": 46
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 74,
+          "label": "图像"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 61,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            65
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 60,
+      "type": "PreviewImage",
+      "pos": [
+        1769.8242541698557,
+        2130.027657329874
+      ],
+      "size": {
+        "0": 387.1495361328125,
+        "1": 715.2608642578125
+      },
+      "flags": {},
+      "order": 33,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 67,
+          "label": "图像"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 3,
+      "type": "LoadImage",
+      "pos": [
+        74,
+        1403
+      ],
+      "size": {
+        "0": 403.16253662109375,
+        "1": 617.469970703125
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            2,
+            58,
+            73,
+            74
+          ],
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "label": "遮罩",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "00250-745999215.png",
+        "image"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 56,
+      "type": "UNETLoader",
+      "pos": [
+        1172.995894565005,
+        2116.0066986932547
+      ],
+      "size": {
+        "0": 268.2411804199219,
+        "1": 82
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            66
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "flux1-dev-fp8.safetensors",
+        "default"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 55,
+      "type": "VAELoader",
+      "pos": [
+        1172.995894565005,
+        2236.0066986932547
+      ],
+      "size": {
+        "0": 258.89141845703125,
+        "1": 58
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            60,
+            61
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 59,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        1172.995894565005,
+        2336.0066986932547
+      ],
+      "size": {
+        "0": 258.89141845703125,
+        "1": 82
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 66,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            62
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "Hyper-FLUX.1-dev-16steps-lora.safetensors",
+        0.13
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 53,
+      "type": "DualCLIPLoader",
+      "pos": [
+        1172.995894565005,
+        2466.0066986932547
+      ],
+      "size": {
+        "0": 258.89141845703125,
+        "1": 106
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            68
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp16.safetensors",
+        "clip_l.safetensors",
+        "flux"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 58,
+      "type": "KSamplerAdvanced",
+      "pos": [
+        1459.8242541698557,
+        2120.027657329874
+      ],
+      "size": {
+        "0": 281.5023498535156,
+        "1": 572.3439331054688
+      },
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 62,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 63,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 64,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 65,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            59
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerAdvanced"
+      },
+      "widgets_values": [
+        "enable",
+        501975816183147,
+        "fixed",
+        16,
+        1,
+        "euler",
+        "simple",
+        0,
+        10000,
+        "disable"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 6,
+      "type": "Joy_caption_two_load",
+      "pos": [
+        96.36438838632594,
+        2118.5980008157703
+      ],
+      "size": {
+        "0": 652.7349853515625,
+        "1": 61.814109802246094
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "JoyTwoPipeline",
+          "type": "JoyTwoPipeline",
+          "links": [
+            4
+          ],
+          "label": "JoyCaptionTwo"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Joy_caption_two_load"
+      },
+      "widgets_values": [
+        "unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit"
+      ]
+    },
+    {
+      "id": 61,
+      "type": "Miaoshouai_Flux_CLIPTextEncode",
+      "pos": [
+        1450.999441803622,
+        2740.1532852030064
+      ],
+      "size": {
+        "0": 285.6000061035156,
+        "1": 118
+      },
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 68,
+          "label": "clip"
+        },
+        {
+          "name": "caption",
+          "type": "STRING",
+          "link": 72,
+          "widget": {
+            "name": "caption"
+          },
+          "label": "caption"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            63
+          ],
+          "label": "CONDITIONING",
+          "slot_index": 0
+        },
+        {
+          "name": "EMPTY CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            64
+          ],
+          "label": "EMPTY CONDITIONING",
+          "slot_index": 1
+        },
+        {
+          "name": "t5xxl",
+          "type": "STRING",
+          "links": null,
+          "label": "t5xxl"
+        },
+        {
+          "name": "clip_l",
+          "type": "STRING",
+          "links": null,
+          "label": "clip_l"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Miaoshouai_Flux_CLIPTextEncode"
+      },
+      "widgets_values": [
+        "",
+        3.5
+      ]
+    },
+    {
+      "id": 30,
+      "type": "DeepTranslatorTextNode",
+      "pos": [
+        521,
+        1590
+      ],
+      "size": [
+        320.4152526855469,
+        270
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 32,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            42
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "文本"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DeepTranslatorTextNode"
+      },
+      "widgets_values": [
+        "auto",
+        "chinese (simplified)",
+        false,
+        "",
+        "",
+        "GoogleTranslator [free]",
+        "of a fantasy-themed CGI artwork. The image depicts a detailed, highly realistic CGI (computer-generated imagery) scene set in a snowy, rugged landscape. The central figure is a muscular male warrior with a fierce, determined expression. He has a thick, bushy beard and his hair is styled in a wild, untamed manner. He is dressed in a rugged, weathered outfit consisting of a blue-green tunic with intricate, worn-out patterns, and matching pants. His armor is made of sturdy, dark brown leather, with metal plates and intricate designs, providing protection for his shoulders and upper arms. His right hand holds a large, ornate staff with a wooden handle and a metal tip, while his left hand rests on his hip. The background features several humanoid creatures with skeletal, ghostly appearances, their pale, translucent skin and hollow eyes adding a haunting quality to the scene. The ground is covered in snow, and the overall color palette is dominated by whites, grays, and muted blues, enhancing the cold and desolate atmosphere. The image is rich in detail and texture, with a realistic, hyper-realistic style that immerses the viewer in the fantastical, otherworldly setting.",
+        "proxy_hide",
+        "authorization_hide"
+      ]
+    },
+    {
+      "id": 36,
+      "type": "Fast Groups Bypasser (rgthree)",
+      "pos": {
+        "0": 87,
+        "1": 1219,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": {
+        "0": 387.7340087890625,
+        "1": 130
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": null,
+          "label": "可选连接"
+        }
+      ],
+      "properties": {
+        "matchColors": "",
+        "matchTitle": "",
+        "showNav": true,
+        "sort": "position",
+        "customSortAlphabet": "",
+        "toggleRestriction": "default"
+      }
+    },
+    {
+      "id": 13,
+      "type": "DeepTranslatorTextNode",
+      "pos": [
+        402.2853601519653,
+        2722.010009408961
+      ],
+      "size": [
+        369.9879150390625,
+        270
+      ],
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 45,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            46
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "文本"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DeepTranslatorTextNode"
+      },
+      "widgets_values": [
+        "auto",
+        "chinese (simplified)",
+        false,
+        "",
+        "",
+        "GoogleTranslator [free]",
+        "of a fantasy-themed CGI artwork. The image depicts a detailed, highly realistic CGI (computer-generated imagery) scene set in a snowy, rugged landscape. The central figure is a muscular male warrior with a fierce, determined expression. He has a thick, bushy beard and his hair is styled in a wild, untamed manner. He is dressed in a rugged, weathered outfit consisting of a blue-green tunic with intricate, worn-out patterns, and matching pants. His armor is made of sturdy, dark brown leather, with metal plates and intricate designs, providing protection for his shoulders and upper arms. His right hand holds a large, ornate staff with a wooden handle and a metal tip, while his left hand rests on his hip. The background features several humanoid creatures with skeletal, ghostly appearances, their pale, translucent skin and hollow eyes adding a haunting quality to the scene. The ground is covered in snow, and the overall color palette is dominated by whites, grays, and muted blues, enhancing the cold and desolate atmosphere. The image is rich in detail and texture, with a realistic, hyper-realistic style that immerses the viewer in the fantastical, otherworldly setting.",
+        "proxy_hide",
+        "authorization_hide"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "Joy_caption_two_advanced",
+      "pos": [
+        101.36438838632594,
+        2717.5980008157703
+      ],
+      "size": {
+        "0": 274.5040588378906,
+        "1": 260.7596130371094
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "joy_two_pipeline",
+          "type": "JoyTwoPipeline",
+          "link": 4,
+          "label": "JoyCaptionTwo"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 73,
+          "label": "图像"
+        },
+        {
+          "name": "extra_options",
+          "type": "Extra_Options",
+          "link": 5,
+          "label": "附加选项"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            44,
+            72
+          ],
+          "slot_index": 0,
+          "label": "提示词"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Joy_caption_two_advanced"
+      },
+      "widgets_values": [
+        "Descriptive",
+        "260",
+        "",
+        "",
+        false
+      ]
+    },
+    {
+      "id": 7,
+      "type": "Joy_extra_options",
+      "pos": [
+        96.36438838632594,
+        2228.5980008157703
+      ],
+      "size": {
+        "0": 667.8374633789062,
+        "1": 442
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "Extra_Options",
+          "type": "Extra_Options",
+          "links": [
+            5
+          ],
+          "label": "附加选项",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Joy_extra_options"
+      },
+      "widgets_values": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "id": 42,
+      "type": "ShowText|pysssss",
+      "pos": [
+        868,
+        1689
+      ],
+      "size": {
+        "0": 246.40650939941406,
+        "1": 319.5643005371094
+      },
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 42,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            56
+          ],
+          "shape": 6,
+          "label": "字符串",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "这是一幅细节丰富、数字创作的超现实主义肖像画，描绘的是一位外表出众的年轻女性。她有一头长长的、波浪形的铂金色头发，披散在肩上，泛着鲜艳的粉色和蓝色。她的皮肤白皙光滑，略带光泽，让她散发出一种近乎超凡脱俗的光芒。她戴着一副大而富有未来感的玫瑰色眼镜，眼镜反射光线，增添了超现实的氛围。她的眼睛又大又有表情，周围是戏剧性的金属粉色眼影和浓密的深色睫毛。她穿着一件闪闪发光的亮片服装，捕捉光线，营造出令人眼花缭乱的效果。背景是深紫色和蓝色的渐变色，柔和发光的球体为图像增添了梦幻般的质感。整体美感融合了未来主义和幻想元素。"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 44,
+      "type": "ShowText|pysssss",
+      "pos": [
+        794.3643883863259,
+        2499.5980008157703
+      ],
+      "size": {
+        "0": 316.4494934082031,
+        "1": 356.83245849609375
+      },
+      "flags": {},
+      "order": 27,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 46,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            49
+          ],
+          "shape": 6,
+          "label": "字符串",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "这幅图像是一幅超现实主义的数字艺术作品，描绘的是一位外表空灵、几乎超凡脱俗的迷人年轻女子。她皮肤白皙，瓷器般细腻，头发蓬松卷曲，从发根的白金色过渡到发梢的鲜艳粉色。她的头发披散在脸部和肩膀周围，更增添了她的神秘气息。她的眼睛又大又迷人，深蓝色的色调似乎在灯光下闪闪发光，反射出一种神秘和诱惑的感觉。她戴着一副超大的未来派眼镜，镜框是反光的金属，可以映照周围的霓虹灯，为她的外表增添了科幻元素。\n\n她的嘴唇丰满，微微张开，涂着柔和的光泽粉色，与她的头发相得益彰。她穿着一件闪闪发光的亮片上衣，捕捉光线，营造出令人眼花缭乱的效果。背景是深紫色和粉红色的混合，柔和的灯光使场景具有梦幻般的、几乎超现实的质感。灯光效果非常戏剧化，霓虹灯的亮点突出了她的特征，营造出一种深度和立体感。这幅作品的整体风格融合了幻想和未来主义元素，强调了鲜艳的色彩和复杂的细节。这幅画散发着一种优雅和超凡脱俗的感觉，使主题看起来既迷人又神秘。"
+      ],
+      "category": "Custom Nodes"
+    }
+  ],
+  "links": [
+    [
+      1,
+      2,
+      0,
+      1,
+      0,
+      "JoyTwoPipeline"
+    ],
+    [
+      2,
+      3,
+      0,
+      1,
+      1,
+      "IMAGE"
+    ],
+    [
+      3,
+      1,
+      0,
+      4,
+      0,
+      "STRING"
+    ],
+    [
+      4,
+      6,
+      0,
+      5,
+      0,
+      "JoyTwoPipeline"
+    ],
+    [
+      5,
+      7,
+      0,
+      5,
+      2,
+      "Extra_Options"
+    ],
+    [
+      14,
+      21,
+      0,
+      16,
+      0,
+      "LATENT"
+    ],
+    [
+      15,
+      17,
+      0,
+      16,
+      1,
+      "VAE"
+    ],
+    [
+      17,
+      17,
+      0,
+      20,
+      1,
+      "VAE"
+    ],
+    [
+      18,
+      22,
+      0,
+      21,
+      0,
+      "MODEL"
+    ],
+    [
+      21,
+      20,
+      0,
+      21,
+      3,
+      "LATENT"
+    ],
+    [
+      22,
+      19,
+      0,
+      22,
+      0,
+      "MODEL"
+    ],
+    [
+      23,
+      16,
+      0,
+      23,
+      0,
+      "IMAGE"
+    ],
+    [
+      28,
+      14,
+      0,
+      29,
+      0,
+      "CLIP"
+    ],
+    [
+      29,
+      29,
+      0,
+      21,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      30,
+      29,
+      1,
+      21,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      32,
+      4,
+      0,
+      30,
+      0,
+      "STRING"
+    ],
+    [
+      42,
+      30,
+      0,
+      42,
+      0,
+      "STRING"
+    ],
+    [
+      44,
+      5,
+      0,
+      43,
+      0,
+      "STRING"
+    ],
+    [
+      45,
+      43,
+      0,
+      13,
+      0,
+      "STRING"
+    ],
+    [
+      46,
+      13,
+      0,
+      44,
+      0,
+      "STRING"
+    ],
+    [
+      49,
+      44,
+      0,
+      47,
+      0,
+      "*"
+    ],
+    [
+      53,
+      16,
+      0,
+      51,
+      0,
+      "*"
+    ],
+    [
+      56,
+      42,
+      0,
+      46,
+      0,
+      "*"
+    ],
+    [
+      58,
+      3,
+      0,
+      20,
+      0,
+      "IMAGE"
+    ],
+    [
+      59,
+      58,
+      0,
+      54,
+      0,
+      "LATENT"
+    ],
+    [
+      60,
+      55,
+      0,
+      54,
+      1,
+      "VAE"
+    ],
+    [
+      61,
+      55,
+      0,
+      57,
+      1,
+      "VAE"
+    ],
+    [
+      62,
+      59,
+      0,
+      58,
+      0,
+      "MODEL"
+    ],
+    [
+      63,
+      61,
+      0,
+      58,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      64,
+      61,
+      1,
+      58,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      65,
+      57,
+      0,
+      58,
+      3,
+      "LATENT"
+    ],
+    [
+      66,
+      56,
+      0,
+      59,
+      0,
+      "MODEL"
+    ],
+    [
+      67,
+      54,
+      0,
+      60,
+      0,
+      "IMAGE"
+    ],
+    [
+      68,
+      53,
+      0,
+      61,
+      0,
+      "CLIP"
+    ],
+    [
+      69,
+      54,
+      0,
+      62,
+      0,
+      "*"
+    ],
+    [
+      71,
+      1,
+      0,
+      29,
+      1,
+      "STRING"
+    ],
+    [
+      72,
+      5,
+      0,
+      61,
+      1,
+      "STRING"
+    ],
+    [
+      73,
+      3,
+      0,
+      5,
+      1,
+      "IMAGE"
+    ],
+    [
+      74,
+      3,
+      0,
+      57,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "基础版渲染",
+      "bounding": [
+        1165,
+        1188,
+        1005,
+        837
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "基础版本",
+      "bounding": [
+        500,
+        1187,
+        628,
+        836
+      ],
+      "color": "#3f789e",
+      "font_size": 22,
+      "locked": false
+    },
+    {
+      "title": "高级版本",
+      "bounding": [
+        72,
+        2045,
+        1066,
+        962
+      ],
+      "color": "#3f789e",
+      "font_size": 22,
+      "locked": false
+    },
+    {
+      "title": "高级版渲染",
+      "bounding": [
+        1162,
+        2042,
+        1022,
+        959
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.45000000000000334,
+      "offset": [
+        1218.975943775129,
+        -1031.8566484274804
+      ]
+    },
+    "workspace_info": {
+      "id": "f290a634-7052-43e9-91a5-87a4ae189c77"
+    }
+  },
+  "version": 0.4
+}

@@ -1,0 +1,1001 @@
+{
+  "last_node_id": 255,
+  "last_link_id": 373,
+  "nodes": [
+    {
+      "id": 206,
+      "type": "UNETLoader",
+      "pos": {
+        "0": 34,
+        "1": 53
+      },
+      "size": {
+        "0": 497.8154296875,
+        "1": 88.05816650390625
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            286
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "flux1-dev-fp8.safetensors",
+        "fp8_e4m3fn"
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 208,
+      "type": "DualCLIPLoader",
+      "pos": {
+        "0": 45,
+        "1": 213
+      },
+      "size": {
+        "0": 497.9337463378906,
+        "1": 108.3858642578125
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            287,
+            340,
+            363
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp16.safetensors",
+        "clip_l.safetensors",
+        "flux"
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 251,
+      "type": "CLIPTextEncodeFlux",
+      "pos": {
+        "0": 799,
+        "1": 447
+      },
+      "size": {
+        "0": 497.78619384765625,
+        "1": 190.18670654296875
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 363,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            364
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeFlux"
+      },
+      "widgets_values": [
+        "bad photo",
+        "bad photo",
+        3.5,
+        true,
+        true
+      ],
+      "color": "#223",
+      "bgcolor": "#335",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 232,
+      "type": "EmptyLatentImage",
+      "pos": {
+        "0": 925,
+        "1": 726
+      },
+      "size": {
+        "0": 359.7925720214844,
+        "1": 145.00604248046875
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            356
+          ],
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1536,
+        1
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 213,
+      "type": "LoadImage",
+      "pos": {
+        "0": -928,
+        "1": 700
+      },
+      "size": {
+        "0": 498.668212890625,
+        "1": 495.43798828125
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            333
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            334
+          ],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "jhk-1726753692816-.png",
+        "image"
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 220,
+      "type": "VAELoader",
+      "pos": {
+        "0": 2233,
+        "1": 223
+      },
+      "size": [
+        210,
+        58
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            358
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 250,
+      "type": "PreviewImage",
+      "pos": {
+        "0": 523,
+        "1": 1087
+      },
+      "size": [
+        358.3828125,
+        246
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 360,
+          "label": "图像"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "color": "#332922",
+      "bgcolor": "#593930",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 219,
+      "type": "CannyEdgePreprocessor",
+      "pos": {
+        "0": 89,
+        "1": 579
+      },
+      "size": {
+        "0": 358.7180480957031,
+        "1": 108.53592681884766
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 298,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            354,
+            360
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CannyEdgePreprocessor"
+      },
+      "widgets_values": [
+        100,
+        200,
+        1024
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 218,
+      "type": "LayerUtility: ImageScaleByAspectRatio V2",
+      "pos": {
+        "0": -296,
+        "1": 832
+      },
+      "size": {
+        "0": 358.3255920410156,
+        "1": 330
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 333,
+          "label": "图像"
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 334,
+          "label": "遮罩"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            298
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": [],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "遮罩"
+        },
+        {
+          "name": "original_size",
+          "type": "BOX",
+          "links": null,
+          "shape": 3,
+          "label": "原始大小"
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LayerUtility: ImageScaleByAspectRatio V2"
+      },
+      "widgets_values": [
+        "custom",
+        2,
+        3,
+        "crop",
+        "lanczos",
+        "8",
+        "None",
+        1024,
+        "#000000"
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 248,
+      "type": "LoadFluxControlNet",
+      "pos": {
+        "0": 138,
+        "1": 420
+      },
+      "size": {
+        "0": 358.77587890625,
+        "1": 82
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "ControlNet",
+          "type": "FluxControlNet",
+          "links": [
+            355
+          ],
+          "shape": 3,
+          "label": "ControlNet"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadFluxControlNet"
+      },
+      "widgets_values": [
+        "flux-dev",
+        "flux-canny-controlnet-v3.safetensors"
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 207,
+      "type": "Lora Loader Stack (rgthree)",
+      "pos": {
+        "0": 955,
+        "1": -226
+      },
+      "size": {
+        "0": 358.3076477050781,
+        "1": 248.8884735107422
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 286,
+          "label": "模型"
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 287,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            337
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Lora Loader Stack (rgthree)"
+      },
+      "widgets_values": [
+        "Flux\\白棱_雷元素-特效(XL,F.1)_FLUX-v1.0.safetensors",
+        0.6,
+        "Flux\\绘梦的夏天-FLUX.1闪电_V1.safetensors",
+        1,
+        "None",
+        1,
+        "None",
+        1
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930"
+    },
+    {
+      "id": 235,
+      "type": "CLIPTextEncodeFlux",
+      "pos": {
+        "0": 833,
+        "1": 107
+      },
+      "size": {
+        "0": 496.56622314453125,
+        "1": 258.29937744140625
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 340,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            361
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeFlux"
+      },
+      "widgets_values": [
+        "ling_lightning,Lightning Effect,composed of elements of thunder,thunder,electricity, The scene is bathed in dramatic lighting, emphasizing the mesmerizing elements,cloud,Lightning Effect,creating a cinematic atmosphere,",
+        "ling_lightning,Lightning Effect,composed of elements of thunder,thunder,electricity, The scene is bathed in dramatic lighting, emphasizing the mesmerizing elements,cloud,Lightning Effect,creating a cinematic atmosphere,",
+        3.5,
+        true,
+        true
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 233,
+      "type": "VAEDecode",
+      "pos": {
+        "0": 2410,
+        "1": -69
+      },
+      "size": {
+        "0": 359.00506591796875,
+        "1": 122.88541412353516
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 357,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 358,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            372
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "color": "#332922",
+      "bgcolor": "#593930",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 249,
+      "type": "SaveImage",
+      "pos": {
+        "0": 3144,
+        "1": 35
+      },
+      "size": {
+        "0": 1046.5899658203125,
+        "1": 1374.27587890625
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 373,
+          "label": "图像"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 244,
+      "type": "ApplyFluxControlNet",
+      "pos": {
+        "0": 917,
+        "1": 967
+      },
+      "size": {
+        "0": 358.9230651855469,
+        "1": 98.05882263183594
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "controlnet",
+          "type": "FluxControlNet",
+          "link": 355,
+          "label": "ControlNet"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 354,
+          "label": "图像"
+        },
+        {
+          "name": "controlnet_condition",
+          "type": "ControlNetCondition",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "controlnet_condition",
+          "type": "ControlNetCondition",
+          "links": [
+            350
+          ],
+          "shape": 3,
+          "label": "ControlNet条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ApplyFluxControlNet"
+      },
+      "widgets_values": [
+        1
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 255,
+      "type": "CR Upscale Image",
+      "pos": {
+        "0": 2791,
+        "1": 261
+      },
+      "size": {
+        "0": 315,
+        "1": 222
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 372,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            373
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Upscale Image"
+      },
+      "widgets_values": [
+        "4x-UltraSharp.pth",
+        "rescale",
+        2,
+        2048,
+        "lanczos",
+        "true",
+        8
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 234,
+      "type": "XlabsSampler",
+      "pos": {
+        "0": 1806,
+        "1": 121
+      },
+      "size": {
+        "0": 358.2855529785156,
+        "1": 859.9688110351562
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 337,
+          "label": "模型"
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 361,
+          "label": "正面条件"
+        },
+        {
+          "name": "neg_conditioning",
+          "type": "CONDITIONING",
+          "link": 364,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 356,
+          "label": "Latent"
+        },
+        {
+          "name": "controlnet_condition",
+          "type": "ControlNetCondition",
+          "link": 350,
+          "label": "ControlNet条件"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            357
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "XlabsSampler"
+      },
+      "widgets_values": [
+        980559969229362,
+        "fixed",
+        20,
+        1,
+        3.5,
+        0,
+        1
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930",
+      "category": "Custom Nodes"
+    }
+  ],
+  "links": [
+    [
+      286,
+      206,
+      0,
+      207,
+      0,
+      "MODEL"
+    ],
+    [
+      287,
+      208,
+      0,
+      207,
+      1,
+      "CLIP"
+    ],
+    [
+      298,
+      218,
+      0,
+      219,
+      0,
+      "IMAGE"
+    ],
+    [
+      333,
+      213,
+      0,
+      218,
+      0,
+      "IMAGE"
+    ],
+    [
+      334,
+      213,
+      1,
+      218,
+      1,
+      "MASK"
+    ],
+    [
+      337,
+      207,
+      0,
+      234,
+      0,
+      "MODEL"
+    ],
+    [
+      340,
+      208,
+      0,
+      235,
+      0,
+      "CLIP"
+    ],
+    [
+      350,
+      244,
+      0,
+      234,
+      4,
+      "ControlNetCondition"
+    ],
+    [
+      354,
+      219,
+      0,
+      244,
+      1,
+      "IMAGE"
+    ],
+    [
+      355,
+      248,
+      0,
+      244,
+      0,
+      "FluxControlNet"
+    ],
+    [
+      356,
+      232,
+      0,
+      234,
+      3,
+      "LATENT"
+    ],
+    [
+      357,
+      234,
+      0,
+      233,
+      0,
+      "LATENT"
+    ],
+    [
+      358,
+      220,
+      0,
+      233,
+      1,
+      "VAE"
+    ],
+    [
+      360,
+      219,
+      0,
+      250,
+      0,
+      "IMAGE"
+    ],
+    [
+      361,
+      235,
+      0,
+      234,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      363,
+      208,
+      0,
+      251,
+      0,
+      "CLIP"
+    ],
+    [
+      364,
+      251,
+      0,
+      234,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      372,
+      233,
+      0,
+      255,
+      0,
+      "IMAGE"
+    ],
+    [
+      373,
+      255,
+      0,
+      249,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.5054470284993544,
+      "offset": [
+        -76.8338996569413,
+        620.4509215728443
+      ]
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

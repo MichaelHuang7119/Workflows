@@ -1,0 +1,1415 @@
+{
+  "last_node_id": 62,
+  "last_link_id": 130,
+  "nodes": [
+    {
+      "id": 58,
+      "type": "LayerUtility: GetImageSize",
+      "pos": [
+        1158.3564452355567,
+        -2414.4329177909603
+      ],
+      "size": {
+        "0": 241.79998779296875,
+        "1": 66
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 113,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            109
+          ],
+          "shape": 3,
+          "label": "宽度",
+          "slot_index": 0
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            110
+          ],
+          "shape": 3,
+          "label": "高度",
+          "slot_index": 1
+        },
+        {
+          "name": "original_size",
+          "type": "BOX",
+          "links": null,
+          "shape": 3,
+          "label": "原始大小"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LayerUtility: GetImageSize"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 43,
+      "type": "OpenposePreprocessor",
+      "pos": [
+        -2242.1568577136604,
+        -2228.9664199345025
+      ],
+      "size": {
+        "0": 315,
+        "1": 150
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 95,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            86
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "POSE_KEYPOINT",
+          "type": "POSE_KEYPOINT",
+          "links": null,
+          "shape": 3,
+          "label": "姿态关键点"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "OpenposePreprocessor"
+      },
+      "widgets_values": [
+        "enable",
+        "enable",
+        "enable",
+        512
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 44,
+      "type": "ControlNetLoader",
+      "pos": [
+        -2316.1568577136604,
+        -2389.9664199345034
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "links": [
+            88
+          ],
+          "shape": 3,
+          "label": "ControlNet"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetLoader"
+      },
+      "widgets_values": [
+        "xinsir_controlnet-openpose-sdxl-1.0"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [
+        2394,
+        -2196
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 23,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 8,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            126
+          ],
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 56,
+      "type": "EmptyLatentImage",
+      "pos": [
+        1454.356445235558,
+        -2428.4329177909603
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "link": 109,
+          "widget": {
+            "name": "width"
+          },
+          "label": "宽度"
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "link": 110,
+          "widget": {
+            "name": "height"
+          },
+          "label": "高度"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            111
+          ],
+          "slot_index": 0,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1536,
+        1
+      ],
+      "_widget_cache_map": {},
+      "color": "#223",
+      "bgcolor": "#335",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -632.3191499012064,
+        -1998.377869199027
+      ],
+      "size": {
+        "0": 422.84503173828125,
+        "1": 164.31304931640625
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 122,
+          "label": "CLIP",
+          "slot_index": 0
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 128,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            90
+          ],
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "1girl,beautiful,Simple Background,short hair,Asian person's face,"
+      ],
+      "_widget_cache_map": {},
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 30,
+      "type": "IPAdapterUnifiedLoader",
+      "pos": [
+        1194.039265984279,
+        -1826.628249180881
+      ],
+      "size": {
+        "0": 315,
+        "1": 78
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 121,
+          "label": "模型"
+        },
+        {
+          "name": "ipadapter",
+          "type": "IPADAPTER",
+          "link": null,
+          "label": "IPAdapter"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            54
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "模型"
+        },
+        {
+          "name": "ipadapter",
+          "type": "IPADAPTER",
+          "links": [
+            55
+          ],
+          "shape": 3,
+          "slot_index": 1,
+          "label": "IPAdapter"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "IPAdapterUnifiedLoader"
+      },
+      "widgets_values": [
+        "PLUS (high strength)"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 14,
+      "type": "KRestartSamplerAdv",
+      "pos": [
+        249,
+        -2486
+      ],
+      "size": {
+        "0": 459.5130310058594,
+        "1": 921.9669189453125
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 124,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 91,
+          "label": "正面条件",
+          "slot_index": 1
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 25,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 112,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            23
+          ],
+          "shape": 3,
+          "label": "Latent",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KRestartSamplerAdv"
+      },
+      "widgets_values": [
+        "enable",
+        178338540072388,
+        "randomize",
+        50,
+        7,
+        "ddim",
+        "karras",
+        0,
+        10000,
+        "disable",
+        "[3,2,0.06,0.30],[3,1,0.30,0.59]",
+        "normal",
+        true
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 4,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        615,
+        -1228
+      ],
+      "size": {
+        "0": 315,
+        "1": 98
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            121
+          ],
+          "slot_index": 0,
+          "label": "模型"
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            5,
+            122
+          ],
+          "slot_index": 1,
+          "label": "CLIP"
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            8
+          ],
+          "slot_index": 2,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "LEOSAM HelloWorld 新世界 | SDXL大模型_v6.0"
+      ],
+      "_widget_cache_map": {
+        "LEOSAM HelloWorld 新世界 | SDXL大模型_v2": {
+          "name": "LEOSAM HelloWorld 新世界 | SDXL大模型_v2",
+          "value": 320653
+        },
+        "LEOSAM HelloWorld 新世界 | SDXL大模型_v6.0": {
+          "name": "LEOSAM HelloWorld 新世界 | SDXL大模型_v6.0",
+          "value": "0a36822043c14404b427805cecd61ec0"
+        },
+        "麻袋realistic_XL_V1.0": {
+          "name": "麻袋realistic_XL_V1.0",
+          "value": "fecc1e05921845a3880cb44ab3d273fa"
+        },
+        "SDSW1.1-更符合东亚人审美的摄影大模型（极速版）_SDSW1.1": {
+          "name": "SDSW1.1-更符合东亚人审美的摄影大模型（极速版）_SDSW1.1",
+          "value": "4c9e0011210e4ca4b7311153f27c294d"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 23,
+      "type": "easy wildcards",
+      "pos": [
+        -1315.4653046185513,
+        -2090.53550942379
+      ],
+      "size": {
+        "0": 522.357666015625,
+        "1": 503.4877624511719
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            128
+          ],
+          "shape": 6,
+          "label": "提示词",
+          "slot_index": 0
+        },
+        {
+          "name": "populated_text",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "通配填充词"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy wildcards"
+      },
+      "widgets_values": [
+        "1 girl，delicate skin, natural skin tone, real person, pretty face, high quality, ultra-detailed, 4K resolution，realistic",
+        "Select the LoRA to add to the text",
+        "Select the Wildcard to add to the text",
+        0,
+        "fixed",
+        false
+      ],
+      "_widget_cache_map": {},
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 57,
+      "type": "LatentUpscaleBy",
+      "pos": [
+        1840,
+        -2416
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 111,
+          "label": "Latent",
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            112
+          ],
+          "shape": 3,
+          "label": "Latent",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LatentUpscaleBy"
+      },
+      "widgets_values": [
+        "nearest-exact",
+        1
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 52,
+      "type": "PreviewImage",
+      "pos": [
+        2689,
+        -1861
+      ],
+      "size": [
+        399.2997578821228,
+        379.2908206183961
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 126,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 31,
+      "type": "IPAdapterStyleComposition",
+      "pos": [
+        1652.6731845016777,
+        -1815.9879498678495
+      ],
+      "size": {
+        "0": 315,
+        "1": 322
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 54,
+          "label": "模型"
+        },
+        {
+          "name": "ipadapter",
+          "type": "IPADAPTER",
+          "link": 55,
+          "label": "IPAdapter"
+        },
+        {
+          "name": "image_style",
+          "type": "IMAGE",
+          "link": 52,
+          "slot_index": 2,
+          "label": "风格图像"
+        },
+        {
+          "name": "image_composition",
+          "type": "IMAGE",
+          "link": 130,
+          "label": "合成图像",
+          "slot_index": 3
+        },
+        {
+          "name": "image_negative",
+          "type": "IMAGE",
+          "link": null,
+          "label": "负面图像",
+          "slot_index": 4
+        },
+        {
+          "name": "attn_mask",
+          "type": "MASK",
+          "link": null,
+          "label": "关注层遮罩"
+        },
+        {
+          "name": "clip_vision",
+          "type": "CLIP_VISION",
+          "link": null,
+          "label": "CLIP视觉"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            124
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "IPAdapterStyleComposition"
+      },
+      "widgets_values": [
+        0.8,
+        0.5,
+        true,
+        "average",
+        0,
+        1,
+        "V only"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 41,
+      "type": "ControlNetApply",
+      "pos": [
+        -1897.0509820626187,
+        -2449.533843437107
+      ],
+      "size": {
+        "0": 317.4000244140625,
+        "1": 98
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 90,
+          "label": "条件"
+        },
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 88,
+          "label": "ControlNet",
+          "slot_index": 1
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 86,
+          "label": "图像",
+          "slot_index": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            91
+          ],
+          "shape": 3,
+          "label": "条件",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetApply"
+      },
+      "widgets_values": [
+        0.8
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 7,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -403.74265462312553,
+        -1318.483772879233
+      ],
+      "size": {
+        "0": 473.2394104003906,
+        "1": 257.2900085449219
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 5,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            25
+          ],
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "Deformed, ugly nose, deformed nose, morbid,  ugly，number，digit"
+      ],
+      "_widget_cache_map": {},
+      "color": "#322",
+      "bgcolor": "#533",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 22,
+      "type": "LoadImage",
+      "pos": [
+        2382,
+        -1917
+      ],
+      "size": {
+        "0": 272.9594421386719,
+        "1": 433.9135437011719
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            52,
+            95,
+            113,
+            130
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "1024.jpg",
+        "image"
+      ],
+      "_widget_cache_map": {
+        "2.jpg": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/e397980bafe459a4742a0f1e9d8d7c2dc2b41509b20c8bddc160c334ae102717.jpg",
+          "name": "2.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/e397980bafe459a4742a0f1e9d8d7c2dc2b41509b20c8bddc160c334ae102717.jpg"
+        },
+        "shakker.png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/3b3537f0876d78a81bcda4c31be6d0aab2ba154ee1d9c3212852f1eee10656ff.png",
+          "name": "shakker.png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/3b3537f0876d78a81bcda4c31be6d0aab2ba154ee1d9c3212852f1eee10656ff.png"
+        },
+        "换脸.png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/0375d18196777c22115e03824ba61af548af01f327dbfa0d8a56dc9b55221783.png",
+          "name": "换脸.png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/0375d18196777c22115e03824ba61af548af01f327dbfa0d8a56dc9b55221783.png"
+        },
+        "4735-5b433b1b4c32a5f26e18cb148585ae1ab0628272974b1aace1021697468a27ce.png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/5b433b1b4c32a5f26e18cb148585ae1ab0628272974b1aace1021697468a27ce.png",
+          "name": "4735-5b433b1b4c32a5f26e18cb148585ae1ab0628272974b1aace1021697468a27ce.png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/5b433b1b4c32a5f26e18cb148585ae1ab0628272974b1aace1021697468a27ce.png"
+        },
+        "640 (2)_1.jpg": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/0ed35b7d05be3f90bcb0c60b949307b5eaf9deaf2748ba24ddda22bca5939c88.jpg",
+          "name": "640 (2)_1.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/0ed35b7d05be3f90bcb0c60b949307b5eaf9deaf2748ba24ddda22bca5939c88.jpg"
+        },
+        "22222.jpg": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/287f3bf99833d0916c09f8a6185ce88c3af610c0ddd087da88da8f2525f92b1d.jpg",
+          "name": "22222.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/287f3bf99833d0916c09f8a6185ce88c3af610c0ddd087da88da8f2525f92b1d.jpg"
+        },
+        "4451719459859_.pic.jpg": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/342974829b0ea72d5b8615af762fffe0d62cf8deed6de5101dca90a0d6c514e0.jpg",
+          "name": "4451719459859_.pic.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/342974829b0ea72d5b8615af762fffe0d62cf8deed6de5101dca90a0d6c514e0.jpg"
+        },
+        "10401722131721_.pic.jpg": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/49ed7e2937ea47d68c143eda50e8d76f19b7ceed4438ee605b5033515d263c3a.jpg",
+          "name": "10401722131721_.pic.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/49ed7e2937ea47d68c143eda50e8d76f19b7ceed4438ee605b5033515d263c3a.jpg"
+        },
+        "4481719459862_.pic.jpg": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/4ab6f81d4f00d6755a26b450d74820dc6abda0de9124b96c492d791f5f4925c4.jpg",
+          "name": "4481719459862_.pic.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/4ab6f81d4f00d6755a26b450d74820dc6abda0de9124b96c492d791f5f4925c4.jpg"
+        },
+        "output (4).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/526dc228b68ef91e523131339caad51708bd47d7b506535d0a1d94fa2528be8d.png",
+          "name": "output (4).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/526dc228b68ef91e523131339caad51708bd47d7b506535d0a1d94fa2528be8d.png"
+        },
+        "原图.png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/4259019d91aa9f22ffc77f2b611e09ba23c62f41cefc8236ae2d6210dc0fa44d.png",
+          "name": "原图.png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/4259019d91aa9f22ffc77f2b611e09ba23c62f41cefc8236ae2d6210dc0fa44d.png"
+        },
+        "5文件.png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/cc7d85c6dc5fd2b17e1e67301f82eaa99e76de73dde138e019b2575cad3c863d.png",
+          "name": "5文件.png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/cc7d85c6dc5fd2b17e1e67301f82eaa99e76de73dde138e019b2575cad3c863d.png"
+        },
+        "b8.png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/80145e72a704189b748d9d46afaf15a423640d98bc65bd1fa13c6c1dfaf5dd39.png",
+          "name": "b8.png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/80145e72a704189b748d9d46afaf15a423640d98bc65bd1fa13c6c1dfaf5dd39.png"
+        },
+        "af20dd0d98ccc13708f919e32ba4f06b2172a777384d6a7969945a86a5e40ce2.png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/af20dd0d98ccc13708f919e32ba4f06b2172a777384d6a7969945a86a5e40ce2.png",
+          "name": "af20dd0d98ccc13708f919e32ba4f06b2172a777384d6a7969945a86a5e40ce2.png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/af20dd0d98ccc13708f919e32ba4f06b2172a777384d6a7969945a86a5e40ce2.png"
+        },
+        "ComfyUI_temp_fnogh_00002_.png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/f6fa6ca0b58a11e21fa35f012c123f9e9c9af7b1dbe15a66005feb0e69417929.png",
+          "name": "ComfyUI_temp_fnogh_00002_.png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/f6fa6ca0b58a11e21fa35f012c123f9e9c9af7b1dbe15a66005feb0e69417929.png"
+        },
+        "output (18).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/ffae64dbef1ba8a9617164a17e7499a01745873c4d15ca7ffb839ebd84fe0f88.png",
+          "name": "output (18).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/ffae64dbef1ba8a9617164a17e7499a01745873c4d15ca7ffb839ebd84fe0f88.png"
+        },
+        "output (12).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/e18eb98085c5a9bf55a9bfe58eee68366c8f656ffe5c4868dd035d80a0272115.png",
+          "name": "output (12).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/e18eb98085c5a9bf55a9bfe58eee68366c8f656ffe5c4868dd035d80a0272115.png"
+        },
+        "output (46).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/d037ac6790d5942e94539de94cb251a666dbb72b4036d100e378a4b0a23aed09.png",
+          "name": "output (46).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/d037ac6790d5942e94539de94cb251a666dbb72b4036d100e378a4b0a23aed09.png"
+        },
+        "output (40).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/791c38a4edcba383dd7b0bd319dd72a523cc38560c89c997c26c576214c1df22.png",
+          "name": "output (40).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/791c38a4edcba383dd7b0bd319dd72a523cc38560c89c997c26c576214c1df22.png"
+        },
+        "output (39).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/af753631073092b7caacdf873ffb19ba5dd9a7d83a8a9a2838719aa4959625e3.png",
+          "name": "output (39).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/af753631073092b7caacdf873ffb19ba5dd9a7d83a8a9a2838719aa4959625e3.png"
+        },
+        "output (38).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/52fee5cd40443a73d9c2c99bc209a6189531c242aa5dda874ccdb26dbaea510d.png",
+          "name": "output (38).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/52fee5cd40443a73d9c2c99bc209a6189531c242aa5dda874ccdb26dbaea510d.png"
+        },
+        "output (16).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/f75cd04dc1962e18d11d35ae8d159bd2143ada1709e77e0a9f51abffcc84e285.png",
+          "name": "output (16).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/f75cd04dc1962e18d11d35ae8d159bd2143ada1709e77e0a9f51abffcc84e285.png"
+        },
+        "output (35).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/38a174bd9b5b356d966b79aac40bdbcedfa3249aeb29af1eccdeef931049e626.png",
+          "name": "output (35).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/38a174bd9b5b356d966b79aac40bdbcedfa3249aeb29af1eccdeef931049e626.png"
+        },
+        "output (2).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/79c07e04c8c835b6dd4d518db5ddf533e36820de2fddb75a276460928f30c383.png",
+          "name": "output (2).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/79c07e04c8c835b6dd4d518db5ddf533e36820de2fddb75a276460928f30c383.png"
+        },
+        "output (13).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/2b8896d3724620553135351d4437994173676aea7bf83dbe94f5ceb30a328851.png",
+          "name": "output (13).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/2b8896d3724620553135351d4437994173676aea7bf83dbe94f5ceb30a328851.png"
+        },
+        "output (20).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/c9d606d23f2cbfdf7d66c5f832f6125d797e6eabed04139e931f23409f346228.png",
+          "name": "output (20).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/c9d606d23f2cbfdf7d66c5f832f6125d797e6eabed04139e931f23409f346228.png"
+        },
+        "64b04a65cc4b8d5ca0be3c95287a362d7fc7ff7f9c4960934fe8a317c4f81028.jpg": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/da43744dfa078592ae1ee8fd50db36ea2daf351608e172406d41581282a9e529.jpg",
+          "name": "64b04a65cc4b8d5ca0be3c95287a362d7fc7ff7f9c4960934fe8a317c4f81028.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/da43744dfa078592ae1ee8fd50db36ea2daf351608e172406d41581282a9e529.jpg"
+        },
+        "1_1.jpg": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/e6fe5dbc102506ee7ebd3d8705f225aa2d6d208d9bd1868361ebe6d79b04d42d.jpg",
+          "name": "1_1.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/e6fe5dbc102506ee7ebd3d8705f225aa2d6d208d9bd1868361ebe6d79b04d42d.jpg"
+        },
+        "6-1.jpg": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/40ff6d075e419e48239120ad023a273bf0e79450ef7f89456b575029b8157735.jpg",
+          "name": "6-1.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/40ff6d075e419e48239120ad023a273bf0e79450ef7f89456b575029b8157735.jpg"
+        },
+        "7dedb73319600dc364624211344f1e1f81a7812b6ec313abe9298bd85787d9e9.png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/7dedb73319600dc364624211344f1e1f81a7812b6ec313abe9298bd85787d9e9.png",
+          "name": "7dedb73319600dc364624211344f1e1f81a7812b6ec313abe9298bd85787d9e9.png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/7dedb73319600dc364624211344f1e1f81a7812b6ec313abe9298bd85787d9e9.png"
+        },
+        "7dedb73319600dc364624211344f1e1f81a7812b6ec313abe9298bd85787d9e9.jpg": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/32472a5403b8852351f6609574f6eb47c312e1195cfb437ae30ea98e64aba298.jpg",
+          "name": "7dedb73319600dc364624211344f1e1f81a7812b6ec313abe9298bd85787d9e9.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/32472a5403b8852351f6609574f6eb47c312e1195cfb437ae30ea98e64aba298.jpg"
+        },
+        "output (11).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/fe42c0b6b0f6b24e018c0f9802e6283bcaa8a2e021037252c7cbd7751aaa366b.png",
+          "name": "output (11).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/fe42c0b6b0f6b24e018c0f9802e6283bcaa8a2e021037252c7cbd7751aaa366b.png"
+        },
+        "9c4e51091617f663d46492be3f4f9092fba3c822698bc50b90800d1d49d00cf5.jpg": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/ca4ab9f9fef2e4c33003a0855db7fcfd38bde8e14ea190875102cdc814971d8e.jpg",
+          "name": "9c4e51091617f663d46492be3f4f9092fba3c822698bc50b90800d1d49d00cf5.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/ca4ab9f9fef2e4c33003a0855db7fcfd38bde8e14ea190875102cdc814971d8e.jpg"
+        },
+        "1024 1375_1_1.jpg": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/6758d1558fd6238d21e83406464e67cf4fa547f5fb302f52760f193e0cb2dd61.jpg",
+          "name": "1024 1375_1_1.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/6758d1558fd6238d21e83406464e67cf4fa547f5fb302f52760f193e0cb2dd61.jpg"
+        },
+        "ComfyUI_00005_.jpg": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/5574d7aa8955c6af248026bf04c902d885785f021ae0b57674639ac7bf7238f7.jpg",
+          "name": "ComfyUI_00005_.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/5574d7aa8955c6af248026bf04c902d885785f021ae0b57674639ac7bf7238f7.jpg"
+        },
+        "7.jpg": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/c29907b447607b6d90dbf6f51a53623b595fefaa8d2496ec27b77f03aa78798f.jpg",
+          "name": "7.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/c29907b447607b6d90dbf6f51a53623b595fefaa8d2496ec27b77f03aa78798f.jpg"
+        },
+        "9.jpg": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/c0b632c81452aa0f71ac9979c7c138a971670f945b48ad7274ea748719549f07.jpg",
+          "name": "9.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/c0b632c81452aa0f71ac9979c7c138a971670f945b48ad7274ea748719549f07.jpg"
+        },
+        "10.jpg": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/f5a616c189aa85523ec7dbae2bd1e8c84e978e9134cef58b7780bdb3a72ee1f3.jpg",
+          "name": "10.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/f5a616c189aa85523ec7dbae2bd1e8c84e978e9134cef58b7780bdb3a72ee1f3.jpg"
+        },
+        "1.jpg": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/6a52ef19b3595c3ad17c43cc0f5779d2edf6901e6755e329d6f41ee7bcc51eaa.jpg",
+          "name": "1.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/6a52ef19b3595c3ad17c43cc0f5779d2edf6901e6755e329d6f41ee7bcc51eaa.jpg"
+        },
+        "6.jpg": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/30baacdf21cf1925b6851dbf54bc15fc257d53025f1d140c7894292df4619c89.jpg",
+          "name": "6.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/30baacdf21cf1925b6851dbf54bc15fc257d53025f1d140c7894292df4619c89.jpg"
+        },
+        "9bc35c070b06d5a1af5755d70c743853323d17b5054930059eeade5812b7d81caa.png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/e67ea4f17b9591551f90c23d05ef2ad1405224f9123f2f3bfc91bdf6860b3aa8.png",
+          "name": "9bc35c070b06d5a1af5755d70c743853323d17b5054930059eeade5812b7d81caa.png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/e67ea4f17b9591551f90c23d05ef2ad1405224f9123f2f3bfc91bdf6860b3aa8.png"
+        },
+        "save_00001_.png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/b0d51b101d4eb9b0f715209aa0b07adcc2a534fc593a61781c000f8156ff900a.png",
+          "name": "save_00001_.png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/b0d51b101d4eb9b0f715209aa0b07adcc2a534fc593a61781c000f8156ff900a.png"
+        },
+        "WechatIMG1503.jpg": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/9d39d65192746064fd36e95dd9d1281d077262e22725d6a7a6c5486a4acacab5.jpg",
+          "name": "WechatIMG1503.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/9d39d65192746064fd36e95dd9d1281d077262e22725d6a7a6c5486a4acacab5.jpg"
+        },
+        "output (17).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/ba0c1235d129fe38fe5f5480a73c964061c386675f504a66f25ee459dea8cad2.png",
+          "name": "output (17).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/ba0c1235d129fe38fe5f5480a73c964061c386675f504a66f25ee459dea8cad2.png"
+        },
+        "output (34).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/532626840531fa64c8ea4ff956d095e87fd4b0b5311c4651e654b6ed2e561874.png",
+          "name": "output (34).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/532626840531fa64c8ea4ff956d095e87fd4b0b5311c4651e654b6ed2e561874.png"
+        },
+        "output (19).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/8bacd06cad34220cbd96eda45d00e83667bffe25b4103a78f5355097656f82f6.png",
+          "name": "output (19).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/8bacd06cad34220cbd96eda45d00e83667bffe25b4103a78f5355097656f82f6.png"
+        },
+        "output (44).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/9557e691ab74be5c1798d639a801463abc0368a656fb0bdf655b43580433f072.png",
+          "name": "output (44).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/9557e691ab74be5c1798d639a801463abc0368a656fb0bdf655b43580433f072.png"
+        },
+        "output (45).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/761ee3ff6a3d5bd8202ad708c61f316526987079172eac6c8474c39a2c921c07.png",
+          "name": "output (45).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/761ee3ff6a3d5bd8202ad708c61f316526987079172eac6c8474c39a2c921c07.png"
+        },
+        "output (5).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/bc8c86bb28b8862c37fbae49f8850e157d313597f5ee696b0cbeb7f533160639.png",
+          "name": "output (5).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/bc8c86bb28b8862c37fbae49f8850e157d313597f5ee696b0cbeb7f533160639.png"
+        },
+        "output (25).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/817450f657499c871520bf4fa0cfab9569b34840cd49ef08a6f6ee5fe4c33820.png",
+          "name": "output (25).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/817450f657499c871520bf4fa0cfab9569b34840cd49ef08a6f6ee5fe4c33820.png"
+        },
+        "output (22).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/a3c1854c44918f84e45c311840c84e75c6f2cf3d35b79e2967f0425364052f10.png",
+          "name": "output (22).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/a3c1854c44918f84e45c311840c84e75c6f2cf3d35b79e2967f0425364052f10.png"
+        },
+        "output (41).png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/f2a4b82a52a7f098ed2a8a3bf3c384449b3116f3bbf8004a49e0a729db087737.png",
+          "name": "output (41).png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/f2a4b82a52a7f098ed2a8a3bf3c384449b3116f3bbf8004a49e0a729db087737.png"
+        },
+        "W.jpg": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/fbb0441b65d7cad0befc66ca4fc85e0d6fcfb705406a5da57a11314fdb889049.jpg",
+          "name": "W.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/fbb0441b65d7cad0befc66ca4fc85e0d6fcfb705406a5da57a11314fdb889049.jpg"
+        },
+        "WechatIMG1503aaa.jpg": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/5f1a9a73bfa22fb67b6b4ce242610e821b1712858ac42dedd493cf81f57167c2.jpg",
+          "name": "WechatIMG1503aaa.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/5f1a9a73bfa22fb67b6b4ce242610e821b1712858ac42dedd493cf81f57167c2.jpg"
+        },
+        "792b407a8d0b6ab9fbbe62e687c830d9390d1847741688d83320640390edaff3.png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/792b407a8d0b6ab9fbbe62e687c830d9390d1847741688d83320640390edaff3.png",
+          "name": "792b407a8d0b6ab9fbbe62e687c830d9390d1847741688d83320640390edaff3.png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/792b407a8d0b6ab9fbbe62e687c830d9390d1847741688d83320640390edaff3.png"
+        },
+        "b05aa60d57e767c5e716fec5c72e3eab1d69af4bd84644a8c5a2789716b45548.png": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/b05aa60d57e767c5e716fec5c72e3eab1d69af4bd84644a8c5a2789716b45548.png",
+          "name": "b05aa60d57e767c5e716fec5c72e3eab1d69af4bd84644a8c5a2789716b45548.png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/b05aa60d57e767c5e716fec5c72e3eab1d69af4bd84644a8c5a2789716b45548.png"
+        },
+        "1024.jpg": {
+          "value": "img/2afffc134ed54f358265cf37bb2d52c5/d8942d93a50ce7d41355845af9f2d20c090280a4151341b51c96511127383e86.jpg",
+          "name": "1024.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/2afffc134ed54f358265cf37bb2d52c5/d8942d93a50ce7d41355845af9f2d20c090280a4151341b51c96511127383e86.jpg"
+        }
+      },
+      "category": "Primitive Nodes"
+    }
+  ],
+  "links": [
+    [
+      5,
+      4,
+      1,
+      7,
+      0,
+      "CLIP"
+    ],
+    [
+      8,
+      4,
+      2,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      23,
+      14,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      25,
+      7,
+      0,
+      14,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      52,
+      22,
+      0,
+      31,
+      2,
+      "IMAGE"
+    ],
+    [
+      54,
+      30,
+      0,
+      31,
+      0,
+      "MODEL"
+    ],
+    [
+      55,
+      30,
+      1,
+      31,
+      1,
+      "IPADAPTER"
+    ],
+    [
+      86,
+      43,
+      0,
+      41,
+      2,
+      "IMAGE"
+    ],
+    [
+      88,
+      44,
+      0,
+      41,
+      1,
+      "CONTROL_NET"
+    ],
+    [
+      90,
+      6,
+      0,
+      41,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      91,
+      41,
+      0,
+      14,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      95,
+      22,
+      0,
+      43,
+      0,
+      "IMAGE"
+    ],
+    [
+      109,
+      58,
+      0,
+      56,
+      0,
+      "INT"
+    ],
+    [
+      110,
+      58,
+      1,
+      56,
+      1,
+      "INT"
+    ],
+    [
+      111,
+      56,
+      0,
+      57,
+      0,
+      "LATENT"
+    ],
+    [
+      112,
+      57,
+      0,
+      14,
+      3,
+      "LATENT"
+    ],
+    [
+      113,
+      22,
+      0,
+      58,
+      0,
+      "IMAGE"
+    ],
+    [
+      121,
+      4,
+      0,
+      30,
+      0,
+      "MODEL"
+    ],
+    [
+      122,
+      4,
+      1,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      124,
+      31,
+      0,
+      14,
+      0,
+      "MODEL"
+    ],
+    [
+      126,
+      8,
+      0,
+      52,
+      0,
+      "IMAGE"
+    ],
+    [
+      128,
+      23,
+      0,
+      6,
+      1,
+      "STRING"
+    ],
+    [
+      130,
+      22,
+      0,
+      31,
+      3,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "正向提示词",
+      "bounding": [
+        -1391,
+        -2324,
+        1401,
+        828
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "迁移融合",
+      "bounding": [
+        1060,
+        -1915,
+        935,
+        581
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "负面",
+      "bounding": [
+        -590,
+        -1414,
+        857,
+        647
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "openpose",
+      "bounding": [
+        -2326,
+        -2515,
+        774,
+        521
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "scaling ratio",
+      "bounding": [
+        1121,
+        -2645,
+        1058,
+        478
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.4090909090909239,
+      "offset": {
+        "0": -729.385333329476,
+        "1": 2165.779654871953
+      }
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

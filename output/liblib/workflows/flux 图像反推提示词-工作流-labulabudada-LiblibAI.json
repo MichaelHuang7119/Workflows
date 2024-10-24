@@ -1,0 +1,1582 @@
+{
+  "last_node_id": 739,
+  "last_link_id": 889,
+  "nodes": [
+    {
+      "id": 118,
+      "type": "EmptyLatentImage",
+      "pos": {
+        "0": 6611.52392578125,
+        "1": 2664.794677734375
+      },
+      "size": {
+        "0": 210,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            163
+          ],
+          "slot_index": 0,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 119,
+      "type": "VAEDecode",
+      "pos": {
+        "0": 6961.7275390625,
+        "1": 2270.085693359375
+      },
+      "size": {
+        "0": 140,
+        "1": 46
+      },
+      "flags": {},
+      "order": 27,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 137,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 138,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            237
+          ],
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 121,
+      "type": "VAELoader",
+      "pos": {
+        "0": 6961.7275390625,
+        "1": 2153.085693359375
+      },
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 4,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            138,
+            150
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 122,
+      "type": "DualCLIPLoader",
+      "pos": {
+        "0": 6254.0654296875,
+        "1": 2296.085693359375
+      },
+      "size": {
+        "0": 280,
+        "1": 110
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            151
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp16.safetensors",
+        "clip_l.safetensors",
+        "flux"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 123,
+      "type": "UNETLoader",
+      "pos": {
+        "0": 6310.68115234375,
+        "1": 2153.085693359375
+      },
+      "size": {
+        "0": 223.3844757080078,
+        "1": 82
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 4,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            145,
+            146
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "flux1-dev.sft",
+        "default"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 124,
+      "type": "SamplerCustomAdvanced",
+      "pos": {
+        "0": 6961.7275390625,
+        "1": 2374.056396484375
+      },
+      "size": {
+        "0": 236.8000030517578,
+        "1": 106
+      },
+      "flags": {},
+      "order": 26,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 140,
+          "slot_index": 0,
+          "label": "噪波生成"
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 141,
+          "slot_index": 1,
+          "label": "引导"
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 142,
+          "slot_index": 2,
+          "label": "采样器"
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 143,
+          "slot_index": 3,
+          "label": "Sigmas"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 144,
+          "slot_index": 4,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            137
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "输出"
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3,
+          "label": "降噪输出"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 125,
+      "type": "KSamplerSelect",
+      "pos": {
+        "0": 6611.52392578125,
+        "1": 2386.794677734375
+      },
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            142
+          ],
+          "shape": 3,
+          "label": "采样器"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "euler"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 126,
+      "type": "BasicScheduler",
+      "pos": {
+        "0": 6611.52392578125,
+        "1": 2501.085693359375
+      },
+      "size": {
+        "0": 210,
+        "1": 106
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 145,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            143
+          ],
+          "shape": 3,
+          "label": "Sigmas"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicScheduler"
+      },
+      "widgets_values": [
+        "simple",
+        20,
+        0.75
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 127,
+      "type": "BasicGuider",
+      "pos": {
+        "0": 6611.52392578125,
+        "1": 2153.085693359375
+      },
+      "size": {
+        "0": 161.1999969482422,
+        "1": 46
+      },
+      "flags": {},
+      "order": 25,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 146,
+          "slot_index": 0,
+          "label": "模型"
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 147,
+          "slot_index": 1,
+          "label": "条件"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            141
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "引导"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicGuider"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 128,
+      "type": "RandomNoise",
+      "pos": {
+        "0": 6611.52392578125,
+        "1": 2253.794677734375
+      },
+      "size": {
+        "0": 261.9582214355469,
+        "1": 82
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            140
+          ],
+          "shape": 3,
+          "label": "噪波生成"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        138467984853475,
+        "randomize"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 129,
+      "type": "LoadImage",
+      "pos": {
+        "0": 5947.49267578125,
+        "1": 2923.512939453125
+      },
+      "size": {
+        "0": 280,
+        "1": 330
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            148,
+            154,
+            158,
+            238
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "iShot_2024-08-04_06.42.06.png",
+        "image"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 130,
+      "type": "ImageResizeKJ",
+      "pos": [
+        6281.78449716528,
+        2921.0523424992457
+      ],
+      "size": [
+        261.7494201660156,
+        214
+      ],
+      "flags": {},
+      "order": 150,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 148,
+          "label": "image"
+        },
+        {
+          "name": "get_image_size",
+          "type": "IMAGE",
+          "link": null,
+          "label": "get_image_size"
+        },
+        {
+          "name": "width_input",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "width_input"
+          },
+          "label": "width_input"
+        },
+        {
+          "name": "height_input",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "height_input"
+          },
+          "label": "height_input"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            149
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "IMAGE"
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null,
+          "shape": 3,
+          "label": "width"
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null,
+          "shape": 3,
+          "label": "height"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageResizeKJ"
+      },
+      "widgets_values": [
+        1024,
+        800,
+        "nearest-exact",
+        false,
+        2,
+        0,
+        0
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 131,
+      "type": "VAEEncode",
+      "pos": {
+        "0": 6961.7275390625,
+        "1": 2586.085693359375
+      },
+      "size": {
+        "0": 140,
+        "1": 46
+      },
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 149,
+          "label": "图像"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 150,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            144,
+            162
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 132,
+      "type": "CLIPTextEncodeFlux",
+      "pos": {
+        "0": 6323.78466796875,
+        "1": 2464.05224609375
+      },
+      "size": {
+        "0": 210,
+        "1": 100
+      },
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 151,
+          "label": "CLIP"
+        },
+        {
+          "name": "clip_l",
+          "type": "STRING",
+          "link": 152,
+          "widget": {
+            "name": "clip_l"
+          },
+          "label": "CLIP_L"
+        },
+        {
+          "name": "t5xxl",
+          "type": "STRING",
+          "link": 153,
+          "widget": {
+            "name": "t5xxl"
+          },
+          "label": "T5XXL"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            147
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeFlux"
+      },
+      "widgets_values": [
+        "i want you to continue to reply to me by making whatever sentence or statement i provide\n... you as verbose as possible. Imagine if you had the capacity to generate images, I will b\n... e providing you weak human-created prompts. I want you to provide me verbose, LLM style i\n... mage prompts. Can we begin?",
+        "i want you to continue to reply to me by making whatever sentence or statement i provide\n... you as verbose as possible. Imagine if you had the capacity to generate images, I will b\n... e providing you weak human-created prompts. I want you to provide me verbose, LLM style i\n... mage prompts. Can we begin?",
+        4,
+        true,
+        true
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 133,
+      "type": "DownloadAndLoadFlorence2Model",
+      "pos": [
+        6267.590677314473,
+        3732.45893097449
+      ],
+      "size": [
+        272.1222229003906,
+        108.1249771118164
+      ],
+      "flags": {},
+      "order": 35,
+      "mode": 4,
+      "outputs": [
+        {
+          "name": "florence2_model",
+          "type": "FL2MODEL",
+          "links": [
+            155
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "florence2_model"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DownloadAndLoadFlorence2Model"
+      },
+      "widgets_values": [
+        "microsoft/Florence-2-base",
+        "fp16",
+        "sdpa"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 134,
+      "type": "Florence2Run",
+      "pos": [
+        6615.581091478568,
+        3451.384820361345
+      ],
+      "size": [
+        280,
+        304.0000305175781
+      ],
+      "flags": {},
+      "order": 152,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 154,
+          "label": "image"
+        },
+        {
+          "name": "florence2_model",
+          "type": "FL2MODEL",
+          "link": 155,
+          "label": "florence2_model"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "mask"
+        },
+        {
+          "name": "caption",
+          "type": "STRING",
+          "links": [
+            157
+          ],
+          "slot_index": 2,
+          "shape": 3,
+          "label": "caption"
+        },
+        {
+          "name": "data",
+          "type": "JSON",
+          "links": null,
+          "shape": 3,
+          "label": "data"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Florence2Run"
+      },
+      "widgets_values": [
+        "",
+        "caption",
+        true,
+        false,
+        1024,
+        3,
+        true,
+        ""
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 135,
+      "type": "Primitive string multiline [Crystools]",
+      "pos": {
+        "0": 6281.52392578125,
+        "1": 3197.085693359375
+      },
+      "size": {
+        "0": 259.8245849609375,
+        "1": 121.2449951171875
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "string",
+          "type": "STRING",
+          "links": [
+            156,
+            165
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Primitive string multiline [Crystools]"
+      },
+      "widgets_values": [
+        "Realistic style，",
+        true
+      ]
+    },
+    {
+      "id": 136,
+      "type": "JWStringConcat",
+      "pos": [
+        6615.581091478568,
+        3269.384820361345
+      ],
+      "size": [
+        210,
+        54
+      ],
+      "flags": {},
+      "order": 196,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "a",
+          "type": "STRING",
+          "link": 156,
+          "widget": {
+            "name": "a"
+          },
+          "label": "a"
+        },
+        {
+          "name": "b",
+          "type": "STRING",
+          "link": 157,
+          "widget": {
+            "name": "b"
+          },
+          "label": "b"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            159
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "JWStringConcat"
+      },
+      "widgets_values": [
+        "",
+        ", "
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 137,
+      "type": "CLIP_Interrogator",
+      "pos": [
+        6259.78449716528,
+        3460.0523424992457
+      ],
+      "size": [
+        280,
+        150
+      ],
+      "flags": {},
+      "order": 151,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 158,
+          "label": "image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "full_prompt",
+          "type": "STRING",
+          "links": [
+            160
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "full_prompt"
+        },
+        {
+          "name": "blip_caption",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "blip_caption"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIP_Interrogator"
+      },
+      "widgets_values": [
+        "fast",
+        false,
+        true,
+        "clip_interrogator_prompt.txt"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 138,
+      "type": "JWStringConcat",
+      "pos": [
+        6615.581091478568,
+        3157.3848203613443
+      ],
+      "size": [
+        210,
+        54
+      ],
+      "flags": {},
+      "order": 226,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "a",
+          "type": "STRING",
+          "link": 159,
+          "widget": {
+            "name": "a"
+          },
+          "label": "a"
+        },
+        {
+          "name": "b",
+          "type": "STRING",
+          "link": 160,
+          "widget": {
+            "name": "b"
+          },
+          "label": "b"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            164
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "JWStringConcat"
+      },
+      "widgets_values": [
+        "",
+        ", "
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 139,
+      "type": "ShowText|pysssss",
+      "pos": {
+        "0": 6872.5810546875,
+        "1": 2965.384765625
+      },
+      "size": {
+        "0": 263.4047546386719,
+        "1": 256.26416015625
+      },
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 161,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "Realistic style，a drawing of a man in a gas mask pointing at somethingA drawing of a man in a gas mask pointing at something, fallout 5 official art, fallout concept art, the price of ncr, in fallout cover art, dressed as a scavenger, pipboy art, detailed fallout npc! high angle, stylization for fallout 4, dieselpunk armor, wearing cloak on blasted plain, disco elysium art, new vegas style"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 140,
+      "type": "Switch latent [Crystools]",
+      "pos": {
+        "0": 6961.7275390625,
+        "1": 2692.794677734375
+      },
+      "size": {
+        "0": 210,
+        "1": 78
+      },
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "on_true",
+          "type": "LATENT",
+          "link": 162,
+          "label": "真"
+        },
+        {
+          "name": "on_false",
+          "type": "LATENT",
+          "link": 163,
+          "label": "假"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Switch latent [Crystools]"
+      },
+      "widgets_values": [
+        true
+      ]
+    },
+    {
+      "id": 141,
+      "type": "Switch any [Crystools]",
+      "pos": {
+        "0": 6615.52392578125,
+        "1": 2960.085693359375
+      },
+      "size": {
+        "0": 210,
+        "1": 78
+      },
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "on_true",
+          "type": "*",
+          "link": 164,
+          "label": "真"
+        },
+        {
+          "name": "on_false",
+          "type": "*",
+          "link": 165,
+          "label": "假"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "links": [
+            152,
+            153,
+            161
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "输出"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Switch any [Crystools]"
+      },
+      "widgets_values": [
+        true
+      ]
+    },
+    {
+      "id": 142,
+      "type": "Note",
+      "pos": {
+        "0": 6260.78466796875,
+        "1": 3400.05224609375
+      },
+      "size": {
+        "0": 241.08323669433594,
+        "1": 90.19999694824219
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 9,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "CLIP Interrogator节点\n图像反推提示词\n分析图像并生成与图像内容相关的文本描述"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 143,
+      "type": "Note",
+      "pos": {
+        "0": 6265.78466796875,
+        "1": 3678.05224609375
+      },
+      "size": {
+        "0": 241.08323669433594,
+        "1": 90.19999694824219
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 10,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        " DownloadAndLoadFlorence2Model 节点\n加载 Florence2 视觉模型"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 144,
+      "type": "Note",
+      "pos": {
+        "0": 6615.5810546875,
+        "1": 3398.384765625
+      },
+      "size": {
+        "0": 241.08323669433594,
+        "1": 90.19999694824219
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 11,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Florence2Run 节点\n对已加载的 Florence2 模型对输入图像进行处理，执行任务如图像分类、对象检测等"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 145,
+      "type": "Note",
+      "pos": {
+        "0": 6615.5810546875,
+        "1": 2915.156005859375
+      },
+      "size": {
+        "0": 241.08323669433594,
+        "1": 90.19999694824219
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 12,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Use LLMs for Prompts? 节点\n用大型语言模型（LLMs）生成提示词或文本描述"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 146,
+      "type": "Note",
+      "pos": {
+        "0": 6615.5810546875,
+        "1": 3102.384765625
+      },
+      "size": {
+        "0": 241.08323669433594,
+        "1": 90.19999694824219
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 13,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "String Concatenate 节点\n用于将多个字符串连接在一起，生成一个完整的文本输入"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 207,
+      "type": "Image Comparer (rgthree)",
+      "pos": {
+        "0": 7220.78173828125,
+        "1": 2938.05126953125
+      },
+      "size": {
+        "0": 805.7069702148438,
+        "1": 902.7034912109375
+      },
+      "flags": {},
+      "order": 28,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_a",
+          "type": "IMAGE",
+          "link": 237,
+          "dir": 3,
+          "label": "图像_A"
+        },
+        {
+          "name": "image_b",
+          "type": "IMAGE",
+          "link": 238,
+          "dir": 3,
+          "label": "图像_B"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "comparer_mode": "Slide"
+      },
+      "widgets_values": [
+        [
+          {
+            "url": "/view?filename=rgthree.compare._temp_sgkng_00003_.png&type=temp&subfolder=&rand=0.26940354037686665",
+            "name": "A",
+            "selected": true
+          },
+          {
+            "url": "/view?filename=rgthree.compare._temp_sgkng_00004_.png&type=temp&subfolder=&rand=0.8581743902735057",
+            "name": "B",
+            "selected": true
+          }
+        ]
+      ]
+    }
+  ],
+  "links": [
+    [
+      137,
+      124,
+      0,
+      119,
+      0,
+      "LATENT"
+    ],
+    [
+      138,
+      121,
+      0,
+      119,
+      1,
+      "VAE"
+    ],
+    [
+      140,
+      128,
+      0,
+      124,
+      0,
+      "NOISE"
+    ],
+    [
+      141,
+      127,
+      0,
+      124,
+      1,
+      "GUIDER"
+    ],
+    [
+      142,
+      125,
+      0,
+      124,
+      2,
+      "SAMPLER"
+    ],
+    [
+      143,
+      126,
+      0,
+      124,
+      3,
+      "SIGMAS"
+    ],
+    [
+      144,
+      131,
+      0,
+      124,
+      4,
+      "LATENT"
+    ],
+    [
+      145,
+      123,
+      0,
+      126,
+      0,
+      "MODEL"
+    ],
+    [
+      146,
+      123,
+      0,
+      127,
+      0,
+      "MODEL"
+    ],
+    [
+      147,
+      132,
+      0,
+      127,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      148,
+      129,
+      0,
+      130,
+      0,
+      "IMAGE"
+    ],
+    [
+      149,
+      130,
+      0,
+      131,
+      0,
+      "IMAGE"
+    ],
+    [
+      150,
+      121,
+      0,
+      131,
+      1,
+      "VAE"
+    ],
+    [
+      151,
+      122,
+      0,
+      132,
+      0,
+      "CLIP"
+    ],
+    [
+      152,
+      141,
+      0,
+      132,
+      1,
+      "STRING"
+    ],
+    [
+      153,
+      141,
+      0,
+      132,
+      2,
+      "STRING"
+    ],
+    [
+      154,
+      129,
+      0,
+      134,
+      0,
+      "IMAGE"
+    ],
+    [
+      155,
+      133,
+      0,
+      134,
+      1,
+      "FL2MODEL"
+    ],
+    [
+      156,
+      135,
+      0,
+      136,
+      0,
+      "STRING"
+    ],
+    [
+      157,
+      134,
+      2,
+      136,
+      1,
+      "STRING"
+    ],
+    [
+      158,
+      129,
+      0,
+      137,
+      0,
+      "IMAGE"
+    ],
+    [
+      159,
+      136,
+      0,
+      138,
+      0,
+      "STRING"
+    ],
+    [
+      160,
+      137,
+      0,
+      138,
+      1,
+      "STRING"
+    ],
+    [
+      161,
+      141,
+      0,
+      139,
+      0,
+      "STRING"
+    ],
+    [
+      162,
+      131,
+      0,
+      140,
+      0,
+      "LATENT"
+    ],
+    [
+      163,
+      118,
+      0,
+      140,
+      1,
+      "LATENT"
+    ],
+    [
+      164,
+      138,
+      0,
+      141,
+      0,
+      "*"
+    ],
+    [
+      165,
+      135,
+      0,
+      141,
+      1,
+      "*"
+    ],
+    [
+      237,
+      119,
+      0,
+      207,
+      0,
+      "IMAGE"
+    ],
+    [
+      238,
+      129,
+      0,
+      207,
+      1,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "FLUX｜图像反推提示词+图生图",
+      "bounding": [
+        5885,
+        2044,
+        2202,
+        1847
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.3138428376721002,
+      "offset": [
+        -3669.085387694416,
+        -936.8830680562253
+      ]
+    },
+    "workspace_info": {
+      "id": "R8WbbflNF7PN4aJn_QzQm",
+      "saveLock": false,
+      "cloudID": null,
+      "coverMediaPath": null
+    }
+  },
+  "version": 0.4
+}

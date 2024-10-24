@@ -1,0 +1,1148 @@
+{
+  "last_node_id": 79,
+  "last_link_id": 106,
+  "nodes": [
+    {
+      "id": 13,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        920,
+        340
+      ],
+      "size": {
+        "0": 349.757080078125,
+        "1": 138.51333618164062
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 37,
+          "slot_index": 0,
+          "label": "噪波生成"
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 30,
+          "slot_index": 1,
+          "label": "引导"
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 19,
+          "slot_index": 2,
+          "label": "采样器"
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 20,
+          "slot_index": 3,
+          "label": "Sigmas"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 89,
+          "slot_index": 4,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            85
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "输出"
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3,
+          "label": "降噪输出"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 16,
+      "type": "KSamplerSelect",
+      "pos": [
+        600,
+        420
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            19
+          ],
+          "shape": 3,
+          "label": "采样器"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "euler"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 10,
+      "type": "VAELoader",
+      "pos": [
+        600,
+        320
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            86,
+            100
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 11,
+      "type": "DualCLIPLoader",
+      "pos": [
+        610,
+        180
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            99,
+            102
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp8_e4m3fn",
+        "clip_l",
+        "flux"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 22,
+      "type": "BasicGuider",
+      "pos": [
+        610,
+        60
+      ],
+      "size": {
+        "0": 311.0043029785156,
+        "1": 80.29173278808594
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 106,
+          "slot_index": 0,
+          "label": "模型"
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 40,
+          "slot_index": 1,
+          "label": "条件"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            30
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "引导"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicGuider"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 17,
+      "type": "BasicScheduler",
+      "pos": [
+        930,
+        70
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 104,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            20
+          ],
+          "shape": 3,
+          "label": "Sigmas"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicScheduler"
+      },
+      "widgets_values": [
+        "simple",
+        20,
+        1
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 70,
+      "type": "easy seed",
+      "pos": [
+        -451.7008138589346,
+        662.0563589860893
+      ],
+      "size": {
+        "0": 339.0898132324219,
+        "1": 156.0732421875
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "seed",
+          "type": "INT",
+          "links": [
+            90
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy seed"
+      },
+      "widgets_values": [
+        429906204884009,
+        "fixed"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 77,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1347,
+        352
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 99,
+          "label": "CLIP",
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            98
+          ],
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 73,
+      "type": "UltimateSDUpscale",
+      "pos": [
+        2526,
+        63
+      ],
+      "size": {
+        "0": 321.8778076171875,
+        "1": 614
+      },
+      "flags": {},
+      "order": 18,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 94,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 105,
+          "label": "模型",
+          "slot_index": 1
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 96,
+          "label": "正面条件",
+          "slot_index": 2
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 98,
+          "label": "负面条件",
+          "slot_index": 3
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 100,
+          "label": "VAE",
+          "slot_index": 4
+        },
+        {
+          "name": "upscale_model",
+          "type": "UPSCALE_MODEL",
+          "link": 92,
+          "slot_index": 5,
+          "label": "放大模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            93
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UltimateSDUpscale"
+      },
+      "widgets_values": [
+        2,
+        622660199667192,
+        "randomize",
+        2,
+        5,
+        "euler",
+        "normal",
+        0.15,
+        "Chess",
+        1024,
+        1024,
+        8,
+        32,
+        "None",
+        1,
+        64,
+        8,
+        16,
+        true,
+        false
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 25,
+      "type": "RandomNoise",
+      "pos": [
+        34,
+        644
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise_seed",
+          "type": "INT",
+          "link": 90,
+          "widget": {
+            "name": "noise_seed"
+          },
+          "label": "随机种"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            37
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "噪波生成"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        18691996265765,
+        "randomize"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 12,
+      "type": "UNETLoader",
+      "pos": [
+        -444,
+        -217
+      ],
+      "size": {
+        "0": 306.7282409667969,
+        "1": 95.8310317993164
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            101
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "Flux1-dev-fp8 11G版_flux1-dev-fp8",
+        "fp8_e4m3fn"
+      ],
+      "_widget_cache_map": {
+        "黑暗森林工作室-FLUX1-DEV.sft_黑暗flux1-schnell": {
+          "name": "黑暗森林工作室-FLUX1-DEV.sft_黑暗flux1-schnell",
+          "value": 2296389
+        },
+        "Flux1-dev-fp8 11G版_flux1-dev-fp8": {
+          "name": "Flux1-dev-fp8 11G版_flux1-dev-fp8",
+          "value": 2298961
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 75,
+      "type": "PreviewImage",
+      "pos": [
+        2901,
+        57
+      ],
+      "size": {
+        "0": 1171.271240234375,
+        "1": 1225.8594970703125
+      },
+      "flags": {},
+      "order": 19,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 93,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 64,
+      "type": "VAEDecode",
+      "pos": [
+        1647,
+        44
+      ],
+      "size": {
+        "0": 324.7274169921875,
+        "1": 90.18732452392578
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 85,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 86,
+          "label": "VAE",
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            87,
+            94
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 74,
+      "type": "UpscaleModelLoader",
+      "pos": [
+        2100,
+        234
+      ],
+      "size": {
+        "0": 320,
+        "1": 70
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 2,
+      "outputs": [
+        {
+          "name": "UPSCALE_MODEL",
+          "type": "UPSCALE_MODEL",
+          "links": [
+            92
+          ],
+          "shape": 3,
+          "label": "放大模型",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UpscaleModelLoader"
+      },
+      "widgets_values": [
+        "ESRGAN_4x"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 68,
+      "type": "Note",
+      "pos": [
+        -2769,
+        -863
+      ],
+      "size": {
+        "0": 2135.83056640625,
+        "1": 2083.68994140625
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "\n\n(no panties),((best quality)),(real),(masterpiece),1girl,Solo,full body,expose the vagina,huge breasts,temptation,aoa,midriff,Big long legs,see-through,(nsfw),\n\n(no panties),((best quality)),(real),(masterpiece),1girl,solo,expose the vagina,full body,huge breasts,temptation,aoa,midriff,Big long legs,see-through,(nsfw),\n\n(no panties),((best quality)),(real),(masterpiece),1girl,Solo,full body,expose the vagina,huge breasts,temptation,aoa,midriff,Big long legs,see-through,Uniform Temptation(nsfw),\n\nmasterpiece,best quality,1girl,black hair,breasts,calendar \\(object\\),cleavage,computer,dirty,dirty face,keyboard \\(computer\\),mole,mole on breast,monitor,photo \\(medium\\),realistic,smile,solo,\n\n(no panties),((best quality)),(real),(masterpiece),1girl,full body,expose the vagina,huge breasts,temptation,aoa,midriff,Big long legs,see-through,Uniform Temptation,keep kneesing(nsfw),\n\n(no panties),((best quality)),(real),(masterpiece),1girl,solo,expose the vagina,full body,huge breasts,temptation,aoa,midriff,Big long legs,see-through,Color(nsfw),\n\n(no panties),((best quality)),(real),(masterpiece),1girl,solo,expose the vagina,full body,huge breasts,temptation,aoa,midriff,Big long legs,see-through,lookdown,kneeling,a girl,school uniform(nsfw),(no panties),((best quality)),(real),(masterpiece),1girl,solo,expose the vagina,full body,huge breasts,temptation,aoa,midriff,Big long legs,see-through,Color(nsfw),\n\n(no panties),((best quality)),(real),(masterpiece),1girl,Solo,full body,expose the vagina,huge breasts,temptation,aoa,midriff,Big long legs,see-through,(nsfw),\n\n(no panties),((best quality)),(real),(masterpiece),1girl,Solo,full body,expose the vagina,huge breasts,temptation,aoa,midriff,Big long legs,see-through,(nsfw),\n\n(no panties),((best quality)),(real),(masterpiece),1girl,solo,expose the vagina,full body,huge breasts,temptation,aoa,midriff,Big long legs,see-through,Color,(nsfw),\n\n(no panties),((best quality)),(real),(masterpiece),1girl,Solo,full body,expose the vagina,huge breasts,temptation,aoa,midriff,Big long legs,see-through,(nsfw),\n\n nsfw,((masterpiece)), (((best quality))), ((ultra-detailed)), ((illustration)), dynamic angle,1girl,0d,black pantyhose,high heels,full body,Black hair,Half-up, half-down hairstyle,jacket,Contrapposto pose,feeding,looking at viewer, playground,sunlight, (long legs:1.3), \n\nMasterpiece, ultra-clear picture quality, real effect, 8k ultra-clear, fine picture effect,1 girl,(solo),Sit,Cocked feet, miniskirt, high heels,(Plump body),(White pantyhose:0.4), White background\n\nrealistic, (masterpiece, top quality, best quality, official art, beautiful and aesthetic:1.2), extremely detailed, fractal art, colorful, highest detailed, zentangle, (abstract background:1.3), dynamic angle,.1girl, (tanned skin, shiny skin), many colors, bright eyes, (detailed face, detailed eyes), looking to the side.,realistic, (masterpiece, top quality, best quality, official art, beautiful and aesthetic:1.2), extremely detailed, fractal art, colorful, highest detailed, zentangle, (abstract background:1.3), dynamic angle,.1girl, (tanned skin, shiny skin), many colors, bright eyes, (detailed face, detailed eyes), looking to the side.\n\n1girl, (nsfw:1.2),from above, single, underwear, jewelry, short skirt, bra, breasts, long hair, office girl, cleavage, pantyhose, necklace, brown hair, shirt, formal, open dress, earrings, suit, pencil skirt, jacket, indoor, looking at the viewer, blue bra, white shirt, open shirt, make-up, lipstick, nail polish, red lips, gray skirt, lips, medium breasts , \n\n1gir,(gray background),(8k, RAW photo, best quality, masterpiece:1.2),(realistic, photo-realistic:1.2)(raw photo) (extremely detailed CG unity 8k wallpaper) detailed and intricate,original,highres,(1girl)(solo)(looking at viewer)(pink dress)see-through,crop top,midriff,(large breasts)sex pose,(cowboy shot),(standing, from below,clothes in front:1.2) beautiful concept illustration,\n\nfluffy hair, long floating hair, (super long hair), shiny pink hair, shiny hair, 1 girl, alone, long hair, blue eyes, (pink hair), pink hair, looking at the audience, smiling, make-up face prints, purple hair, colored hair, thighs, outdoors, full body ((masterpiece)), (((best quality))), ((ultra-detailed)), ((illustration)), A lot of waving glow sticks,Stage,Concert,(solo),1 girl,((singing)),headset,(leaning_forward:1.2),(arms_behind_back),((extremely_detailed_eyes_and_face)),colorful,Tokyo Dome,ray tracing,(disheveled hair),cherry_blossoms,petals,Flying notes\n\n(nsfw:1.2), jk_lure_dress3,8k,(realistic:1.1), (photorealistic:1.1), (masterpiece:1.1), (best quality:1.1), RAW photo, highres, ultra detailed, High detail RAW color photo,professional photograph,masterpiece, best quality,realistic,realskin,1girl,low_key,solo,lighting,long hair ,full body, standing,classroom, beautiful detailed eyes,natural lighting,, (detailed face:1.2),extremely beautiful face,  \n\n\n(nsfw:1.3),(8k, RAW photo, best quality, masterpiece:1.2),(realistic, photo-realistic:1.37),photon mapping, professional lighting, radiosity,(fashionably dressed:1.5)),(idol:1.4),1girl,solo,long_hair,(watch:1.1),(bracelet:1.1),(long legs:1.2),(earrings:1.1),full body, physically-based rendering\n\n(masterpiece, best quality:1.4),finely detailed,1girl,solo,pale skin,perfect body,(half body photo:1.5),\n\nbest quality,realistic,masterpiece,full body,1girl,\n\n Best quality,masterpiece, 1girl,red shirt, (Tie), Exposed thighs, exposed navel,Hourglass body shape\n\n(nsfw),1girl,solo,black hair,realistic,lips,masterpiece,best quality,Solid background,Long hair,large breasts,  skin texture,(cowboy shot:0.5)\n\n(nsfw:1.2),[[delicate fingers and hands:0.55]::0.85],(sketch:0.7),{(:yellow:0.6):1.12222}},{(:blue:0.9):1.13333},{(red::0.3):1.111111},,(foot Focus:1.3),(beautiful detailed eyes),Details of the foot,(beautiful detailed girl),Details of the characters,(solo:1.1),(one_foot_raised:1.2),(Step on:1.4),(pov:1.2),sitting,,1girl,yang girl,long white hair,Small breasts,(Silver Eyes:1.25),[(black Maid's outfit:0.8):0.7],[(Bikini:1.1)::0.7],perfect limb,perfect little belly,(1girl),Disdainful expressions,grimacing,yang girl,((an extremely delicate face and beautiful eyes)),((black long white hair),highly detailed,Belly button,(Short maid's apron:1.1),Skirt with lace lace,(White stockings:1.2),(Transparent stockings:1.2),[(black Maid's outfit:0.8):0.8],[(Bikini:1.1)::0.8],(Short maid's apron:1.1),Skirt with lace lace,White stockings,(Transparent stockings:1.2),Tearing(Beads of sweat:1.2),(Wet clothes:1.3),(Wet underwear:1.3),[(black Maid's outfit:0.8):0.7],[(Bikini:1.1)::0.7],(Short maid's apron:1.1),(Transparent stockings:1.2),(Cream dripping on body),(sad:1.3),(annoyed:1.3),(frown:1.3),,=/,bedroom, on bed,,(ribbons),neon light,,\n\n1girl,black pleated skirt,white shirt,necktie,indoor,hands on wait,white legwear,White playful socks with legs spread open,Expose underwear,Lying in bed with sexy movements,\n\n(nsfw:1.2),[[delicate fingers and hands:0.55]::0.85],(sketch:0.7),{(:yellow:0.6):1.12222}},{(:blue:0.9):1.13333},{(red::0.3):1.111111},,(foot Focus:1.3),(beautiful detailed eyes),Details of the foot,(beautiful detailed girl),Details of the characters,(solo:1.1),(one_foot_raised:1.2),(Step on:1.4),(pov:1.2),sitting,,1girl,yang girl,long white hair,Small breasts,(Silver Eyes:1.25),[(black Maid's outfit:0.8):0.7],[(Bikini:1.1)::0.7],perfect limb,perfect little belly,(1girl),Disdainful expressions,grimacing,yang girl,((an extremely delicate face and beautiful eyes)),((black long white hair),highly detailed,Belly button,(Short maid's apron:1.1),Skirt with lace lace,(White stockings:1.2),(Transparent stockings:1.2),[(black Maid's outfit:0.8):0.8],[(Bikini:1.1)::0.8],(Short maid's apron:1.1),Skirt with lace lace,White stockings,(Transparent stockings:1.2),Tearing(Beads of sweat:1.2),(Wet clothes:1.3),(Wet underwear:1.3),[(black Maid's outfit:0.8):0.7],[(Bikini:1.1)::0.7],(Short maid's apron:1.1),(Transparent stockin\ngs:1.2),(Cream dripping on body),(sad:1.3),(annoyed:1.3),(frown:1.3),,=/,bedroom, on bed,,(ribbons),neon light,,\n\n(Christmas costume: 1.5), (black stockings: 1.5), light and shadow, red lips, clean point background, (black lace :1.5), big breasts, jewelry,earrings, vress a hair, quality, solo, realistic, feathers, aesthetic and quality), official art\n\nbest quality, masterpiece, ultra high res,1girl, big breast, looking at viewer,pure color background,yosshi film ,1girl, breasts, curtains, holding_animal, iphone, jewelry, letterboxed, lips, necklace, panties, photo_\\(medium\\), shorts, solo, window\n\nCanon RF85mm f/1.2,masterpiece,best quality,ultra highres,vc,1 girl,(korean mixed,kpop idol:1.2),solo,shiny_skin,very white skin,black eyes,necklace,brown hair,red lips,long hair,eyelashes,wavy hair,bangs,aface,make-up,shiny lips,shiny,Pore,skin texture,jewelry,bracelet,offshoulder,see-through,big breasts\n\nmasterpiece, high resolution, best quality, 8k, 1girl, solo, messy hair, realistic, lips, parted lips, blink,sunrise, blurry background, clevage, moles on breasts, evil smile, wink, lingerie, bare back\n\nA cute girl chest c cup showing cleavage wearing blue and white suspenders, in the swimming pool, doing ashore action, big breasts, 1 girl, (Masterpiece), 8k\n\n\n bares shoulder,Glowing ambiance,enchanting radiance,luminous lighting,ethereal atmosphere,evocative hues,captivating coloration,dramatic lighting,enchanting aura,masterpiece,best quality,1girl,1 Chinese patterns in the middle of the girl's forehead,girl with a weak temperament,epic cinematic,soft nature lights,rim light,absurd,amazing,funny,itricate,hyper detailed,ultra realistic,soft,medium breasts, lying, cleavage,collarbone,bed sheet,Black stockings,bj_Devil_angel\n\n bares shoulder,Glowing ambiance,enchanting radiance,luminous lighting,ethereal atmosphere,evocative hues,captivating coloration,dramatic lighting,enchanting aura,masterpiece,best quality,1girl,1 Chinese patterns in the middle of the girl's forehead,girl with a weak temperament,epic cinematic,soft nature lights,rim light,absurd,amazing,funny,itricate,hyper detailed,ultra realistic,soft,medium breasts, lying, cleavage,collarbone,bed sheet,Black stockings,bj_Devil_angel\n\n\n((nsfw)), masterpiece, best quality, ultra detailed, detailed face, 1girl, solo, long hair, Jewelry necklace, earrings, jewelry, complex details,8K,(photorealistic:1.4),large breasts, pussy, expose the vagina, Spread one's legs, Hands behind your back \n\n((nsfw)), masterpiece, best quality, ultra detailed, detailed face, 1girl, solo, long hair, Jewelry necklace, earrings, jewelry, complex details,8K,(photorealistic:1.4),large breasts, pussy, expose the vagina, Spread one's legs \n\na girl, solo, white dress, sleeve, masterpiece, long hair, black hair, high quality, photorealistic, large breasts, Sexy lingerie,\n\nmasterpiece, best quality, 1girl ((snowy background)), black hair, floating hair, blush, looking at viewers, white glossy down jacket, happy, whole body, feeling snow, (studio light), soft light, dark style, night style, winter,(masterpiece:1,2), best quality, masterpiece, highres, original, extremely detailed wallpaper,,perfect lighting,(extremely detailed CG:1.2), drawing, paintbrush,outdoors,\n\nRAW photo, a close up portrait photo of 20 y.o girl in hollow out sexy lingerie, large breasts,long haircut, pale skin, slim body, background is city ruins, (high detailed skin:1.2), 8k uhd, dslr, soft lighting, high quality, film grain, Fujifilm XT3\n\n1girl, solo, long hair,twintails, looking at viewer, brown eyes,blonde hair, lips, realistic, full body,Standing,nose blush , light blush, collarbone, grey background,flesh tint Highleg Leotard,roushi,high heels,legs,<lora:roushi:0.8>, <lora:jyy:0.5>\n\nmasterpiece,zzxfuzhuang,best quality,(photorealistic:1.4),(xueshengzhuang:1.2),1girl,black hair,solo,full body,(pantyhose:1.3),(ultra detailed:1.3),(outdoors:1.4),(light rays:1.3),(street:1.3),cowboy_shot,(standing:1.2),unity 8k wallpaper,blunt bangs,solo,light smile,teeth,xueshengzhaung,1girl,solo,skirt,high heels,, ((large breasts:1.1)),nsfw,\n\nmasterpiece,best quality,absurdres,highres,4k,ray tracing,perfect face,perfect eyes,intricate details,highly detailed,arms behind back,1girl,necktie,pleated skirt,red skirt ,white shirt,thighhighs,white legwear,long sleeves,outdoors(large breasts:1.4), (nsfw:1.1), \n\n"
+      ],
+      "_widget_cache_map": {},
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -495.6066479121172,
+        188.87728703377323
+      ],
+      "size": {
+        "0": 410.6120910644531,
+        "1": 347.0876159667969
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 103,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            40,
+            96
+          ],
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "LLL，(nsfw),1girl,solo,black hair,realistic,lips,masterpiece,best quality,Solid background,Long hair,large breasts,  skin texture,(cowboy shot:0.5)"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 66,
+      "type": "EmptyLatentImage",
+      "pos": [
+        27,
+        203
+      ],
+      "size": {
+        "0": 413.45770263671875,
+        "1": 109.18730163574219
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            89
+          ],
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1504,
+        6
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 79,
+      "type": "Note",
+      "pos": [
+        60,
+        -385
+      ],
+      "size": [
+        287.0881889534369,
+        93.48418237287683
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "LORA模型触发词：LLL\n\n\n出图数量设为6张的时候 请勿离开生成界面否则会出图失败。"
+      ],
+      "_widget_cache_map": {},
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 78,
+      "type": "LoraLoader",
+      "pos": [
+        52,
+        -229
+      ],
+      "size": {
+        "0": 315,
+        "1": 126
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 101,
+          "label": "模型"
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 102,
+          "label": "CLIP",
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            104,
+            105,
+            106
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            103
+          ],
+          "shape": 3,
+          "label": "CLIP",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoader"
+      },
+      "widgets_values": [
+        "FLUX超真实人像_1.0",
+        1,
+        1
+      ],
+      "_widget_cache_map": {
+        "FLUX超真实人像_1.0": {
+          "name": "FLUX超真实人像_1.0",
+          "value": "8024cc6bad9a47cabbfe8216321aca99"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 65,
+      "type": "PreviewImage",
+      "pos": [
+        1479,
+        313
+      ],
+      "size": [
+        664.5277752111933,
+        811.4605698866327
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 87,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    }
+  ],
+  "links": [
+    [
+      19,
+      16,
+      0,
+      13,
+      2,
+      "SAMPLER"
+    ],
+    [
+      20,
+      17,
+      0,
+      13,
+      3,
+      "SIGMAS"
+    ],
+    [
+      30,
+      22,
+      0,
+      13,
+      1,
+      "GUIDER"
+    ],
+    [
+      37,
+      25,
+      0,
+      13,
+      0,
+      "NOISE"
+    ],
+    [
+      40,
+      6,
+      0,
+      22,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      85,
+      13,
+      0,
+      64,
+      0,
+      "LATENT"
+    ],
+    [
+      86,
+      10,
+      0,
+      64,
+      1,
+      "VAE"
+    ],
+    [
+      87,
+      64,
+      0,
+      65,
+      0,
+      "IMAGE"
+    ],
+    [
+      89,
+      66,
+      0,
+      13,
+      4,
+      "LATENT"
+    ],
+    [
+      90,
+      70,
+      0,
+      25,
+      0,
+      "INT"
+    ],
+    [
+      92,
+      74,
+      0,
+      73,
+      5,
+      "UPSCALE_MODEL"
+    ],
+    [
+      93,
+      73,
+      0,
+      75,
+      0,
+      "IMAGE"
+    ],
+    [
+      94,
+      64,
+      0,
+      73,
+      0,
+      "IMAGE"
+    ],
+    [
+      96,
+      6,
+      0,
+      73,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      98,
+      77,
+      0,
+      73,
+      3,
+      "CONDITIONING"
+    ],
+    [
+      99,
+      11,
+      0,
+      77,
+      0,
+      "CLIP"
+    ],
+    [
+      100,
+      10,
+      0,
+      73,
+      4,
+      "VAE"
+    ],
+    [
+      101,
+      12,
+      0,
+      78,
+      0,
+      "MODEL"
+    ],
+    [
+      102,
+      11,
+      0,
+      78,
+      1,
+      "CLIP"
+    ],
+    [
+      103,
+      78,
+      1,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      104,
+      78,
+      0,
+      17,
+      0,
+      "MODEL"
+    ],
+    [
+      105,
+      78,
+      0,
+      73,
+      1,
+      "MODEL"
+    ],
+    [
+      106,
+      78,
+      0,
+      22,
+      0,
+      "MODEL"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "提示词",
+      "bounding": [
+        -515,
+        13,
+        455,
+        548
+      ],
+      "color": "#3f789e",
+      "font_size": 100,
+      "locked": false
+    },
+    {
+      "title": "尺寸大小",
+      "bounding": [
+        -3,
+        21,
+        564,
+        381
+      ],
+      "color": "#3f789e",
+      "font_size": 100,
+      "locked": false
+    },
+    {
+      "title": "每组提示词随着尺寸大小的改变，出图结果也不同",
+      "bounding": [
+        2,
+        317,
+        547,
+        80
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "每次修改提示词请点击下面的骰子",
+      "bounding": [
+        -502,
+        587,
+        441,
+        240
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "如果是在线运行请把：(no panties),expose the vagina，这些提示词删了",
+      "bounding": [
+        -536,
+        -87,
+        1620,
+        80
+      ],
+      "color": "#3f789e",
+      "font_size": 50,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.5989500000000074,
+      "offset": [
+        3077.5577182585466,
+        1022.6236041073366
+      ]
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

@@ -1,0 +1,1157 @@
+{
+  "last_node_id": 196,
+  "last_link_id": 226,
+  "nodes": [
+    {
+      "id": 196,
+      "type": "Florence2ModelLoader",
+      "pos": {
+        "0": -1370,
+        "1": 140
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "lora",
+          "type": "PEFTLORA",
+          "link": null,
+          "label": "lora"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "florence2_model",
+          "type": "FL2MODEL",
+          "links": [
+            225
+          ],
+          "shape": 3,
+          "label": "florence2_model"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Florence2ModelLoader"
+      },
+      "widgets_values": [
+        "Florence-2-large",
+        "bf16",
+        "sdpa"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 59,
+      "type": "DualCLIPLoader",
+      "pos": {
+        "0": -950,
+        "1": -270
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            185
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp8_e4m3fn.safetensors",
+        "Flux\\clip_l.safetensors",
+        "flux"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 194,
+      "type": "ControlNetLoader",
+      "pos": {
+        "0": -640,
+        "1": -410
+      },
+      "size": {
+        "0": 410,
+        "1": 70
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "links": [
+            215
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "ControlNet"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetLoader"
+      },
+      "widgets_values": [
+        "flux\\FLUX.1-dev-ControlNet-Union-Pro.safetensors"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 190,
+      "type": "LoraLoaderModelOnly",
+      "pos": {
+        "0": -980,
+        "1": -430
+      },
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 210,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            211
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "AA-FLUX-lora\\Hyper加速-FLUX.1-dev_8steps.safetensors",
+        0.13
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 60,
+      "type": "UNETLoader",
+      "pos": {
+        "0": -1380,
+        "1": -430
+      },
+      "size": {
+        "0": 360,
+        "1": 82
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            210
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "Flux\\黑暗森林工作室-FLUX.1_FLUX.1-dev-fp8.safetensors",
+        "fp8_e4m3fn"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 176,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": -590,
+        "1": -270
+      },
+      "size": {
+        "0": 210,
+        "1": 60
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 185,
+          "label": "CLIP"
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 226,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            208,
+            218
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "A man wearing Hannya Mask,,designed by Classic Disney and (Artgerm:1.0) , landscape of a Peplum (Grassland:1.1) , desolate vegetation, Moon in the night, Regret, anaglyph filter",
+        true
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 189,
+      "type": "ConditioningZeroOut",
+      "pos": {
+        "0": -370,
+        "1": -260
+      },
+      "size": {
+        "0": 140,
+        "1": 30
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 208,
+          "label": "条件"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            219
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ConditioningZeroOut"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 193,
+      "type": "SetUnionControlNetType",
+      "pos": {
+        "0": -210,
+        "1": -410
+      },
+      "size": {
+        "0": 210,
+        "1": 60
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 215,
+          "label": "ControlNet"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "links": [
+            214
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "ControlNet"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SetUnionControlNetType"
+      },
+      "widgets_values": [
+        "tile"
+      ]
+    },
+    {
+      "id": 191,
+      "type": "Image Comparer (rgthree)",
+      "pos": {
+        "0": 750,
+        "1": 410
+      },
+      "size": {
+        "0": 910,
+        "1": 890
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_a",
+          "type": "IMAGE",
+          "link": 213,
+          "dir": 3,
+          "label": "图像_A"
+        },
+        {
+          "name": "image_b",
+          "type": "IMAGE",
+          "link": 212,
+          "dir": 3,
+          "label": "图像_B"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "comparer_mode": "Slide"
+      },
+      "widgets_values": [
+        [
+          {
+            "name": "A",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_zukqe_00001_.png&type=temp&subfolder=&rand=0.9267098657055366"
+          },
+          {
+            "name": "B",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_zukqe_00002_.png&type=temp&subfolder=&rand=0.13717510477951222"
+          }
+        ]
+      ]
+    },
+    {
+      "id": 58,
+      "type": "VAELoader",
+      "pos": {
+        "0": -290,
+        "1": 60
+      },
+      "size": {
+        "0": 210,
+        "1": 60
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            189,
+            217
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 175,
+      "type": "UltimateSDUpscale",
+      "pos": {
+        "0": 50,
+        "1": -420
+      },
+      "size": {
+        "0": 630,
+        "1": 1700
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 202,
+          "label": "图像"
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 211,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 223,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 221,
+          "label": "负面条件"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 189,
+          "label": "VAE"
+        },
+        {
+          "name": "upscale_model",
+          "type": "UPSCALE_MODEL",
+          "link": 190,
+          "slot_index": 5,
+          "label": "放大模型"
+        },
+        {
+          "name": "tile_width",
+          "type": "INT",
+          "link": 203,
+          "widget": {
+            "name": "tile_width"
+          },
+          "label": "分块宽度"
+        },
+        {
+          "name": "tile_height",
+          "type": "INT",
+          "link": 204,
+          "widget": {
+            "name": "tile_height"
+          },
+          "label": "分块高度"
+        },
+        {
+          "name": "upscale_by",
+          "type": "FLOAT",
+          "link": 205,
+          "widget": {
+            "name": "upscale_by"
+          },
+          "label": "放大系数"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            191,
+            212
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UltimateSDUpscale"
+      },
+      "widgets_values": [
+        4,
+        1052666721168627,
+        "randomize",
+        8,
+        1,
+        "euler",
+        "beta",
+        0.5,
+        "Linear",
+        1024,
+        1024,
+        8,
+        32,
+        "None",
+        1,
+        64,
+        8,
+        16,
+        true,
+        false
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 69,
+      "type": "SaveImage",
+      "pos": {
+        "0": 750,
+        "1": -420
+      },
+      "size": {
+        "0": 900,
+        "1": 770
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 191,
+          "label": "图像"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 192,
+      "type": "ControlNetApplySD3",
+      "pos": {
+        "0": -610,
+        "1": 30
+      },
+      "size": {
+        "0": 210,
+        "1": 190
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 218,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 219,
+          "label": "负面条件"
+        },
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 214,
+          "label": "ControlNet"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 217,
+          "label": "VAE"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 216,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            222
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            221
+          ],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "负面条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetApplySD3"
+      },
+      "widgets_values": [
+        0.4,
+        0,
+        0.4
+      ]
+    },
+    {
+      "id": 178,
+      "type": "UpscaleModelLoader",
+      "pos": {
+        "0": -290,
+        "1": -50
+      },
+      "size": {
+        "0": 220,
+        "1": 60
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "UPSCALE_MODEL",
+          "type": "UPSCALE_MODEL",
+          "links": [
+            190
+          ],
+          "shape": 3,
+          "label": "放大模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UpscaleModelLoader"
+      },
+      "widgets_values": [
+        "ESRGAN_4x.pth"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 188,
+      "type": "FluxGuidance",
+      "pos": {
+        "0": -300,
+        "1": -170
+      },
+      "size": {
+        "0": 211.60000610351562,
+        "1": 58
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 222,
+          "label": "条件"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            223
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FluxGuidance"
+      },
+      "widgets_values": [
+        3.5
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 71,
+      "type": "LoadImage",
+      "pos": {
+        "0": -1370,
+        "1": 300
+      },
+      "size": {
+        "0": 1340,
+        "1": 980
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            201,
+            216,
+            224
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "ComfyUI_05591_.png",
+        "image"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 187,
+      "type": "FL_SDUltimate_Slices",
+      "pos": {
+        "0": -970,
+        "1": -110
+      },
+      "size": {
+        "0": 315,
+        "1": 142
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 201,
+          "label": "image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            202,
+            213
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "image"
+        },
+        {
+          "name": "slice_width",
+          "type": "INT",
+          "links": [
+            203
+          ],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "slice_width"
+        },
+        {
+          "name": "slice_height",
+          "type": "INT",
+          "links": [
+            204
+          ],
+          "slot_index": 2,
+          "shape": 3,
+          "label": "slice_height"
+        },
+        {
+          "name": "multiplier",
+          "type": "FLOAT",
+          "links": [
+            205
+          ],
+          "slot_index": 3,
+          "shape": 3,
+          "label": "multiplier"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FL_SDUltimate_Slices"
+      },
+      "widgets_values": [
+        "2x2",
+        2
+      ],
+      "color": "#16727c",
+      "bgcolor": "#4F0074"
+    },
+    {
+      "id": 195,
+      "type": "Florence2Run",
+      "pos": {
+        "0": -1370,
+        "1": -280
+      },
+      "size": [
+        330,
+        357
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 224,
+          "label": "image"
+        },
+        {
+          "name": "florence2_model",
+          "type": "FL2MODEL",
+          "link": 225,
+          "label": "florence2_model"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "image"
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "mask"
+        },
+        {
+          "name": "caption",
+          "type": "STRING",
+          "links": [
+            226
+          ],
+          "slot_index": 2,
+          "shape": 3,
+          "label": "caption"
+        },
+        {
+          "name": "data",
+          "type": "JSON",
+          "links": null,
+          "shape": 3,
+          "label": "data"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Florence2Run"
+      },
+      "widgets_values": [
+        "",
+        "more_detailed_caption",
+        true,
+        false,
+        1024,
+        3,
+        true,
+        "",
+        922407148607948,
+        "randomize",
+        true
+      ],
+      "category": "Custom Nodes"
+    }
+  ],
+  "links": [
+    [
+      185,
+      59,
+      0,
+      176,
+      0,
+      "CLIP"
+    ],
+    [
+      189,
+      58,
+      0,
+      175,
+      4,
+      "VAE"
+    ],
+    [
+      190,
+      178,
+      0,
+      175,
+      5,
+      "UPSCALE_MODEL"
+    ],
+    [
+      191,
+      175,
+      0,
+      69,
+      0,
+      "IMAGE"
+    ],
+    [
+      201,
+      71,
+      0,
+      187,
+      0,
+      "IMAGE"
+    ],
+    [
+      202,
+      187,
+      0,
+      175,
+      0,
+      "IMAGE"
+    ],
+    [
+      203,
+      187,
+      1,
+      175,
+      6,
+      "INT"
+    ],
+    [
+      204,
+      187,
+      2,
+      175,
+      7,
+      "INT"
+    ],
+    [
+      205,
+      187,
+      3,
+      175,
+      8,
+      "FLOAT"
+    ],
+    [
+      208,
+      176,
+      0,
+      189,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      210,
+      60,
+      0,
+      190,
+      0,
+      "MODEL"
+    ],
+    [
+      211,
+      190,
+      0,
+      175,
+      1,
+      "MODEL"
+    ],
+    [
+      212,
+      175,
+      0,
+      191,
+      1,
+      "IMAGE"
+    ],
+    [
+      213,
+      187,
+      0,
+      191,
+      0,
+      "IMAGE"
+    ],
+    [
+      214,
+      193,
+      0,
+      192,
+      2,
+      "CONTROL_NET"
+    ],
+    [
+      215,
+      194,
+      0,
+      193,
+      0,
+      "CONTROL_NET"
+    ],
+    [
+      216,
+      71,
+      0,
+      192,
+      4,
+      "IMAGE"
+    ],
+    [
+      217,
+      58,
+      0,
+      192,
+      3,
+      "VAE"
+    ],
+    [
+      218,
+      176,
+      0,
+      192,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      219,
+      189,
+      0,
+      192,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      221,
+      192,
+      1,
+      175,
+      3,
+      "CONDITIONING"
+    ],
+    [
+      222,
+      192,
+      0,
+      188,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      223,
+      188,
+      0,
+      175,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      224,
+      71,
+      0,
+      195,
+      0,
+      "IMAGE"
+    ],
+    [
+      225,
+      196,
+      0,
+      195,
+      1,
+      "FL2MODEL"
+    ],
+    [
+      226,
+      195,
+      2,
+      176,
+      1,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "FLUX-Hyper加速+Tile细节+SD放大",
+      "bounding": [
+        -1480,
+        -780,
+        3230,
+        2200
+      ],
+      "color": "#3f789e",
+      "font_size": 100,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.495000000000003,
+      "offset": [
+        1872.9235859257824,
+        1375.1751954138922
+      ]
+    }
+  },
+  "version": 0.4
+}

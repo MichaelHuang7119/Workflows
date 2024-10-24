@@ -1,0 +1,1193 @@
+{
+  "last_link_id": 177,
+  "nodes": [
+    {
+      "mode": 0,
+      "outputs": [
+        {
+          "shape": 3,
+          "name": "WIDTH",
+          "slot_index": 0,
+          "links": [
+            168,
+            174
+          ],
+          "label": "WIDTH",
+          "type": "INT"
+        },
+        {
+          "shape": 3,
+          "name": "HEIGHT",
+          "slot_index": 1,
+          "links": [
+            169,
+            175
+          ],
+          "label": "HEIGHT",
+          "type": "INT"
+        }
+      ],
+      "size": {
+        "0": 381.00030517578125,
+        "1": 46
+      },
+      "pos": [
+        3150,
+        -1090
+      ],
+      "inputs": [
+        {
+          "name": "image",
+          "link": 167,
+          "label": "image",
+          "type": "IMAGE"
+        }
+      ],
+      "flags": {},
+      "id": 96,
+      "type": "DF_Get_image_size",
+      "properties": {
+        "Node name for S&R": "DF_Get_image_size"
+      },
+      "order": 11,
+      "category": "Custom Nodes"
+    },
+    {
+      "mode": 0,
+      "outputs": [
+        {
+          "shape": 3,
+          "name": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            152,
+            154
+          ],
+          "label": "IMAGE",
+          "type": "IMAGE"
+        }
+      ],
+      "size": {
+        "0": 391.0529479980469,
+        "1": 83.07364654541016
+      },
+      "pos": [
+        3580.536689031807,
+        -1375.831743456072
+      ],
+      "widgets_values": [
+        "AnyLineArtPreprocessor_aux",
+        1024
+      ],
+      "inputs": [
+        {
+          "name": "image",
+          "link": 170,
+          "label": "image",
+          "type": "IMAGE"
+        }
+      ],
+      "flags": {},
+      "id": 88,
+      "type": "AIO_Preprocessor",
+      "properties": {
+        "Node name for S&R": "AIO_Preprocessor"
+      },
+      "order": 12,
+      "category": "Custom Nodes"
+    },
+    {
+      "mode": 0,
+      "outputs": [
+        {
+          "shape": 3,
+          "name": "ControlNet",
+          "slot_index": 0,
+          "links": [
+            151
+          ],
+          "label": "ControlNet",
+          "type": "FluxControlNet"
+        }
+      ],
+      "size": {
+        "0": 400.3248596191406,
+        "1": 82
+      },
+      "pos": [
+        3580.536689031807,
+        -1245.831743456072
+      ],
+      "widgets_values": [
+        "flux-dev-fp8",
+        "flux-canny-controlnet-v3-xlabs-dev.safetensors"
+      ],
+      "flags": {},
+      "id": 82,
+      "type": "LoadFluxControlNet",
+      "properties": {
+        "Node name for S&R": "LoadFluxControlNet"
+      },
+      "order": 0,
+      "category": "Custom Nodes"
+    },
+    {
+      "mode": 0,
+      "outputs": [
+        {
+          "shape": 3,
+          "name": "VAE",
+          "slot_index": 0,
+          "links": [
+            150
+          ],
+          "label": "VAE",
+          "type": "VAE"
+        }
+      ],
+      "size": {
+        "0": 304.7322998046875,
+        "1": 58
+      },
+      "pos": [
+        4815.577327966918,
+        -1079.2369514136171
+      ],
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "flags": {},
+      "id": 81,
+      "type": "VAELoader",
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "order": 1,
+      "category": "Primitive Nodes"
+    },
+    {
+      "mode": 0,
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "pos": [
+        4965.577327966918,
+        -969.2369514136179
+      ],
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "inputs": [
+        {
+          "name": "images",
+          "link": 158,
+          "label": "images",
+          "type": "IMAGE"
+        }
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "id": 91,
+      "type": "SaveImage",
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "order": 20,
+      "category": "Primitive Nodes"
+    },
+    {
+      "mode": 0,
+      "outputs": [
+        {
+          "shape": 3,
+          "name": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            157,
+            158,
+            177
+          ],
+          "label": "IMAGE",
+          "type": "IMAGE"
+        }
+      ],
+      "size": {
+        "0": 206.76022338867188,
+        "1": 46
+      },
+      "pos": [
+        4815.577327966918,
+        -969.2369514136179
+      ],
+      "inputs": [
+        {
+          "name": "samples",
+          "link": 149,
+          "slot_index": 0,
+          "label": "samples",
+          "type": "LATENT"
+        },
+        {
+          "name": "vae",
+          "link": 150,
+          "label": "vae",
+          "type": "VAE"
+        }
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "id": 80,
+      "type": "VAEDecode",
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "order": 18,
+      "category": "Primitive Nodes"
+    },
+    {
+      "mode": 0,
+      "outputs": [
+        {
+          "shape": 3,
+          "name": "latent",
+          "links": [
+            149
+          ],
+          "label": "latent",
+          "type": "LATENT"
+        }
+      ],
+      "size": {
+        "0": 313.6778869628906,
+        "1": 282
+      },
+      "pos": [
+        4813.577327966918,
+        -916.2369514136179
+      ],
+      "widgets_values": [
+        291266262746832,
+        "randomize",
+        20,
+        1,
+        3.5,
+        0,
+        1
+      ],
+      "inputs": [
+        {
+          "name": "model",
+          "link": 173,
+          "slot_index": 0,
+          "label": "model",
+          "type": "MODEL"
+        },
+        {
+          "name": "conditioning",
+          "link": 144,
+          "label": "conditioning",
+          "type": "CONDITIONING"
+        },
+        {
+          "name": "neg_conditioning",
+          "link": 145,
+          "label": "neg_conditioning",
+          "type": "CONDITIONING"
+        },
+        {
+          "name": "latent_image",
+          "link": 146,
+          "label": "latent_image",
+          "type": "LATENT"
+        },
+        {
+          "name": "controlnet_condition",
+          "link": 147,
+          "label": "controlnet_condition",
+          "type": "ControlNetCondition"
+        }
+      ],
+      "flags": {},
+      "id": 77,
+      "type": "XlabsSampler",
+      "properties": {
+        "Node name for S&R": "XlabsSampler"
+      },
+      "order": 17,
+      "category": "Custom Nodes"
+    },
+    {
+      "mode": 0,
+      "outputs": [
+        {
+          "shape": 3,
+          "name": "MODEL",
+          "slot_index": 0,
+          "links": [
+            172
+          ],
+          "label": "MODEL",
+          "type": "MODEL"
+        }
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "pos": [
+        4808.577327966918,
+        -1384.2369514136171
+      ],
+      "widgets_values": [
+        "flux1-dev-fp8-Kijai.safetensors",
+        "fp8_e4m3fn"
+      ],
+      "flags": {},
+      "id": 86,
+      "type": "UNETLoader",
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "order": 2,
+      "category": "Primitive Nodes"
+    },
+    {
+      "mode": 0,
+      "outputs": [
+        {
+          "shape": 3,
+          "name": "LATENT",
+          "slot_index": 0,
+          "links": [
+            146
+          ],
+          "label": "LATENT",
+          "type": "LATENT"
+        }
+      ],
+      "size": {
+        "0": 400.9596252441406,
+        "1": 85.02118682861328
+      },
+      "pos": [
+        4385.577327966918,
+        -1219.2369514136171
+      ],
+      "widgets_values": [
+        512,
+        512,
+        1
+      ],
+      "inputs": [
+        {
+          "widget": {
+            "name": "width"
+          },
+          "name": "width",
+          "link": 168,
+          "label": "width",
+          "type": "INT"
+        },
+        {
+          "widget": {
+            "name": "height"
+          },
+          "name": "height",
+          "link": 169,
+          "label": "height",
+          "type": "INT"
+        }
+      ],
+      "flags": {},
+      "id": 93,
+      "type": "EmptyLatentImage",
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "order": 13,
+      "category": "Primitive Nodes"
+    },
+    {
+      "mode": 0,
+      "outputs": [
+        {
+          "shape": 3,
+          "name": "MODEL",
+          "slot_index": 0,
+          "links": [
+            173
+          ],
+          "label": "MODEL",
+          "type": "MODEL"
+        }
+      ],
+      "size": {
+        "0": 315.00421142578125,
+        "1": 122
+      },
+      "pos": [
+        4811.577327966918,
+        -1250.2369514136171
+      ],
+      "widgets_values": [
+        1.15,
+        0.5,
+        1024,
+        1024
+      ],
+      "inputs": [
+        {
+          "name": "model",
+          "link": 172,
+          "label": "model",
+          "type": "MODEL"
+        },
+        {
+          "widget": {
+            "name": "width"
+          },
+          "name": "width",
+          "link": 174,
+          "label": "width",
+          "type": "INT"
+        },
+        {
+          "widget": {
+            "name": "height"
+          },
+          "name": "height",
+          "link": 175,
+          "label": "height",
+          "type": "INT"
+        }
+      ],
+      "flags": {},
+      "id": 113,
+      "type": "ModelSamplingFlux",
+      "properties": {
+        "Node name for S&R": "ModelSamplingFlux"
+      },
+      "order": 14,
+      "category": "Custom Nodes"
+    },
+    {
+      "mode": 0,
+      "outputs": [
+        {
+          "shape": 3,
+          "name": "CLIP",
+          "slot_index": 0,
+          "links": [
+            148,
+            153
+          ],
+          "label": "CLIP",
+          "type": "CLIP"
+        }
+      ],
+      "size": {
+        "0": 396.3948974609375,
+        "1": 106.50865173339844
+      },
+      "pos": [
+        4387.577327966918,
+        -1382.2369514136171
+      ],
+      "widgets_values": [
+        "sd3/clip_l.safetensors",
+        "sd3/t5xxl_fp8_e4m3fn.safetensors",
+        "flux"
+      ],
+      "flags": {},
+      "id": 78,
+      "type": "DualCLIPLoader",
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "order": 3,
+      "category": "Primitive Nodes"
+    },
+    {
+      "mode": 0,
+      "bgcolor": "#653",
+      "size": {
+        "0": 730.31884765625,
+        "1": 58
+      },
+      "color": "#432",
+      "pos": [
+        2805,
+        -1533
+      ],
+      "widgets_values": [
+        "原始图片太大的画可以改scale_factor,是按比例放图片.大家记得关注柒安工作室哦~"
+      ],
+      "flags": {},
+      "id": 118,
+      "type": "Note",
+      "properties": {
+        "text": ""
+      },
+      "order": 4,
+      "category": "Official"
+    },
+    {
+      "mode": 0,
+      "bgcolor": "#653",
+      "size": {
+        "0": 1900.9063720703125,
+        "1": 69.11677551269531
+      },
+      "color": "#432",
+      "pos": [
+        4372,
+        -1545
+      ],
+      "widgets_values": [
+        "Flux参数按自己需求去调整，正向题词两个框都填一样的，你们也可以自己玩玩其他的。大家记得关注柒安工作室哦~"
+      ],
+      "flags": {},
+      "id": 120,
+      "type": "Note",
+      "properties": {
+        "text": ""
+      },
+      "order": 5,
+      "category": "Official"
+    },
+    {
+      "mode": 0,
+      "outputs": [],
+      "size": {
+        "0": 545.6248168945312,
+        "1": 724.8103637695312
+      },
+      "pos": {
+        "0": 5717,
+        "1": -1364,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "widgets_values": [
+        [
+          {
+            "name": "A",
+            "selected": true,
+            "url": "/view?filename=rgthree.compare._temp_dfngq_00001_.png&type=temp&subfolder=&rand=0.2391686854843329&Rh-Comfy-Auth=eyJ1c2VySWQiOiJjNGUxNDI4MWMzMWZlM2UwMThjMWJkNWEzY2E0NzhhNyIsInNpZ25FeHBpcmUiOjE3MjY2MjgzMTI5NzMsInRzIjoxNzI2MDIzNTEyOTczLCJzaWduIjoiZGM4OWVkMWQ5OWNkMGQxMDhkZWNiN2NkMTEwOTA5ZTMifQ==&Rh-Identify=c4e14281c31fe3e018c1bd5a3ca478a7"
+          },
+          {
+            "name": "B",
+            "selected": true,
+            "url": "/view?filename=rgthree.compare._temp_dfngq_00002_.png&type=temp&subfolder=&rand=0.06873250499723182&Rh-Comfy-Auth=eyJ1c2VySWQiOiJjNGUxNDI4MWMzMWZlM2UwMThjMWJkNWEzY2E0NzhhNyIsInNpZ25FeHBpcmUiOjE3MjY2MjgzMTI5NzMsInRzIjoxNzI2MDIzNTEyOTczLCJzaWduIjoiZGM4OWVkMWQ5OWNkMGQxMDhkZWNiN2NkMTEwOTA5ZTMifQ==&Rh-Identify=c4e14281c31fe3e018c1bd5a3ca478a7"
+          }
+        ]
+      ],
+      "inputs": [
+        {
+          "name": "image_a",
+          "link": 177,
+          "label": "image_a",
+          "type": "IMAGE",
+          "dir": 3
+        },
+        {
+          "name": "image_b",
+          "link": 176,
+          "label": "image_b",
+          "type": "IMAGE",
+          "dir": 3
+        }
+      ],
+      "flags": {},
+      "id": 116,
+      "type": "Image Comparer (rgthree)",
+      "properties": {
+        "comparer_mode": "Slide"
+      },
+      "order": 21
+    },
+    {
+      "mode": 0,
+      "bgcolor": "#653",
+      "size": {
+        "0": 760.9065551757812,
+        "1": 58.50618362426758
+      },
+      "color": "#432",
+      "pos": [
+        3576,
+        -1541
+      ],
+      "widgets_values": [
+        "strength可以根据自己需要调整，建议不要开太大，不然一跑一个不吱声。大家记得关注柒安工作室哦~"
+      ],
+      "flags": {},
+      "id": 119,
+      "type": "Note",
+      "properties": {
+        "text": ""
+      },
+      "order": 6,
+      "category": "Official"
+    },
+    {
+      "mode": 0,
+      "outputs": [
+        {
+          "shape": 3,
+          "name": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            145
+          ],
+          "label": "CONDITIONING",
+          "type": "CONDITIONING"
+        }
+      ],
+      "size": {
+        "0": 406.28765869140625,
+        "1": 171.0375518798828
+      },
+      "pos": [
+        4396,
+        -809
+      ],
+      "widgets_values": [
+        "",
+        "bad photo",
+        2.5
+      ],
+      "inputs": [
+        {
+          "name": "clip",
+          "link": 153,
+          "slot_index": 0,
+          "label": "clip",
+          "type": "CLIP"
+        }
+      ],
+      "flags": {},
+      "id": 85,
+      "type": "CLIPTextEncodeFlux",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeFlux"
+      },
+      "order": 9,
+      "category": "Custom Nodes"
+    },
+    {
+      "mode": 0,
+      "outputs": [
+        {
+          "shape": 3,
+          "name": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            167,
+            170
+          ],
+          "label": "IMAGE",
+          "type": "IMAGE"
+        },
+        {
+          "shape": 3,
+          "name": "MASK",
+          "label": "MASK",
+          "type": "MASK"
+        }
+      ],
+      "size": {
+        "0": 392.5090637207031,
+        "1": 246
+      },
+      "pos": [
+        3140,
+        -1380
+      ],
+      "widgets_values": [
+        "resize only",
+        0,
+        0,
+        2,
+        "any",
+        "4:3",
+        0.5,
+        20
+      ],
+      "inputs": [
+        {
+          "name": "pixels",
+          "link": 166,
+          "label": "pixels",
+          "type": "IMAGE"
+        },
+        {
+          "name": "mask_optional",
+          "label": "mask_optional",
+          "type": "MASK"
+        }
+      ],
+      "flags": {},
+      "id": 95,
+      "type": "ImageResize",
+      "properties": {
+        "Node name for S&R": "ImageResize"
+      },
+      "order": 10,
+      "category": "Custom Nodes"
+    },
+    {
+      "mode": 0,
+      "outputs": [
+        {
+          "shape": 3,
+          "name": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            144
+          ],
+          "label": "CONDITIONING",
+          "type": "CONDITIONING"
+        }
+      ],
+      "size": {
+        "0": 409.4102478027344,
+        "1": 223.8092041015625
+      },
+      "pos": [
+        4386,
+        -1089
+      ],
+      "widgets_values": [
+        "Neon-lit streets, holographic advertisements, augmented reality overlays, virtual interfaces, glowing cybernetic enhancements, urban grunge, leather jackets with circuit patterns, neon hair colors, VR goggles, holographic tattoos, LED-lit accessories, chrome and metal body modifications, data streams scrolling across the visor, dystopian cityscape in the background, hackers in dimly lit cybercafes, neon signs reflecting off rain-slicked streets, and a general atmosphere of high-tech meets low life",
+        "Neon-lit streets, holographic advertisements, augmented reality overlays, virtual interfaces, glowing cybernetic enhancements, urban grunge, leather jackets with circuit patterns, neon hair colors, VR goggles, holographic tattoos, LED-lit accessories, chrome and metal body modifications, data streams scrolling across the visor, dystopian cityscape in the background, hackers in dimly lit cybercafes, neon signs reflecting off rain-slicked streets, and a general atmosphere of high-tech meets low life",
+        2.5
+      ],
+      "inputs": [
+        {
+          "name": "clip",
+          "link": 148,
+          "slot_index": 0,
+          "label": "clip",
+          "type": "CLIP"
+        }
+      ],
+      "flags": {},
+      "id": 79,
+      "type": "CLIPTextEncodeFlux",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeFlux"
+      },
+      "order": 8,
+      "category": "Custom Nodes"
+    },
+    {
+      "mode": 0,
+      "outputs": [
+        {
+          "shape": 3,
+          "name": "controlnet_condition",
+          "slot_index": 0,
+          "links": [
+            147
+          ],
+          "label": "controlnet_condition",
+          "type": "ControlNetCondition"
+        }
+      ],
+      "size": {
+        "0": 390.369140625,
+        "1": 81.30809020996094
+      },
+      "pos": [
+        3589,
+        -1118
+      ],
+      "widgets_values": [
+        0.7000000000000001
+      ],
+      "inputs": [
+        {
+          "name": "controlnet",
+          "link": 151,
+          "label": "controlnet",
+          "type": "FluxControlNet"
+        },
+        {
+          "name": "image",
+          "link": 152,
+          "slot_index": 1,
+          "label": "image",
+          "type": "IMAGE"
+        }
+      ],
+      "flags": {},
+      "id": 83,
+      "type": "ApplyFluxControlNet",
+      "properties": {
+        "Node name for S&R": "ApplyFluxControlNet"
+      },
+      "order": 15,
+      "category": "Custom Nodes"
+    },
+    {
+      "mode": 0,
+      "size": [
+        542.8497593819939,
+        707.817217043681
+      ],
+      "pos": [
+        5155,
+        -1360
+      ],
+      "inputs": [
+        {
+          "name": "images",
+          "link": 157,
+          "label": "images",
+          "type": "IMAGE"
+        }
+      ],
+      "flags": {},
+      "id": 90,
+      "type": "PreviewImage",
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "order": 19,
+      "category": "Primitive Nodes"
+    },
+    {
+      "mode": 0,
+      "outputs": [
+        {
+          "shape": 3,
+          "name": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            166,
+            176
+          ],
+          "label": "IMAGE",
+          "type": "IMAGE"
+        },
+        {
+          "shape": 3,
+          "name": "MASK",
+          "label": "MASK",
+          "type": "MASK"
+        }
+      ],
+      "size": [
+        297.95573710726967,
+        320.9328014840585
+      ],
+      "pos": [
+        2820,
+        -1373
+      ],
+      "widgets_values": [
+        "b6bb64483450025b0d03a88798fb96bbcf835158163cf-FCrPcC_fw658webp.webp",
+        "image"
+      ],
+      "flags": {},
+      "id": 84,
+      "type": "LoadImage",
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "order": 7,
+      "category": "Primitive Nodes"
+    },
+    {
+      "mode": 0,
+      "size": [
+        310.7242396044767,
+        336.7132039520427
+      ],
+      "pos": [
+        3994,
+        -1383
+      ],
+      "inputs": [
+        {
+          "name": "images",
+          "link": 154,
+          "label": "images",
+          "type": "IMAGE"
+        }
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "id": 87,
+      "type": "PreviewImage",
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "order": 16,
+      "category": "Primitive Nodes"
+    }
+  ],
+  "extra": {
+    "workspace_info": {
+      "id": "9435d74c-34f8-4f45-8215-5c7cae0adff8"
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ],
+    "ds": {
+      "offset": {
+        "0": -2580.0511294622283,
+        "1": 1926.4894022890753
+      },
+      "scale": 0.4090909090909171
+    }
+  },
+  "groups": [
+    {
+      "color": "#3f789e",
+      "font_size": 24,
+      "title": "Image Resize",
+      "locked": false,
+      "bounding": [
+        2804,
+        -1454,
+        739,
+        423
+      ]
+    },
+    {
+      "color": "#3f789e",
+      "font_size": 24,
+      "title": "CN",
+      "locked": false,
+      "bounding": [
+        3571,
+        -1460,
+        766,
+        435
+      ]
+    },
+    {
+      "color": "#3f789e",
+      "font_size": 24,
+      "title": "Flux",
+      "locked": false,
+      "bounding": [
+        4376,
+        -1458,
+        1897,
+        834
+      ]
+    }
+  ],
+  "links": [
+    [
+      144,
+      79,
+      0,
+      77,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      145,
+      85,
+      0,
+      77,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      146,
+      93,
+      0,
+      77,
+      3,
+      "LATENT"
+    ],
+    [
+      147,
+      83,
+      0,
+      77,
+      4,
+      "ControlNetCondition"
+    ],
+    [
+      148,
+      78,
+      0,
+      79,
+      0,
+      "CLIP"
+    ],
+    [
+      149,
+      77,
+      0,
+      80,
+      0,
+      "LATENT"
+    ],
+    [
+      150,
+      81,
+      0,
+      80,
+      1,
+      "VAE"
+    ],
+    [
+      151,
+      82,
+      0,
+      83,
+      0,
+      "FluxControlNet"
+    ],
+    [
+      152,
+      88,
+      0,
+      83,
+      1,
+      "IMAGE"
+    ],
+    [
+      153,
+      78,
+      0,
+      85,
+      0,
+      "CLIP"
+    ],
+    [
+      154,
+      88,
+      0,
+      87,
+      0,
+      "IMAGE"
+    ],
+    [
+      157,
+      80,
+      0,
+      90,
+      0,
+      "IMAGE"
+    ],
+    [
+      158,
+      80,
+      0,
+      91,
+      0,
+      "IMAGE"
+    ],
+    [
+      166,
+      84,
+      0,
+      95,
+      0,
+      "IMAGE"
+    ],
+    [
+      167,
+      95,
+      0,
+      96,
+      0,
+      "IMAGE"
+    ],
+    [
+      168,
+      96,
+      0,
+      93,
+      0,
+      "INT"
+    ],
+    [
+      169,
+      96,
+      1,
+      93,
+      1,
+      "INT"
+    ],
+    [
+      170,
+      95,
+      0,
+      88,
+      0,
+      "IMAGE"
+    ],
+    [
+      172,
+      86,
+      0,
+      113,
+      0,
+      "MODEL"
+    ],
+    [
+      173,
+      113,
+      0,
+      77,
+      0,
+      "MODEL"
+    ],
+    [
+      174,
+      96,
+      0,
+      113,
+      1,
+      "INT"
+    ],
+    [
+      175,
+      96,
+      1,
+      113,
+      2,
+      "INT"
+    ],
+    [
+      176,
+      84,
+      0,
+      116,
+      1,
+      "IMAGE"
+    ],
+    [
+      177,
+      80,
+      0,
+      116,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "config": {},
+  "version": 0.4,
+  "last_node_id": 122
+}

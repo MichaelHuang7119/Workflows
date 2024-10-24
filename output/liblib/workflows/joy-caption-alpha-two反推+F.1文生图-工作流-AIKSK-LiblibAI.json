@@ -1,0 +1,1093 @@
+{
+  "last_node_id": 50,
+  "last_link_id": 65,
+  "nodes": [
+    {
+      "id": 36,
+      "type": "VAEDecode",
+      "pos": {
+        "0": 2560,
+        "1": 1110
+      },
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 47,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 48,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            49
+          ],
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 38,
+      "type": "BasicScheduler",
+      "pos": {
+        "0": 2180,
+        "1": 1320
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 50,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            59
+          ],
+          "shape": 3,
+          "label": "Sigmas"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicScheduler"
+      },
+      "widgets_values": [
+        "sgm_uniform",
+        60,
+        1
+      ],
+      "shape": 1,
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 39,
+      "type": "VAELoader",
+      "pos": {
+        "0": 910,
+        "1": 1350
+      },
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            48
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 40,
+      "type": "UNETLoader",
+      "pos": {
+        "0": 900,
+        "1": 1020
+      },
+      "size": {
+        "0": 432.9945983886719,
+        "1": 103.98894500732422
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            62
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "consolidated_s6700.safetensors",
+        "fp8_e4m3fn"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 41,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": 1730,
+        "1": 1020
+      },
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 51,
+          "label": "CLIP"
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 65,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            54
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "The image presents a dynamic and contrasting portrait of a woman with a distinctive and edgy appearance. Her skin is fair and unblemished, and she is adorned with intricate tattoos that cover her arms. One of the tattoos stands out prominently — an emo design. Her facial features are well-defined, with large eyes that are accentuated by stylish glasses. Her hair is long and jet-black, cascading freely. She wears a sleek black tank top with the word «OGINCG» written in bold, cursive white letters. A black choker with metal studs cinches her neck. The background is a sleek sports car, creating a striking contrast with her dark attire and flowing hair. ",
+        true
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 42,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": 1740,
+        "1": 1280
+      },
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 52,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            55
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "",
+        true
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 45,
+      "type": "RandomNoise",
+      "pos": {
+        "0": 2170,
+        "1": 1480
+      },
+      "size": {
+        "0": 337.2749938964844,
+        "1": 88.93125915527344
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            56
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "噪波生成"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        48749730385134,
+        "randomize"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 46,
+      "type": "SDXLEmptyLatentSizePicker+",
+      "pos": {
+        "0": 910,
+        "1": 1470
+      },
+      "size": {
+        "0": 268.79998779296875,
+        "1": 170
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            60
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "Latent"
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            63
+          ],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "宽度"
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            64
+          ],
+          "slot_index": 2,
+          "shape": 3,
+          "label": "高度"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SDXLEmptyLatentSizePicker+"
+      },
+      "widgets_values": [
+        "1280x768 (1.67)",
+        1,
+        0,
+        0
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 47,
+      "type": "SamplerCustomAdvanced",
+      "pos": {
+        "0": 2570,
+        "1": 940
+      },
+      "size": {
+        "0": 355.20001220703125,
+        "1": 106
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 56,
+          "label": "噪波生成"
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 57,
+          "label": "引导"
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 58,
+          "label": "采样器"
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 59,
+          "label": "Sigmas"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 60,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            47
+          ],
+          "label": "输出"
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": null,
+          "label": "降噪输出"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 48,
+      "type": "CLIPAttentionMultiply",
+      "pos": {
+        "0": 1390,
+        "1": 1190
+      },
+      "size": {
+        "0": 320,
+        "1": 130
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 61,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            51,
+            52
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPAttentionMultiply"
+      },
+      "widgets_values": [
+        1.2,
+        1.1,
+        0.8,
+        1.25
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 49,
+      "type": "ModelSamplingFlux",
+      "pos": {
+        "0": 1400,
+        "1": 1030
+      },
+      "size": {
+        "0": 291.6429443359375,
+        "1": 122
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 62,
+          "label": "模型"
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "link": 63,
+          "widget": {
+            "name": "width"
+          },
+          "label": "宽度"
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "link": 64,
+          "widget": {
+            "name": "height"
+          },
+          "label": "高度"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            50,
+            53
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ModelSamplingFlux"
+      },
+      "widgets_values": [
+        1.1500000000000001,
+        0.5,
+        1024,
+        1024
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 50,
+      "type": "KSamplerSelect",
+      "pos": {
+        "0": 2170,
+        "1": 1200
+      },
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            58
+          ],
+          "label": "采样器"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "dpm_adaptive"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 44,
+      "type": "DualCLIPLoader",
+      "pos": {
+        "0": 890,
+        "1": 1190
+      },
+      "size": {
+        "0": 451.8716125488281,
+        "1": 112.89736938476562
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            61
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp16.safetensors",
+        "ViT-L-14-TEXT-detail-improved-hiT-GmP-TE-only-HF.safetensors",
+        "flux"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 43,
+      "type": "AdaptiveGuidance",
+      "pos": {
+        "0": 2180,
+        "1": 980
+      },
+      "size": {
+        "0": 315,
+        "1": 170
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 53,
+          "label": "model"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 54,
+          "label": "positive"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 55,
+          "label": "negative"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            57
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "GUIDER"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "AdaptiveGuidance"
+      },
+      "widgets_values": [
+        1,
+        5,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 13,
+      "type": "LayerUtility: JoyCaption2ExtraOptions",
+      "pos": {
+        "0": 365,
+        "1": 1059
+      },
+      "size": {
+        "0": 426.57257080078125,
+        "1": 466
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "extra_option",
+          "type": "JoyCaption2ExtraOption",
+          "links": [
+            25
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "extra_option"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LayerUtility: JoyCaption2ExtraOptions"
+      },
+      "widgets_values": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        ""
+      ],
+      "color": "rgba(38, 73, 116, 0.7)"
+    },
+    {
+      "id": 3,
+      "type": "LoadImage",
+      "pos": {
+        "0": 141,
+        "1": 460
+      },
+      "size": {
+        "0": 633.7820434570312,
+        "1": 491.7446594238281
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            24
+          ],
+          "slot_index": 0,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "ComfyUI_04273_.png",
+        "image"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 17,
+      "type": "easy showAnything",
+      "pos": {
+        "0": 1322,
+        "1": 467
+      },
+      "size": [
+        417.7348477545488,
+        412.8752167158692
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "type": "*",
+          "link": 27,
+          "shape": 7,
+          "label": "输入任何"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy showAnything"
+      },
+      "widgets_values": [
+        "\"Amidst the golden glow of a sun-kissed afternoon, a statuesque warrior stands tall, her gleaming armor a testament to her unyielding spirit. The delicate curves of her helmet and the intricate etchings on her breastplate catch the eye, as a fiery red cape billows behind her, its tassels dancing in the gentle breeze. Her raven tresses, loose and flowing, frame her determined profile, while her left hand, clad in a gauntlet, holds aloft a gleaming sword, its blade a razor's edge.\n\nThe camera's vantage point, situated atop a grand colonnade, offers a sweeping perspective on the scene, with the imposing spire of a distant cathedral rising majestically into the sky. The warm light of the setting sun casts long shadows, accentuating the grandeur of the architecture, while the soft focus of the background allows the viewer's attention to remain fixed on the warrior.\n\nThe image is rendered in exquisite detail, with a subtle texture to the armor and a sense of depth to the surroundings. A slight vignette effect adds to the overall sense of drama, while the subtle gradations of color in the sky evoke a sense of serenity.\n\nCompositionally, the image makes use of the rule of thirds, with the warrior's figure positioned at the intersection of two lines, drawing the viewer's eye inexorably to her imposing form. The leading lines of the colonnade and the distant arch"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 20,
+      "type": "Note",
+      "pos": {
+        "0": -57,
+        "1": 1130
+      },
+      "size": [
+        383.00729648089896,
+        324.95304949840784
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "refer_character_name - 引用角色名称\nexclude_people_info - 排除人物信息\ninclude_lighting - 包括照明\ninclude_camera_angle - 包括相机角度\ninclude_watermark - 包括水印\ninclude_JPEG_artifacts - 包括JPEG伪影\ninclude_EXIF - 包括EXIF\nexclude_sexual - 排除性内容\nexclude_image_resolution - 排除图像分辨率\ninclude_aesthetic_qualiy - 包括审美质量\ninclude_composition_style - 包括构图风格\nexclude_text - 排除文本\nspecify_depth_field - 指定景深\nspecify_lighting_sources - 指定照明源\ndo_not_use_ambiguous_language - 不使用模糊语言\ninclude_NSFW - 包括NSFW内容\nonly_describe_most Important_elements - 只描述最重要的元素\ncharacter_name - 角色名称"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 16,
+      "type": "LayerUtility: JoyCaption2",
+      "pos": {
+        "0": 862,
+        "1": 510
+      },
+      "size": {
+        "0": 407.4161682128906,
+        "1": 333.63232421875
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 24,
+          "label": "image"
+        },
+        {
+          "name": "extra_options",
+          "type": "JoyCaption2ExtraOption",
+          "link": 25,
+          "shape": 7,
+          "label": "extra_options"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            27,
+            65
+          ],
+          "slot_index": 0,
+          "shape": 6,
+          "label": "text"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LayerUtility: JoyCaption2"
+      },
+      "widgets_values": [
+        "Orenguteng/Llama-3.1-8B-Lexi-Uncensored-V2",
+        "cuda",
+        "nf4",
+        "text_model",
+        "Descriptive",
+        "any",
+        "",
+        300,
+        0.9,
+        0.6,
+        false
+      ],
+      "color": "rgba(38, 73, 116, 0.7)"
+    },
+    {
+      "id": 37,
+      "type": "SaveImage",
+      "pos": {
+        "0": 1812,
+        "1": 111
+      },
+      "size": {
+        "0": 603.2312622070312,
+        "1": 797.2318725585938
+      },
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 49,
+          "label": "图像"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "category": "Primitive Nodes"
+    }
+  ],
+  "links": [
+    [
+      24,
+      3,
+      0,
+      16,
+      0,
+      "IMAGE"
+    ],
+    [
+      25,
+      13,
+      0,
+      16,
+      1,
+      "JoyCaption2ExtraOption"
+    ],
+    [
+      27,
+      16,
+      0,
+      17,
+      0,
+      "*"
+    ],
+    [
+      47,
+      47,
+      0,
+      36,
+      0,
+      "LATENT"
+    ],
+    [
+      48,
+      39,
+      0,
+      36,
+      1,
+      "VAE"
+    ],
+    [
+      49,
+      36,
+      0,
+      37,
+      0,
+      "IMAGE"
+    ],
+    [
+      50,
+      49,
+      0,
+      38,
+      0,
+      "MODEL"
+    ],
+    [
+      51,
+      48,
+      0,
+      41,
+      0,
+      "CLIP"
+    ],
+    [
+      52,
+      48,
+      0,
+      42,
+      0,
+      "CLIP"
+    ],
+    [
+      53,
+      49,
+      0,
+      43,
+      0,
+      "MODEL"
+    ],
+    [
+      54,
+      41,
+      0,
+      43,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      55,
+      42,
+      0,
+      43,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      56,
+      45,
+      0,
+      47,
+      0,
+      "NOISE"
+    ],
+    [
+      57,
+      43,
+      0,
+      47,
+      1,
+      "GUIDER"
+    ],
+    [
+      58,
+      50,
+      0,
+      47,
+      2,
+      "SAMPLER"
+    ],
+    [
+      59,
+      38,
+      0,
+      47,
+      3,
+      "SIGMAS"
+    ],
+    [
+      60,
+      46,
+      0,
+      47,
+      4,
+      "LATENT"
+    ],
+    [
+      61,
+      44,
+      0,
+      48,
+      0,
+      "CLIP"
+    ],
+    [
+      62,
+      40,
+      0,
+      49,
+      0,
+      "MODEL"
+    ],
+    [
+      63,
+      46,
+      1,
+      49,
+      1,
+      "INT"
+    ],
+    [
+      64,
+      46,
+      2,
+      49,
+      2,
+      "INT"
+    ],
+    [
+      65,
+      16,
+      0,
+      41,
+      1,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.598950000000007,
+      "offset": [
+        180.01329240680985,
+        -169.39217323868743
+      ]
+    }
+  },
+  "version": 0.4
+}

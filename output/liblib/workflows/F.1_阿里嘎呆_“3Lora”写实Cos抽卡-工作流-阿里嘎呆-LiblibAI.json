@@ -1,0 +1,808 @@
+{
+  "last_node_id": 27,
+  "last_link_id": 24,
+  "nodes": [
+    {
+      "id": 10,
+      "type": "EmptyLatentImage",
+      "pos": [
+        100,
+        130
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            9
+          ],
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1152,
+        1728,
+        3
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 17,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        1280,
+        140
+      ],
+      "size": {
+        "0": 355.20001220703125,
+        "1": 106
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 5,
+          "label": "噪波生成"
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 6,
+          "label": "引导"
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 7,
+          "label": "采样器"
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 8,
+          "label": "Sigmas"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 9,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            2
+          ],
+          "shape": 3,
+          "label": "输出"
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "shape": 3,
+          "label": "降噪输出"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 12,
+      "type": "VAEDecode",
+      "pos": [
+        1330,
+        190
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 2,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 3,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            4
+          ],
+          "shape": 3,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 19,
+      "type": "BasicScheduler",
+      "pos": [
+        930,
+        140
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 10,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            8
+          ],
+          "shape": 3,
+          "label": "Sigmas"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicScheduler"
+      },
+      "widgets_values": [
+        "simple",
+        30,
+        1
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 14,
+      "type": "VAELoader",
+      "pos": [
+        100,
+        290
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            3
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 18,
+      "type": "KSamplerSelect",
+      "pos": [
+        100,
+        700
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            7
+          ],
+          "shape": 3,
+          "label": "采样器"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "euler"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 20,
+      "type": "BasicGuider",
+      "pos": [
+        940,
+        302
+      ],
+      "size": {
+        "0": 241.79998779296875,
+        "1": 46
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 11,
+          "label": "模型"
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 12,
+          "label": "条件"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            6
+          ],
+          "shape": 3,
+          "label": "引导"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicGuider"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 15,
+      "type": "DualCLIPLoader",
+      "pos": [
+        100,
+        410
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            1
+          ],
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp8_e4m3fn",
+        "clip_l",
+        "flux"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 23,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        537,
+        393
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 14,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            20
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "F.1_阿里嘎呆_亚洲审美_beta",
+        1
+      ],
+      "_widget_cache_map": {
+        "F.1_阿里嘎呆_Realistic_Coser_真人角色扮演_v1.0": {
+          "name": "F.1_阿里嘎呆_Realistic_Coser_真人角色扮演_v1.0",
+          "value": "f9894144c8234be496684f2a3536a9a2"
+        },
+        "F.1_阿里嘎呆_亚洲审美_beta": {
+          "name": "F.1_阿里嘎呆_亚洲审美_beta",
+          "value": "94f93c0c496e469596a55e1228b840cf"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 26,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        535,
+        531
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 20,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            24
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "F.1_阿里嘎呆_Realistic_Coser_真人角色扮演_v1.0",
+        1
+      ],
+      "_widget_cache_map": {
+        "F.1_阿里嘎呆_Realistic_Coser_真人角色扮演_v1.0": {
+          "name": "F.1_阿里嘎呆_Realistic_Coser_真人角色扮演_v1.0",
+          "value": "f9894144c8234be496684f2a3536a9a2"
+        },
+        "F.1_阿里嘎呆_亚洲审美_beta": {
+          "name": "F.1_阿里嘎呆_亚洲审美_beta",
+          "value": "94f93c0c496e469596a55e1228b840cf"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 22,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        535,
+        670
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 24,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            10,
+            11
+          ],
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "F.1_阿里嘎呆_涨姿势_Pose动作加强_v1.0",
+        1
+      ],
+      "_widget_cache_map": {
+        "F.1_阿里嘎呆_涨姿势_Pose动作加强_v1.0": {
+          "name": "F.1_阿里嘎呆_涨姿势_Pose动作加强_v1.0",
+          "value": "26ec9a89477c4dd193882b067155d571"
+        },
+        "F.1_阿里嘎呆_Realistic_Coser_真人角色扮演_v1.0": {
+          "name": "F.1_阿里嘎呆_Realistic_Coser_真人角色扮演_v1.0",
+          "value": "f9894144c8234be496684f2a3536a9a2"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 16,
+      "type": "UNETLoader",
+      "pos": [
+        100,
+        570
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            14
+          ],
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "基础算法_F.1",
+        "fp8_e4m3fn"
+      ],
+      "_widget_cache_map": {
+        "基础算法_F.1": {
+          "name": "基础算法_F.1",
+          "value": "412b427ddb674b4dbab9e5abd5ae6057"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 13,
+      "type": "SaveImage",
+      "pos": [
+        1464,
+        155
+      ],
+      "size": {
+        "0": 317.6648864746094,
+        "1": 454.603271484375
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 4,
+          "label": "图像"
+        }
+      ],
+      "properties": {},
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 11,
+      "type": "CLIPTextEncode",
+      "pos": [
+        470,
+        140
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 1,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            12
+          ],
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "asian woman cosplayer posing"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 21,
+      "type": "RandomNoise",
+      "pos": [
+        105,
+        850
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            5
+          ],
+          "shape": 3,
+          "label": "噪波生成"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        42645480340413,
+        "randomize"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    }
+  ],
+  "links": [
+    [
+      1,
+      15,
+      0,
+      11,
+      0,
+      "CLIP"
+    ],
+    [
+      2,
+      17,
+      0,
+      12,
+      0,
+      "LATENT"
+    ],
+    [
+      3,
+      14,
+      0,
+      12,
+      1,
+      "VAE"
+    ],
+    [
+      4,
+      12,
+      0,
+      13,
+      0,
+      "IMAGE"
+    ],
+    [
+      5,
+      21,
+      0,
+      17,
+      0,
+      "NOISE"
+    ],
+    [
+      6,
+      20,
+      0,
+      17,
+      1,
+      "GUIDER"
+    ],
+    [
+      7,
+      18,
+      0,
+      17,
+      2,
+      "SAMPLER"
+    ],
+    [
+      8,
+      19,
+      0,
+      17,
+      3,
+      "SIGMAS"
+    ],
+    [
+      9,
+      10,
+      0,
+      17,
+      4,
+      "LATENT"
+    ],
+    [
+      10,
+      22,
+      0,
+      19,
+      0,
+      "MODEL"
+    ],
+    [
+      11,
+      22,
+      0,
+      20,
+      0,
+      "MODEL"
+    ],
+    [
+      12,
+      11,
+      0,
+      20,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      14,
+      16,
+      0,
+      23,
+      0,
+      "MODEL"
+    ],
+    [
+      20,
+      23,
+      0,
+      26,
+      0,
+      "MODEL"
+    ],
+    [
+      24,
+      26,
+      0,
+      22,
+      0,
+      "MODEL"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "在线运行需Ctrl+回车，刷新随机种子",
+      "bounding": [
+        60,
+        771,
+        400,
+        184
+      ],
+      "color": "#b58b2a",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ],
+    "ds": {
+      "scale": 0.9646149645000013,
+      "offset": [
+        418.8920269997984,
+        54.50225339290231
+      ]
+    }
+  },
+  "version": 0.4
+}

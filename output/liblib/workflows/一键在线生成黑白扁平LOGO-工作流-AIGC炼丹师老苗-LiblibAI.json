@@ -1,0 +1,645 @@
+{
+  "last_node_id": 17,
+  "last_link_id": 19,
+  "nodes": [
+    {
+      "id": 12,
+      "type": "VAEDecode",
+      "pos": [
+        1822,
+        343,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 7,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 10,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            9
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 14,
+      "type": "SaveImage",
+      "pos": [
+        2064,
+        350,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "size": {
+        "0": 315,
+        "1": 270
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 9,
+          "label": "图像"
+        }
+      ],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 5,
+      "type": "FluxSamplerParams+",
+      "pos": [
+        1449,
+        131,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "size": {
+        "0": 327.5999755859375,
+        "1": 498
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 15,
+          "label": "model"
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 11,
+          "label": "conditioning"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 5,
+          "label": "latent_image"
+        },
+        {
+          "name": "loras",
+          "type": "LORA_PARAMS",
+          "link": null,
+          "label": "loras"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            7
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "latent"
+        },
+        {
+          "name": "params",
+          "type": "SAMPLER_PARAMS",
+          "links": null,
+          "shape": 3,
+          "label": "params"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FluxSamplerParams+"
+      },
+      "widgets_values": [
+        "?",
+        "euler",
+        "simple",
+        "20",
+        "3.5",
+        "",
+        "",
+        "1.0"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 10,
+      "type": "EmptyLatentImage",
+      "pos": [
+        1026,
+        553,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            5
+          ],
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 1,
+      "type": "DualCLIPLoader",
+      "pos": [
+        459,
+        234,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            18
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "clip_l",
+        "t5xxl_fp8_e4m3fn",
+        "flux"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 2,
+      "type": "UNETLoader",
+      "pos": [
+        388,
+        58,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            16
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "F.1-fp8 11G版_flux1-dev",
+        "default"
+      ],
+      "_widget_cache_map": {
+        "F.1-fp8 11G版_flux1-dev": {
+          "name": "F.1-fp8 11G版_flux1-dev",
+          "value": "7b3004f6dcb94298b19a1b3b38430c13"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 3,
+      "type": "VAELoader",
+      "pos": [
+        470,
+        403,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            10
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 16,
+      "type": "ModelSamplingFlux",
+      "pos": [
+        1071,
+        49,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 17,
+          "label": "model"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            15
+          ],
+          "shape": 3,
+          "label": "MODEL",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ModelSamplingFlux"
+      },
+      "widgets_values": [
+        1.15,
+        0.5,
+        1024,
+        1024
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 11,
+      "type": "CLIPTextEncode",
+      "pos": [
+        981,
+        251,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 19,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            11
+          ],
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "Impressionist paper art,"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 17,
+      "type": "LoraLoader",
+      "pos": [
+        732,
+        51
+      ],
+      "size": {
+        "0": 315,
+        "1": 126
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 16,
+          "label": "模型"
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 18,
+          "label": "CLIP",
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            17
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            19
+          ],
+          "shape": 3,
+          "label": "CLIP",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoader"
+      },
+      "widgets_values": [
+        "F.1-黑白扁平LOGO-laomiao-V1.0_LM-黑白扁平LOGO-V1",
+        1.3,
+        1
+      ],
+      "_widget_cache_map": {
+        "手绘插画-纯享质感V1.0_v1.0": {
+          "name": "手绘插画-纯享质感V1.0_v1.0",
+          "value": "9e2a56d040f34f299cb50d9e1e844168"
+        },
+        "undefined_0006": {
+          "name": "undefined_0006"
+        },
+        "F.1-印象派纸艺-创造灵感-laomiao-V1.0_F.1-印象派纸艺-创造灵感": {
+          "name": "F.1-印象派纸艺-创造灵感-laomiao-V1.0_F.1-印象派纸艺-创造灵感",
+          "value": "6388b34a6c12417a9042df69932defe0"
+        },
+        "F.1-黑白扁平LOGO-laomiao-V1.0_LM-黑白扁平LOGO-V1": {
+          "name": "F.1-黑白扁平LOGO-laomiao-V1.0_LM-黑白扁平LOGO-V1",
+          "value": "1f5e203496a549d891fb1cabb6c7165b"
+        }
+      },
+      "category": "Primitive Nodes"
+    }
+  ],
+  "links": [
+    [
+      5,
+      10,
+      0,
+      5,
+      2,
+      "LATENT"
+    ],
+    [
+      7,
+      5,
+      0,
+      12,
+      0,
+      "LATENT"
+    ],
+    [
+      9,
+      12,
+      0,
+      14,
+      0,
+      "IMAGE"
+    ],
+    [
+      10,
+      3,
+      0,
+      12,
+      1,
+      "VAE"
+    ],
+    [
+      11,
+      11,
+      0,
+      5,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      15,
+      16,
+      0,
+      5,
+      0,
+      "MODEL"
+    ],
+    [
+      16,
+      2,
+      0,
+      17,
+      0,
+      "MODEL"
+    ],
+    [
+      17,
+      17,
+      0,
+      16,
+      0,
+      "MODEL"
+    ],
+    [
+      18,
+      1,
+      0,
+      17,
+      1,
+      "CLIP"
+    ],
+    [
+      19,
+      17,
+      1,
+      11,
+      0,
+      "CLIP"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8769226950000023,
+      "offset": [
+        -153.94196336094916,
+        113.59725360522782
+      ]
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

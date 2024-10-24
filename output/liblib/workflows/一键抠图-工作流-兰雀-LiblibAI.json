@@ -1,0 +1,631 @@
+{
+  "last_node_id": 78,
+  "last_link_id": 81,
+  "nodes": [
+    {
+      "id": 56,
+      "type": "BRIA_RMBG_Zho",
+      "pos": [
+        -131,
+        1376
+      ],
+      "size": {
+        "0": 236.45643615722656,
+        "1": 115.75395202636719
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "rmbgmodel",
+          "link": 65,
+          "label": "rmbgmodel",
+          "type": "RMBGMODEL"
+        },
+        {
+          "name": "image",
+          "link": 66,
+          "slot_index": 1,
+          "label": "image",
+          "type": "IMAGE"
+        }
+      ],
+      "outputs": [
+        {
+          "shape": 3,
+          "name": "image",
+          "slot_index": 0,
+          "links": [
+            67
+          ],
+          "label": "image",
+          "type": "IMAGE"
+        },
+        {
+          "shape": 3,
+          "name": "mask",
+          "slot_index": 1,
+          "links": [
+            68
+          ],
+          "label": "mask",
+          "type": "MASK"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BRIA_RMBG_Zho"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 49,
+      "type": "GroundingDinoSAMSegment (segment anything)",
+      "pos": [
+        95.37651157847995,
+        808.3346688200794
+      ],
+      "size": {
+        "0": 330,
+        "1": 122
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "sam_model",
+          "type": "SAM_MODEL",
+          "link": 61,
+          "label": "SAM模型",
+          "slot_index": 0
+        },
+        {
+          "name": "grounding_dino_model",
+          "type": "GROUNDING_DINO_MODEL",
+          "link": 55,
+          "label": "G-Dino模型",
+          "slot_index": 1
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 54,
+          "label": "图像",
+          "slot_index": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            60
+          ],
+          "shape": 3,
+          "label": " 图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            59
+          ],
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "GroundingDinoSAMSegment (segment anything)"
+      },
+      "widgets_values": [
+        "主体",
+        0.3
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 54,
+      "type": "SAMModelLoader (segment anything)",
+      "pos": [
+        100,
+        720
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "SAM_MODEL",
+          "type": "SAM_MODEL",
+          "links": [
+            61
+          ],
+          "shape": 3,
+          "label": "SAM模型",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SAMModelLoader (segment anything)"
+      },
+      "widgets_values": [
+        "sam_vit_h_4b8939.pth"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 50,
+      "type": "GroundingDinoModelLoader (segment anything)",
+      "pos": [
+        103,
+        628
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "GROUNDING_DINO_MODEL",
+          "type": "GROUNDING_DINO_MODEL",
+          "links": [
+            55
+          ],
+          "shape": 3,
+          "label": "G-Dino模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "GroundingDinoModelLoader (segment anything)"
+      },
+      "widgets_values": [
+        "GroundingDINO_SwinT_OGC (694MB)"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 33,
+      "type": "InvertMask",
+      "pos": [
+        99,
+        564
+      ],
+      "size": [
+        325.0796397423601,
+        30.439803021381294
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 59,
+          "label": "遮罩",
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            38
+          ],
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "InvertMask"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 34,
+      "type": "JoinImageWithAlpha",
+      "pos": [
+        91,
+        485
+      ],
+      "size": [
+        337.64104523774427,
+        58.123991198310705
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 60,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "alpha",
+          "type": "MASK",
+          "link": 38,
+          "label": "透明遮罩",
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            40
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "JoinImageWithAlpha"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 32,
+      "type": "LoadImage",
+      "pos": [
+        -770,
+        193
+      ],
+      "size": [
+        581.6663870553605,
+        852.5675503765799
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            54
+          ],
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "1724338180087.png",
+        "image"
+      ],
+      "_widget_cache_map": {
+        "a92ac04dd0229ce56c1d52ba3c5905eb70f5ac677dba7cfeccf02bf692bd232e.png": {
+          "value": "img/46987de339ac47e0965172f7ccd1b939/a92ac04dd0229ce56c1d52ba3c5905eb70f5ac677dba7cfeccf02bf692bd232e.png",
+          "name": "a92ac04dd0229ce56c1d52ba3c5905eb70f5ac677dba7cfeccf02bf692bd232e.png",
+          "url": "https://liblibai-tmp-image.vibrou.com/img/46987de339ac47e0965172f7ccd1b939/a92ac04dd0229ce56c1d52ba3c5905eb70f5ac677dba7cfeccf02bf692bd232e.png"
+        },
+        "微信图片_20240802210200.jpg": {
+          "value": "img/46987de339ac47e0965172f7ccd1b939/281f3900613fbc549181874757d7252c107697cb7806709fe7a137d209648cde.jpg",
+          "name": "微信图片_20240802210200.jpg",
+          "url": "https://liblibai-tmp-image.vibrou.com/img/46987de339ac47e0965172f7ccd1b939/281f3900613fbc549181874757d7252c107697cb7806709fe7a137d209648cde.jpg"
+        },
+        "S16A53576673KH09VZY4REBXR0.jpeg": {
+          "value": "img/46987de339ac47e0965172f7ccd1b939/55f1256430671b78013fbd155f28fc1a30b002167b754d04d224337904cc3884.jpeg",
+          "name": "S16A53576673KH09VZY4REBXR0.jpeg",
+          "url": "https://liblibai-tmp-image.vibrou.com/img/46987de339ac47e0965172f7ccd1b939/55f1256430671b78013fbd155f28fc1a30b002167b754d04d224337904cc3884.jpeg"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 35,
+      "type": "PreviewImage",
+      "pos": [
+        533,
+        354
+      ],
+      "size": [
+        716.3367268166087,
+        722.3756311846607
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 40,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 55,
+      "type": "BRIA_RMBG_ModelLoader_Zho",
+      "pos": [
+        -137,
+        1278
+      ],
+      "size": [
+        243.44809526511278,
+        69.00766762659578
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "shape": 3,
+          "name": "rmbgmodel",
+          "slot_index": 0,
+          "links": [
+            65
+          ],
+          "label": "rmbgmodel",
+          "type": "RMBGMODEL"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BRIA_RMBG_ModelLoader_Zho"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 59,
+      "type": "preview_mask",
+      "pos": [
+        -130,
+        1526
+      ],
+      "size": [
+        228.92177619772895,
+        261.2973330685418
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mask",
+          "link": 68,
+          "label": "mask",
+          "type": "MASK"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "preview_mask"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 58,
+      "type": "PreviewImage",
+      "pos": [
+        441,
+        1303
+      ],
+      "size": [
+        736.6941758560583,
+        716.3588376462058
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "link": 67,
+          "label": "图像",
+          "type": "IMAGE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 57,
+      "type": "LoadImage",
+      "pos": [
+        -1065,
+        1124
+      ],
+      "size": [
+        737.3669155095815,
+        989.0031810623609
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "shape": 3,
+          "name": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            66
+          ],
+          "label": "图像",
+          "type": "IMAGE"
+        },
+        {
+          "shape": 3,
+          "name": "MASK",
+          "label": "遮罩",
+          "type": "MASK"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "1724338180087.png",
+        "image"
+      ],
+      "_widget_cache_map": {
+        "微信图片_20240802210815.jpg": {
+          "value": "img/46987de339ac47e0965172f7ccd1b939/61711af652d810d56e84c8e606d76ec938b7c9821115ac2f5ecc76650f75dcb9.jpg",
+          "name": "微信图片_20240802210815.jpg",
+          "url": "https://liblibai-tmp-image.vibrou.com/img/46987de339ac47e0965172f7ccd1b939/61711af652d810d56e84c8e606d76ec938b7c9821115ac2f5ecc76650f75dcb9.jpg"
+        },
+        "微信图片_20240802210812.jpg": {
+          "value": "img/46987de339ac47e0965172f7ccd1b939/2da2a01dc1d93021ed6b93904a8cf1163647a75506a3134d4a9dd1077cea8b80.jpg",
+          "name": "微信图片_20240802210812.jpg",
+          "url": "https://liblibai-tmp-image.vibrou.com/img/46987de339ac47e0965172f7ccd1b939/2da2a01dc1d93021ed6b93904a8cf1163647a75506a3134d4a9dd1077cea8b80.jpg"
+        },
+        "微信图片_20240802210805.jpg": {
+          "value": "img/46987de339ac47e0965172f7ccd1b939/5e1c904258880b7c029bb06d9452534db83e405ddc0e40024dc6a5b364a900d9.jpg",
+          "name": "微信图片_20240802210805.jpg",
+          "url": "https://liblibai-tmp-image.vibrou.com/img/46987de339ac47e0965172f7ccd1b939/5e1c904258880b7c029bb06d9452534db83e405ddc0e40024dc6a5b364a900d9.jpg"
+        },
+        "微信图片_20240802210200.jpg": {
+          "value": "img/46987de339ac47e0965172f7ccd1b939/281f3900613fbc549181874757d7252c107697cb7806709fe7a137d209648cde.jpg",
+          "name": "微信图片_20240802210200.jpg",
+          "url": "https://liblibai-tmp-image.vibrou.com/img/46987de339ac47e0965172f7ccd1b939/281f3900613fbc549181874757d7252c107697cb7806709fe7a137d209648cde.jpg"
+        },
+        "S16A53576673KH09VZY4REBXR0.jpeg": {
+          "value": "img/46987de339ac47e0965172f7ccd1b939/55f1256430671b78013fbd155f28fc1a30b002167b754d04d224337904cc3884.jpeg",
+          "name": "S16A53576673KH09VZY4REBXR0.jpeg",
+          "url": "https://liblibai-tmp-image.vibrou.com/img/46987de339ac47e0965172f7ccd1b939/55f1256430671b78013fbd155f28fc1a30b002167b754d04d224337904cc3884.jpeg"
+        }
+      },
+      "category": "Primitive Nodes"
+    }
+  ],
+  "links": [
+    [
+      38,
+      33,
+      0,
+      34,
+      1,
+      "MASK"
+    ],
+    [
+      40,
+      34,
+      0,
+      35,
+      0,
+      "IMAGE"
+    ],
+    [
+      54,
+      32,
+      0,
+      49,
+      2,
+      "IMAGE"
+    ],
+    [
+      55,
+      50,
+      0,
+      49,
+      1,
+      "GROUNDING_DINO_MODEL"
+    ],
+    [
+      59,
+      49,
+      1,
+      33,
+      0,
+      "MASK"
+    ],
+    [
+      60,
+      49,
+      0,
+      34,
+      0,
+      "IMAGE"
+    ],
+    [
+      61,
+      54,
+      0,
+      49,
+      0,
+      "SAM_MODEL"
+    ],
+    [
+      65,
+      55,
+      0,
+      56,
+      0,
+      "RMBGMODEL"
+    ],
+    [
+      66,
+      57,
+      0,
+      56,
+      1,
+      "IMAGE"
+    ],
+    [
+      67,
+      56,
+      0,
+      58,
+      0,
+      "IMAGE"
+    ],
+    [
+      68,
+      56,
+      1,
+      59,
+      0,
+      "MASK"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.49500000000000044,
+      "offset": {
+        "0": 2225.982801662133,
+        "1": 231.06197045278913
+      }
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

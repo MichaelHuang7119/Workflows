@@ -1,0 +1,1095 @@
+{
+  "last_node_id": 26,
+  "last_link_id": 35,
+  "nodes": [
+    {
+      "id": 16,
+      "type": "SUPIR_decode",
+      "pos": [
+        810.172613008109,
+        -879.654773983782
+      ],
+      "size": {
+        "0": 315,
+        "1": 102
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "SUPIR_VAE",
+          "type": "SUPIRVAE",
+          "link": 28,
+          "label": "SUPIR_VAE"
+        },
+        {
+          "name": "latents",
+          "type": "LATENT",
+          "link": 15,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            16
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SUPIR_decode"
+      },
+      "widgets_values": [
+        true,
+        512
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 18,
+      "type": "SUPIR_model_loader_v2",
+      "pos": [
+        122.17261300810898,
+        -898.654773983782
+      ],
+      "size": {
+        "0": 315,
+        "1": 170
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 20,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 21,
+          "label": "CLIP"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 22,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SUPIR_model",
+          "type": "SUPIRMODEL",
+          "links": [
+            17,
+            27
+          ],
+          "shape": 3
+        },
+        {
+          "name": "SUPIR_VAE",
+          "type": "SUPIRVAE",
+          "links": [
+            28,
+            29
+          ],
+          "shape": 3,
+          "label": "SUPIR_VAE",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SUPIR_model_loader_v2"
+      },
+      "widgets_values": [
+        "SUPIR-v0F_fp16.safetensors",
+        false,
+        "auto",
+        false
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 20,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        -211.82738699189102,
+        -895.654773983782
+      ],
+      "size": {
+        "0": 315,
+        "1": 98
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            20
+          ],
+          "shape": 3,
+          "label": "模型"
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            21
+          ],
+          "shape": 3,
+          "label": "CLIP",
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            22
+          ],
+          "shape": 3,
+          "label": "VAE",
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "真境写真XL Apex | 商业电商摄影真实写实大师_真境写真XL_v4"
+      ],
+      "_widget_cache_map": {
+        "真境写真XL Apex | 商业电商摄影真实写实大师_真境写真XL_v4": {
+          "name": "真境写真XL Apex | 商业电商摄影真实写实大师_真境写真XL_v4",
+          "value": "f63786f671f646b9ab5ac45d86663f66"
+        },
+        "LEOSAM HelloWorld 新世界 | SDXL大模型_v7.0": {
+          "name": "LEOSAM HelloWorld 新世界 | SDXL大模型_v7.0",
+          "value": "aeed3bb1cdcb40c098e6f5011aa6d5cb"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 22,
+      "type": "SUPIR_first_stage",
+      "pos": [
+        -204.82738699189102,
+        -753.654773983782
+      ],
+      "size": {
+        "0": 298.6155090332031,
+        "1": 170.16128540039062
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "SUPIR_VAE",
+          "type": "SUPIRVAE",
+          "link": 29,
+          "label": "SUPIR_VAE",
+          "slot_index": 0
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 35,
+          "label": "图像",
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SUPIR_VAE",
+          "type": "SUPIRVAE",
+          "links": [
+            24
+          ],
+          "shape": 3,
+          "label": "SUPIR_VAE"
+        },
+        {
+          "name": "denoised_image",
+          "type": "IMAGE",
+          "links": [
+            25
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 1
+        },
+        {
+          "name": "denoised_latents",
+          "type": "LATENT",
+          "links": [
+            26
+          ],
+          "shape": 3,
+          "label": "Latent",
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SUPIR_first_stage"
+      },
+      "widgets_values": [
+        true,
+        512,
+        512,
+        "auto"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 21,
+      "type": "SUPIR_encode",
+      "pos": [
+        -215.82738699189102,
+        -537.654773983782
+      ],
+      "size": {
+        "0": 315,
+        "1": 126
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "SUPIR_VAE",
+          "type": "SUPIRVAE",
+          "link": 24,
+          "label": "SUPIR_VAE",
+          "slot_index": 0
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 25,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            23
+          ],
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SUPIR_encode"
+      },
+      "widgets_values": [
+        true,
+        512,
+        "auto"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 17,
+      "type": "PreviewImage",
+      "pos": [
+        812.172613008109,
+        -726.654773983782
+      ],
+      "size": {
+        "0": 301.71160888671875,
+        "1": 288.56500244140625
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 16,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 10,
+      "type": "SUPIR_Upscale",
+      "pos": [
+        190,
+        60
+      ],
+      "size": {
+        "0": 393.0082092285156,
+        "1": 881.7218627929688
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 14,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "captions",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "captions"
+          },
+          "label": "captions"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "upscaled_image",
+          "type": "IMAGE",
+          "links": [
+            10
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SUPIR_Upscale"
+      },
+      "widgets_values": [
+        "SUPIR-v0F_fp16.safetensors",
+        "真境写真XL Apex | 商业电商摄影真实写实大师_真境写真XL_v4",
+        773138547862335,
+        "randomize",
+        "lanczos",
+        2,
+        45,
+        5,
+        4,
+        "high quality, detailed",
+        "bad quality, blurry, messy",
+        5,
+        1.003,
+        1,
+        4,
+        0,
+        "Wavelet",
+        true,
+        true,
+        512,
+        64,
+        "",
+        "bf16",
+        "bf16",
+        1,
+        false,
+        1024,
+        512,
+        false,
+        false,
+        "RestoreEDMSampler"
+      ],
+      "_widget_cache_map": {
+        "真境写真XL Apex | 商业电商摄影真实写实大师_真境写真XL_v4": {
+          "name": "真境写真XL Apex | 商业电商摄影真实写实大师_真境写真XL_v4",
+          "value": "f63786f671f646b9ab5ac45d86663f66"
+        }
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 11,
+      "type": "PreviewImage",
+      "pos": [
+        624,
+        71
+      ],
+      "size": {
+        "0": 234.8365478515625,
+        "1": 308.9131774902344
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 10,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 25,
+      "type": "ImageResize+",
+      "pos": [
+        -199,
+        -363
+      ],
+      "size": {
+        "0": 315,
+        "1": 218
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 34,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            35
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null,
+          "shape": 3,
+          "label": "宽度"
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null,
+          "shape": 3,
+          "label": "高度"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageResize+"
+      },
+      "widgets_values": [
+        2056,
+        2056,
+        "nearest",
+        "keep proportion",
+        "always",
+        0
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 14,
+      "type": "ImageResize+",
+      "pos": [
+        196,
+        10
+      ],
+      "size": {
+        "0": 315,
+        "1": 218
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 5,
+      "mode": 2,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 13,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            14
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null,
+          "shape": 3,
+          "label": "宽度"
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null,
+          "shape": 3,
+          "label": "高度"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageResize+"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        "nearest",
+        "keep proportion",
+        "always",
+        0
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 15,
+      "type": "SUPIR_sample",
+      "pos": [
+        462.9203177649885,
+        -890.7785858673602
+      ],
+      "size": {
+        "0": 315,
+        "1": 454
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "SUPIR_model",
+          "type": "SUPIRMODEL",
+          "link": 17,
+          "label": "SUPIR模型",
+          "slot_index": 0
+        },
+        {
+          "name": "latents",
+          "type": "LATENT",
+          "link": 23,
+          "label": "Latent",
+          "slot_index": 1
+        },
+        {
+          "name": "positive",
+          "type": "SUPIR_cond_pos",
+          "link": 18,
+          "label": "正面条件",
+          "slot_index": 2
+        },
+        {
+          "name": "negative",
+          "type": "SUPIR_cond_neg",
+          "link": 19,
+          "label": "负面条件",
+          "slot_index": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            15
+          ],
+          "shape": 3,
+          "label": "Latent",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SUPIR_sample"
+      },
+      "widgets_values": [
+        778518327044357,
+        "randomize",
+        45,
+        4,
+        4,
+        5,
+        1.0030000000000001,
+        1,
+        1,
+        1,
+        5,
+        false,
+        "RestoreEDMSampler",
+        1024,
+        512
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 12,
+      "type": "LoadImage",
+      "pos": [
+        -400,
+        80
+      ],
+      "size": {
+        "0": 503.6949462890625,
+        "1": 802.094970703125
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 2,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            13
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "1728390788337.png",
+        "image"
+      ],
+      "_widget_cache_map": {
+        "1.jpg": {
+          "value": "img/8d5ade1f022c453089e473c7e39dbb35/0610de6ff614ae829e8b2d9e0a1e1812634a3a946219b0b8fb9bc8b1fae1589e.jpg",
+          "name": "1.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/8d5ade1f022c453089e473c7e39dbb35/0610de6ff614ae829e8b2d9e0a1e1812634a3a946219b0b8fb9bc8b1fae1589e.jpg"
+        },
+        "3.jpg": {
+          "value": "img/8d5ade1f022c453089e473c7e39dbb35/be019fef6f7c309d888dc0583d8d270af7f71f02e4598d348d419ab804750a18.jpg",
+          "name": "3.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/8d5ade1f022c453089e473c7e39dbb35/be019fef6f7c309d888dc0583d8d270af7f71f02e4598d348d419ab804750a18.jpg"
+        },
+        "尝试自动 AI 照片编辑背景 - Cutout.Pro.png": {
+          "value": "img/8d5ade1f022c453089e473c7e39dbb35/2b442c635f0d662bd5a5de94bfe5e96c91be78330520ba0e02ecd33ba35d5a7c.png",
+          "name": "尝试自动 AI 照片编辑背景 - Cutout.Pro.png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/8d5ade1f022c453089e473c7e39dbb35/2b442c635f0d662bd5a5de94bfe5e96c91be78330520ba0e02ecd33ba35d5a7c.png"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 23,
+      "type": "LoadImage",
+      "pos": [
+        -704,
+        -874
+      ],
+      "size": {
+        "0": 340.1602783203125,
+        "1": 488.5182189941406
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            34
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "1728390788337.png",
+        "image"
+      ],
+      "_widget_cache_map": {
+        "3.jpg": {
+          "value": "img/8d5ade1f022c453089e473c7e39dbb35/be019fef6f7c309d888dc0583d8d270af7f71f02e4598d348d419ab804750a18.jpg",
+          "name": "3.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/8d5ade1f022c453089e473c7e39dbb35/be019fef6f7c309d888dc0583d8d270af7f71f02e4598d348d419ab804750a18.jpg"
+        },
+        "1.jpg": {
+          "value": "img/8d5ade1f022c453089e473c7e39dbb35/0610de6ff614ae829e8b2d9e0a1e1812634a3a946219b0b8fb9bc8b1fae1589e.jpg",
+          "name": "1.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/8d5ade1f022c453089e473c7e39dbb35/0610de6ff614ae829e8b2d9e0a1e1812634a3a946219b0b8fb9bc8b1fae1589e.jpg"
+        },
+        "尝试自动 AI 照片编辑背景 - Cutout.Pro.png": {
+          "value": "img/8d5ade1f022c453089e473c7e39dbb35/2b442c635f0d662bd5a5de94bfe5e96c91be78330520ba0e02ecd33ba35d5a7c.png",
+          "name": "尝试自动 AI 照片编辑背景 - Cutout.Pro.png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/8d5ade1f022c453089e473c7e39dbb35/2b442c635f0d662bd5a5de94bfe5e96c91be78330520ba0e02ecd33ba35d5a7c.png"
+        },
+        "假刘海_淘宝搜索.jpg": {
+          "value": "img/8d5ade1f022c453089e473c7e39dbb35/b6091d48d71fc45c98b494abe40a61efc74f5ed93b7e01191b673208f8831cd1.jpg",
+          "name": "假刘海_淘宝搜索.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/8d5ade1f022c453089e473c7e39dbb35/b6091d48d71fc45c98b494abe40a61efc74f5ed93b7e01191b673208f8831cd1.jpg"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 19,
+      "type": "SUPIR_conditioner",
+      "pos": [
+        122,
+        -682
+      ],
+      "size": {
+        "0": 306.2409973144531,
+        "1": 255.43145751953125
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "SUPIR_model",
+          "type": "SUPIRMODEL",
+          "link": 27,
+          "slot_index": 0
+        },
+        {
+          "name": "latents",
+          "type": "LATENT",
+          "link": 26,
+          "label": "Latent"
+        },
+        {
+          "name": "captions",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "captions"
+          },
+          "label": "captions"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "SUPIR_cond_pos",
+          "links": [
+            18
+          ],
+          "shape": 3,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "SUPIR_cond_neg",
+          "links": [
+            19
+          ],
+          "shape": 3,
+          "label": "负面条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SUPIR_conditioner"
+      },
+      "widgets_values": [
+        "high quality, detailed",
+        "bad quality, blurry, messy",
+        ""
+      ],
+      "_widget_cache_map": {},
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 26,
+      "type": "Note",
+      "pos": [
+        -1463,
+        -330
+      ],
+      "size": {
+        "0": 557.2431640625,
+        "1": 167.48789978027344
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "两种方式，可以都尝试一下，哪个效果好用哪个，但不建议同时运行这两种方式\n\n如果修复的图像是男性写实类型的话有可能会出现白发和皱纹的情况，这个时候需要输入你图像年龄和人种的关键词至正向提示词中（例如：30岁左右的亚洲男子），翻译成英文输入进去，修复女性的话就不需要，直接上传后点击生成即可，而且效果比男性好太多，也不知道是什么原因\n"
+      ],
+      "_widget_cache_map": {},
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Official"
+    }
+  ],
+  "links": [
+    [
+      10,
+      10,
+      0,
+      11,
+      0,
+      "IMAGE"
+    ],
+    [
+      13,
+      12,
+      0,
+      14,
+      0,
+      "IMAGE"
+    ],
+    [
+      14,
+      14,
+      0,
+      10,
+      0,
+      "IMAGE"
+    ],
+    [
+      15,
+      15,
+      0,
+      16,
+      1,
+      "LATENT"
+    ],
+    [
+      16,
+      16,
+      0,
+      17,
+      0,
+      "IMAGE"
+    ],
+    [
+      17,
+      18,
+      0,
+      15,
+      0,
+      "SUPIRMODEL"
+    ],
+    [
+      18,
+      19,
+      0,
+      15,
+      2,
+      "SUPIR_cond_pos"
+    ],
+    [
+      19,
+      19,
+      1,
+      15,
+      3,
+      "SUPIR_cond_neg"
+    ],
+    [
+      20,
+      20,
+      0,
+      18,
+      0,
+      "MODEL"
+    ],
+    [
+      21,
+      20,
+      1,
+      18,
+      1,
+      "CLIP"
+    ],
+    [
+      22,
+      20,
+      2,
+      18,
+      2,
+      "VAE"
+    ],
+    [
+      23,
+      21,
+      0,
+      15,
+      1,
+      "LATENT"
+    ],
+    [
+      24,
+      22,
+      0,
+      21,
+      0,
+      "SUPIRVAE"
+    ],
+    [
+      25,
+      22,
+      1,
+      21,
+      1,
+      "IMAGE"
+    ],
+    [
+      26,
+      22,
+      2,
+      19,
+      1,
+      "LATENT"
+    ],
+    [
+      27,
+      18,
+      0,
+      19,
+      0,
+      "SUPIRMODEL"
+    ],
+    [
+      28,
+      18,
+      1,
+      16,
+      0,
+      "SUPIRVAE"
+    ],
+    [
+      29,
+      18,
+      1,
+      22,
+      0,
+      "SUPIRVAE"
+    ],
+    [
+      34,
+      23,
+      0,
+      25,
+      0,
+      "IMAGE"
+    ],
+    [
+      35,
+      25,
+      0,
+      22,
+      1,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "方式一（右键此处禁用组）",
+      "bounding": [
+        -621,
+        -1037,
+        1784,
+        737
+      ],
+      "color": "#3f789e",
+      "font_size": 50,
+      "locked": false
+    },
+    {
+      "title": "方式二（右键此处启用组）",
+      "bounding": [
+        -624,
+        -80,
+        1731,
+        1098
+      ],
+      "color": "#3f789e",
+      "font_size": 50,
+      "locked": false
+    },
+    {
+      "title": "看这里",
+      "bounding": [
+        -1548,
+        -517,
+        744,
+        491
+      ],
+      "color": "#3f789e",
+      "font_size": 100,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6588450000000007,
+      "offset": {
+        "0": 2104.6525209055253,
+        "1": 706.9590054501402
+      }
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

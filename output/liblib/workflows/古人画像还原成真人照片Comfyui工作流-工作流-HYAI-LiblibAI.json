@@ -1,0 +1,840 @@
+{
+  "last_node_id": 23,
+  "last_link_id": 27,
+  "nodes": [
+    {
+      "id": 5,
+      "type": "EmptyLatentImage",
+      "pos": [
+        882.8194929293198,
+        191
+      ],
+      "size": {
+        "0": 210,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            2
+          ],
+          "slot_index": 0,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        800,
+        1024,
+        1
+      ],
+      "_widget_cache_map": {},
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 7,
+      "type": "CLIPTextEncode",
+      "pos": [
+        562.0589299364744,
+        340.0700095767723
+      ],
+      "size": {
+        "0": 266.35675048828125,
+        "1": 86.6044692993164
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 5,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            6
+          ],
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "text, watermark,low quality,embedding:EasyNegative, "
+      ],
+      "_widget_cache_map": {},
+      "color": "#322",
+      "bgcolor": "#533",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [
+        1356,
+        191
+      ],
+      "size": {
+        "0": 140,
+        "1": 46
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 7,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 27,
+          "slot_index": 1,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            9
+          ],
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "color": "#2a363b",
+      "bgcolor": "#3f5159",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 3,
+      "type": "KSampler",
+      "pos": [
+        1118,
+        191
+      ],
+      "size": {
+        "0": 210,
+        "1": 262
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 23,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 20,
+          "slot_index": 1,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 6,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 2,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            7
+          ],
+          "slot_index": 0,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        489466111750287,
+        "randomize",
+        35,
+        6,
+        "dpmpp_2m",
+        "karras",
+        1
+      ],
+      "_widget_cache_map": {},
+      "color": "#223",
+      "bgcolor": "#335",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 9,
+      "type": "SaveImage",
+      "pos": [
+        1507,
+        191
+      ],
+      "size": {
+        "0": 246.12664794921875,
+        "1": 270
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 9,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "_widget_cache_map": {},
+      "color": "#233",
+      "bgcolor": "#355",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        553.0589299364746,
+        190.07000957677207
+      ],
+      "size": {
+        "0": 289.2708740234375,
+        "1": 105.61815643310547
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 3,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            14
+          ],
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "Chinese ancient man,real,photo,portrait"
+      ],
+      "_widget_cache_map": {},
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 13,
+      "type": "LoadImage",
+      "pos": [
+        -70,
+        -61
+      ],
+      "size": {
+        "0": 315,
+        "1": 314
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            15,
+            22
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "85f693437b064f429ae274b3c166a474~tplv-tt-large.jpeg",
+        "image"
+      ],
+      "_widget_cache_map": {
+        "85f693437b064f429ae274b3c166a474~tplv-tt-large.jpeg": {
+          "value": "img/f6a874d8e6384412aef848a740719008/274db6e30bc193b63f8c2db211e253150e02783f54f9437c511e4f70472cd81e.jpeg",
+          "name": "85f693437b064f429ae274b3c166a474~tplv-tt-large.jpeg",
+          "url": "https://liblibai-tmp-image.vibrou.com/img/f6a874d8e6384412aef848a740719008/274db6e30bc193b63f8c2db211e253150e02783f54f9437c511e4f70472cd81e.jpeg"
+        }
+      },
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 4,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        296.05892993647456,
+        192.07000957677207
+      ],
+      "size": {
+        "0": 210,
+        "1": 98
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            23
+          ],
+          "slot_index": 0,
+          "label": "模型"
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            3,
+            5
+          ],
+          "slot_index": 1,
+          "label": "CLIP"
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            27
+          ],
+          "slot_index": 2,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "Realism Engine SDXL_v3.0 VAE"
+      ],
+      "_widget_cache_map": {
+        "Realism Engine SDXL_v3.0 VAE": {
+          "name": "Realism Engine SDXL_v3.0 VAE",
+          "value": 1330575
+        }
+      },
+      "color": "#323",
+      "bgcolor": "#535",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 17,
+      "type": "ControlNetLoader",
+      "pos": [
+        793,
+        -13
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "links": [
+            21
+          ],
+          "shape": 3,
+          "label": "ControlNet"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetLoader"
+      },
+      "widgets_values": [
+        "TTPLanet_SDXL_Controlnet_Tile_Realistic_v2"
+      ],
+      "_widget_cache_map": {},
+      "color": "#323",
+      "bgcolor": "#535",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 11,
+      "type": "ControlNetApply",
+      "pos": [
+        533,
+        -10
+      ],
+      "size": {
+        "0": 211.60000610351562,
+        "1": 98
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 14,
+          "label": "条件"
+        },
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 18,
+          "slot_index": 1,
+          "label": "ControlNet"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 15,
+          "slot_index": 2,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            19
+          ],
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetApply"
+      },
+      "widgets_values": [
+        0.5
+      ],
+      "_widget_cache_map": {},
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 16,
+      "type": "ControlNetApply",
+      "pos": [
+        1033,
+        -5
+      ],
+      "size": {
+        "0": 211.60000610351562,
+        "1": 98
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 19,
+          "label": "条件"
+        },
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 21,
+          "slot_index": 1,
+          "label": "ControlNet"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 22,
+          "slot_index": 2,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            20
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetApply"
+      },
+      "widgets_values": [
+        0.2
+      ],
+      "_widget_cache_map": {},
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 12,
+      "type": "ControlNetLoader",
+      "pos": [
+        299,
+        -15
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "links": [
+            18
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "ControlNet"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetLoader"
+      },
+      "widgets_values": [
+        "xinsir_controlnet-canny-sdxl_V2"
+      ],
+      "_widget_cache_map": {},
+      "color": "#323",
+      "bgcolor": "#535",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 23,
+      "type": "Note",
+      "pos": [
+        25,
+        323
+      ],
+      "size": {
+        "0": 237.4791717529297,
+        "1": 89.06804656982422
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "SDXL模型选择Realist Engine V3.0VAE模型；\n也可选择其他真人模型，自行测试；"
+      ],
+      "_widget_cache_map": {},
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 21,
+      "type": "Note",
+      "pos": [
+        516,
+        -205
+      ],
+      "size": [
+        245.3752257231879,
+        96.64926793825506
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "ControlNet Canny控制：\nSDXL模型选择文件名带SDXL或XL的canny模型；\nSD15模型选择文件名带SD15的canny模型；\n强度：0.4-0.6\n\n微调参数以达到最佳效果"
+      ],
+      "_widget_cache_map": {},
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 22,
+      "type": "Note",
+      "pos": [
+        937,
+        -204
+      ],
+      "size": [
+        240.9975390697416,
+        97.09151727389332
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "ControlNet Tile控制：\nSDXL模型选择文件名带SDXL或XL的Tile模型；\nSD15模型选择文件名带SD15的Tile模型；\n强度：0.1-0.2\n\n微调参数以达到最佳效果"
+      ],
+      "_widget_cache_map": {},
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    }
+  ],
+  "links": [
+    [
+      2,
+      5,
+      0,
+      3,
+      3,
+      "LATENT"
+    ],
+    [
+      3,
+      4,
+      1,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      5,
+      4,
+      1,
+      7,
+      0,
+      "CLIP"
+    ],
+    [
+      6,
+      7,
+      0,
+      3,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      7,
+      3,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      9,
+      8,
+      0,
+      9,
+      0,
+      "IMAGE"
+    ],
+    [
+      14,
+      6,
+      0,
+      11,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      15,
+      13,
+      0,
+      11,
+      2,
+      "IMAGE"
+    ],
+    [
+      18,
+      12,
+      0,
+      11,
+      1,
+      "CONTROL_NET"
+    ],
+    [
+      19,
+      11,
+      0,
+      16,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      20,
+      16,
+      0,
+      3,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      21,
+      17,
+      0,
+      16,
+      1,
+      "CONTROL_NET"
+    ],
+    [
+      22,
+      13,
+      0,
+      16,
+      2,
+      "IMAGE"
+    ],
+    [
+      23,
+      4,
+      0,
+      3,
+      0,
+      "MODEL"
+    ],
+    [
+      27,
+      4,
+      2,
+      8,
+      1,
+      "VAE"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "ControlNet",
+      "bounding": [
+        289,
+        -89,
+        966,
+        192
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "Sampler",
+      "bounding": [
+        873,
+        117,
+        890,
+        350
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "Model & Prompt",
+      "bounding": [
+        286,
+        116,
+        566,
+        321
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ],
+    "ds": {
+      "scale": 1.283902517749502,
+      "offset": {
+        "0": 420.17865319519336,
+        "1": 322.54144841148445
+      }
+    },
+    "workspace_info": {
+      "id": "X9ewUGLTNxUvPBVAqCi3N",
+      "saveLock": false,
+      "cloudID": null,
+      "coverMediaPath": null
+    }
+  },
+  "version": 0.4
+}

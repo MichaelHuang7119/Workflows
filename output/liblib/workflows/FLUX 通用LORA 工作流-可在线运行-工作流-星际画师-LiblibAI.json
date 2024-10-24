@@ -1,0 +1,903 @@
+{
+  "last_node_id": 76,
+  "last_link_id": 128,
+  "nodes": [
+    {
+      "id": 22,
+      "type": "BasicGuider",
+      "pos": [
+        1443.1577453613281,
+        569
+      ],
+      "size": {
+        "0": 241.79998779296875,
+        "1": 46
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 98,
+          "slot_index": 0,
+          "label": "模型"
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 120,
+          "slot_index": 1,
+          "label": "条件"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            30
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "引导"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicGuider"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 25,
+      "type": "RandomNoise",
+      "pos": [
+        1393.9818115234375,
+        80
+      ],
+      "size": {
+        "0": 290.9759216308594,
+        "1": 82
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            37
+          ],
+          "shape": 3,
+          "label": "噪波生成"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        575865143189205,
+        "randomize"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 16,
+      "type": "KSamplerSelect",
+      "pos": [
+        1428.696533203125,
+        242
+      ],
+      "size": {
+        "0": 256.2611999511719,
+        "1": 58
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            19
+          ],
+          "shape": 3,
+          "label": "采样器"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "euler"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 5,
+      "type": "EmptyLatentImage",
+      "pos": [
+        1036.9845275878906,
+        80
+      ],
+      "size": {
+        "0": 282.97320556640625,
+        "1": 125.21430969238281
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            115
+          ],
+          "slot_index": 0,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        800,
+        1024,
+        1
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 10,
+      "type": "VAELoader",
+      "pos": [
+        1791.5594177246094,
+        80
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            12
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [
+        2046,
+        84
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 24,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 12,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            41,
+            127
+          ],
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 13,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        1805,
+        288
+      ],
+      "size": {
+        "0": 266.6016845703125,
+        "1": 106
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 37,
+          "slot_index": 0,
+          "label": "噪波生成"
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 30,
+          "slot_index": 1,
+          "label": "引导"
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 19,
+          "slot_index": 2,
+          "label": "采样器"
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 20,
+          "slot_index": 3,
+          "label": "Sigmas"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 117,
+          "slot_index": 4,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            24
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "输出"
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3,
+          "label": "降噪输出"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 17,
+      "type": "BasicScheduler",
+      "pos": [
+        1400,
+        392
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 100,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            20
+          ],
+          "shape": 3,
+          "label": "Sigmas"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicScheduler"
+      },
+      "widgets_values": [
+        "normal",
+        25,
+        1
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 27,
+      "type": "PreviewImage",
+      "pos": [
+        2321,
+        92
+      ],
+      "size": {
+        "0": 210,
+        "1": 246
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 41,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 58,
+      "type": "LoraLoader",
+      "pos": [
+        563,
+        676
+      ],
+      "size": {
+        "0": 251.50570678710938,
+        "1": 126
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 96,
+          "label": "模型"
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 97,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            98,
+            100
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            121
+          ],
+          "shape": 3,
+          "label": "CLIP",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoader"
+      },
+      "widgets_values": [
+        "古风汉服 Flux | 中国女孩_v1.0",
+        1,
+        1
+      ],
+      "_widget_cache_map": {
+        "武侠-FLUX-PAseer_FLUX V1": {
+          "name": "武侠-FLUX-PAseer_FLUX V1",
+          "value": 2381440
+        },
+        "古风汉服 Flux | 中国女孩_v1.0": {
+          "name": "古风汉服 Flux | 中国女孩_v1.0",
+          "value": "912d7498589b433486fa0ee23ca4eec5"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 12,
+      "type": "UNETLoader",
+      "pos": [
+        -94,
+        544
+      ],
+      "size": {
+        "0": 344.93365478515625,
+        "1": 87.99366760253906
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            96
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "FLUX.1哩布在线可运行-黑暗森林工作室_FLUX.1-dev-fp8",
+        "fp8_e4m3fn"
+      ],
+      "_widget_cache_map": {
+        "flux-schnell_fp8_unet_vae_clip_v1": {
+          "name": "flux-schnell_fp8_unet_vae_clip_v1",
+          "value": 2304011
+        },
+        "Flux1-fp8 11G版_flux1-dev": {
+          "name": "Flux1-fp8 11G版_flux1-dev",
+          "value": 2298961
+        },
+        "FLUX.1哩布在线可运行-黑暗森林工作室_FLUX.1-dev-fp8": {
+          "name": "FLUX.1哩布在线可运行-黑暗森林工作室_FLUX.1-dev-fp8",
+          "value": 2295774
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 11,
+      "type": "DualCLIPLoader",
+      "pos": [
+        -68,
+        227
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            97
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp8_e4m3fn",
+        "clip_l",
+        "flux"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 76,
+      "type": "SaveImage",
+      "pos": [
+        2248,
+        493
+      ],
+      "size": {
+        "0": 315,
+        "1": 270
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 127,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 71,
+      "type": "Latent Switch (JPS)",
+      "pos": [
+        1475,
+        698
+      ],
+      "size": {
+        "0": 210,
+        "1": 138
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "latent_1",
+          "type": "LATENT",
+          "link": 115,
+          "label": "latent_1"
+        },
+        {
+          "name": "latent_2",
+          "type": "LATENT",
+          "link": null,
+          "label": "latent_2"
+        },
+        {
+          "name": "latent_3",
+          "type": "LATENT",
+          "link": null,
+          "label": "latent_3"
+        },
+        {
+          "name": "latent_4",
+          "type": "LATENT",
+          "link": null,
+          "label": "latent_4"
+        },
+        {
+          "name": "latent_5",
+          "type": "LATENT",
+          "link": null,
+          "label": "latent_5"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "latent_out",
+          "type": "LATENT",
+          "links": [
+            117
+          ],
+          "shape": 3,
+          "label": "latent_out",
+          "slot_index": 0
+        }
+      ],
+      "title": "文生图",
+      "properties": {
+        "Node name for S&R": "Latent Switch (JPS)"
+      },
+      "widgets_values": [
+        0
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 35,
+      "type": "StringFunction|pysssss",
+      "pos": [
+        381,
+        100
+      ],
+      "size": {
+        "0": 438.01171875,
+        "1": 381.4057922363281
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text_c",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text_c"
+          },
+          "label": "文本_C"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            128
+          ],
+          "shape": 3,
+          "label": "字符串",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "StringFunction|pysssss"
+      },
+      "widgets_values": [
+        "append",
+        "yes",
+        "1qqq,realistic,best quality,masterpiece,highres,(exquisite body:1.5),gorgeous face,(milky skin:1.3),intricate details,high resolution,wallpaper,1girl,solo,dress,hair ornament,(((green and red dress))),flowers,long hair,brown hair,closed mouth,jewelry,long sleeves,wide sleeves,big eyes,floating hair,chinese clothes,hanfu,embroidery,long skirt,natural pose,falling petals,indoor,fanning,lantern,16K,HDR,highres,depth field,(film grain:1.1),boken,golden hour,(lens flare),vignette,rainbowing,(color grading:1.5),(large breasts:1.2),upper body,",
+        "",
+        ""
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 72,
+      "type": "CLIPTextEncodeFlux",
+      "pos": [
+        969,
+        279
+      ],
+      "size": {
+        "0": 387.0123596191406,
+        "1": 210.2318572998047
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 121,
+          "label": "clip"
+        },
+        {
+          "name": "t5xxl",
+          "type": "STRING",
+          "link": 128,
+          "widget": {
+            "name": "t5xxl"
+          },
+          "label": "t5xxl"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            120
+          ],
+          "shape": 3,
+          "label": "CONDITIONING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeFlux"
+      },
+      "widgets_values": [
+        "",
+        "",
+        3.5
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    }
+  ],
+  "links": [
+    [
+      12,
+      10,
+      0,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      19,
+      16,
+      0,
+      13,
+      2,
+      "SAMPLER"
+    ],
+    [
+      20,
+      17,
+      0,
+      13,
+      3,
+      "SIGMAS"
+    ],
+    [
+      24,
+      13,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      30,
+      22,
+      0,
+      13,
+      1,
+      "GUIDER"
+    ],
+    [
+      37,
+      25,
+      0,
+      13,
+      0,
+      "NOISE"
+    ],
+    [
+      41,
+      8,
+      0,
+      27,
+      0,
+      "IMAGE"
+    ],
+    [
+      96,
+      12,
+      0,
+      58,
+      0,
+      "MODEL"
+    ],
+    [
+      97,
+      11,
+      0,
+      58,
+      1,
+      "CLIP"
+    ],
+    [
+      98,
+      58,
+      0,
+      22,
+      0,
+      "MODEL"
+    ],
+    [
+      100,
+      58,
+      0,
+      17,
+      0,
+      "MODEL"
+    ],
+    [
+      115,
+      5,
+      0,
+      71,
+      0,
+      "LATENT"
+    ],
+    [
+      117,
+      71,
+      0,
+      13,
+      4,
+      "LATENT"
+    ],
+    [
+      120,
+      72,
+      0,
+      22,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      121,
+      58,
+      1,
+      72,
+      0,
+      "CLIP"
+    ],
+    [
+      127,
+      8,
+      0,
+      76,
+      0,
+      "IMAGE"
+    ],
+    [
+      128,
+      35,
+      0,
+      72,
+      1,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9646149645000022,
+      "offset": [
+        -230.2140801974415,
+        6.004124926248914
+      ]
+    },
+    "workspace_info": {
+      "id": "QyM_A6uLxG5Z0yCLwYGkm"
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

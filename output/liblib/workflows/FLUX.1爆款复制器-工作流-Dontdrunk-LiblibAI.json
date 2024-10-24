@@ -1,0 +1,1629 @@
+{
+  "last_node_id": 62,
+  "last_link_id": 74,
+  "nodes": [
+    {
+      "id": 18,
+      "type": "CLIPTextEncodeFlux",
+      "pos": {
+        "0": -384.6142578125,
+        "1": -48.947357177734375
+      },
+      "size": {
+        "0": 271.147705078125,
+        "1": 98
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 68,
+          "label": "CLIP"
+        },
+        {
+          "name": "clip_l",
+          "type": "STRING",
+          "link": 51,
+          "widget": {
+            "name": "clip_l"
+          },
+          "label": "CLIP_L"
+        },
+        {
+          "name": "t5xxl",
+          "type": "STRING",
+          "link": 49,
+          "widget": {
+            "name": "t5xxl"
+          },
+          "label": "T5XXL"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            16
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeFlux"
+      },
+      "widgets_values": [
+        "",
+        "",
+        3.5
+      ],
+      "color": "#346434",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 16,
+      "type": "RandomNoise",
+      "pos": {
+        "0": -382.6142578125,
+        "1": 108.05264282226562
+      },
+      "size": {
+        "0": 272.1231689453125,
+        "1": 82
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            11
+          ],
+          "label": "噪波生成",
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        995982105575817,
+        "randomize"
+      ],
+      "color": "#346434",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 15,
+      "type": "BasicGuider",
+      "pos": {
+        "0": -382.6142578125,
+        "1": 247.05264282226562
+      },
+      "size": {
+        "0": 268.0176696777344,
+        "1": 71.15848541259766
+      },
+      "flags": {},
+      "order": 26,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 69,
+          "slot_index": 0,
+          "label": "模型"
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 16,
+          "slot_index": 1,
+          "label": "条件"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            12
+          ],
+          "slot_index": 0,
+          "label": "引导",
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicGuider"
+      },
+      "color": "#346434",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 13,
+      "type": "KSamplerSelect",
+      "pos": {
+        "0": -380.6142578125,
+        "1": 373.05267333984375
+      },
+      "size": {
+        "0": 261.3573303222656,
+        "1": 58
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            13
+          ],
+          "label": "采样器",
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "euler"
+      ],
+      "color": "#346434",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 11,
+      "type": "VAEDecode",
+      "pos": {
+        "0": -351.6142578125,
+        "1": 828.0526123046875
+      },
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 28,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 10,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 24,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            55
+          ],
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "color": "#346434",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 12,
+      "type": "SamplerCustomAdvanced",
+      "pos": {
+        "0": -59.6142578125,
+        "1": 216.05264282226562
+      },
+      "size": {
+        "0": 369.0391540527344,
+        "1": 428.54840087890625
+      },
+      "flags": {},
+      "order": 27,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 11,
+          "slot_index": 0,
+          "label": "噪波生成"
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 12,
+          "slot_index": 1,
+          "label": "引导"
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 13,
+          "slot_index": 2,
+          "label": "采样器"
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 14,
+          "slot_index": 3,
+          "label": "Sigmas"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 44,
+          "slot_index": 4,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            10
+          ],
+          "slot_index": 0,
+          "label": "输出",
+          "shape": 3
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": null,
+          "label": "降噪输出",
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      },
+      "color": "#346434",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 50,
+      "type": "DualCLIPLoaderGGUF",
+      "pos": {
+        "0": -1986.561767578125,
+        "1": -68.09536743164062
+      },
+      "size": {
+        "0": 312.54229736328125,
+        "1": 106
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoaderGGUF"
+      },
+      "widgets_values": [
+        "clip_l.safetensors",
+        "t5-v1_1-xxl-encoder-Q8_0.gguf",
+        "flux"
+      ]
+    },
+    {
+      "id": 49,
+      "type": "VAELoader",
+      "pos": {
+        "0": -1987.561767578125,
+        "1": 112.90482330322266
+      },
+      "size": {
+        "0": 309.0223083496094,
+        "1": 58
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "FLUX.1VAE.safetensors"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 51,
+      "type": "UnetLoaderGGUFAdvanced",
+      "pos": {
+        "0": -1988.81591796875,
+        "1": -254.3951416015625
+      },
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "MODEL"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UnetLoaderGGUFAdvanced"
+      },
+      "widgets_values": [
+        "FLUX1-D-Q8_0.gguf",
+        "default",
+        "default",
+        false
+      ]
+    },
+    {
+      "id": 53,
+      "type": "DualCLIPLoader",
+      "pos": {
+        "0": -1966.918212890625,
+        "1": 635.3114624023438
+      },
+      "size": {
+        "0": 273.03485107421875,
+        "1": 106
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "clip_l.safetensors",
+        "model.fp16.safetensors",
+        "flux"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 54,
+      "type": "VAELoader",
+      "pos": {
+        "0": -1966.918212890625,
+        "1": 805.311279296875
+      },
+      "size": {
+        "0": 271.3761901855469,
+        "1": 58
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "FLUX.1VAE.safetensors"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 52,
+      "type": "UNETLoader",
+      "pos": {
+        "0": -1967.918212890625,
+        "1": 494.3115234375
+      },
+      "size": {
+        "0": 278.18157958984375,
+        "1": 82
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "FLUX.1-Unet-D-FP8-绘梦写真-人物写实摄影.safetensors",
+        "fp8_e4m3fn"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 25,
+      "type": "Joy_caption_load",
+      "pos": {
+        "0": -1044,
+        "1": 545
+      },
+      "size": {
+        "0": 299.09136962890625,
+        "1": 58
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "JoyPipeline",
+          "type": "JoyPipeline",
+          "links": [
+            26
+          ],
+          "shape": 3,
+          "label": "JoyCaption"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Joy_caption_load"
+      },
+      "widgets_values": [
+        "unsloth/Meta-Llama-3.1-8B-bnb-4bit"
+      ]
+    },
+    {
+      "id": 55,
+      "type": "Note",
+      "pos": {
+        "0": -1511,
+        "1": -221
+      },
+      "size": {
+        "0": 276.9642639160156,
+        "1": 81.84528350830078
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "加入喜欢的lora，以更接近理想的风格。"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 28,
+      "type": "WD14Tagger|pysssss",
+      "pos": {
+        "0": -1039,
+        "1": -35
+      },
+      "size": {
+        "0": 296.290283203125,
+        "1": 220
+      },
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 61,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            50
+          ],
+          "slot_index": 0,
+          "shape": 6,
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "WD14Tagger|pysssss"
+      },
+      "widgets_values": [
+        "wd-swinv2-tagger-v3",
+        0.35,
+        0.85,
+        false,
+        true,
+        "",
+        "simple_background, shirt, long_sleeves, 1boy, hat, holding, standing, jacket, white_shirt, heart, necktie, pants, black_footwear, bag, no_humans, bird, animal, blush_stickers, suit, plant, yellow_background, green_jacket, shoulder_bag, green_headwear, green_pants, letter, bear, envelope, color_guide, clothed_animal, love_letter, white_bird, holding_envelope, "
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 14,
+      "type": "BasicScheduler",
+      "pos": {
+        "0": -381.6142578125,
+        "1": 484.05267333984375
+      },
+      "size": {
+        "0": 263.48870849609375,
+        "1": 106
+      },
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 70,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            14
+          ],
+          "label": "Sigmas",
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicScheduler"
+      },
+      "widgets_values": [
+        "simple",
+        20,
+        1
+      ],
+      "color": "#346434",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 24,
+      "type": "Joy_caption",
+      "pos": {
+        "0": -1048,
+        "1": 674
+      },
+      "size": {
+        "0": 299.1300048828125,
+        "1": 168
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "joy_pipeline",
+          "type": "JoyPipeline",
+          "link": 26,
+          "label": "JoyCaption"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 59,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            48,
+            73
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Joy_caption"
+      },
+      "widgets_values": [
+        "A descriptive caption for this image",
+        1024,
+        0.7000000000000001,
+        true
+      ]
+    },
+    {
+      "id": 59,
+      "type": "ShowText|pysssss",
+      "pos": {
+        "0": -721,
+        "1": 556
+      },
+      "size": {
+        "0": 310.6084289550781,
+        "1": 282.28515625
+      },
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 73,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        ", a digital drawing featuring a cute anthropomorphic bear dressed as a postal worker. The bear stands upright and is wearing a green postal uniform with a matching hat, adorned with a gold emblem. A brown messenger bag, also with a gold emblem, is slung across its shoulder. The bear has rosy cheeks and a small nose, with its eyes closed, giving it a peaceful and friendly expression. The bear's left hand holds a red postbox, adorned with a white dove and a heart-shaped stamp. The postbox is placed centrally in the foreground and is framed by greenery. The background is a soft, pastel yellow, creating a calm and inviting atmosphere. A color palette consisting of red, green, brown, white, and yellow is used in the illustration, with the colors arranged in a horizontal row at the bottom of the image."
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 56,
+      "type": "Note",
+      "pos": {
+        "0": -1512,
+        "1": 319
+      },
+      "size": {
+        "0": 280.94622802734375,
+        "1": 95.36080169677734
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "上传参考图"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 57,
+      "type": "Note",
+      "pos": {
+        "0": -2343,
+        "1": 242
+      },
+      "size": [
+        293.8692321154822,
+        136.80082526649198
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "从三个加载模式中选择适合自己的加载模式\n\n显存低于8G的建议使用GGUF模式\n\n40系12G显存及以上的推荐使用混合模型\n\n尊贵的4090推荐使用官方原版大模型或官方混合调优模型\n，GGUF直接删掉他不配在尊贵的4090上出图"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 32,
+      "type": "EmptyLatentImage",
+      "pos": {
+        "0": -374,
+        "1": 644
+      },
+      "size": {
+        "0": 257.2720947265625,
+        "1": 106
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            44
+          ],
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        768,
+        1024,
+        2
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 48,
+      "type": "ClipInterrogator",
+      "pos": {
+        "0": -1050,
+        "1": 245
+      },
+      "size": {
+        "0": 315,
+        "1": 244
+      },
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 71,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "links": [
+            72
+          ],
+          "slot_index": 0,
+          "shape": 6,
+          "label": "提示词"
+        },
+        {
+          "name": "random_samples",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "随机样本"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ClipInterrogator"
+      },
+      "widgets_values": [
+        "fast",
+        "off",
+        "a bear is standing next to a mailbox, sticker illustration, postage, letterbox, square sticker, he is greeting you warmly, delivering mail, mascot illustration, telegram sticker, kawaii cutest sticker ever, telegram sticker design, sticker design, postcard, cute illustration, vintage postcard illustration, in the style of sachin teng, cute storybook illustration, by Nyuju Stumpy Brown",
+        "[]",
+        ""
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 60,
+      "type": "easy showAnything",
+      "pos": {
+        "0": -720,
+        "1": -48
+      },
+      "size": {
+        "0": 312.6084289550781,
+        "1": 221.23220825195312
+      },
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "type": "*",
+          "link": 74,
+          "label": "输入任何"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "easy showAnything"
+      },
+      "widgets_values": [
+        "simple_background, shirt, long_sleeves, 1boy, hat, holding, standing, jacket, white_shirt, heart, necktie, pants, black_footwear, bag, no_humans, bird, animal, blush_stickers, suit, plant, yellow_background, green_jacket, shoulder_bag, green_headwear, green_pants, letter, bear, envelope, color_guide, clothed_animal, love_letter, white_bird, holding_envelope, a bear is standing next to a mailbox, sticker illustration, postage, letterbox, square sticker, he is greeting you warmly, delivering mail, mascot illustration, telegram sticker, kawaii cutest sticker ever, telegram sticker design, sticker design, postcard, cute illustration, vintage postcard illustration, in the style of sachin teng, cute storybook illustration, by Nyuju Stumpy Brown"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 38,
+      "type": "easy promptConcat",
+      "pos": {
+        "0": -716,
+        "1": 236
+      },
+      "size": {
+        "0": 303.12286376953125,
+        "1": 95.61140441894531
+      },
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "prompt1",
+          "type": "STRING",
+          "link": 50,
+          "widget": {
+            "name": "prompt1"
+          },
+          "label": "提示词1"
+        },
+        {
+          "name": "prompt2",
+          "type": "STRING",
+          "link": 72,
+          "widget": {
+            "name": "prompt2"
+          },
+          "label": "提示词2"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "links": [
+            51,
+            74
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "提示词"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy promptConcat"
+      },
+      "widgets_values": [
+        "",
+        "",
+        ""
+      ],
+      "color": "#233",
+      "bgcolor": "#355",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 37,
+      "type": "easy promptConcat",
+      "pos": {
+        "0": -716,
+        "1": 390
+      },
+      "size": {
+        "0": 299.2102966308594,
+        "1": 97.57389831542969
+      },
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "prompt1",
+          "type": "STRING",
+          "link": 48,
+          "widget": {
+            "name": "prompt1"
+          },
+          "label": "提示词1"
+        },
+        {
+          "name": "prompt2",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "prompt2"
+          },
+          "label": "提示词2"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "links": [
+            49
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "提示词"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy promptConcat"
+      },
+      "widgets_values": [
+        "",
+        "",
+        ""
+      ],
+      "color": "#233",
+      "bgcolor": "#355",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 26,
+      "type": "Power Lora Loader (rgthree)",
+      "pos": {
+        "0": -1515,
+        "1": -74
+      },
+      "size": {
+        "0": 279.0859069824219,
+        "1": 310
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 28,
+          "label": "模型",
+          "dir": 3
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 29,
+          "label": "CLIP",
+          "dir": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            69,
+            70
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型",
+          "dir": 4
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            68
+          ],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "CLIP",
+          "dir": 4
+        }
+      ],
+      "properties": {
+        "Show Strengths": "Single Strength"
+      },
+      "widgets_values": [
+        null,
+        {
+          "type": "PowerLoraLoaderHeaderWidget"
+        },
+        {
+          "on": false,
+          "lora": "FLUX.1-中国女孩-V1.safetensors",
+          "strength": 0.8,
+          "strengthTwo": null
+        },
+        {
+          "on": false,
+          "lora": "FLUX.1-皮肤质感增强-V1.safetensors",
+          "strength": 0.7,
+          "strengthTwo": null
+        },
+        {
+          "on": false,
+          "lora": "FLUX.1-细节光影质感提升.safetensors",
+          "strength": 0.5,
+          "strengthTwo": null
+        },
+        {
+          "on": false,
+          "lora": "FLUX.1-美学姿势-V1.safetensors",
+          "strength": 1,
+          "strengthTwo": null
+        },
+        {
+          "on": false,
+          "lora": "FLUX.1-扁平化彩色动漫-V3.3.safetensors",
+          "strength": 1,
+          "strengthTwo": null
+        },
+        {
+          "on": false,
+          "lora": "FLUX.1-通用细节增强.safetensors",
+          "strength": 0.5,
+          "strengthTwo": null
+        },
+        {
+          "on": false,
+          "lora": "FLUX.1-MJ动漫风格-V3.1.safetensors",
+          "strength": 1.1,
+          "strengthTwo": null
+        },
+        {
+          "on": false,
+          "lora": "FLUX.1-艺术风格增强器-V1.safetensors",
+          "strength": 0.6,
+          "strengthTwo": null
+        },
+        null,
+        ""
+      ]
+    },
+    {
+      "id": 23,
+      "type": "CheckpointLoaderSimple",
+      "pos": {
+        "0": -1970,
+        "1": 295
+      },
+      "size": {
+        "0": 282.3978576660156,
+        "1": 98
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            28
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            29
+          ],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "CLIP"
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            24
+          ],
+          "slot_index": 2,
+          "shape": 3,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "FLUX.1-D-FP16-官方混合.safetensors"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 44,
+      "type": "PreviewImage",
+      "pos": {
+        "0": 1379,
+        "1": -50
+      },
+      "size": {
+        "0": 939.2410278320312,
+        "1": 915.995361328125
+      },
+      "flags": {},
+      "order": 30,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 62,
+          "label": "图像"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 22,
+      "type": "LoadImage",
+      "pos": {
+        "0": -1508,
+        "1": 463
+      },
+      "size": {
+        "0": 283.0446472167969,
+        "1": 451.3999938964844
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            59,
+            61,
+            71
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "pasted/image (4).png",
+        "image"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 40,
+      "type": "easy imageChooser",
+      "pos": {
+        "0": 342,
+        "1": -50
+      },
+      "size": {
+        "0": 1018.2513427734375,
+        "1": 919.1569213867188
+      },
+      "flags": {},
+      "order": 29,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 55,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            62
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "values": [
+          1
+        ],
+        "Node name for S&R": "easy imageChooser"
+      },
+      "widgets_values": [
+        "Always Pause",
+        "",
+        ""
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 58,
+      "type": "Note",
+      "pos": {
+        "0": -712,
+        "1": -293
+      },
+      "size": [
+        309.55197744274005,
+        139.5966571281416
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "在进行写实风格复制时请忽略CLIP询问机节点\n\n在进行其他非真实系复制时请打开CLIP询问机节点\n\n提示词链接加入lora触发词来修改成指定风格，人物，动作等\n默认复制不要加入任何lora，推荐使用FLUX.1-DEV-FP16模型进行风格复制。"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    }
+  ],
+  "links": [
+    [
+      10,
+      12,
+      0,
+      11,
+      0,
+      "LATENT"
+    ],
+    [
+      11,
+      16,
+      0,
+      12,
+      0,
+      "NOISE"
+    ],
+    [
+      12,
+      15,
+      0,
+      12,
+      1,
+      "GUIDER"
+    ],
+    [
+      13,
+      13,
+      0,
+      12,
+      2,
+      "SAMPLER"
+    ],
+    [
+      14,
+      14,
+      0,
+      12,
+      3,
+      "SIGMAS"
+    ],
+    [
+      16,
+      18,
+      0,
+      15,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      24,
+      23,
+      2,
+      11,
+      1,
+      "VAE"
+    ],
+    [
+      26,
+      25,
+      0,
+      24,
+      0,
+      "JoyPipeline"
+    ],
+    [
+      28,
+      23,
+      0,
+      26,
+      0,
+      "MODEL"
+    ],
+    [
+      29,
+      23,
+      1,
+      26,
+      1,
+      "CLIP"
+    ],
+    [
+      44,
+      32,
+      0,
+      12,
+      4,
+      "LATENT"
+    ],
+    [
+      48,
+      24,
+      0,
+      37,
+      0,
+      "STRING"
+    ],
+    [
+      49,
+      37,
+      0,
+      18,
+      2,
+      "STRING"
+    ],
+    [
+      50,
+      28,
+      0,
+      38,
+      0,
+      "STRING"
+    ],
+    [
+      51,
+      38,
+      0,
+      18,
+      1,
+      "STRING"
+    ],
+    [
+      55,
+      11,
+      0,
+      40,
+      0,
+      "IMAGE"
+    ],
+    [
+      59,
+      22,
+      0,
+      24,
+      1,
+      "IMAGE"
+    ],
+    [
+      61,
+      22,
+      0,
+      28,
+      0,
+      "IMAGE"
+    ],
+    [
+      62,
+      40,
+      0,
+      44,
+      0,
+      "IMAGE"
+    ],
+    [
+      68,
+      26,
+      1,
+      18,
+      0,
+      "CLIP"
+    ],
+    [
+      69,
+      26,
+      0,
+      15,
+      0,
+      "MODEL"
+    ],
+    [
+      70,
+      26,
+      0,
+      14,
+      0,
+      "MODEL"
+    ],
+    [
+      71,
+      22,
+      0,
+      48,
+      0,
+      "IMAGE"
+    ],
+    [
+      72,
+      48,
+      0,
+      38,
+      1,
+      "STRING"
+    ],
+    [
+      73,
+      24,
+      0,
+      59,
+      0,
+      "STRING"
+    ],
+    [
+      74,
+      38,
+      0,
+      60,
+      0,
+      "*"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "GGUF加载模式",
+      "bounding": [
+        -2026,
+        -345,
+        399,
+        558
+      ],
+      "color": "#A88",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "爆款复制器",
+      "bounding": [
+        -1089,
+        -128,
+        3458,
+        1037
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "混合加载模式",
+      "bounding": [
+        -2026,
+        214,
+        398,
+        200
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "UNET加载模式",
+      "bounding": [
+        -2025,
+        417,
+        396,
+        482
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.49500000000000555,
+      "offset": [
+        2479.61997380293,
+        803.8378705564272
+      ]
+    }
+  },
+  "version": 0.4
+}

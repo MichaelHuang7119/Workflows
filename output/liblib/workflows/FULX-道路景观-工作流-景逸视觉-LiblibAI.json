@@ -1,0 +1,830 @@
+{
+  "last_node_id": 35,
+  "last_link_id": 77,
+  "nodes": [
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [
+        948,
+        -14
+      ],
+      "size": {
+        "0": 140,
+        "1": 46
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 68,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 12,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            72
+          ],
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 28,
+      "type": "workflow/FLUX",
+      "pos": [
+        610,
+        8
+      ],
+      "size": {
+        "0": 280,
+        "1": 430
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 75,
+          "label": "model"
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 70,
+          "label": "guider"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 71,
+          "label": "latent_image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            68
+          ],
+          "shape": 3,
+          "label": "output"
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3,
+          "label": "denoised_output"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "workflow/FLUX"
+      },
+      "widgets_values": [
+        1072177147881991,
+        "randomize",
+        "euler",
+        "simple",
+        40,
+        1
+      ],
+      "_widget_cache_map": {}
+    },
+    {
+      "id": 25,
+      "type": "BasicGuider",
+      "pos": [
+        271,
+        31
+      ],
+      "size": {
+        "0": 280,
+        "1": 50
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 74,
+          "slot_index": 0,
+          "label": "模型"
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 64,
+          "slot_index": 1,
+          "label": "条件"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            70
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "引导"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicGuider"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 11,
+      "type": "DualCLIPLoader",
+      "pos": [
+        -840,
+        160
+      ],
+      "size": {
+        "0": 310,
+        "1": 110
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            10
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp8_e4m3fn",
+        "clip_l",
+        "flux"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 12,
+      "type": "UNETLoader",
+      "pos": [
+        -1161,
+        -19
+      ],
+      "size": {
+        "0": 477.1915588378906,
+        "1": 97.3603286743164
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            76
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "F.1基础算法模型-哩布在线可运行_F.1-dev-fp8",
+        "fp8_e4m3fn"
+      ],
+      "_widget_cache_map": {
+        "绘梦逸境 F.1  | 建筑室内设计大模型 | 空间景观_beta 0.5": {
+          "name": "绘梦逸境 F.1  | 建筑室内设计大模型 | 空间景观_beta 0.5",
+          "value": "f2259c5441674a4f90b25b9b96a7e2b6"
+        },
+        "F.1基础算法模型-哩布在线可运行_F.1-dev-fp8": {
+          "name": "F.1基础算法模型-哩布在线可运行_F.1-dev-fp8",
+          "value": "412b427ddb674b4dbab9e5abd5ae6057"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 34,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        -184,
+        -13
+      ],
+      "size": {
+        "0": 386.0681457519531,
+        "1": 82
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 77,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            74,
+            75
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "F.1_Detailer_LoRA通用型细节增强_Detailer",
+        1
+      ],
+      "_widget_cache_map": {
+        "flux-JY-高层住宅v4_flux-JY-高层住宅v4": {
+          "name": "flux-JY-高层住宅v4_flux-JY-高层住宅v4",
+          "value": "2111a4929bf245f390f1715a6511815b"
+        },
+        "flux-鸟瞰图-v2_flux-鸟瞰图-v2": {
+          "name": "flux-鸟瞰图-v2_flux-鸟瞰图-v2",
+          "value": "246032b058bc40f6a4b55c6d3b570f4e"
+        },
+        "F.1_Detailer_LoRA通用型细节增强_Detailer": {
+          "name": "F.1_Detailer_LoRA通用型细节增强_Detailer",
+          "value": "d2894d9fc5ce4fd79e7426569433a2bd"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 35,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        -603,
+        -17
+      ],
+      "size": {
+        "0": 365.35870361328125,
+        "1": 82
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 76,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            77
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "FLUX-道路景观-v6_FLUX-道路景观v6",
+        0.7000000000000001
+      ],
+      "_widget_cache_map": {
+        "flux-JY-高层住宅v4_flux-JY-高层住宅v4": {
+          "name": "flux-JY-高层住宅v4_flux-JY-高层住宅v4",
+          "value": "2111a4929bf245f390f1715a6511815b"
+        },
+        "flux-鸟瞰图-v2_flux-鸟瞰图-v2": {
+          "name": "flux-鸟瞰图-v2_flux-鸟瞰图-v2",
+          "value": "246032b058bc40f6a4b55c6d3b570f4e"
+        },
+        "FLUX-道路景观-v6_FLUX-道路景观v6": {
+          "name": "FLUX-道路景观-v6_FLUX-道路景观v6",
+          "value": "b7554295e59347519e32f61bbc613be9"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -492,
+        159
+      ],
+      "size": {
+        "0": 661.4781494140625,
+        "1": 281.1945495605469
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 10,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            64
+          ],
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "photographic masterpiece, hyper-realistic, true-to-life photo realism, (public square design:1.2), open and spacious layout, symmetrical pathways, well-organized seating areas, decorative paving patterns, lush greenery, interactive water features, elegant lighting fixtures, vibrant social atmosphere, clean and well-maintained surfaces, integrated landscaping, seamless pedestrian flow, central gathering spaces, (high-rise modern residential buildings:1.2), sleek urban architecture, expansive glass windows, spacious balconies, contemporary facade, clean lines, minimalist design, integrated greenery, well-lit interiors, luxurious living spacesThe image is an aerial view of a winding road in a park-like area. The road is divided into two sections, with the left side of the image showing a large park with trees and bushes on both sides. The trees are in various shades of green, orange, and yellow, indicating that it is autumn. The park is surrounded by a blue sky and there are a few buildings visible in the background. There are several cars driving on the road, and a few people can be seen walking on the sidewalks. The image appears to be taken from a high vantage point, looking down on the park."
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 5,
+      "type": "EmptyLatentImage",
+      "pos": [
+        228,
+        167
+      ],
+      "size": {
+        "0": 310,
+        "1": 110
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            71
+          ],
+          "slot_index": 0,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1536,
+        4
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 10,
+      "type": "VAELoader",
+      "pos": [
+        632,
+        -103
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            12
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 31,
+      "type": "SaveImage",
+      "pos": [
+        1140,
+        -14
+      ],
+      "size": {
+        "0": 517.7649536132812,
+        "1": 637.6412963867188
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 72,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    }
+  ],
+  "links": [
+    [
+      10,
+      11,
+      0,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      12,
+      10,
+      0,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      64,
+      6,
+      0,
+      25,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      68,
+      28,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      70,
+      25,
+      0,
+      28,
+      1,
+      "GUIDER"
+    ],
+    [
+      71,
+      5,
+      0,
+      28,
+      2,
+      "LATENT"
+    ],
+    [
+      72,
+      8,
+      0,
+      31,
+      0,
+      "IMAGE"
+    ],
+    [
+      74,
+      34,
+      0,
+      25,
+      0,
+      "MODEL"
+    ],
+    [
+      75,
+      34,
+      0,
+      28,
+      0,
+      "MODEL"
+    ],
+    [
+      76,
+      12,
+      0,
+      35,
+      0,
+      "MODEL"
+    ],
+    [
+      77,
+      35,
+      0,
+      34,
+      0,
+      "MODEL"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7972024500000044,
+      "offset": [
+        1921.7488610823211,
+        368.14770764211846
+      ]
+    },
+    "groupNodes": {
+      "FLUX": {
+        "nodes": [
+          {
+            "type": "RandomNoise",
+            "pos": [
+              470,
+              -330
+            ],
+            "size": {
+              "0": 315,
+              "1": 82
+            },
+            "flags": {},
+            "order": 4,
+            "mode": 0,
+            "outputs": [
+              {
+                "name": "NOISE",
+                "type": "NOISE",
+                "links": [],
+                "shape": 3
+              }
+            ],
+            "properties": {
+              "Node name for S&R": "RandomNoise"
+            },
+            "widgets_values": [
+              1035243129351945,
+              "randomize"
+            ],
+            "index": 0
+          },
+          {
+            "type": "KSamplerSelect",
+            "pos": [
+              440,
+              460
+            ],
+            "size": {
+              "0": 315,
+              "1": 58
+            },
+            "flags": {},
+            "order": 5,
+            "mode": 0,
+            "outputs": [
+              {
+                "name": "SAMPLER",
+                "type": "SAMPLER",
+                "links": [],
+                "shape": 3
+              }
+            ],
+            "properties": {
+              "Node name for S&R": "KSamplerSelect"
+            },
+            "widgets_values": [
+              "euler"
+            ],
+            "index": 1
+          },
+          {
+            "type": "BasicScheduler",
+            "pos": [
+              390,
+              670
+            ],
+            "size": {
+              "0": 315,
+              "1": 106
+            },
+            "flags": {},
+            "order": 6,
+            "mode": 0,
+            "inputs": [
+              {
+                "name": "model",
+                "type": "MODEL",
+                "link": null,
+                "slot_index": 0
+              }
+            ],
+            "outputs": [
+              {
+                "name": "SIGMAS",
+                "type": "SIGMAS",
+                "links": [],
+                "shape": 3
+              }
+            ],
+            "properties": {
+              "Node name for S&R": "BasicScheduler"
+            },
+            "widgets_values": [
+              "simple",
+              20,
+              1
+            ],
+            "index": 2
+          },
+          {
+            "type": "SamplerCustomAdvanced",
+            "pos": [
+              1270,
+              90
+            ],
+            "size": {
+              "0": 355.20001220703125,
+              "1": 106
+            },
+            "flags": {},
+            "order": 9,
+            "mode": 0,
+            "inputs": [
+              {
+                "name": "noise",
+                "type": "NOISE",
+                "link": null,
+                "slot_index": 0
+              },
+              {
+                "name": "guider",
+                "type": "GUIDER",
+                "link": null,
+                "slot_index": 1
+              },
+              {
+                "name": "sampler",
+                "type": "SAMPLER",
+                "link": null,
+                "slot_index": 2
+              },
+              {
+                "name": "sigmas",
+                "type": "SIGMAS",
+                "link": null,
+                "slot_index": 3
+              },
+              {
+                "name": "latent_image",
+                "type": "LATENT",
+                "link": null,
+                "slot_index": 4
+              }
+            ],
+            "outputs": [
+              {
+                "name": "output",
+                "type": "LATENT",
+                "links": [],
+                "shape": 3,
+                "slot_index": 0
+              },
+              {
+                "name": "denoised_output",
+                "type": "LATENT",
+                "links": null,
+                "shape": 3
+              }
+            ],
+            "properties": {
+              "Node name for S&R": "SamplerCustomAdvanced"
+            },
+            "index": 3
+          }
+        ],
+        "links": [
+          [
+            null,
+            0,
+            2,
+            0,
+            12,
+            "MODEL"
+          ],
+          [
+            0,
+            0,
+            3,
+            0,
+            16,
+            "NOISE"
+          ],
+          [
+            null,
+            0,
+            3,
+            1,
+            25,
+            "GUIDER"
+          ],
+          [
+            1,
+            0,
+            3,
+            2,
+            17,
+            "SAMPLER"
+          ],
+          [
+            2,
+            0,
+            3,
+            3,
+            22,
+            "SIGMAS"
+          ],
+          [
+            null,
+            0,
+            3,
+            4,
+            5,
+            "LATENT"
+          ]
+        ],
+        "external": [
+          [
+            3,
+            0,
+            "LATENT"
+          ]
+        ]
+      }
+    }
+  },
+  "version": 0.4
+}

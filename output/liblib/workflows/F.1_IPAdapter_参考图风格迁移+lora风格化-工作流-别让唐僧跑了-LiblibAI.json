@@ -1,0 +1,825 @@
+{
+  "last_node_id": 49,
+  "last_link_id": 105,
+  "nodes": [
+    {
+      "id": 32,
+      "type": "LoadFluxIPAdapter",
+      "pos": {
+        "0": 480,
+        "1": 530
+      },
+      "size": {
+        "0": 380,
+        "1": 110
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "ipadapterFlux",
+          "type": "IP_ADAPTER_FLUX",
+          "links": [
+            65
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "IPAdapter_Flux"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadFluxIPAdapter"
+      },
+      "widgets_values": [
+        "flux-ip-adapter.safetensors",
+        "clip_vision_l.safetensors",
+        "GPU"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 10,
+      "type": "UNETLoader",
+      "pos": {
+        "0": 150,
+        "1": 690
+      },
+      "size": {
+        "0": 320,
+        "1": 80
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            89
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "flux1-dev.sft",
+        "fp8_e4m3fn"
+      ],
+      "color": "#346434",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 8,
+      "type": "VAELoader",
+      "pos": {
+        "0": 880,
+        "1": 490
+      },
+      "size": [
+        350,
+        60
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            59
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 7,
+      "type": "VAEDecode",
+      "pos": {
+        "0": 880,
+        "1": 590
+      },
+      "size": {
+        "0": 340,
+        "1": 50
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 86,
+          "slot_index": 0,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 59,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            76
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": [],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 19,
+      "type": "CLIPTextEncodeFlux",
+      "pos": {
+        "0": 580,
+        "1": 980
+      },
+      "size": {
+        "0": 410,
+        "1": 220
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 27,
+          "slot_index": 0,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            84
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeFlux"
+      },
+      "widgets_values": [
+        "",
+        "",
+        4
+      ],
+      "color": "#006691",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 29,
+      "type": "ImageCrop",
+      "pos": {
+        "0": 480,
+        "1": 360
+      },
+      "size": [
+        380,
+        130
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 55,
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageCrop"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        4,
+        4
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 33,
+      "type": "ImageScale",
+      "pos": {
+        "0": 480,
+        "1": 190
+      },
+      "size": [
+        380,
+        130
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 72,
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            73
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageScale"
+      },
+      "widgets_values": [
+        "nearest-exact",
+        1024,
+        1024,
+        "disabled"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 6,
+      "type": "EmptyLatentImage",
+      "pos": {
+        "0": 480,
+        "1": 1180
+      },
+      "size": {
+        "0": 380,
+        "1": 110
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            85
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        768,
+        1024,
+        1
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 5,
+      "type": "CLIPTextEncodeFlux",
+      "pos": {
+        "0": 480,
+        "1": 820
+      },
+      "size": {
+        "0": 380,
+        "1": 320
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 2,
+          "slot_index": 0,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            83
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeFlux"
+      },
+      "widgets_values": [
+        "An Asian girl is sitting on a wooden chair next to a round dining table, wearing a light pink dress, cotton dress, off-shoulder, V-neck, with a thin necklace, round hair, Asian young woman, smiling, right hand Picking up a light pink thermos cup, looking at the thermos cup, I caught a small pot of green cactus plants and two magazines. The background was light green walls and olive green curtains. The picture was clean and tidy.",
+        "An Asian girl is sitting on a wooden chair next to a round dining table, wearing a light pink dress, cotton dress, off-shoulder, V-neck, with a thin necklace, round hair, Asian young woman, smiling, right hand Picking up a light pink thermos cup, looking at the thermos cup, I caught a small pot of green cactus plants and two magazines. The background was light green walls and olive green curtains. The picture was clean and tidy.",
+        4
+      ],
+      "color": "#af3535",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 4,
+      "type": "DualCLIPLoader",
+      "pos": {
+        "0": 150,
+        "1": 930
+      },
+      "size": {
+        "0": 320,
+        "1": 110
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            2,
+            27
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp16.safetensors",
+        "clip_l.safetensors",
+        "flux"
+      ],
+      "color": "#346434",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 16,
+      "type": "LoadImage",
+      "pos": {
+        "0": 150,
+        "1": 190
+      },
+      "size": {
+        "0": 320,
+        "1": 450
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            55,
+            72
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "ceshi.jpg",
+        "image"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 27,
+      "type": "ApplyFluxIPAdapter",
+      "pos": {
+        "0": 480,
+        "1": 680
+      },
+      "size": {
+        "0": 380,
+        "1": 100
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 90,
+          "slot_index": 0,
+          "label": "模型"
+        },
+        {
+          "name": "ip_adapter_flux",
+          "type": "IP_ADAPTER_FLUX",
+          "link": 65,
+          "label": "IPAdapter_Flux"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 73,
+          "slot_index": 2,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            82
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ApplyFluxIPAdapter"
+      },
+      "widgets_values": [
+        0.6
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 3,
+      "type": "XlabsSampler",
+      "pos": {
+        "0": 880,
+        "1": 690
+      },
+      "size": {
+        "0": 350,
+        "1": 600
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 82,
+          "slot_index": 0,
+          "label": "模型"
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 83,
+          "label": "正面条件"
+        },
+        {
+          "name": "neg_conditioning",
+          "type": "CONDITIONING",
+          "link": 84,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 85,
+          "label": "Latent",
+          "shape": 7
+        },
+        {
+          "name": "controlnet_condition",
+          "type": "ControlNetCondition",
+          "link": null,
+          "label": "ControlNet条件",
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            86
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "XlabsSampler"
+      },
+      "widgets_values": [
+        391226055714093,
+        "randomize",
+        40,
+        7,
+        3.5,
+        0,
+        1
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 38,
+      "type": "LoraLoaderModelOnly",
+      "pos": {
+        "0": 150,
+        "1": 810
+      },
+      "size": [
+        320,
+        80
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 89,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            90
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "FLUX\\F.1水光肌真人.safetensors",
+        0.5
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "shape": 1,
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 36,
+      "type": "PreviewImage",
+      "pos": {
+        "0": 1240,
+        "1": 590
+      },
+      "size": [
+        510,
+        700
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 76,
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": [],
+      "category": "Primitive Nodes"
+    }
+  ],
+  "links": [
+    [
+      2,
+      4,
+      0,
+      5,
+      0,
+      "CLIP"
+    ],
+    [
+      27,
+      4,
+      0,
+      19,
+      0,
+      "CLIP"
+    ],
+    [
+      55,
+      16,
+      0,
+      29,
+      0,
+      "IMAGE"
+    ],
+    [
+      59,
+      8,
+      0,
+      7,
+      1,
+      "VAE"
+    ],
+    [
+      65,
+      32,
+      0,
+      27,
+      1,
+      "IP_ADAPTER_FLUX"
+    ],
+    [
+      72,
+      16,
+      0,
+      33,
+      0,
+      "IMAGE"
+    ],
+    [
+      73,
+      33,
+      0,
+      27,
+      2,
+      "IMAGE"
+    ],
+    [
+      76,
+      7,
+      0,
+      36,
+      0,
+      "IMAGE"
+    ],
+    [
+      82,
+      27,
+      0,
+      3,
+      0,
+      "MODEL"
+    ],
+    [
+      83,
+      5,
+      0,
+      3,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      84,
+      19,
+      0,
+      3,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      85,
+      6,
+      0,
+      3,
+      3,
+      "LATENT"
+    ],
+    [
+      86,
+      3,
+      0,
+      7,
+      0,
+      "LATENT"
+    ],
+    [
+      89,
+      10,
+      0,
+      38,
+      0,
+      "MODEL"
+    ],
+    [
+      90,
+      38,
+      0,
+      27,
+      0,
+      "MODEL"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "FLUX_IPAdapter_图像风格迁移",
+      "bounding": [
+        20,
+        70,
+        1790,
+        1270
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1.0610764609500065,
+      "offset": [
+        151.00126878776985,
+        -270.4175768999819
+      ]
+    },
+    "workspace_info": {
+      "id": "BF_N2qLyYQNulx36Ku_Xt"
+    }
+  },
+  "version": 0.4
+}

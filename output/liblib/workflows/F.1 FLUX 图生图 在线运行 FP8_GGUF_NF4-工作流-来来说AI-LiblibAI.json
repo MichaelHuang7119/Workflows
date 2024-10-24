@@ -1,0 +1,690 @@
+{
+  "last_node_id": 41,
+  "last_link_id": 66,
+  "nodes": [
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": {
+        "0": 894,
+        "1": 57.98246765136719
+      },
+      "size": {
+        "0": 140.41586303710938,
+        "1": 46
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 52,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 46,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            9
+          ],
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 9,
+      "type": "SaveImage",
+      "pos": {
+        "0": 879,
+        "1": 154.98248291015625
+      },
+      "size": {
+        "0": 312.1710205078125,
+        "1": 465.2613220214844
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 9,
+          "label": "图像"
+        }
+      ],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 35,
+      "type": "FluxGuidance",
+      "pos": {
+        "0": 580,
+        "1": 55
+      },
+      "size": {
+        "0": 211.60000610351562,
+        "1": 58
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 56,
+          "label": "条件"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            57
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FluxGuidance"
+      },
+      "widgets_values": [
+        3.5
+      ],
+      "color": "#322",
+      "bgcolor": "#533",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 30,
+      "type": "CheckpointLoaderSimple",
+      "pos": {
+        "0": 58.73685836791992,
+        "1": 71.06433868408203
+      },
+      "size": {
+        "0": 431.5279235839844,
+        "1": 100.88790893554688
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            47
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            45,
+            54
+          ],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "CLIP"
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            46,
+            64
+          ],
+          "slot_index": 2,
+          "shape": 3,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "flux1-dev-fp8.safetensors"
+      ],
+      "color": "#322",
+      "bgcolor": "#533",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 31,
+      "type": "KSampler",
+      "pos": {
+        "0": 573,
+        "1": 202
+      },
+      "size": {
+        "0": 255.98428344726562,
+        "1": 272.786376953125
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 47,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 57,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 55,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 66,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            52
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        264605720106674,
+        "randomize",
+        40,
+        1,
+        "euler",
+        "simple",
+        1
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": 37,
+        "1": 307
+      },
+      "size": {
+        "0": 471.0981750488281,
+        "1": 313.6373291015625
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 45,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            56
+          ],
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "an Asian little girl, 8 years old, black hair, wearing a white princess dress, full-body photograph with long hair, standing in front of an ice sculpture castle, against a sky-blue background, natural lighting, a dreamy scene, high-definition photography, exquisite details on the skirt, and a sparkling crystal texture on her face. The full-body photograph was taken in the style of Canon cameras.\n\n\n",
+        true
+      ],
+      "color": "#322",
+      "bgcolor": "#533",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 38,
+      "type": "VAEEncode",
+      "pos": {
+        "0": -227,
+        "1": 610
+      },
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 58,
+          "label": "图像"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 64,
+          "slot_index": 1,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            65
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 37,
+      "type": "LoadImage",
+      "pos": {
+        "0": -311,
+        "1": 66
+      },
+      "size": {
+        "0": 299.5102233886719,
+        "1": 494.935546875
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            58
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "stevenchan001_12919_an_Asian_little_girl_8_years_old_black_hair_349d7d6c-ef6a-45d9-95a6-44a0fe27503b.png",
+        "image"
+      ],
+      "color": "#322",
+      "bgcolor": "#533",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 33,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": 355,
+        "1": 671
+      },
+      "size": {
+        "0": 422.84503173828125,
+        "1": 164.31304931640625
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 54,
+          "slot_index": 0,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            55
+          ],
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "",
+        true
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 41,
+      "type": "Note",
+      "pos": {
+        "0": -1042,
+        "1": 5
+      },
+      "size": [
+        654.495849609375,
+        745.1446533203125
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "text": "说明"
+      },
+      "widgets_values": [
+        "********************************\n工作流功能 Workflow function\n********************************\n使用FLUX FP8 comfy org版模型图片生成图片，简称I2I，共10个节点\nGenerate images using FLUX FP8 comfy org model text, abbreviated as T2I, with a total of 8 nodes\n\n********************************\n使用方法  HOW TO USE\n********************************\n第1组，红色框：加载图片\n第2组，红色框：加载FP8大模型(16GB)，无需加载clip模型和VAE模型。\n第3组，红色框：填写提示词；\n第4组，红色框：设置引导参数，2~5；绿色框：设置步数，CFG切记设置1，采样器和调度器按喜好设置。蓝色框：设置生成图片数量.\n第5组，等待AI出图。\nGroup 1, red box: Load FP8 large model (16GB) without loading clip model and VAE model.\nGroup 3, red box: fill in prompt words; Green box: Set the size and quantity of generated images\nGroup 4, red box: Set guidance parameters, 2-5; Green box: Set the number of steps, remember to set CFG to 1, and set the sampler and scheduler according to preference.\nGroup 4, wait for AI to generate the image.\n\n\n**********************************\n下载工作流 Download workflows \n**********************************\n你可以从这里找到更多“来来”制作的工作流下载\nYou can find more \"LAILAI\" production workflows here to download\n\n1、Openart\nhttps://openart.ai/workflows/@lailai\n2、LIBLIB\nhttps://www.liblib.art/userpage/246223f3718d400d980019ede42e6912/publish/workflow\n\n\n********************************\n联系方式 Contact information\n********************************\n如果您在使用过程中遇到任何问题，请通过下述联系方式与我联系,全网同名：来来说AI\nIf you encounter any problems during the use, Please contact me through the following contact information,Same name across the internet: lailai talk AI\n\n1、推特/Twitter\nhttps://x.com/6Lailai\n\n2、油管/youtube\nhttps://www.youtube.com/@laiAIGC\n\n3、TikTok\nhttps://www.tiktok.com/@laiaidesign\n\n4、微信/Wechat\nlaiweb3\n\n1、个人网站/Website\nhttps://lailai.club/\n\n2、微信公众号/Official Account WeChat\n搜索：来来说AI\n\n3、小红书/Red book\nhttps://www.xiaohongshu.com/user/profile/5d552549000000001103c036\n\n4、B站/blibli\nhttps://space.bilibili.com/503941258\n\n5、抖音/douyin\n搜索：来来说AI"
+      ],
+      "color": "#dbd414",
+      "bgcolor": "#c7c000",
+      "category": "Official"
+    },
+    {
+      "id": 40,
+      "type": "RepeatLatentBatch",
+      "pos": {
+        "0": 571,
+        "1": 547
+      },
+      "size": {
+        "0": 259.931640625,
+        "1": 63.94435119628906
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 65,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            66
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RepeatLatentBatch"
+      },
+      "widgets_values": [
+        4
+      ],
+      "color": "#223",
+      "bgcolor": "#335",
+      "category": "Primitive Nodes"
+    }
+  ],
+  "links": [
+    [
+      9,
+      8,
+      0,
+      9,
+      0,
+      "IMAGE"
+    ],
+    [
+      45,
+      30,
+      1,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      46,
+      30,
+      2,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      47,
+      30,
+      0,
+      31,
+      0,
+      "MODEL"
+    ],
+    [
+      52,
+      31,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      54,
+      30,
+      1,
+      33,
+      0,
+      "CLIP"
+    ],
+    [
+      55,
+      33,
+      0,
+      31,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      56,
+      6,
+      0,
+      35,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      57,
+      35,
+      0,
+      31,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      58,
+      37,
+      0,
+      38,
+      0,
+      "IMAGE"
+    ],
+    [
+      64,
+      30,
+      2,
+      38,
+      1,
+      "VAE"
+    ],
+    [
+      65,
+      38,
+      0,
+      40,
+      0,
+      "LATENT"
+    ],
+    [
+      66,
+      40,
+      0,
+      31,
+      3,
+      "LATENT"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "1（加载图像）",
+      "bounding": [
+        -334,
+        -21,
+        333,
+        688
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "5（AI自动出图）",
+      "bounding": [
+        870,
+        -29,
+        348,
+        697
+      ],
+      "color": "#8A8",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "4（设置参数）",
+      "bounding": [
+        537,
+        -27,
+        316,
+        700
+      ],
+      "color": "#b58b2a",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "3（设置提示词+图片大小）",
+      "bounding": [
+        11,
+        228,
+        509,
+        452
+      ],
+      "color": "#b06634",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "2（加载FLUX模型）",
+      "bounding": [
+        18,
+        -23,
+        505,
+        223
+      ],
+      "color": "#A88",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7247295000000015,
+      "offset": [
+        1025.0469361086627,
+        368.9107570376594
+      ]
+    },
+    "workspace_info": {
+      "id": "5a006366-9e06-44bf-b645-1d71568073c3",
+      "saveLock": false,
+      "cloudID": null,
+      "coverMediaPath": null
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

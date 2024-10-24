@@ -1,0 +1,745 @@
+{
+  "last_node_id": 53,
+  "last_link_id": 30,
+  "nodes": [
+    {
+      "id": 17,
+      "type": "BasicScheduler",
+      "pos": [
+        2100,
+        980
+      ],
+      "size": {
+        "0": 210,
+        "1": 115.57566833496094
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 8,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            4
+          ],
+          "shape": 3,
+          "label": "Sigmas"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicScheduler"
+      },
+      "widgets_values": [
+        "simple",
+        20,
+        0.8
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 10,
+      "type": "VAELoader",
+      "pos": [
+        2390,
+        570
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            2,
+            21
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 40,
+      "type": "VAEEncode",
+      "pos": [
+        2110,
+        570
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 24,
+          "label": "图像"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 21,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            20
+          ],
+          "shape": 3,
+          "label": "Latent",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 27,
+      "type": "PreviewImage",
+      "pos": [
+        2890,
+        120
+      ],
+      "size": {
+        "0": 732.4376831054688,
+        "1": 1070.3936767578125
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 11,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [
+        2660,
+        570
+      ],
+      "size": {
+        "0": 140,
+        "1": 46
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 6,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 2,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            11
+          ],
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 25,
+      "type": "RandomNoise",
+      "pos": [
+        2110,
+        690
+      ],
+      "size": {
+        "0": 251.46771240234375,
+        "1": 82.58558654785156
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            7
+          ],
+          "shape": 3,
+          "label": "噪波生成"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        543077302695505,
+        "randomize"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 16,
+      "type": "KSamplerSelect",
+      "pos": [
+        2110,
+        840
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            3
+          ],
+          "shape": 3,
+          "label": "采样器"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "euler"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 47,
+      "type": "Note",
+      "pos": [
+        1420,
+        590
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "这里上传马赛克的画框图，也可以自己涂抹"
+      ],
+      "_widget_cache_map": {},
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 37,
+      "type": "LoadImage",
+      "pos": [
+        1690,
+        570
+      ],
+      "size": {
+        "0": 315,
+        "1": 314
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            24
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "flux图生图漫画底图.jpg",
+        "image"
+      ],
+      "_widget_cache_map": {
+        "flux图生图漫画底图.jpg": {
+          "value": "img/9d7be7d23ae74996907ae610c7f945b8/219f4f2df73f841595ffb6f8ff9e85a0b0216ba3e543dc80b7359aaca8d20116.jpg",
+          "name": "flux图生图漫画底图.jpg",
+          "url": "https://liblibai-tmp-image.vibrou.com/img/9d7be7d23ae74996907ae610c7f945b8/219f4f2df73f841595ffb6f8ff9e85a0b0216ba3e543dc80b7359aaca8d20116.jpg"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 12,
+      "type": "UNETLoader",
+      "pos": [
+        1721,
+        178
+      ],
+      "size": {
+        "0": 222.6508331298828,
+        "1": 82
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            8,
+            9
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "FLUX.1哩布在线可运行-黑暗森林工作室_FLUX.1-dev-fp8",
+        "fp8_e4m3fn"
+      ],
+      "_widget_cache_map": {
+        "FLUX.1哩布在线可运行-黑暗森林工作室_FLUX.1-dev-fp8": {
+          "name": "FLUX.1哩布在线可运行-黑暗森林工作室_FLUX.1-dev-fp8",
+          "value": 2295774
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 11,
+      "type": "DualCLIPLoader",
+      "pos": [
+        1715,
+        340
+      ],
+      "size": {
+        "0": 251.0052947998047,
+        "1": 106
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            1
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "clip_l",
+        "t5xxl_fp16",
+        "flux"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        2098,
+        190
+      ],
+      "size": [
+        210,
+        96
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 1,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            10
+          ],
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "manga, comic, monochrome, sci-fi, Star Wars-inspired\n\nfirst panel\nCreate an image of a vast, futuristic space battlefield with massive starships exchanging laser fire. In the foreground, a lone pilot in a sleek starfighter is diving into the fray, with the cockpit illuminated by the glow of his instruments. The starry expanse and distant planets form the backdrop, with explosions and laser beams crisscrossing the scene.\n\nsecond panel\nShow a close-up of the pilot's face inside the cockpit, intense and focused as he navigates through the chaos. His helmet visor reflects the flashes of battle, and his expression is one of determination and resolve. The background should be the cockpit’s interior, filled with futuristic controls, displays, and a hint of the space battle outside the window.\n\nthird panel\nCreate a dramatic scene where the pilot’s starfighter is weaving through a swarm of enemy ships, narrowly avoiding blasts of laser fire. The starfighter’s sleek design and agility should be emphasized, with dynamic lines and shading to convey speed and intensity. The background can include the distant starships and the trail of destruction left behind.\n\nfourth panel\nShow a confrontation between the pilot and a menacing figure wielding a glowing energy sword (lightsaber-like). The pilot, now outside his starfighter, stands ready with a blaster in hand, while the figure exudes an aura of power and menace. The background should be a futuristic, metallic environment, such as a spaceship hangar or an alien planet’s surface, adding to the tension of the standoff.\n\nfifth panel\nCreate a close-up of the energy sword clashing with the pilot’s blaster, capturing the moment of impact. Sparks fly, and energy crackles as the two weapons collide. The background should be blurred, keeping the focus on the weapons and the intensity of the moment, with detailed textures on the energy sword and the blaster to enhance the sci-fi aesthetic.\n"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 22,
+      "type": "BasicGuider",
+      "pos": [
+        2106,
+        364
+      ],
+      "size": {
+        "0": 140,
+        "1": 46
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 9,
+          "slot_index": 0,
+          "label": "模型"
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 10,
+          "slot_index": 1,
+          "label": "条件"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            18
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "引导"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicGuider"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 13,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        2392,
+        279
+      ],
+      "size": {
+        "0": 140,
+        "1": 111.28502655029297
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 7,
+          "slot_index": 0,
+          "label": "噪波生成"
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 18,
+          "slot_index": 1,
+          "label": "引导"
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 3,
+          "slot_index": 2,
+          "label": "采样器"
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 4,
+          "slot_index": 3,
+          "label": "Sigmas"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 20,
+          "slot_index": 4,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            6
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "输出"
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3,
+          "label": "降噪输出"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 48,
+      "type": "Note",
+      "pos": [
+        2106,
+        59
+      ],
+      "size": [
+        214.87086270897453,
+        71.23541561370973
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "提示词不一定按照我这样写，我是省事用GPT写的，只要前面描述好风格，然后指定他位置描述就好"
+      ],
+      "_widget_cache_map": {},
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    }
+  ],
+  "links": [
+    [
+      1,
+      11,
+      0,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      2,
+      10,
+      0,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      3,
+      16,
+      0,
+      13,
+      2,
+      "SAMPLER"
+    ],
+    [
+      4,
+      17,
+      0,
+      13,
+      3,
+      "SIGMAS"
+    ],
+    [
+      6,
+      13,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      7,
+      25,
+      0,
+      13,
+      0,
+      "NOISE"
+    ],
+    [
+      8,
+      12,
+      0,
+      17,
+      0,
+      "MODEL"
+    ],
+    [
+      9,
+      12,
+      0,
+      22,
+      0,
+      "MODEL"
+    ],
+    [
+      10,
+      6,
+      0,
+      22,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      11,
+      8,
+      0,
+      27,
+      0,
+      "IMAGE"
+    ],
+    [
+      18,
+      22,
+      0,
+      13,
+      1,
+      "GUIDER"
+    ],
+    [
+      20,
+      40,
+      0,
+      13,
+      4,
+      "LATENT"
+    ],
+    [
+      21,
+      10,
+      0,
+      40,
+      1,
+      "VAE"
+    ],
+    [
+      24,
+      37,
+      0,
+      40,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.5445000000000015,
+      "offset": [
+        -673.5362142200497,
+        194.5383182214616
+      ]
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

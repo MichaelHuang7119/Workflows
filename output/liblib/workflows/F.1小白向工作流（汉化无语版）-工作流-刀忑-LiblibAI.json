@@ -1,0 +1,851 @@
+{
+  "last_node_id": 51,
+  "last_link_id": 91,
+  "nodes": [
+    {
+      "id": 16,
+      "type": "KSamplerSelect",
+      "pos": [
+        664.2108275943334,
+        180
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            19
+          ],
+          "shape": 3,
+          "label": "采样器"
+        }
+      ],
+      "title": "别动",
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "euler"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 13,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        827.2108275943334,
+        164
+      ],
+      "size": {
+        "0": 236.8000030517578,
+        "1": 106
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 37,
+          "slot_index": 0,
+          "label": "噪波生成"
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 30,
+          "slot_index": 1,
+          "label": "引导"
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 19,
+          "slot_index": 2,
+          "label": "采样器"
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 20,
+          "slot_index": 3,
+          "label": "Sigmas"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 23,
+          "slot_index": 4,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            24
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "输出"
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3,
+          "label": "降噪输出"
+        }
+      ],
+      "title": "少管我",
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      },
+      "color": "#223",
+      "bgcolor": "#335",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [
+        751.2108275943334,
+        157
+      ],
+      "size": {
+        "0": 140,
+        "1": 46
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 24,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 12,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            49
+          ],
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "color": "#2a363b",
+      "bgcolor": "#3f5159",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 22,
+      "type": "BasicGuider",
+      "pos": [
+        258.2108275943332,
+        222
+      ],
+      "size": {
+        "0": 161.1999969482422,
+        "1": 46
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 80,
+          "slot_index": 0,
+          "label": "模型"
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 60,
+          "slot_index": 1,
+          "label": "条件"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            30
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "引导"
+        }
+      ],
+      "title": "别动 快断了！",
+      "properties": {
+        "Node name for S&R": "BasicGuider"
+      },
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 49,
+      "type": "LoraLoader",
+      "pos": [
+        8.2108275943333,
+        121
+      ],
+      "size": [
+        454.7484595686023,
+        146.14022582767615
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 90,
+          "label": "模型"
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 91,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            79,
+            80
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            81
+          ],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "title": "lora不用要么选none，要么归零哈",
+      "properties": {
+        "Node name for S&R": "LoraLoader"
+      },
+      "widgets_values": [
+        "Dgirl-000017.safetensors",
+        0,
+        0
+      ],
+      "color": "#323",
+      "bgcolor": "#535",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 12,
+      "type": "UNETLoader",
+      "pos": [
+        9.2108275943333,
+        -13
+      ],
+      "size": [
+        454.41107336638123,
+        85.66116363257413
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            90
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "title": "大模型(加载了没，收藏了没？)",
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "RealmRender_00001_.safetensors",
+        "fp8_e4m3fn"
+      ],
+      "color": "#323",
+      "bgcolor": "#535",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 10,
+      "type": "VAELoader",
+      "pos": [
+        12.210827594333297,
+        -157
+      ],
+      "size": [
+        218.3744901603892,
+        94.68936714317857
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            12
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "title": "VAE也要加载",
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "color": "#323",
+      "bgcolor": "#535",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 11,
+      "type": "DualCLIPLoader",
+      "pos": [
+        243.2108275943333,
+        -163
+      ],
+      "size": [
+        210,
+        106
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            91
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "title": "clip（报红点开重选）",
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp8_e4m3fn.safetensors",
+        "clip_l.safetensors",
+        "flux"
+      ],
+      "color": "#323",
+      "bgcolor": "#535",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 17,
+      "type": "BasicScheduler",
+      "pos": [
+        1084,
+        -194
+      ],
+      "size": {
+        "0": 288.7072448730469,
+        "1": 106
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 79,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            20
+          ],
+          "shape": 3,
+          "label": "Sigmas"
+        }
+      ],
+      "title": "第二行修改步数，别的别管哦",
+      "properties": {
+        "Node name for S&R": "BasicScheduler"
+      },
+      "widgets_values": [
+        "simple",
+        20,
+        1
+      ],
+      "color": "#233",
+      "bgcolor": "#355",
+      "shape": 1,
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 25,
+      "type": "RandomNoise",
+      "pos": [
+        1086,
+        90
+      ],
+      "size": {
+        "0": 291.0855712890625,
+        "1": 82
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            37
+          ],
+          "shape": 3,
+          "label": "噪波生成"
+        }
+      ],
+      "title": "数字就是种子，不动就换一个数字吧",
+      "properties": {
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        572873375879657,
+        "randomize"
+      ],
+      "color": "#233",
+      "bgcolor": "#355",
+      "shape": 1,
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 42,
+      "type": "CLIPTextEncodeFlux",
+      "pos": [
+        1089,
+        209
+      ],
+      "size": [
+        283.53024986143555,
+        98
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 81,
+          "label": "clip"
+        },
+        {
+          "name": "clip_l",
+          "type": "STRING",
+          "link": 66,
+          "widget": {
+            "name": "clip_l"
+          },
+          "label": "clip_l"
+        },
+        {
+          "name": "t5xxl",
+          "type": "STRING",
+          "link": 67,
+          "widget": {
+            "name": "t5xxl"
+          },
+          "label": "t5xxl"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            60
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CONDITIONING"
+        }
+      ],
+      "title": "引导（Guidance）",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeFlux"
+      },
+      "widgets_values": [
+        "1boy,outdoors,looking at viewer,upper body,multicolored hair,full_shot,white hair,messy hair,cross_earrings,panorama,multicolored_background,short hair,hair in takes,black leather jacket,disney,",
+        "1boy,outdoors,looking at viewer,upper body,multicolored hair,full_shot,white hair,messy hair,cross_earrings,panorama,multicolored_background,short hair,hair in takes,black leather jacket,disney,",
+        3.5
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "shape": 1,
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 9,
+      "type": "SaveImage",
+      "pos": [
+        1394,
+        -193
+      ],
+      "size": {
+        "0": 344.8248596191406,
+        "1": 588.3900756835938
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 49,
+          "label": "图像"
+        }
+      ],
+      "title": "别瞅了 去右上角点生成，别忘了保存啊！",
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "Flux/ComfyUI"
+      ],
+      "color": "#222",
+      "bgcolor": "#000",
+      "shape": 1,
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 5,
+      "type": "EmptyLatentImage",
+      "pos": [
+        1085,
+        -53
+      ],
+      "size": {
+        "0": 287.2315673828125,
+        "1": 106
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            23
+          ],
+          "slot_index": 0,
+          "label": "Latent"
+        }
+      ],
+      "title": "调尺寸用的！1.宽 2.高 3.一次出几张",
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1536,
+        1
+      ],
+      "color": "#233",
+      "bgcolor": "#355",
+      "shape": 1,
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 44,
+      "type": "SeargePromptCombiner",
+      "pos": [
+        485,
+        -194
+      ],
+      "size": [
+        599.3477194900283,
+        492.8234068931527
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "combined prompt",
+          "type": "STRING",
+          "links": [
+            66,
+            67
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "合并提示词"
+        }
+      ],
+      "title": "上面造句下面写词，出不来的往下面堆",
+      "properties": {
+        "Node name for S&R": "SeargePromptCombiner"
+      },
+      "widgets_values": [
+        "octane rendering,This is an screencap of an anime-style character with blue-white hair. The character has large shinning blue eyes and pink lips, smiling. Her hair has a flowing, watercolor-like texture, with shades ranging from light blue to deep blue, and it has a glossy finish. Decorations include green leaves and blue flowers in her hair. Her expression appears friendly, with confidence and grace in her eyes. The overall style is very delicate and refined, with a harmonious color palette.",
+        ", ",
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335",
+      "shape": 1,
+      "category": "Custom Nodes"
+    }
+  ],
+  "links": [
+    [
+      12,
+      10,
+      0,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      19,
+      16,
+      0,
+      13,
+      2,
+      "SAMPLER"
+    ],
+    [
+      20,
+      17,
+      0,
+      13,
+      3,
+      "SIGMAS"
+    ],
+    [
+      23,
+      5,
+      0,
+      13,
+      4,
+      "LATENT"
+    ],
+    [
+      24,
+      13,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      30,
+      22,
+      0,
+      13,
+      1,
+      "GUIDER"
+    ],
+    [
+      37,
+      25,
+      0,
+      13,
+      0,
+      "NOISE"
+    ],
+    [
+      49,
+      8,
+      0,
+      9,
+      0,
+      "IMAGE"
+    ],
+    [
+      60,
+      42,
+      0,
+      22,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      66,
+      44,
+      0,
+      42,
+      1,
+      "STRING"
+    ],
+    [
+      67,
+      44,
+      0,
+      42,
+      2,
+      "STRING"
+    ],
+    [
+      79,
+      49,
+      0,
+      17,
+      0,
+      "MODEL"
+    ],
+    [
+      80,
+      49,
+      0,
+      22,
+      0,
+      "MODEL"
+    ],
+    [
+      81,
+      49,
+      1,
+      42,
+      0,
+      "CLIP"
+    ],
+    [
+      90,
+      12,
+      0,
+      49,
+      0,
+      "MODEL"
+    ],
+    [
+      91,
+      11,
+      0,
+      49,
+      1,
+      "CLIP"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "关键模型区",
+      "bounding": [
+        11,
+        -231,
+        466,
+        509
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "我在这呢！左键拖动，滚轮放大。看不清记得放大！",
+      "bounding": [
+        4,
+        -452,
+        1803,
+        999
+      ],
+      "color": "#3f789e",
+      "font_size": 100,
+      "locked": true
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.5054470284992943,
+      "offset": [
+        65.55492072093844,
+        454.3255248580621
+      ]
+    },
+    "workspace_info": {
+      "id": "cF14JHNEa0QU8y_o2bgEY",
+      "saveLock": false,
+      "cloudID": null,
+      "coverMediaPath": null
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

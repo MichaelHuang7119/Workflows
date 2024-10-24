@@ -1,0 +1,773 @@
+{
+  "last_node_id": 36,
+  "last_link_id": 76,
+  "nodes": [
+    {
+      "id": 19,
+      "type": "CLIPTextEncodeFlux",
+      "pos": [
+        256,
+        108
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 27,
+          "slot_index": 0,
+          "label": "clip"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            26
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "CONDITIONING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeFlux"
+      },
+      "widgets_values": [
+        "",
+        "",
+        4
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 4,
+      "type": "DualCLIPLoader",
+      "pos": [
+        -75,
+        374
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            2,
+            27
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "clip_l",
+        "t5xxl_fp8_e4m3fn",
+        "flux"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 29,
+      "type": "ImageCrop",
+      "pos": [
+        -81,
+        189
+      ],
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 55,
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageCrop"
+      },
+      "widgets_values": [
+        1024,
+        512,
+        4,
+        4
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 33,
+      "type": "ImageScale",
+      "pos": [
+        -77,
+        12
+      ],
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 72,
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            73
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageScale"
+      },
+      "widgets_values": [
+        "nearest-exact",
+        1024,
+        1024,
+        "disabled"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 10,
+      "type": "UNETLoader",
+      "pos": [
+        -79,
+        -135
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            61
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "黑暗森林工作室-FLUX.1_FLUX.1-dev-fp8",
+        "fp8_e4m3fn"
+      ],
+      "_widget_cache_map": {
+        "黑暗森林工作室-FLUX.1_FLUX.1-dev-fp8": {
+          "name": "黑暗森林工作室-FLUX.1_FLUX.1-dev-fp8",
+          "value": 2295774
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 16,
+      "type": "LoadImage",
+      "pos": [
+        -412,
+        -132
+      ],
+      "size": {
+        "0": 315,
+        "1": 314
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            55,
+            72
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "1285ef951c64831f2c3027fa00090a60d64524592bfbbfc7a972ed0f4e8e276a.png",
+        "image"
+      ],
+      "_widget_cache_map": {
+        "05bb5e3ecf31b1e8e77aaa68f54faba88aed26136c65be45b1caf06ef37ba721.png": {
+          "value": "img/081e9f07d9bd4c2ba090efde163518f9/05bb5e3ecf31b1e8e77aaa68f54faba88aed26136c65be45b1caf06ef37ba721.png",
+          "name": "05bb5e3ecf31b1e8e77aaa68f54faba88aed26136c65be45b1caf06ef37ba721.png",
+          "url": "https://liblibai-gen-images.vibrou.com/img/081e9f07d9bd4c2ba090efde163518f9/05bb5e3ecf31b1e8e77aaa68f54faba88aed26136c65be45b1caf06ef37ba721.png"
+        },
+        "output (27).png": {
+          "value": "img/081e9f07d9bd4c2ba090efde163518f9/8de531623ea8cf47c144a57a935019bc02bf6ae8807ae48ed1dc55d64443f933.png",
+          "name": "output (27).png",
+          "url": "https://liblibai-gen-images.vibrou.com/img/081e9f07d9bd4c2ba090efde163518f9/8de531623ea8cf47c144a57a935019bc02bf6ae8807ae48ed1dc55d64443f933.png"
+        },
+        "00ba08bfaa9ce67933e358744a5efc35a9a4144e07d3cc8b108ba742f025e5db.png": {
+          "value": "img/081e9f07d9bd4c2ba090efde163518f9/00ba08bfaa9ce67933e358744a5efc35a9a4144e07d3cc8b108ba742f025e5db.png",
+          "name": "00ba08bfaa9ce67933e358744a5efc35a9a4144e07d3cc8b108ba742f025e5db.png",
+          "url": "https://liblibai-gen-images.vibrou.com/img/081e9f07d9bd4c2ba090efde163518f9/00ba08bfaa9ce67933e358744a5efc35a9a4144e07d3cc8b108ba742f025e5db.png"
+        },
+        "1285ef951c64831f2c3027fa00090a60d64524592bfbbfc7a972ed0f4e8e276a.png": {
+          "value": "img/081e9f07d9bd4c2ba090efde163518f9/1285ef951c64831f2c3027fa00090a60d64524592bfbbfc7a972ed0f4e8e276a.png",
+          "name": "1285ef951c64831f2c3027fa00090a60d64524592bfbbfc7a972ed0f4e8e276a.png",
+          "url": "https://liblibai-gen-images.vibrou.com/img/081e9f07d9bd4c2ba090efde163518f9/1285ef951c64831f2c3027fa00090a60d64524592bfbbfc7a972ed0f4e8e276a.png"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 36,
+      "type": "PreviewImage",
+      "pos": [
+        1066,
+        -151
+      ],
+      "size": {
+        "0": 865.8053588867188,
+        "1": 863.5560913085938
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 76,
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 6,
+      "type": "EmptyLatentImage",
+      "pos": [
+        263,
+        356
+      ],
+      "size": [
+        391.59298365804125,
+        113.59716763288833
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            75
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        4
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 27,
+      "type": "ApplyFluxIPAdapter",
+      "pos": [
+        685,
+        11
+      ],
+      "size": [
+        301.40979875939956,
+        98.98210090799324
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 61,
+          "slot_index": 0,
+          "label": "model"
+        },
+        {
+          "name": "ip_adapter_flux",
+          "type": "IP_ADAPTER_FLUX",
+          "link": 65,
+          "label": "ip_adapter_flux"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 73,
+          "slot_index": 2,
+          "label": "image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            62
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "MODEL"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ApplyFluxIPAdapter"
+      },
+      "widgets_values": [
+        0.92
+      ],
+      "_widget_cache_map": {}
+    },
+    {
+      "id": 32,
+      "type": "LoadFluxIPAdapter",
+      "pos": [
+        684,
+        -140
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "ipadapterFlux",
+          "type": "IP_ADAPTER_FLUX",
+          "links": [
+            65
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "ipadapterFlux"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadFluxIPAdapter"
+      },
+      "widgets_values": [
+        "XLabs-flux-ip-adapter.safetensors",
+        "clip_vision_l.safetensors",
+        "CPU"
+      ],
+      "_widget_cache_map": {}
+    },
+    {
+      "id": 8,
+      "type": "VAELoader",
+      "pos": [
+        689,
+        461
+      ],
+      "size": [
+        296.40979875939956,
+        58
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            59
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 7,
+      "type": "VAEDecode",
+      "pos": [
+        691,
+        563
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 6,
+          "slot_index": 0,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 59,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            76
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 5,
+      "type": "CLIPTextEncodeFlux",
+      "pos": [
+        255,
+        -140
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 2,
+          "slot_index": 0,
+          "label": "clip"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            18
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "CONDITIONING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeFlux"
+      },
+      "widgets_values": [
+        "1 man, looking at viewer,\nDisplay glowing text \"IP Adapter in Liblib\" in white painting brush, placed in the center",
+        "1 man,looking at viewer, Display glowing text \"IP Adapter in Liblib\" in white painting brush, placed in the center",
+        4
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 3,
+      "type": "XlabsSampler",
+      "pos": [
+        687,
+        155
+      ],
+      "size": [
+        302.40979875939956,
+        258
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 62,
+          "slot_index": 0,
+          "label": "model"
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 18,
+          "label": "conditioning"
+        },
+        {
+          "name": "neg_conditioning",
+          "type": "CONDITIONING",
+          "link": 26,
+          "label": "neg_conditioning"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 75,
+          "label": "latent_image"
+        },
+        {
+          "name": "controlnet_condition",
+          "type": "ControlNetCondition",
+          "link": null,
+          "label": "controlnet_condition"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            6
+          ],
+          "shape": 3,
+          "label": "latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "XlabsSampler"
+      },
+      "widgets_values": [
+        65134356513968,
+        "fixed",
+        50,
+        1,
+        3.5,
+        0
+      ],
+      "_widget_cache_map": {}
+    }
+  ],
+  "links": [
+    [
+      2,
+      4,
+      0,
+      5,
+      0,
+      "CLIP"
+    ],
+    [
+      6,
+      3,
+      0,
+      7,
+      0,
+      "LATENT"
+    ],
+    [
+      18,
+      5,
+      0,
+      3,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      26,
+      19,
+      0,
+      3,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      27,
+      4,
+      0,
+      19,
+      0,
+      "CLIP"
+    ],
+    [
+      55,
+      16,
+      0,
+      29,
+      0,
+      "IMAGE"
+    ],
+    [
+      59,
+      8,
+      0,
+      7,
+      1,
+      "VAE"
+    ],
+    [
+      61,
+      10,
+      0,
+      27,
+      0,
+      "MODEL"
+    ],
+    [
+      62,
+      27,
+      0,
+      3,
+      0,
+      "MODEL"
+    ],
+    [
+      65,
+      32,
+      0,
+      27,
+      1,
+      "IP_ADAPTER_FLUX"
+    ],
+    [
+      72,
+      16,
+      0,
+      33,
+      0,
+      "IMAGE"
+    ],
+    [
+      73,
+      33,
+      0,
+      27,
+      2,
+      "IMAGE"
+    ],
+    [
+      75,
+      6,
+      0,
+      3,
+      3,
+      "LATENT"
+    ],
+    [
+      76,
+      7,
+      0,
+      36,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8769226950000013,
+      "offset": [
+        603.7783810915018,
+        380.35413284762126
+      ]
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

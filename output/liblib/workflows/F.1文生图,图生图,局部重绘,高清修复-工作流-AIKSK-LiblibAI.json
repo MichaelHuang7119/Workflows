@@ -1,0 +1,3048 @@
+{
+  "last_node_id": 154,
+  "last_link_id": 191,
+  "nodes": [
+    {
+      "id": 59,
+      "type": "DualCLIPLoader",
+      "pos": [
+        -396.20156300137023,
+        -341.9563821139482
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            79
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp16.safetensors",
+        "clip_l.safetensors",
+        "flux"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 61,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        940.7984369986301,
+        -268.95638211394834
+      ],
+      "size": {
+        "0": 355.20001220703125,
+        "1": 106
+      },
+      "flags": {},
+      "order": 40,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 68,
+          "slot_index": 0,
+          "label": "噪波生成"
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 69,
+          "slot_index": 1,
+          "label": "引导"
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 70,
+          "slot_index": 2,
+          "label": "采样器"
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 71,
+          "slot_index": 3,
+          "label": "Sigmas"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 82,
+          "slot_index": 4,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            66
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "输出"
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3,
+          "label": "降噪输出"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 64,
+      "type": "BasicGuider",
+      "pos": [
+        519.7984369986299,
+        -424.95638211394817
+      ],
+      "size": {
+        "0": 241.79998779296875,
+        "1": 46
+      },
+      "flags": {},
+      "order": 35,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 184,
+          "slot_index": 0,
+          "label": "模型"
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 80,
+          "slot_index": 1,
+          "label": "条件"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            69
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "引导"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicGuider"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 65,
+      "type": "RandomNoise",
+      "pos": [
+        502.7984369986297,
+        -42.95638211394829
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            68
+          ],
+          "shape": 3,
+          "label": "噪波生成"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        1051022272055724,
+        "randomize"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 58,
+      "type": "VAELoader",
+      "pos": [
+        78.79843699862964,
+        55.04361788605174
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            67,
+            83
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 57,
+      "type": "VAEDecode",
+      "pos": [
+        952.7984369986301,
+        -66.95638211394838
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 44,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 66,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 67,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            81
+          ],
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 69,
+      "type": "SaveImage",
+      "pos": [
+        1376.7984369986302,
+        -448.9563821139482
+      ],
+      "size": {
+        "0": 537.5791625976562,
+        "1": 858.9998168945312
+      },
+      "flags": {},
+      "order": 49,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 81,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 62,
+      "type": "KSamplerSelect",
+      "pos": [
+        496.79843699862977,
+        -308.9563821139483
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            70
+          ],
+          "shape": 3,
+          "label": "采样器"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "dpmpp_2m"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 63,
+      "type": "BasicScheduler",
+      "pos": [
+        501.7984369986297,
+        -190.9563821139483
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 30,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 183,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            71
+          ],
+          "shape": 3,
+          "label": "Sigmas"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicScheduler"
+      },
+      "widgets_values": [
+        "sgm_uniform",
+        30,
+        0.75
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 71,
+      "type": "LoadImage",
+      "pos": [
+        -405.20156300137023,
+        153.04361788605186
+      ],
+      "size": [
+        315,
+        314.00000762939453
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            86
+          ],
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "pexels-ozanculha-20359976.jpg",
+        "image"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 70,
+      "type": "ImageScaleBy",
+      "pos": [
+        84.79843699862964,
+        202.04361788605192
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 86,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            85
+          ],
+          "shape": 3,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageScaleBy"
+      },
+      "widgets_values": [
+        "lanczos",
+        0.5
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 68,
+      "type": "CLIPTextEncodeFlux",
+      "pos": [
+        46.79843699862967,
+        -361.9563821139482
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 79,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            80
+          ],
+          "shape": 3,
+          "label": "条件",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeFlux"
+      },
+      "widgets_values": [
+        "Maiden, chestnut curls, deep soulful eyes, ancient structure, weathered stones, black cloak, billowing gently, arms close to body, secret object, soft enigmatic smile, pale skin, fresh snow, setting sun, rosy cheeks, slightly parted mouth, whispering, wind, serene warmth, peace, wonder, nature.",
+        "In this scene, we find a young maiden with chestnut curls framing her face and deep, soulful eyes. She stands before an ancient structure, its weathered stones telling tales of bygone eras. Dressed in a black cloak that billows gently in the breeze, she holds her arms close to her body, as if guarding a secret or perhaps a precious object. A soft, enigmatic smile plays on her lips, her pale skin glowing like fresh snow under the warm light of the setting sun. Her rosy cheeks and slightly parted mouth suggest a quiet narrative, as if she is whispering a story only the wind can hear. The air around her is filled with a serene warmth, a sense of peace and wonder that seems to emanate from the very heart of nature",
+        3.5,
+        null,
+        null
+      ]
+    },
+    {
+      "id": 80,
+      "type": "BasicGuider",
+      "pos": [
+        2733.831608533432,
+        -1561.850453745123
+      ],
+      "size": {
+        "0": 241.79998779296875,
+        "1": 46
+      },
+      "flags": {},
+      "order": 37,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 189,
+          "slot_index": 0,
+          "label": "模型"
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 98,
+          "slot_index": 1,
+          "label": "条件"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            92,
+            109
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "引导"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicGuider"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 81,
+      "type": "RandomNoise",
+      "pos": [
+        2703.831608533432,
+        -1721.8504537451229
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            91,
+            108
+          ],
+          "shape": 3,
+          "label": "噪波生成"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        338022169122326,
+        "randomize"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 73,
+      "type": "VAEDecode",
+      "pos": [
+        3203.831608533432,
+        -1781.8504537451229
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 45,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 89,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 90,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            107
+          ],
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 90,
+      "type": "EmptyLatentImage",
+      "pos": [
+        2723.831608533432,
+        -1221.8504537451233
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            103
+          ],
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        768,
+        768,
+        1
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 77,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        2698.831608533432,
+        -1426.850453745123
+      ],
+      "size": {
+        "0": 355.20001220703125,
+        "1": 106
+      },
+      "flags": {},
+      "order": 41,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 91,
+          "slot_index": 0,
+          "label": "噪波生成"
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 92,
+          "slot_index": 1,
+          "label": "引导"
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 93,
+          "slot_index": 2,
+          "label": "采样器"
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 94,
+          "slot_index": 3,
+          "label": "Sigmas"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 103,
+          "slot_index": 4,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            89,
+            106
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "输出"
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3,
+          "label": "降噪输出"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 92,
+      "type": "PreviewImage",
+      "pos": [
+        3203.831608533432,
+        -1661.850453745123
+      ],
+      "size": {
+        "0": 210,
+        "1": 246
+      },
+      "flags": {},
+      "order": 50,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 107,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 74,
+      "type": "VAELoader",
+      "pos": [
+        3593.8316085334322,
+        -2103.850453745125
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            90,
+            116
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 95,
+      "type": "VAEDecode",
+      "pos": [
+        3633.8316085334322,
+        -1995.8504537451226
+      ],
+      "size": {
+        "0": 210,
+        "1": 50
+      },
+      "flags": {},
+      "order": 54,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 117,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 116,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            118
+          ],
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 75,
+      "type": "DualCLIPLoader",
+      "pos": [
+        2247.831608533432,
+        -1798.8504537451229
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            100
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp16.safetensors",
+        "clip_l.safetensors",
+        "flux"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 79,
+      "type": "BasicScheduler",
+      "pos": [
+        2253.831608533432,
+        -1371.8504537451229
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 32,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 187,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            94
+          ],
+          "shape": 3,
+          "label": "Sigmas"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicScheduler"
+      },
+      "widgets_values": [
+        "sgm_uniform",
+        50,
+        1
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 78,
+      "type": "KSamplerSelect",
+      "pos": [
+        2253.831608533432,
+        -1527.8504537451229
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            93,
+            110
+          ],
+          "shape": 3,
+          "label": "采样器"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "dpmpp_2m"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 94,
+      "type": "BasicScheduler",
+      "pos": [
+        2256.831608533432,
+        -1194.8504537451229
+      ],
+      "size": {
+        "0": 320,
+        "1": 110
+      },
+      "flags": {},
+      "order": 33,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 188,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            115
+          ],
+          "shape": 3,
+          "label": "Sigmas",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicScheduler"
+      },
+      "widgets_values": [
+        "sgm_uniform",
+        20,
+        0.5
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 83,
+      "type": "CLIPTextEncodeFlux",
+      "pos": [
+        2673.831608533432,
+        -2101.850453745125
+      ],
+      "size": {
+        "0": 440.6289367675781,
+        "1": 297.69525146484375
+      },
+      "flags": {},
+      "order": 26,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 100,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            98
+          ],
+          "shape": 3,
+          "label": "条件",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeFlux"
+      },
+      "widgets_values": [
+        "Maiden, chestnut curls, deep soulful eyes, ancient structure, weathered stones, black cloak, billowing gently, arms close to body, secret object, soft enigmatic smile, pale skin, fresh snow, setting sun, rosy cheeks, slightly parted mouth, whispering, wind, serene warmth, peace, wonder, nature.",
+        "In this breathtaking scene, a solitary valkyrie stands in all her glory, her form outlined against a cloudy sky. The valkyrie, a majestic figure, is dressed in a gorgeous set of armor that shines like polished silver, each plate intricately designed and fitting her form perfectly. She holds a long, gleaming spear in one hand, its tip pointed downward, exuding an aura of both power and grace. Adorning her head is a golden laurel wreath, a symbol of her divine status and valorous deeds.\n\nHer pale skin contrasts beautifully with the metallic tones of her armor, while her face is a vision of serene beauty, with delicate features and an expression that suggests both wisdom and compassion. The armor itself is not merely protective but also ornamental, resembling a dress that drapes elegantly over her form. Behind her, a pair of magnificent wings unfurls, their feathers shimmering with hues of gold and silver, adding to her ethereal presence.\n\nShe turns her gaze toward the viewer, her eyes meeting ours with a mix of curiosity and understanding. The cloudy sky above her is illuminated by a soft, holy light that seems to emanate from the heavens themselves, casting a gentle glow upon her and emphasizing her otherworldly nature. The light from the clouds above bathes the scene in a warm, mystical ambiance, enhancing the fantasy theme and the sense of being in the presence of a true goddess.",
+        2.5,
+        null,
+        null
+      ]
+    },
+    {
+      "id": 121,
+      "type": "KSamplerSelect",
+      "pos": [
+        2218.5790135905336,
+        -210.61073227407667
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            144
+          ],
+          "shape": 3,
+          "label": "采样器"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "dpmpp_2m"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 117,
+      "type": "VAELoader",
+      "pos": [
+        2208.5790135905336,
+        219.3892677259226
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            141,
+            157
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 124,
+      "type": "RandomNoise",
+      "pos": [
+        2208.5790135905336,
+        59.389267725923034
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            142
+          ],
+          "shape": 3,
+          "label": "噪波生成"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        844907628590586,
+        "randomize"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 122,
+      "type": "BasicScheduler",
+      "pos": [
+        2208.5790135905336,
+        -100.61073227407688
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 34,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 190,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            145
+          ],
+          "shape": 3,
+          "label": "Sigmas"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicScheduler"
+      },
+      "widgets_values": [
+        "sgm_uniform",
+        34,
+        1
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 134,
+      "type": "VAEDecode",
+      "pos": [
+        943.9007839626707,
+        -1143.65456814238
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 48,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 164,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 165,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            176
+          ],
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 142,
+      "type": "RandomNoise",
+      "pos": [
+        483.9007839626705,
+        -1073.65456814238
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            166
+          ],
+          "shape": 3,
+          "label": "噪波生成"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        663109275486579,
+        "randomize"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 138,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        923.9007839626707,
+        -1343.65456814238
+      ],
+      "size": {
+        "0": 355.20001220703125,
+        "1": 106
+      },
+      "flags": {},
+      "order": 43,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 166,
+          "slot_index": 0,
+          "label": "噪波生成"
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 167,
+          "slot_index": 1,
+          "label": "引导"
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 168,
+          "slot_index": 2,
+          "label": "采样器"
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 169,
+          "slot_index": 3,
+          "label": "Sigmas"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 178,
+          "slot_index": 4,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            164
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "输出"
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3,
+          "label": "降噪输出"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 148,
+      "type": "EmptyLatentImage",
+      "pos": [
+        -416.0992160373295,
+        -983.6545681423801
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            178
+          ],
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        832,
+        1280,
+        1
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 139,
+      "type": "KSamplerSelect",
+      "pos": [
+        473.9007839626705,
+        -1343.65456814238
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            168
+          ],
+          "shape": 3,
+          "label": "采样器"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "dpmpp_2m"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 141,
+      "type": "BasicGuider",
+      "pos": [
+        503.9007839626705,
+        -1463.65456814238
+      ],
+      "size": {
+        "0": 241.79998779296875,
+        "1": 46
+      },
+      "flags": {},
+      "order": 39,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 186,
+          "slot_index": 0,
+          "label": "模型"
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 173,
+          "slot_index": 1,
+          "label": "条件"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            167
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "引导"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicGuider"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 140,
+      "type": "BasicScheduler",
+      "pos": [
+        483.9007839626705,
+        -1223.65456814238
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 31,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 185,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            169
+          ],
+          "shape": 3,
+          "label": "Sigmas"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicScheduler"
+      },
+      "widgets_values": [
+        "sgm_uniform",
+        50,
+        1
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 145,
+      "type": "SaveImage",
+      "pos": [
+        1301,
+        -1527
+      ],
+      "size": {
+        "0": 537.5791625976562,
+        "1": 858.9998168945312
+      },
+      "flags": {},
+      "order": 53,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 176,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 120,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        2647,
+        -369
+      ],
+      "size": {
+        "0": 355.20001220703125,
+        "1": 106
+      },
+      "flags": {},
+      "order": 47,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 142,
+          "slot_index": 0,
+          "label": "噪波生成"
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 143,
+          "slot_index": 1,
+          "label": "引导"
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 144,
+          "slot_index": 2,
+          "label": "采样器"
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 145,
+          "slot_index": 3,
+          "label": "Sigmas"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 158,
+          "slot_index": 4,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            140
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "输出"
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3,
+          "label": "降噪输出"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 127,
+      "type": "SaveImage",
+      "pos": [
+        3088,
+        -622
+      ],
+      "size": {
+        "0": 537.5791625976562,
+        "1": 858.9998168945312
+      },
+      "flags": {},
+      "order": 55,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 152,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 151,
+      "type": "CLIPTextEncode",
+      "pos": [
+        2609,
+        -608
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 27,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 179,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            180
+          ],
+          "shape": 3,
+          "label": "条件",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "In this captivating portrait, a young woman with curly hair and striking brown eyes gazes directly into the camera, her expression serious and contemplative. She wears a black and green beret, holding it in place with one hand, while the rest of the fabric falls artfully around her head. The beret, with its intricate design, adds a touch of mystery and intrigue to her appearance.\n\nThe background is a warm, earthy brown, providing a stark contrast to her vibrant attire. The lighting is soft and diffused, casting a gentle glow on her face and highlighting the contours of her features. The overall composition of the image creates a sense of depth and dimension, drawing the viewer's eye toward the subject.",
+        null
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 118,
+      "type": "DualCLIPLoader",
+      "pos": [
+        2218.5790135905336,
+        -380.61073227407707
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            179,
+            181
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp16.safetensors",
+        "clip_l.safetensors",
+        "flux"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 152,
+      "type": "CLIPTextEncode",
+      "pos": [
+        2617,
+        -199
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 28,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 181,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            182
+          ],
+          "shape": 3,
+          "label": "条件",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "",
+        null
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 130,
+      "type": "InpaintModelConditioning",
+      "pos": [
+        2710,
+        80
+      ],
+      "size": {
+        "0": 220,
+        "1": 110
+      },
+      "flags": {},
+      "order": 38,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 180,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 182,
+          "label": "负面条件"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 157,
+          "slot_index": 2,
+          "label": "VAE"
+        },
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 160,
+          "slot_index": 3,
+          "label": "图像"
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 161,
+          "label": "遮罩"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            159
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [],
+          "shape": 3,
+          "slot_index": 1,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            158
+          ],
+          "shape": 3,
+          "slot_index": 2,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "InpaintModelConditioning"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 116,
+      "type": "VAEDecode",
+      "pos": [
+        2705,
+        343
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 52,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 140,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 141,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            152
+          ],
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 123,
+      "type": "BasicGuider",
+      "pos": [
+        2688,
+        238
+      ],
+      "size": {
+        "0": 241.79998779296875,
+        "1": 46
+      },
+      "flags": {},
+      "order": 42,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 191,
+          "slot_index": 0,
+          "label": "模型"
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 159,
+          "slot_index": 1,
+          "label": "条件"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            143
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "引导"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicGuider"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 135,
+      "type": "VAELoader",
+      "pos": [
+        67,
+        -982
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            165
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 144,
+      "type": "CLIPTextEncodeFlux",
+      "pos": [
+        -26,
+        -1552
+      ],
+      "size": {
+        "0": 441.3853759765625,
+        "1": 348.4978332519531
+      },
+      "flags": {},
+      "order": 29,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 175,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            173
+          ],
+          "shape": 3,
+          "label": "条件",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeFlux"
+      },
+      "widgets_values": [
+        "medium full shot of awe-inspiring snake with muscular body, amber eyes, bronze brown armored scales, venomous fangs, coiling tail, gemstone-studded scales frills, set in  a barren desert wasteland, with cracked earth and the remains of ancient structures, a place of mystery and danger, at dawn, ,Masterpiece,best quality, raw photo, realistic, very aesthetic, dark",
+        "In a stunning medium full shot, an awe-inspiring snake with a muscular body and piercing amber eyes is captured in all its glory. Its bronzed brown scales shimmer like armor, each one a miniature shield protecting its formidable form. Venomous fangs gleam menacingly as the snake opens its mouth, revealing the lethal weaponry that has earned it a fearsome reputation. Its coiling tail wraps around itself, a testament to the creature's power and grace.\n\nGemstone-studded scales form frills along its body, adding an element of mystique and wonder. These scales catch the light, reflecting hues of precious stones that adorn its form, creating a mesmerizing display of color and texture.\n\nThe snake is set against the backdrop of a barren desert wasteland, where the cracked earth stretches out endlessly under the first light of dawn. Ancient ruins dot the landscape, their weathered stones hinting at a forgotten civilization. The remains of these structures stand as silent sentinels, bearing witness to the mysteries and dangers that lie within this desolate place.\n\nAs the sun begins to rise, the sky fills with a palette of deep purples and rich oranges, casting long shadows that play across the rugged terrain. The contrast between the dark, brooding landscape and the vibrant colors of the snake creates a striking composition, evoking a sense of both beauty and peril.\n\nThis masterpiece is captured in the best possible quality, offering a raw and realistic photograph that is both aesthetically pleasing and deeply compelling. The image conveys a sense of the unknown, inviting viewers to ponder the secrets that this ancient land and its magnificent serpent might hold.",
+        2.5,
+        null,
+        null
+      ]
+    },
+    {
+      "id": 136,
+      "type": "DualCLIPLoader",
+      "pos": [
+        -406,
+        -1414
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            175
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp16.safetensors",
+        "clip_l.safetensors",
+        "flux"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 30,
+      "type": "VAEEncode",
+      "pos": [
+        495,
+        133
+      ],
+      "size": {
+        "0": 320,
+        "1": 50
+      },
+      "flags": {},
+      "order": 36,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 85,
+          "label": "图像"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 83,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            82
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 91,
+      "type": "LatentUpscaleBy",
+      "pos": [
+        3199,
+        -2094
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 46,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 106,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            113
+          ],
+          "shape": 3,
+          "label": "Latent",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LatentUpscaleBy"
+      },
+      "widgets_values": [
+        "nearest-exact",
+        1.5
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 93,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        3184,
+        -1942
+      ],
+      "size": {
+        "0": 360,
+        "1": 110
+      },
+      "flags": {},
+      "order": 51,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 108,
+          "slot_index": 0,
+          "label": "噪波生成"
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 109,
+          "slot_index": 1,
+          "label": "引导"
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 110,
+          "slot_index": 2,
+          "label": "采样器"
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 115,
+          "slot_index": 3,
+          "label": "Sigmas"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 113,
+          "slot_index": 4,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            117
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "输出"
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3,
+          "label": "降噪输出"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 96,
+      "type": "SaveImage",
+      "pos": [
+        3555,
+        -1845
+      ],
+      "size": {
+        "0": 534.8099365234375,
+        "1": 892.830810546875
+      },
+      "flags": {},
+      "order": 56,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 118,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 60,
+      "type": "UNETLoader",
+      "pos": [
+        -410.20156300137023,
+        -89.95638211394844
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            183,
+            184
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "flux1-dev.sft",
+        "default"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 137,
+      "type": "UNETLoader",
+      "pos": [
+        -396,
+        -1185
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            185,
+            186
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "flux1-dev.sft",
+        "fp8_e4m3fn"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 76,
+      "type": "UNETLoader",
+      "pos": [
+        2256.831608533432,
+        -2109.850453745125
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            187,
+            188,
+            189
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "flux1-dev.sft",
+        "default"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 119,
+      "type": "UNETLoader",
+      "pos": [
+        2218.5790135905336,
+        -640.6107322740764
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            190,
+            191
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "flux1-dev.sft",
+        "default"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 129,
+      "type": "LoadImage",
+      "pos": [
+        2237,
+        379
+      ],
+      "size": {
+        "0": 315,
+        "1": 314
+      },
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            160
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            161
+          ],
+          "shape": 3,
+          "label": "遮罩",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "clipspace/clipspace-mask-2183431.0000000005.png [input]",
+        "image"
+      ],
+      "category": "Primitive Nodes"
+    }
+  ],
+  "links": [
+    [
+      66,
+      61,
+      0,
+      57,
+      0,
+      "LATENT"
+    ],
+    [
+      67,
+      58,
+      0,
+      57,
+      1,
+      "VAE"
+    ],
+    [
+      68,
+      65,
+      0,
+      61,
+      0,
+      "NOISE"
+    ],
+    [
+      69,
+      64,
+      0,
+      61,
+      1,
+      "GUIDER"
+    ],
+    [
+      70,
+      62,
+      0,
+      61,
+      2,
+      "SAMPLER"
+    ],
+    [
+      71,
+      63,
+      0,
+      61,
+      3,
+      "SIGMAS"
+    ],
+    [
+      79,
+      59,
+      0,
+      68,
+      0,
+      "CLIP"
+    ],
+    [
+      80,
+      68,
+      0,
+      64,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      81,
+      57,
+      0,
+      69,
+      0,
+      "IMAGE"
+    ],
+    [
+      82,
+      30,
+      0,
+      61,
+      4,
+      "LATENT"
+    ],
+    [
+      83,
+      58,
+      0,
+      30,
+      1,
+      "VAE"
+    ],
+    [
+      85,
+      70,
+      0,
+      30,
+      0,
+      "IMAGE"
+    ],
+    [
+      86,
+      71,
+      0,
+      70,
+      0,
+      "IMAGE"
+    ],
+    [
+      89,
+      77,
+      0,
+      73,
+      0,
+      "LATENT"
+    ],
+    [
+      90,
+      74,
+      0,
+      73,
+      1,
+      "VAE"
+    ],
+    [
+      91,
+      81,
+      0,
+      77,
+      0,
+      "NOISE"
+    ],
+    [
+      92,
+      80,
+      0,
+      77,
+      1,
+      "GUIDER"
+    ],
+    [
+      93,
+      78,
+      0,
+      77,
+      2,
+      "SAMPLER"
+    ],
+    [
+      94,
+      79,
+      0,
+      77,
+      3,
+      "SIGMAS"
+    ],
+    [
+      98,
+      83,
+      0,
+      80,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      100,
+      75,
+      0,
+      83,
+      0,
+      "CLIP"
+    ],
+    [
+      103,
+      90,
+      0,
+      77,
+      4,
+      "LATENT"
+    ],
+    [
+      106,
+      77,
+      0,
+      91,
+      0,
+      "LATENT"
+    ],
+    [
+      107,
+      73,
+      0,
+      92,
+      0,
+      "IMAGE"
+    ],
+    [
+      108,
+      81,
+      0,
+      93,
+      0,
+      "NOISE"
+    ],
+    [
+      109,
+      80,
+      0,
+      93,
+      1,
+      "GUIDER"
+    ],
+    [
+      110,
+      78,
+      0,
+      93,
+      2,
+      "SAMPLER"
+    ],
+    [
+      113,
+      91,
+      0,
+      93,
+      4,
+      "LATENT"
+    ],
+    [
+      115,
+      94,
+      0,
+      93,
+      3,
+      "SIGMAS"
+    ],
+    [
+      116,
+      74,
+      0,
+      95,
+      1,
+      "VAE"
+    ],
+    [
+      117,
+      93,
+      0,
+      95,
+      0,
+      "LATENT"
+    ],
+    [
+      118,
+      95,
+      0,
+      96,
+      0,
+      "IMAGE"
+    ],
+    [
+      140,
+      120,
+      0,
+      116,
+      0,
+      "LATENT"
+    ],
+    [
+      141,
+      117,
+      0,
+      116,
+      1,
+      "VAE"
+    ],
+    [
+      142,
+      124,
+      0,
+      120,
+      0,
+      "NOISE"
+    ],
+    [
+      143,
+      123,
+      0,
+      120,
+      1,
+      "GUIDER"
+    ],
+    [
+      144,
+      121,
+      0,
+      120,
+      2,
+      "SAMPLER"
+    ],
+    [
+      145,
+      122,
+      0,
+      120,
+      3,
+      "SIGMAS"
+    ],
+    [
+      152,
+      116,
+      0,
+      127,
+      0,
+      "IMAGE"
+    ],
+    [
+      157,
+      117,
+      0,
+      130,
+      2,
+      "VAE"
+    ],
+    [
+      158,
+      130,
+      2,
+      120,
+      4,
+      "LATENT"
+    ],
+    [
+      159,
+      130,
+      0,
+      123,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      160,
+      129,
+      0,
+      130,
+      3,
+      "IMAGE"
+    ],
+    [
+      161,
+      129,
+      1,
+      130,
+      4,
+      "MASK"
+    ],
+    [
+      164,
+      138,
+      0,
+      134,
+      0,
+      "LATENT"
+    ],
+    [
+      165,
+      135,
+      0,
+      134,
+      1,
+      "VAE"
+    ],
+    [
+      166,
+      142,
+      0,
+      138,
+      0,
+      "NOISE"
+    ],
+    [
+      167,
+      141,
+      0,
+      138,
+      1,
+      "GUIDER"
+    ],
+    [
+      168,
+      139,
+      0,
+      138,
+      2,
+      "SAMPLER"
+    ],
+    [
+      169,
+      140,
+      0,
+      138,
+      3,
+      "SIGMAS"
+    ],
+    [
+      173,
+      144,
+      0,
+      141,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      175,
+      136,
+      0,
+      144,
+      0,
+      "CLIP"
+    ],
+    [
+      176,
+      134,
+      0,
+      145,
+      0,
+      "IMAGE"
+    ],
+    [
+      178,
+      148,
+      0,
+      138,
+      4,
+      "LATENT"
+    ],
+    [
+      179,
+      118,
+      0,
+      151,
+      0,
+      "CLIP"
+    ],
+    [
+      180,
+      151,
+      0,
+      130,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      181,
+      118,
+      0,
+      152,
+      0,
+      "CLIP"
+    ],
+    [
+      182,
+      152,
+      0,
+      130,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      183,
+      60,
+      0,
+      63,
+      0,
+      "MODEL"
+    ],
+    [
+      184,
+      60,
+      0,
+      64,
+      0,
+      "MODEL"
+    ],
+    [
+      185,
+      137,
+      0,
+      140,
+      0,
+      "MODEL"
+    ],
+    [
+      186,
+      137,
+      0,
+      141,
+      0,
+      "MODEL"
+    ],
+    [
+      187,
+      76,
+      0,
+      79,
+      0,
+      "MODEL"
+    ],
+    [
+      188,
+      76,
+      0,
+      94,
+      0,
+      "MODEL"
+    ],
+    [
+      189,
+      76,
+      0,
+      80,
+      0,
+      "MODEL"
+    ],
+    [
+      190,
+      119,
+      0,
+      122,
+      0,
+      "MODEL"
+    ],
+    [
+      191,
+      119,
+      0,
+      123,
+      0,
+      "MODEL"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "文生图",
+      "bounding": [
+        -519,
+        -1653,
+        2534,
+        1045
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "图生图",
+      "bounding": [
+        -488,
+        -523,
+        2510,
+        1143
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "高清放大",
+      "bounding": [
+        2109,
+        -2197,
+        1996,
+        1274
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "局部重绘",
+      "bounding": [
+        2117,
+        -853,
+        1575,
+        1654
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.544500000000001,
+      "offset": [
+        996.8780664327332,
+        2375.6612799406607
+      ]
+    }
+  },
+  "version": 0.4
+}

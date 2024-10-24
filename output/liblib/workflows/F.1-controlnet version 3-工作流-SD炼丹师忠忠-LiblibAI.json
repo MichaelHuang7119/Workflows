@@ -1,0 +1,806 @@
+{
+  "last_node_id": 50,
+  "last_link_id": 121,
+  "nodes": [
+    {
+      "id": 8,
+      "type": "VAELoader",
+      "pos": [
+        1524,
+        -110
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            7
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "_widget_cache_map": {},
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 4,
+      "type": "DualCLIPLoader",
+      "pos": [
+        -191,
+        28
+      ],
+      "size": {
+        "0": 511.43951416015625,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            2,
+            27
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "clip_l",
+        "t5xxl_fp8_e4m3fn",
+        "flux"
+      ],
+      "_widget_cache_map": {},
+      "color": "#223",
+      "bgcolor": "#335",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 19,
+      "type": "CLIPTextEncodeFlux",
+      "pos": [
+        420,
+        -39
+      ],
+      "size": {
+        "0": 601.6422729492188,
+        "1": 375.1761169433594
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 27,
+          "slot_index": 0,
+          "label": "clip"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            26
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "CONDITIONING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeFlux"
+      },
+      "widgets_values": [
+        "(worst quality, low quality:1.4),(depth of field, blurry:1.2),(greyscale, monochrome:1.1),3D face,cropped,lowres,text,(nsfw:1.3),(worst quality:2),(low quality:2),(normal quality:2),normal quality,((grayscale)),skin spots,acnes,skin blemishes,age spot,(ugly:1.331),(duplicate:1.331),(morbid:1.21),(mutilated:1.21),(tranny:1.331),mutated hands,(poorly drawn hands:1.5),blurry,(bad anatomy:1.21),(bad proportions:1.331),extra limbs,(disfigured:1.331),(missing arms:1.331),(extra legs:1.331),(fused fingers:1.61051),(too many fingers:1.61051),(unclear eyes:1.331),lowers,bad hands,missing fingers,extra digit,bad hands,missing fingers,(((extra arms and legs)))",
+        "(worst quality, low quality:1.4),(depth of field, blurry:1.2),(greyscale, monochrome:1.1),3D face,cropped,lowres,text,(nsfw:1.3),(worst quality:2),(low quality:2),(normal quality:2),normal quality,((grayscale)),skin spots,acnes,skin blemishes,age spot,(ugly:1.331),(duplicate:1.331),(morbid:1.21),(mutilated:1.21),(tranny:1.331),mutated hands,(poorly drawn hands:1.5),blurry,(bad anatomy:1.21),(bad proportions:1.331),extra limbs,(disfigured:1.331),(missing arms:1.331),(extra legs:1.331),(fused fingers:1.61051),(too many fingers:1.61051),(unclear eyes:1.331),lowers,bad hands,missing fingers,extra digit,bad hands,missing fingers,(((extra arms and legs)))",
+        4
+      ],
+      "_widget_cache_map": {},
+      "color": "#223",
+      "bgcolor": "#335",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 14,
+      "type": "ApplyFluxControlNet",
+      "pos": [
+        598,
+        527
+      ],
+      "size": {
+        "0": 423.67315673828125,
+        "1": 117.21568298339844
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "controlnet",
+          "type": "FluxControlNet",
+          "link": 44,
+          "label": "controlnet"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 118,
+          "slot_index": 1,
+          "label": "image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "controlnet_condition",
+          "type": "ControlNetCondition",
+          "links": [
+            28
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "controlnet_condition"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ApplyFluxControlNet"
+      },
+      "widgets_values": [
+        0.7000000000000001
+      ],
+      "_widget_cache_map": {},
+      "color": "#332922",
+      "bgcolor": "#593930"
+    },
+    {
+      "id": 39,
+      "type": "PreviewImage",
+      "pos": [
+        608,
+        701
+      ],
+      "size": {
+        "0": 422.60882568359375,
+        "1": 395.9010314941406
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 119,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "color": "#332922",
+      "bgcolor": "#593930",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 3,
+      "type": "XlabsSampler",
+      "pos": [
+        1204,
+        -259
+      ],
+      "size": {
+        "0": 287.48468017578125,
+        "1": 559.39599609375
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 58,
+          "slot_index": 0,
+          "label": "model"
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 18,
+          "label": "conditioning"
+        },
+        {
+          "name": "neg_conditioning",
+          "type": "CONDITIONING",
+          "link": 26,
+          "label": "neg_conditioning"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 66,
+          "label": "latent_image"
+        },
+        {
+          "name": "controlnet_condition",
+          "type": "ControlNetCondition",
+          "link": 28,
+          "label": "controlnet_condition"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            6
+          ],
+          "shape": 3,
+          "label": "latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "XlabsSampler"
+      },
+      "widgets_values": [
+        324242532548,
+        "randomize",
+        28,
+        1,
+        3.5,
+        0
+      ],
+      "_widget_cache_map": {},
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 7,
+      "type": "VAEDecode",
+      "pos": [
+        1531,
+        -305
+      ],
+      "size": {
+        "0": 283.05072021484375,
+        "1": 85.75492858886719
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 6,
+          "slot_index": 0,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 7,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            116
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 5,
+      "type": "CLIPTextEncodeFlux",
+      "pos": [
+        420,
+        -380
+      ],
+      "size": {
+        "0": 606.363037109375,
+        "1": 277.9173889160156
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 2,
+          "slot_index": 0,
+          "label": "clip"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            18
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "CONDITIONING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeFlux"
+      },
+      "widgets_values": [
+        "The image is an abstract 3D rendering of a futuristic cityscape. The background is white with blue lines and geometric shapes scattered throughout. In the center of the image, there is a circular structure with multiple layers of blue and white buildings. The buildings are arranged in a way that creates a sense of depth and dimension. On the left side of the structure, there are two smaller buildings, one with a blue roof and the other with a white roof. On top of the buildings, there appears to be a blue pyramid-like structure. The overall color scheme is blue, white, and gray, giving the image a modern and futuristic feel.",
+        "The image is an abstract 3D rendering of a futuristic cityscape. The background is white with blue lines and geometric shapes scattered throughout. In the center of the image, there is a circular structure with multiple layers of blue and white buildings. The buildings are arranged in a way that creates a sense of depth and dimension. On the left side of the structure, there are two smaller buildings, one with a blue roof and the other with a white roof. On top of the buildings, there appears to be a blue pyramid-like structure. The overall color scheme is blue, white, and gray, giving the image a modern and futuristic feel.",
+        4
+      ],
+      "_widget_cache_map": {},
+      "color": "#223",
+      "bgcolor": "#335",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 32,
+      "type": "UNETLoader",
+      "pos": [
+        -185,
+        -300
+      ],
+      "size": {
+        "0": 494.79986572265625,
+        "1": 96.3184585571289
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            58
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "Flux_Bdiconpro_V1.0",
+        "fp8_e4m3fn"
+      ],
+      "_widget_cache_map": {
+        "FLUX.1哩布在线可运行-黑暗森林工作室_FLUX.1-dev-fp8": {
+          "name": "FLUX.1哩布在线可运行-黑暗森林工作室_FLUX.1-dev-fp8",
+          "value": "412b427ddb674b4dbab9e5abd5ae6057"
+        },
+        "Flux_Bdiconpro_V1.0": {
+          "name": "Flux_Bdiconpro_V1.0",
+          "value": "4c213d92d5da4dffbf2f1b5588236ea9"
+        }
+      },
+      "color": "#223",
+      "bgcolor": "#335",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 6,
+      "type": "EmptyLatentImage",
+      "pos": [
+        1200,
+        431
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            66
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1
+      ],
+      "_widget_cache_map": {},
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 49,
+      "type": "SaveImage",
+      "pos": [
+        1952,
+        -457
+      ],
+      "size": {
+        "0": 1080.818115234375,
+        "1": 1552.9208984375
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 116,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 13,
+      "type": "LoadFluxControlNet",
+      "pos": [
+        164,
+        503
+      ],
+      "size": {
+        "0": 409.13958740234375,
+        "1": 136.2864990234375
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "ControlNet",
+          "type": "FluxControlNet",
+          "links": [
+            44
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "ControlNet"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadFluxControlNet"
+      },
+      "widgets_values": [
+        "flux-dev-fp8",
+        "XLabs-flux-depth-controlnet_v3"
+      ],
+      "_widget_cache_map": {},
+      "color": "#332922",
+      "bgcolor": "#593930"
+    },
+    {
+      "id": 16,
+      "type": "LoadImage",
+      "pos": [
+        -225,
+        526
+      ],
+      "size": {
+        "0": 346.3109130859375,
+        "1": 548.990478515625
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            117
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "ComfyUI_01338_.png",
+        "image"
+      ],
+      "_widget_cache_map": {
+        "Chinese Woman.jpeg": {
+          "value": "img/73cd41fd772d472e9fab0ef75f60c24a/154316c2b14d8c532a2c0f064e7056d17a4975697f4113a59b92ba83c5d970b7.jpeg",
+          "name": "Chinese Woman.jpeg",
+          "url": "https://liblibai-tmp-image.vibrou.com/img/73cd41fd772d472e9fab0ef75f60c24a/154316c2b14d8c532a2c0f064e7056d17a4975697f4113a59b92ba83c5d970b7.jpeg"
+        },
+        "Woman-Portrait (1).jpeg": {
+          "value": "img/73cd41fd772d472e9fab0ef75f60c24a/63706dac467293a4ba422a1c217311e084bf049e6e28c48656bbc7bc34be7179.jpeg",
+          "name": "Woman-Portrait (1).jpeg",
+          "url": "https://liblibai-tmp-image.vibrou.com/img/73cd41fd772d472e9fab0ef75f60c24a/63706dac467293a4ba422a1c217311e084bf049e6e28c48656bbc7bc34be7179.jpeg"
+        },
+        "ComfyUI_01338_.png": {
+          "value": "img/73cd41fd772d472e9fab0ef75f60c24a/50d347302d861341da370d13f64d631f8b87630434c298478e44913dedbbde48.png",
+          "name": "ComfyUI_01338_.png",
+          "url": "https://liblibai-tmp-image.vibrou.com/img/73cd41fd772d472e9fab0ef75f60c24a/50d347302d861341da370d13f64d631f8b87630434c298478e44913dedbbde48.png"
+        }
+      },
+      "color": "#332922",
+      "bgcolor": "#593930",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 50,
+      "type": "LineArtPreprocessor",
+      "pos": [
+        198,
+        830
+      ],
+      "size": [
+        391.22550671652505,
+        141.4616930657587
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 117,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            118,
+            119
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LineArtPreprocessor"
+      },
+      "widgets_values": [
+        "disable",
+        512
+      ],
+      "_widget_cache_map": {},
+      "color": "#332922",
+      "bgcolor": "#593930",
+      "category": "Custom Nodes"
+    }
+  ],
+  "links": [
+    [
+      2,
+      4,
+      0,
+      5,
+      0,
+      "CLIP"
+    ],
+    [
+      6,
+      3,
+      0,
+      7,
+      0,
+      "LATENT"
+    ],
+    [
+      7,
+      8,
+      0,
+      7,
+      1,
+      "VAE"
+    ],
+    [
+      18,
+      5,
+      0,
+      3,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      26,
+      19,
+      0,
+      3,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      27,
+      4,
+      0,
+      19,
+      0,
+      "CLIP"
+    ],
+    [
+      28,
+      14,
+      0,
+      3,
+      4,
+      "ControlNetCondition"
+    ],
+    [
+      44,
+      13,
+      0,
+      14,
+      0,
+      "FluxControlNet"
+    ],
+    [
+      58,
+      32,
+      0,
+      3,
+      0,
+      "MODEL"
+    ],
+    [
+      66,
+      6,
+      0,
+      3,
+      3,
+      "LATENT"
+    ],
+    [
+      116,
+      7,
+      0,
+      49,
+      0,
+      "IMAGE"
+    ],
+    [
+      117,
+      16,
+      0,
+      50,
+      0,
+      "IMAGE"
+    ],
+    [
+      118,
+      50,
+      0,
+      14,
+      1,
+      "IMAGE"
+    ],
+    [
+      119,
+      50,
+      0,
+      39,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "Flux model",
+      "bounding": [
+        -231,
+        -480,
+        1271,
+        843
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "image upload",
+      "bounding": [
+        -230,
+        417,
+        1277,
+        695
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "潜空间（生成图片的地方）",
+      "bounding": [
+        1104,
+        -490,
+        761,
+        1593
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7972024500000024,
+      "offset": [
+        58.60001876896058,
+        29.898124128483005
+      ]
+    }
+  },
+  "version": 0.4
+}

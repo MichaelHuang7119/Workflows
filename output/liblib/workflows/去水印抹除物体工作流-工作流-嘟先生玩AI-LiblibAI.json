@@ -1,0 +1,882 @@
+{
+  "last_node_id": 27,
+  "last_link_id": 51,
+  "nodes": [
+    {
+      "id": 11,
+      "type": "INPAINT_LoadFooocusInpaint",
+      "pos": [
+        427,
+        73
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "INPAINT_PATCH",
+          "type": "INPAINT_PATCH",
+          "links": [
+            10
+          ],
+          "shape": 3,
+          "label": "局部重绘组件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "INPAINT_LoadFooocusInpaint"
+      },
+      "widgets_values": [
+        "fooocus_inpaint_head.pth",
+        "inpaint_v26.fooocus.patch"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 10,
+      "type": "INPAINT_ApplyFooocusInpaint",
+      "pos": [
+        530,
+        215
+      ],
+      "size": {
+        "0": 210,
+        "1": 66
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 22,
+          "label": "模型"
+        },
+        {
+          "name": "patch",
+          "type": "INPAINT_PATCH",
+          "link": 10,
+          "label": "局部重绘组件",
+          "slot_index": 1
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "link": 21,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            14
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "INPAINT_ApplyFooocusInpaint"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 15,
+      "type": "INPAINT_VAEEncodeInpaintConditioning",
+      "pos": [
+        443,
+        338
+      ],
+      "size": {
+        "0": 292.20001220703125,
+        "1": 106
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 25,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 24,
+          "label": "负面条件"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 17,
+          "label": "VAE",
+          "slot_index": 2
+        },
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 19,
+          "label": "图像",
+          "slot_index": 3
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 20,
+          "label": "遮罩"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            26
+          ],
+          "shape": 3,
+          "label": "正面条件",
+          "slot_index": 0
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            27
+          ],
+          "shape": 3,
+          "label": "负面条件",
+          "slot_index": 1
+        },
+        {
+          "name": "latent_inpaint",
+          "type": "LATENT",
+          "links": [
+            21
+          ],
+          "shape": 3,
+          "label": "局部重绘Latent",
+          "slot_index": 2
+        },
+        {
+          "name": "latent_samples",
+          "type": "LATENT",
+          "links": [
+            23
+          ],
+          "shape": 3,
+          "label": "采样Latent",
+          "slot_index": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "INPAINT_VAEEncodeInpaintConditioning"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 7,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -84,
+        309
+      ],
+      "size": {
+        "0": 425.27801513671875,
+        "1": 180.6060791015625
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 5,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            24
+          ],
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "text, watermark"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -84,
+        85
+      ],
+      "size": {
+        "0": 422.84503173828125,
+        "1": 164.31304931640625
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 3,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            25
+          ],
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "empty"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 12,
+      "type": "INPAINT_InpaintWithModel",
+      "pos": [
+        -12,
+        -107
+      ],
+      "size": {
+        "0": 355.20001220703125,
+        "1": 142
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "inpaint_model",
+          "type": "INPAINT_MODEL",
+          "link": 11,
+          "label": "局部重绘模型",
+          "slot_index": 0
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 12,
+          "label": "图像",
+          "slot_index": 1
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 13,
+          "label": "遮罩"
+        },
+        {
+          "name": "optional_upscale_model",
+          "type": "UPSCALE_MODEL",
+          "link": null,
+          "label": "放大模型(可选)"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            19
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "INPAINT_InpaintWithModel"
+      },
+      "widgets_values": [
+        405648586064956,
+        "randomize"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 3,
+      "type": "KSampler",
+      "pos": [
+        818,
+        -44
+      ],
+      "size": {
+        "0": 315,
+        "1": 474
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 14,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 26,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 27,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 23,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            7
+          ],
+          "slot_index": 0,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        808937021660569,
+        "randomize",
+        20,
+        8,
+        "euler",
+        "normal",
+        1
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [
+        1189,
+        -28
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 7,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 8,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            37
+          ],
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 19,
+      "type": "ImageCompositeMasked",
+      "pos": [
+        1167,
+        70
+      ],
+      "size": {
+        "0": 315,
+        "1": 146
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "destination",
+          "type": "IMAGE",
+          "link": 36,
+          "label": "目标图像"
+        },
+        {
+          "name": "source",
+          "type": "IMAGE",
+          "link": 37,
+          "label": "源图像"
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 34,
+          "label": "遮罩"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            48
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageCompositeMasked"
+      },
+      "widgets_values": [
+        0,
+        0,
+        false
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 14,
+      "type": "LoadImage",
+      "pos": [
+        529,
+        -545
+      ],
+      "size": {
+        "0": 346.50830078125,
+        "1": 427.109130859375
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            12,
+            36
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            13,
+            20,
+            34
+          ],
+          "shape": 3,
+          "label": "遮罩",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "1723082392360.svg",
+        "image"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 13,
+      "type": "INPAINT_LoadInpaintModel",
+      "pos": [
+        -361,
+        -107
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "INPAINT_MODEL",
+          "type": "INPAINT_MODEL",
+          "links": [
+            11
+          ],
+          "shape": 3,
+          "label": "局部重绘模型",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "INPAINT_LoadInpaintModel"
+      },
+      "widgets_values": [
+        "big_lama"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 25,
+      "type": "PreviewImage",
+      "pos": [
+        893,
+        -553
+      ],
+      "size": {
+        "0": 379.71734619140625,
+        "1": 467.895263671875
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 48,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 4,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        -613,
+        336
+      ],
+      "size": {
+        "0": 475.8109130859375,
+        "1": 108.78811645507812
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            22
+          ],
+          "slot_index": 0,
+          "label": "模型"
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            3,
+            5
+          ],
+          "slot_index": 1,
+          "label": "CLIP"
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            8,
+            17
+          ],
+          "slot_index": 2,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "真实感Juggernaut XL_Juggernaut_X_RunDiffusion"
+      ],
+      "_widget_cache_map": {
+        "真实感Juggernaut XL_Juggernaut_X_RunDiffusion": {
+          "name": "真实感Juggernaut XL_Juggernaut_X_RunDiffusion",
+          "value": 1821357
+        }
+      },
+      "category": "Primitive Nodes"
+    }
+  ],
+  "links": [
+    [
+      3,
+      4,
+      1,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      5,
+      4,
+      1,
+      7,
+      0,
+      "CLIP"
+    ],
+    [
+      7,
+      3,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      8,
+      4,
+      2,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      10,
+      11,
+      0,
+      10,
+      1,
+      "INPAINT_PATCH"
+    ],
+    [
+      11,
+      13,
+      0,
+      12,
+      0,
+      "INPAINT_MODEL"
+    ],
+    [
+      12,
+      14,
+      0,
+      12,
+      1,
+      "IMAGE"
+    ],
+    [
+      13,
+      14,
+      1,
+      12,
+      2,
+      "MASK"
+    ],
+    [
+      14,
+      10,
+      0,
+      3,
+      0,
+      "MODEL"
+    ],
+    [
+      17,
+      4,
+      2,
+      15,
+      2,
+      "VAE"
+    ],
+    [
+      19,
+      12,
+      0,
+      15,
+      3,
+      "IMAGE"
+    ],
+    [
+      20,
+      14,
+      1,
+      15,
+      4,
+      "MASK"
+    ],
+    [
+      21,
+      15,
+      2,
+      10,
+      2,
+      "LATENT"
+    ],
+    [
+      22,
+      4,
+      0,
+      10,
+      0,
+      "MODEL"
+    ],
+    [
+      23,
+      15,
+      3,
+      3,
+      3,
+      "LATENT"
+    ],
+    [
+      24,
+      7,
+      0,
+      15,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      25,
+      6,
+      0,
+      15,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      26,
+      15,
+      0,
+      3,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      27,
+      15,
+      1,
+      3,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      34,
+      14,
+      1,
+      19,
+      2,
+      "MASK"
+    ],
+    [
+      36,
+      14,
+      0,
+      19,
+      0,
+      "IMAGE"
+    ],
+    [
+      37,
+      8,
+      0,
+      19,
+      1,
+      "IMAGE"
+    ],
+    [
+      48,
+      19,
+      0,
+      25,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1.0610764609500007,
+      "offset": [
+        1106.223487050054,
+        336.2633910602835
+      ]
+    },
+    "workspace_info": {
+      "id": "WWyoaUMo2Tc7Cr2FcK9Pe",
+      "saveLock": false,
+      "cloudID": null,
+      "coverMediaPath": null
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

@@ -1,0 +1,855 @@
+{
+  "last_node_id": 66,
+  "last_link_id": 91,
+  "nodes": [
+    {
+      "id": 37,
+      "type": "CLIPTextEncode",
+      "pos": [
+        131.96208134483916,
+        433.0788774663351
+      ],
+      "size": {
+        "0": 210,
+        "1": 54
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 63,
+          "label": "CLIP"
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 62,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            68
+          ],
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 38,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        121.96208134483915,
+        230.07887746633588
+      ],
+      "size": {
+        "0": 315,
+        "1": 98
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            84
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            58,
+            63
+          ],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "CLIP"
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            70
+          ],
+          "slot_index": 2,
+          "shape": 3,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "flux1-dev-fp8.safetensors"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 40,
+      "type": "CLIPTextEncode",
+      "pos": [
+        587.9620813448392,
+        215.07887746633605
+      ],
+      "size": {
+        "0": 422.84503173828125,
+        "1": 164.31304931640625
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 58,
+          "slot_index": 0,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            86
+          ],
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 41,
+      "type": "RandomPrompt",
+      "pos": [
+        110,
+        715
+      ],
+      "size": {
+        "0": 777.798828125,
+        "1": 548.6845703125
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "seed",
+          "type": "*",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            62,
+            89
+          ],
+          "slot_index": 0,
+          "shape": 6,
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RandomPrompt"
+      },
+      "widgets_values": [
+        5,
+        "A lovely little penguin stands on the ice and snow in Antarctica, looking into the distance with eyes, and next to it is the penguin mother.\n\nThe little penguin waddles away from home. On the way, it meets a big seal. The big seal shows a worried expression. The little penguin walks forward firmly.\n\nThe little penguin meets a colorful little fish in a blue sea area. They communicate happily.\n\nIn the strong wind, the little penguin holds the floating ice tightly with a scared expression but firm eyes.\n\nThe little penguin plays in the beautiful outside world and then sets foot on the way home with a happy smile on his face.",
+        "comic style,",
+        "disable",
+        null
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 45,
+      "type": "VAEDecode",
+      "pos": [
+        1275.6930327713935,
+        222.53983290136784
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 88,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 70,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            74,
+            82
+          ],
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 47,
+      "type": "FluxGuidance",
+      "pos": [
+        518.9620813448392,
+        296.07887746633503
+      ],
+      "size": {
+        "0": 211.60000610351562,
+        "1": 58
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 68
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            85
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FluxGuidance"
+      },
+      "widgets_values": [
+        3.5
+      ]
+    },
+    {
+      "id": 49,
+      "type": "CR Simple Meme Template",
+      "pos": [
+        1643.49261591574,
+        200.02748526226912
+      ],
+      "size": {
+        "0": 736.3001708984375,
+        "1": 360.47222900390625
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 74,
+          "label": "图像"
+        },
+        {
+          "name": "text_top",
+          "type": "STRING",
+          "link": 72,
+          "widget": {
+            "name": "text_top"
+          },
+          "label": "文本上"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            83
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "显示帮助"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Simple Meme Template"
+      },
+      "widgets_values": [
+        "custom",
+        "\n从前，有一只活泼可爱的小松鼠，它生活在一片美丽的森林里。\n\n一天，小松鼠听说森林深处有一个神秘的花园，里面长满了各种各样奇异的花朵和美味的果实。\n\n小松鼠非常好奇，决定踏上寻找神秘花园的旅程。\n\n它沿着一条小路蹦蹦跳跳地前进，遇到了一条潺潺流淌的小溪。\n\n小松鼠勇敢地跳过小溪，继续向前走。\n\n接着，它来到了一个茂密的灌木丛，小松鼠努力地在灌木丛中穿梭，身上的毛都被树枝挂乱了，但它没有放弃。\n\n走了好久好久，小松鼠终于找到了那个神秘花园。\n\n花园里的花朵绽放得如彩虹般绚烂，果实散发着诱人的香气。\n\n小松鼠开心极了，它在花园里玩耍、品尝果实，度过了一段非常美好的时光。\n\n当太阳快要落山的时候，小松鼠带着满满的快乐和回忆，踏上了回家的路。",
+        "",
+        "comic.ttf",
+        250,
+        "white",
+        "thick",
+        "black",
+        "no bars",
+        "",
+        ""
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 50,
+      "type": "Note",
+      "pos": [
+        2422.492615915736,
+        206.0274852622689
+      ],
+      "size": {
+        "0": 456.0452575683594,
+        "1": 266.995361328125
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "字体 存放文件夹  custom_nodes\\ComfyUI_Comfyroll_CustomNodes\\fonts\n\n最大字体大小 ：默认150\n\n字体颜色：\n\n字体轮廓 ：onne  无轮廓，thin 细，thik 粗 ，extra thick  加粗\n\n条颜色，设置空白图条。\n\n条设置：设置空白图条的位置； no 不设置条，top顶部设置，\n\nfont color hex ：\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 51,
+      "type": "RandomPrompt",
+      "pos": [
+        1652,
+        638
+      ],
+      "size": {
+        "0": 739.671875,
+        "1": 610.6726684570312
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "seed",
+          "type": "*",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            72,
+            90
+          ],
+          "slot_index": 0,
+          "shape": 6,
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RandomPrompt"
+      },
+      "widgets_values": [
+        0,
+        "一只可爱的小企鹅站在南极的冰雪上，眼睛望着远方，旁边是企鹅妈妈。\n\n小企鹅摇摇摆摆地离开家，路上遇到大海豹，大海豹露出担忧的表情，小企鹅坚定地向前走。\n\n小企鹅在一片蓝色的海域遇到彩色小鱼，它们欢快地交流。\n\n狂风中，小企鹅紧紧抓住浮冰，表情害怕但眼神坚定。\n\n小企鹅在美丽的外面世界玩耍，然后踏上回家的路，脸上带着幸福的笑容。\n",
+        "",
+        "disable",
+        null
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 61,
+      "type": "PreviewImage",
+      "pos": [
+        1271,
+        322
+      ],
+      "size": {
+        "0": 239.16680908203125,
+        "1": 342.63238525390625
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 82,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 62,
+      "type": "SaveImage",
+      "pos": [
+        3128,
+        149
+      ],
+      "size": {
+        "0": 884.358154296875,
+        "1": 1085.296630859375
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 83,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 63,
+      "type": "KSampler",
+      "pos": [
+        941,
+        203
+      ],
+      "size": {
+        "0": 292.13861083984375,
+        "1": 474
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 84,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 85,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 86,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 91,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            88
+          ],
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        1121587342412731,
+        "fixed",
+        20,
+        1,
+        "euler",
+        "normal",
+        1
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 64,
+      "type": "ShowText|pysssss",
+      "pos": [
+        984,
+        716
+      ],
+      "size": {
+        "0": 519.402587890625,
+        "1": 545.4056396484375
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 89,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "comic style,,A lovely little penguin stands on the ice and snow in Antarctica, looking into the distance with eyes, and next to it is the penguin mother.",
+        "comic style,,The little penguin waddles away from home. On the way, it meets a big seal. The big seal shows a worried expression. The little penguin walks forward firmly.",
+        "comic style,,The little penguin meets a colorful little fish in a blue sea area. They communicate happily.",
+        "comic style,,In the strong wind, the little penguin holds the floating ice tightly with a scared expression but firm eyes.",
+        "comic style,,The little penguin plays in the beautiful outside world and then sets foot on the way home with a happy smile on his face."
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 65,
+      "type": "ShowText|pysssss",
+      "pos": [
+        2456,
+        540
+      ],
+      "size": {
+        "0": 542.9675903320312,
+        "1": 674.1651000976562
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 90,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "一只可爱的小企鹅站在南极的冰雪上，眼睛望着远方，旁边是企鹅妈妈。",
+        "小企鹅摇摇摆摆地离开家，路上遇到大海豹，大海豹露出担忧的表情，小企鹅坚定地向前走。",
+        "小企鹅在一片蓝色的海域遇到彩色小鱼，它们欢快地交流。",
+        "狂风中，小企鹅紧紧抓住浮冰，表情害怕但眼神坚定。",
+        "小企鹅在美丽的外面世界玩耍，然后踏上回家的路，脸上带着幸福的笑容。"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 66,
+      "type": "EmptyLatentImage",
+      "pos": [
+        516,
+        416
+      ],
+      "size": {
+        "0": 210,
+        "1": 106
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            91
+          ],
+          "slot_index": 0,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        768,
+        1
+      ],
+      "category": "Primitive Nodes"
+    }
+  ],
+  "links": [
+    [
+      58,
+      38,
+      1,
+      40,
+      0,
+      "CLIP"
+    ],
+    [
+      62,
+      41,
+      0,
+      37,
+      1,
+      "STRING"
+    ],
+    [
+      63,
+      38,
+      1,
+      37,
+      0,
+      "CLIP"
+    ],
+    [
+      68,
+      37,
+      0,
+      47,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      70,
+      38,
+      2,
+      45,
+      1,
+      "VAE"
+    ],
+    [
+      72,
+      51,
+      0,
+      49,
+      1,
+      "STRING"
+    ],
+    [
+      74,
+      45,
+      0,
+      49,
+      0,
+      "IMAGE"
+    ],
+    [
+      82,
+      45,
+      0,
+      61,
+      0,
+      "IMAGE"
+    ],
+    [
+      83,
+      49,
+      0,
+      62,
+      0,
+      "IMAGE"
+    ],
+    [
+      84,
+      38,
+      0,
+      63,
+      0,
+      "MODEL"
+    ],
+    [
+      85,
+      47,
+      0,
+      63,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      86,
+      40,
+      0,
+      63,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      88,
+      63,
+      0,
+      45,
+      0,
+      "LATENT"
+    ],
+    [
+      89,
+      41,
+      0,
+      64,
+      0,
+      "STRING"
+    ],
+    [
+      90,
+      51,
+      0,
+      65,
+      0,
+      "STRING"
+    ],
+    [
+      91,
+      66,
+      0,
+      63,
+      3,
+      "LATENT"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "批量添加文案",
+      "bounding": [
+        1604,
+        114,
+        1446,
+        1175
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "批量生图",
+      "bounding": [
+        35,
+        113,
+        1511,
+        1175
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "儿童动画绘本工作流V1",
+      "bounding": [
+        38,
+        9,
+        674,
+        85
+      ],
+      "color": "#3f789e",
+      "font_size": 64,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6588450000000008,
+      "offset": [
+        60.46751385682768,
+        61.02701830935109
+      ]
+    }
+  },
+  "version": 0.4
+}
