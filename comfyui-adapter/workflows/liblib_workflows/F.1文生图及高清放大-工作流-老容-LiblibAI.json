@@ -1,0 +1,1093 @@
+{
+  "last_node_id": 61,
+  "last_link_id": 125,
+  "nodes": [
+    {
+      "id": 36,
+      "type": "UpscaleModelLoader",
+      "pos": [
+        646,
+        258
+      ],
+      "size": {
+        "0": 377.8639221191406,
+        "1": 58
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "UPSCALE_MODEL",
+          "type": "UPSCALE_MODEL",
+          "links": [
+            119
+          ],
+          "shape": 3,
+          "label": "放大模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UpscaleModelLoader"
+      },
+      "widgets_values": [
+        "4x-UltraSharp.pth"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 33,
+      "type": "VAEEncode",
+      "pos": [
+        1460,
+        -200
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 120,
+          "label": "图像"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 103,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            112
+          ],
+          "shape": 3,
+          "label": "Latent",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 34,
+      "type": "VAEDecode",
+      "pos": [
+        1466,
+        -94
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 113,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 104,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            108
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 56,
+      "type": "Note",
+      "pos": [
+        -624,
+        547
+      ],
+      "size": {
+        "0": 317.6618957519531,
+        "1": 66.3153076171875
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "使用该节点可以中文输入，且能够自动联想扩展提示词。\nhttps://github.com/siliconflow/BizyAir"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 51,
+      "type": "BizyAirSiliconCloudLLMAPI",
+      "pos": [
+        -630,
+        74
+      ],
+      "size": {
+        "0": 440.5366516113281,
+        "1": 403.0691223144531
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            91
+          ],
+          "shape": 3,
+          "label": "STRING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BizyAirSiliconCloudLLMAPI"
+      },
+      "widgets_values": [
+        "(Free)GLM4 9B Chat",
+        "你是一个 stable diffusion prompt 专家，为我生成适用于 Stable Diffusion 模型的prompt。\n我给你相关的单词，你帮我增加想象力并扩写为适合 Stable Diffusion 文生图的 prompt。要求：\n1. 英文输出\n2. 除了 prompt 外，不要输出任何其它的信息\n",
+        "展现新能源电动汽车的行驶过程中的泊车时的辅助泊车或行驶过程中的智能化驾驶等画面，车身的周围应有雷达波的形状或画面，插画，3D，俯视角度，宽屏，",
+        512,
+        0.7
+      ]
+    },
+    {
+      "id": 44,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -128,
+        222
+      ],
+      "size": {
+        "0": 302.0128479003906,
+        "1": 54
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 82,
+          "label": "CLIP"
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 91,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            122
+          ],
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "A furry and cute hamster wearing a vest, holding a cup of tea in its hand,National Geographic photography Style，"
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 49,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -90,
+        339
+      ],
+      "size": {
+        "0": 422.84503173828125,
+        "1": 164.31304931640625
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 89,
+          "slot_index": 0,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            123
+          ],
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 46,
+      "type": "EmptySD3LatentImage",
+      "pos": [
+        -140,
+        397
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            124
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptySD3LatentImage"
+      },
+      "widgets_values": [
+        1024,
+        768,
+        4
+      ],
+      "color": "#323",
+      "bgcolor": "#535",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 47,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        -135,
+        58
+      ],
+      "size": {
+        "0": 315,
+        "1": 98
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            121
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "模型"
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            82,
+            89
+          ],
+          "shape": 3,
+          "slot_index": 1,
+          "label": "CLIP"
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            84
+          ],
+          "shape": 3,
+          "slot_index": 2,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "flux1-schnell-fp8.safetensors"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 45,
+      "type": "VAEDecode",
+      "pos": [
+        254,
+        54
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 125,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 84,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            114
+          ],
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 50,
+      "type": "Note",
+      "pos": [
+        -163,
+        554
+      ],
+      "size": [
+        352.39509344209614,
+        103.65770573366558
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Note that Flux dev and schnell do not have any negative prompt so CFG should be set to 1.0. Setting CFG to 1.0 means the negative prompt is ignored.\n\nThe schnell model is a distilled model that can generate a good image with only 4 steps."
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 54,
+      "type": "easy fullLoader",
+      "pos": [
+        650,
+        -198
+      ],
+      "size": {
+        "0": 430.8000183105469,
+        "1": 586
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model_override",
+          "type": "MODEL",
+          "link": null,
+          "label": "模型（可选）"
+        },
+        {
+          "name": "clip_override",
+          "type": "CLIP",
+          "link": null,
+          "label": "CLIP（可选）"
+        },
+        {
+          "name": "vae_override",
+          "type": "VAE",
+          "link": null,
+          "label": "VAE（可选）"
+        },
+        {
+          "name": "optional_lora_stack",
+          "type": "LORA_STACK",
+          "link": null,
+          "label": "LoRA堆（可选）",
+          "slot_index": 3
+        },
+        {
+          "name": "optional_controlnet_stack",
+          "type": "CONTROL_NET_STACK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "pipe",
+          "type": "PIPE_LINE",
+          "links": [],
+          "shape": 3,
+          "label": "节点束",
+          "slot_index": 0
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            109,
+            115
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 1
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "links": [
+            103,
+            104,
+            118
+          ],
+          "shape": 3,
+          "slot_index": 2
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            110,
+            116
+          ],
+          "shape": 3,
+          "slot_index": 4
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            111,
+            117
+          ],
+          "shape": 3,
+          "slot_index": 5
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy fullLoader"
+      },
+      "widgets_values": [
+        "SDXL\\dreamshaperXL_v21TurboDPMSDE.safetensors",
+        "Default",
+        "Baked VAE",
+        -2,
+        "None",
+        1,
+        1,
+        "width x height (custom)",
+        1024,
+        768,
+        "1girl, ",
+        "none",
+        "comfy",
+        "",
+        "none",
+        "comfy",
+        1,
+        false
+      ]
+    },
+    {
+      "id": 57,
+      "type": "SaveImage",
+      "pos": [
+        1815,
+        -178
+      ],
+      "size": [
+        622.1783447265625,
+        809.04541015625
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 108,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 58,
+      "type": "KSampler",
+      "pos": [
+        1455,
+        33
+      ],
+      "size": [
+        315,
+        474
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 109,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 110,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 111,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 112,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            113
+          ],
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        272138784779413,
+        "randomize",
+        10,
+        1,
+        "euler",
+        "normal",
+        0.2
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 59,
+      "type": "HD UltimateSDUpscale",
+      "pos": [
+        1113,
+        -200
+      ],
+      "size": [
+        315,
+        826
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 114,
+          "label": "image"
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 115,
+          "label": "model"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 116,
+          "label": "positive"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 117,
+          "label": "negative"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 118,
+          "label": "vae"
+        },
+        {
+          "name": "upscale_model",
+          "type": "UPSCALE_MODEL",
+          "link": 119,
+          "label": "upscale_model"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            120
+          ],
+          "shape": 3,
+          "label": "IMAGE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "HD UltimateSDUpscale"
+      },
+      "widgets_values": [
+        2,
+        48867021285485,
+        "randomize",
+        20,
+        7,
+        "dpmpp_2m",
+        "karras",
+        0.2,
+        "Linear",
+        512,
+        512,
+        8,
+        32,
+        "None",
+        1,
+        64,
+        8,
+        16,
+        true,
+        false
+      ]
+    },
+    {
+      "id": 60,
+      "type": "KSampler",
+      "pos": [
+        240,
+        167
+      ],
+      "size": [
+        315,
+        474
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 121,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 122,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 123,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 124,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            125
+          ],
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        1103943595769436,
+        "randomize",
+        4,
+        1,
+        "euler",
+        "simple",
+        1
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 61,
+      "type": "Note",
+      "pos": [
+        676,
+        459
+      ],
+      "size": [
+        402.1633021251596,
+        149.71962048665955
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "HD Ultimate SD Upscale节点的下载网址：\nhttps://github.com/xiaoxiaodesha/hd_node"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    }
+  ],
+  "links": [
+    [
+      82,
+      47,
+      1,
+      44,
+      0,
+      "CLIP"
+    ],
+    [
+      84,
+      47,
+      2,
+      45,
+      1,
+      "VAE"
+    ],
+    [
+      89,
+      47,
+      1,
+      49,
+      0,
+      "CLIP"
+    ],
+    [
+      91,
+      51,
+      0,
+      44,
+      1,
+      "STRING"
+    ],
+    [
+      103,
+      54,
+      2,
+      33,
+      1,
+      "VAE"
+    ],
+    [
+      104,
+      54,
+      2,
+      34,
+      1,
+      "VAE"
+    ],
+    [
+      108,
+      34,
+      0,
+      57,
+      0,
+      "IMAGE"
+    ],
+    [
+      109,
+      54,
+      1,
+      58,
+      0,
+      "MODEL"
+    ],
+    [
+      110,
+      54,
+      4,
+      58,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      111,
+      54,
+      5,
+      58,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      112,
+      33,
+      0,
+      58,
+      3,
+      "LATENT"
+    ],
+    [
+      113,
+      58,
+      0,
+      34,
+      0,
+      "LATENT"
+    ],
+    [
+      114,
+      45,
+      0,
+      59,
+      0,
+      "IMAGE"
+    ],
+    [
+      115,
+      54,
+      1,
+      59,
+      1,
+      "MODEL"
+    ],
+    [
+      116,
+      54,
+      4,
+      59,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      117,
+      54,
+      5,
+      59,
+      3,
+      "CONDITIONING"
+    ],
+    [
+      118,
+      54,
+      2,
+      59,
+      4,
+      "VAE"
+    ],
+    [
+      119,
+      36,
+      0,
+      59,
+      5,
+      "UPSCALE_MODEL"
+    ],
+    [
+      120,
+      59,
+      0,
+      33,
+      0,
+      "IMAGE"
+    ],
+    [
+      121,
+      47,
+      0,
+      60,
+      0,
+      "MODEL"
+    ],
+    [
+      122,
+      44,
+      0,
+      60,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      123,
+      49,
+      0,
+      60,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      124,
+      46,
+      0,
+      60,
+      3,
+      "LATENT"
+    ],
+    [
+      125,
+      60,
+      0,
+      45,
+      0,
+      "LATENT"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "FLUK文生图",
+      "bounding": [
+        -656,
+        -86,
+        1242,
+        778
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "放大",
+      "bounding": [
+        618,
+        -348,
+        1850,
+        1008
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6934334949441353,
+      "offset": [
+        221.16822219439558,
+        439.68661500758776
+      ]
+    },
+    "workspace_info": {
+      "id": "a7VR9osxo_2bpP6t_8aGG",
+      "saveLock": false,
+      "cloudID": null,
+      "coverMediaPath": null
+    }
+  },
+  "version": 0.4
+}

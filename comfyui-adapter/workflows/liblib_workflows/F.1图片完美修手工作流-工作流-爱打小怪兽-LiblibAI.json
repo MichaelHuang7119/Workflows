@@ -1,0 +1,594 @@
+{
+  "last_node_id": 43,
+  "last_link_id": 51,
+  "nodes": [
+    {
+      "id": 9,
+      "type": "CLIPTextEncodeFlux",
+      "pos": [
+        1000,
+        -350
+      ],
+      "size": {
+        "0": 450,
+        "1": 440
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 12,
+          "label": "clip"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            8,
+            47
+          ],
+          "shape": 3,
+          "label": "CONDITIONING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeFlux"
+      },
+      "widgets_values": [
+        "",
+        "Replace (bad hands, deformed hands, deformed fingers, excess fingers) with good hands",
+        3.5
+      ]
+    },
+    {
+      "id": 10,
+      "type": "ConditioningZeroOut",
+      "pos": [
+        1500,
+        -360
+      ],
+      "size": {
+        "0": 317.4000244140625,
+        "1": 26
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 8,
+          "label": "条件"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            46
+          ],
+          "shape": 3,
+          "label": "条件",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ConditioningZeroOut"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 40,
+      "type": "UltralyticsDetectorProvider",
+      "pos": [
+        1530,
+        220
+      ],
+      "size": {
+        "0": 315,
+        "1": 78
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "BBOX_DETECTOR",
+          "type": "BBOX_DETECTOR",
+          "links": [
+            42
+          ],
+          "shape": 3,
+          "label": "BBox检测",
+          "slot_index": 0
+        },
+        {
+          "name": "SEGM_DETECTOR",
+          "type": "SEGM_DETECTOR",
+          "links": [],
+          "shape": 3,
+          "label": "SEGM检测"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UltralyticsDetectorProvider"
+      },
+      "widgets_values": [
+        "bbox/hand_yolov8s.pt"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 23,
+      "type": "easy imageScaleDownToSize",
+      "pos": [
+        1040,
+        180
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 19,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            43,
+            51
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy imageScaleDownToSize"
+      },
+      "widgets_values": [
+        1024,
+        true
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 6,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        750,
+        -350
+      ],
+      "size": {
+        "0": 210,
+        "1": 122
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            50
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            12,
+            49
+          ],
+          "shape": 3,
+          "label": "CLIP",
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            48
+          ],
+          "shape": 3,
+          "label": "VAE",
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "flux-schnell_fp8_unet_vae_clip_v1.safetensors",
+        null
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 43,
+      "type": "DetailerForEach",
+      "pos": [
+        1960,
+        -440
+      ],
+      "size": {
+        "0": 400,
+        "1": 840
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 51,
+          "label": "图像"
+        },
+        {
+          "name": "segs",
+          "type": "SEGS",
+          "link": 44,
+          "label": "Seg"
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 50,
+          "label": "模型"
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 49,
+          "label": "CLIP"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 48,
+          "label": "VAE"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 47,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 46,
+          "label": "负面条件"
+        },
+        {
+          "name": "detailer_hook",
+          "type": "DETAILER_HOOK",
+          "link": null,
+          "label": "细化约束"
+        },
+        {
+          "name": "scheduler_func_opt",
+          "type": "SCHEDULER_FUNC",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            45
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DetailerForEach"
+      },
+      "widgets_values": [
+        512,
+        true,
+        1024,
+        314084111542992,
+        "randomize",
+        4,
+        1.5,
+        "euler",
+        "normal",
+        0.7000000000000001,
+        25,
+        true,
+        true,
+        "",
+        1,
+        false,
+        20
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 42,
+      "type": "BboxDetectorSEGS",
+      "pos": [
+        1480,
+        -50
+      ],
+      "size": {
+        "0": 400,
+        "1": 212
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "bbox_detector",
+          "type": "BBOX_DETECTOR",
+          "link": 42,
+          "label": "BBox检测"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 43,
+          "label": "图像"
+        },
+        {
+          "name": "detailer_hook",
+          "type": "DETAILER_HOOK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SEGS",
+          "type": "SEGS",
+          "links": [
+            44
+          ],
+          "shape": 3,
+          "label": "Seg",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BboxDetectorSEGS"
+      },
+      "widgets_values": [
+        0.2,
+        10,
+        2,
+        10,
+        "all"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 12,
+      "type": "PreviewImage",
+      "pos": [
+        2580,
+        -530
+      ],
+      "size": {
+        "0": 630,
+        "1": 1170
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 45,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 16,
+      "type": "LoadImage",
+      "pos": [
+        -100,
+        -620
+      ],
+      "size": [
+        630,
+        1260
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            19
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "QQ截图20240802114938.png",
+        "image"
+      ],
+      "category": "Primitive Nodes"
+    }
+  ],
+  "links": [
+    [
+      8,
+      9,
+      0,
+      10,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      12,
+      6,
+      1,
+      9,
+      0,
+      "CLIP"
+    ],
+    [
+      19,
+      16,
+      0,
+      23,
+      0,
+      "IMAGE"
+    ],
+    [
+      42,
+      40,
+      0,
+      42,
+      0,
+      "BBOX_DETECTOR"
+    ],
+    [
+      43,
+      23,
+      0,
+      42,
+      1,
+      "IMAGE"
+    ],
+    [
+      44,
+      42,
+      0,
+      43,
+      1,
+      "SEGS"
+    ],
+    [
+      45,
+      43,
+      0,
+      12,
+      0,
+      "IMAGE"
+    ],
+    [
+      46,
+      10,
+      0,
+      43,
+      6,
+      "CONDITIONING"
+    ],
+    [
+      47,
+      9,
+      0,
+      43,
+      5,
+      "CONDITIONING"
+    ],
+    [
+      48,
+      6,
+      2,
+      43,
+      4,
+      "VAE"
+    ],
+    [
+      49,
+      6,
+      1,
+      43,
+      3,
+      "CLIP"
+    ],
+    [
+      50,
+      6,
+      0,
+      43,
+      2,
+      "MODEL"
+    ],
+    [
+      51,
+      23,
+      0,
+      43,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "           小怪兽flux完美修手工作流",
+      "bounding": [
+        -385,
+        -1485,
+        4066,
+        770
+      ],
+      "color": "#3f789e",
+      "font_size": 240,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.13034897088150973,
+      "offset": [
+        7964.16301731486,
+        3475.3403501270764
+      ]
+    }
+  },
+  "version": 0.4
+}

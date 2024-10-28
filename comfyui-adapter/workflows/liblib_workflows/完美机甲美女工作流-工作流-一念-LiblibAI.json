@@ -1,0 +1,2354 @@
+{
+  "last_node_id": 266,
+  "last_link_id": 632,
+  "nodes": [
+    {
+      "id": 163,
+      "type": "VAEDecode",
+      "pos": [
+        3005,
+        495
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 30,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 608,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 373,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            460
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 208,
+      "type": "CLIPTextEncode",
+      "pos": [
+        2423,
+        625
+      ],
+      "size": {
+        "0": 422.84503173828125,
+        "1": 164.31304931640625
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "link": 479,
+          "name": "clip",
+          "type": "CLIP",
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "label": "条件",
+          "links": [
+            481
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "Perfect face, exquisite face"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 209,
+      "type": "CLIPTextEncode",
+      "pos": [
+        2424,
+        845
+      ],
+      "size": {
+        "0": 425.27801513671875,
+        "1": 180.6060791015625
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "link": 480,
+          "name": "clip",
+          "type": "CLIP",
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "label": "条件",
+          "links": [
+            482
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "Ugly face,\n"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 195,
+      "type": "SAMLoader",
+      "pos": [
+        2468,
+        1085
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "SAM_MODEL",
+          "type": "SAM_MODEL",
+          "links": [
+            463
+          ],
+          "shape": 3,
+          "label": "SAM模型",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SAMLoader"
+      },
+      "widgets_values": [
+        "sam_vit_b_01ec64.pth",
+        "Prefer GPU"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 211,
+      "type": "UltralyticsDetectorProvider",
+      "pos": [
+        2471,
+        1217
+      ],
+      "size": {
+        "0": 315,
+        "1": 78
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "BBOX_DETECTOR",
+          "type": "BBOX_DETECTOR",
+          "links": [
+            487
+          ],
+          "shape": 3,
+          "label": "BBox检测",
+          "slot_index": 0
+        },
+        {
+          "name": "SEGM_DETECTOR",
+          "type": "SEGM_DETECTOR",
+          "links": null,
+          "shape": 3,
+          "label": "SEGM检测"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UltralyticsDetectorProvider"
+      },
+      "widgets_values": [
+        "bbox/face_yolov8m"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 207,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        2071,
+        630
+      ],
+      "size": {
+        "0": 315,
+        "1": 98
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            483
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            478,
+            479,
+            480
+          ],
+          "shape": 3,
+          "label": "CLIP",
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            485
+          ],
+          "shape": 3,
+          "label": "VAE",
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "majicMIX realistic 麦橘写实_v7"
+      ],
+      "_widget_cache_map": {
+        "XXMix_9realisticSDXL_v1": {
+          "name": "XXMix_9realisticSDXL_v1",
+          "value": 54155
+        },
+        "majicMIX realistic 麦橘写实_v7": {
+          "name": "majicMIX realistic 麦橘写实_v7",
+          "value": 125488
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 210,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        2070,
+        779
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 483,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            484
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "（一念）美女脸模001（眼睛提升，脸部质量提升）_SD1.5 v1.0",
+        0.5
+      ],
+      "_widget_cache_map": {
+        "虚拟模特_SDXL V1.1": {
+          "name": "虚拟模特_SDXL V1.1",
+          "value": 1955302
+        },
+        "（一念）美女脸模001（眼睛提升，脸部质量提升）_SD1.5 v1.0": {
+          "name": "（一念）美女脸模001（眼睛提升，脸部质量提升）_SD1.5 v1.0",
+          "value": 1915337
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 187,
+      "type": "VAEDecode",
+      "pos": [
+        2229,
+        288
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 26,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 615,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 454,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            456
+          ],
+          "shape": 3,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 214,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        47,
+        961
+      ],
+      "size": {
+        "0": 315,
+        "1": 98
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            493
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            494
+          ],
+          "shape": 3,
+          "label": "CLIP",
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            533
+          ],
+          "shape": 3,
+          "label": "VAE",
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "SDXL 1.0 ArienMixXL 亚洲人像_V4.5"
+      ],
+      "_widget_cache_map": {
+        "SDXL 1.0 ArienMixXL 亚洲人像_V4.5": {
+          "name": "SDXL 1.0 ArienMixXL 亚洲人像_V4.5",
+          "value": 1470329
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 226,
+      "type": "PreviewImage",
+      "pos": [
+        1624,
+        967
+      ],
+      "size": {
+        "0": 210,
+        "1": 246
+      },
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 534,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 247,
+      "type": "LoraLoader",
+      "pos": [
+        413,
+        989
+      ],
+      "size": {
+        "0": 315,
+        "1": 126
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 577,
+          "label": "模型"
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 578,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [],
+          "shape": 3,
+          "label": "CLIP",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoader"
+      },
+      "widgets_values": [
+        "虚拟模特_SDXL V1.1",
+        0.5,
+        1
+      ],
+      "_widget_cache_map": {
+        "（一念）美女脸模001（眼睛提升，脸部质量提升）_SD1.5 v1.0": {
+          "name": "（一念）美女脸模001（眼睛提升，脸部质量提升）_SD1.5 v1.0",
+          "value": 1915337
+        },
+        "虚拟模特_SDXL V1.1": {
+          "name": "虚拟模特_SDXL V1.1",
+          "value": 1955302
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 12,
+      "type": "LoraLoader",
+      "pos": [
+        466,
+        788
+      ],
+      "size": {
+        "0": 210,
+        "1": 150
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "link": 493,
+          "name": "model",
+          "type": "MODEL",
+          "label": "模型"
+        },
+        {
+          "link": 494,
+          "name": "clip",
+          "type": "CLIP",
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "label": "模型",
+          "links": [
+            574,
+            577
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "label": "CLIP",
+          "links": [
+            575,
+            578
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoader"
+      },
+      "widgets_values": [
+        "时尚美女（多姿势动作）-进阶版SDXL_v2.0",
+        0.8,
+        1
+      ],
+      "_widget_cache_map": {
+        "时尚美女（多姿势动作）-进阶版SDXL_v2.0": {
+          "name": "时尚美女（多姿势动作）-进阶版SDXL_v2.0",
+          "value": 2164677
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 246,
+      "type": "LoraLoader",
+      "pos": [
+        411,
+        1360
+      ],
+      "size": {
+        "0": 315,
+        "1": 126
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 573,
+          "label": "模型"
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 572,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            576
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            570,
+            571
+          ],
+          "shape": 3,
+          "label": "CLIP",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoader"
+      },
+      "widgets_values": [
+        "鲜创一派@女士手XL_V1.0",
+        0.2,
+        1
+      ],
+      "_widget_cache_map": {
+        "SDXL Detail 细节调节器_v1.0": {
+          "name": "SDXL Detail 细节调节器_v1.0",
+          "value": 28306
+        },
+        "鲜创一派@女士手XL_V1.0": {
+          "name": "鲜创一派@女士手XL_V1.0",
+          "value": 1421225
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 191,
+      "type": "FaceDetailer",
+      "pos": [
+        2886,
+        612
+      ],
+      "size": {
+        "0": 519,
+        "1": 900
+      },
+      "flags": {},
+      "order": 31,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 460,
+          "label": "图像"
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 484,
+          "label": "模型"
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 478,
+          "label": "CLIP"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 485,
+          "label": "VAE"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 481,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 482,
+          "label": "负面条件"
+        },
+        {
+          "name": "bbox_detector",
+          "type": "BBOX_DETECTOR",
+          "link": 487,
+          "label": "BBox检测",
+          "slot_index": 6
+        },
+        {
+          "name": "sam_model_opt",
+          "type": "SAM_MODEL",
+          "link": 463,
+          "label": "SAM模型",
+          "slot_index": 7
+        },
+        {
+          "name": "segm_detector_opt",
+          "type": "SEGM_DETECTOR",
+          "link": null,
+          "label": "Segm检测",
+          "slot_index": 8
+        },
+        {
+          "name": "detailer_hook",
+          "type": "DETAILER_HOOK",
+          "link": null,
+          "label": "细化约束",
+          "slot_index": 9
+        },
+        {
+          "name": "scheduler_func_opt",
+          "type": "SCHEDULER_FUNC",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            604
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "cropped_refined",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 6,
+          "label": "细化图像"
+        },
+        {
+          "name": "cropped_enhanced_alpha",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 6,
+          "label": "细化部分"
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        },
+        {
+          "name": "detailer_pipe",
+          "type": "DETAILER_PIPE",
+          "links": null,
+          "shape": 3,
+          "label": "细化节点束"
+        },
+        {
+          "name": "cnet_images",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 6,
+          "label": "ControlNet图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FaceDetailer"
+      },
+      "widgets_values": [
+        512,
+        true,
+        2048,
+        0,
+        "randomize",
+        40,
+        8,
+        "dpmpp_sde",
+        "karras",
+        0.5,
+        5,
+        true,
+        true,
+        0.1,
+        10,
+        3,
+        "center-1",
+        0,
+        0.93,
+        0,
+        0.1,
+        "False",
+        10,
+        "",
+        1,
+        false,
+        20
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 225,
+      "type": "VAEDecode",
+      "pos": [
+        1619,
+        841
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 532,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 533,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            534,
+            616
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 148,
+      "type": "CheckpointLoader",
+      "pos": [
+        578,
+        115
+      ],
+      "size": {
+        "0": 315,
+        "1": 122
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            332
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            333
+          ],
+          "shape": 3,
+          "label": "CLIP",
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            373,
+            454,
+            455,
+            617
+          ],
+          "shape": 3,
+          "label": "VAE",
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoader"
+      },
+      "widgets_values": [
+        "v1-inference_clip_skip_2_fp16.yaml",
+        "XXMix_9realisticSDXL_v1"
+      ],
+      "_widget_cache_map": {
+        "XXMix_9realisticSDXL_v1": {
+          "name": "XXMix_9realisticSDXL_v1",
+          "value": 54155
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 264,
+      "type": "VAEEncode",
+      "pos": [
+        1622,
+        687
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 616,
+          "label": "图像"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 617,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            618
+          ],
+          "shape": 3,
+          "label": "Latent",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 8,
+      "type": "EmptyLatentImage",
+      "pos": [
+        1253,
+        1152
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "label": "Latent",
+          "links": [
+            530
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        576,
+        1024,
+        1
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 189,
+      "type": "ImageScaleBy",
+      "pos": [
+        2269,
+        118
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 27,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 456,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            457
+          ],
+          "shape": 3,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageScaleBy"
+      },
+      "widgets_values": [
+        "nearest-exact",
+        2
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 2,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1253,
+        80
+      ],
+      "size": {
+        "0": 422.84503173828125,
+        "1": 164.31304931640625
+      },
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "link": 626,
+          "name": "clip",
+          "type": "CLIP",
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "label": "条件",
+          "links": [
+            610,
+            613
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "Best quality, masterpiece, 16k，1Girl, wearing mecha, full body mecha, dynamic posture, multi light mecha, super complex mecha structure, multiple cameras, screw holes，Mecanization of objects and mechanization of character clothing"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 262,
+      "type": "KSampler",
+      "pos": [
+        2683,
+        117
+      ],
+      "size": {
+        "0": 315,
+        "1": 262
+      },
+      "flags": {},
+      "order": 29,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 625,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 610,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 611,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 612,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            608
+          ],
+          "shape": 3,
+          "label": "Latent",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        2345673478456387,
+        "randomize",
+        40,
+        7,
+        "dpmpp_sde",
+        "karras",
+        0.35000000000000003
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 263,
+      "type": "KSampler",
+      "pos": [
+        1824,
+        124
+      ],
+      "size": {
+        "0": 315,
+        "1": 262
+      },
+      "flags": {},
+      "order": 25,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 628,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 613,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 614,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 618,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            615
+          ],
+          "shape": 3,
+          "label": "Latent",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        13476354986567,
+        "randomize",
+        30,
+        7,
+        "dpmpp_sde",
+        "karras",
+        0.5
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 16,
+      "type": "LoraLoader",
+      "pos": [
+        917,
+        100
+      ],
+      "size": {
+        "0": 210,
+        "1": 150
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "link": 332,
+          "name": "model",
+          "type": "MODEL",
+          "label": "模型"
+        },
+        {
+          "link": 333,
+          "name": "clip",
+          "type": "CLIP",
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "label": "模型",
+          "links": [
+            559
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "label": "CLIP",
+          "links": [
+            560
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoader"
+      },
+      "widgets_values": [
+        "炫酷机甲美女_SDXL V1.2",
+        0.7000000000000001,
+        1
+      ],
+      "_widget_cache_map": {
+        "时尚美女（多姿势动作）-进阶版SDXL_v2.0": {
+          "name": "时尚美女（多姿势动作）-进阶版SDXL_v2.0",
+          "value": 2164677
+        },
+        "炫酷机甲美女_SDXL V1.2": {
+          "name": "炫酷机甲美女_SDXL V1.2",
+          "value": 1151903
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 234,
+      "type": "LoraLoader",
+      "pos": [
+        876,
+        303
+      ],
+      "size": {
+        "0": 315,
+        "1": 126
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 559,
+          "label": "模型"
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 560,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            629
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            630
+          ],
+          "shape": 3,
+          "label": "CLIP",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoader"
+      },
+      "widgets_values": [
+        "时尚美女（多姿势动作）-进阶版SDXL_v2.0",
+        0.35000000000000003,
+        1
+      ],
+      "_widget_cache_map": {
+        "（一念）美女脸模001（眼睛提升，脸部质量提升）_SD1.5 v1.0": {
+          "name": "（一念）美女脸模001（眼睛提升，脸部质量提升）_SD1.5 v1.0",
+          "value": 1915337
+        },
+        "虚拟模特_SDXL V1.1": {
+          "name": "虚拟模特_SDXL V1.1",
+          "value": 1955302
+        },
+        "时尚美女（多姿势动作）-进阶版SDXL_v2.0": {
+          "name": "时尚美女（多姿势动作）-进阶版SDXL_v2.0",
+          "value": 2164677
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 231,
+      "type": "LoraLoader",
+      "pos": [
+        877,
+        582
+      ],
+      "size": {
+        "0": 315,
+        "1": 126
+      },
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 631,
+          "label": "模型"
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 632,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            625,
+            628
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            626,
+            627
+          ],
+          "shape": 3,
+          "label": "CLIP",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoader"
+      },
+      "widgets_values": [
+        "虚拟模特_SDXL V1.1",
+        0.5,
+        1
+      ],
+      "_widget_cache_map": {
+        "（一念）美女脸模001（眼睛提升，脸部质量提升）_SD1.5 v1.0": {
+          "name": "（一念）美女脸模001（眼睛提升，脸部质量提升）_SD1.5 v1.0",
+          "value": 1915337
+        },
+        "虚拟模特_SDXL V1.1": {
+          "name": "虚拟模特_SDXL V1.1",
+          "value": 1955302
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 266,
+      "type": "LoraLoader",
+      "pos": [
+        525,
+        444
+      ],
+      "size": {
+        "0": 315,
+        "1": 126
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 629,
+          "label": "模型"
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 630,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            631
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            632
+          ],
+          "shape": 3,
+          "label": "CLIP",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoader"
+      },
+      "widgets_values": [
+        "（一念）美脚（修腿，修脚，坐姿优化）SD1.5_v1.0",
+        0.15,
+        1
+      ],
+      "_widget_cache_map": {
+        "（一念）美脚（修腿，修脚，坐姿优化）SD1.5_v1.0": {
+          "name": "（一念）美脚（修腿，修脚，坐姿优化）SD1.5_v1.0",
+          "value": 2105886
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 245,
+      "type": "LoraLoader",
+      "pos": [
+        414,
+        1176
+      ],
+      "size": {
+        "0": 315,
+        "1": 126
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 574,
+          "label": "模型"
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 575,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            573
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            572
+          ],
+          "shape": 3,
+          "label": "CLIP",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoader"
+      },
+      "widgets_values": [
+        "（一念）美脚（修腿，修脚，坐姿优化）SD1.5_v1.0",
+        0.15,
+        1
+      ],
+      "_widget_cache_map": {
+        "SDXL Detail 细节调节器_v1.0": {
+          "name": "SDXL Detail 细节调节器_v1.0",
+          "value": 28306
+        },
+        "鲜创一派@女士手XL_V1.0": {
+          "name": "鲜创一派@女士手XL_V1.0",
+          "value": 1421225
+        },
+        "（一念）美脚（修腿，修脚，坐姿优化）SD1.5_v1.0": {
+          "name": "（一念）美脚（修腿，修脚，坐姿优化）SD1.5_v1.0",
+          "value": 2105886
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 164,
+      "type": "PreviewImage",
+      "pos": [
+        3572,
+        619
+      ],
+      "size": {
+        "0": 210,
+        "1": 246
+      },
+      "flags": {},
+      "order": 32,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 604,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 10,
+      "type": "CLIPTextEncode",
+      "pos": [
+        776.1831570484053,
+        1054.7130315075667
+      ],
+      "size": {
+        "0": 425.27801513671875,
+        "1": 180.6060791015625
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "link": 571,
+          "name": "clip",
+          "type": "CLIP",
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "label": "条件",
+          "links": [
+            529
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "verybadimagenegative_v1.3, ng_deepnegative_v1_75t, (ugly face:0.8),cross-eyed,sketches, (worst quality:2), (low quality:2), (normal quality:2), lowres, normal quality, ((monochrome)), ((grayscale)), skin spots, acnes, skin blemishes, bad anatomy, deepnegative, facing away, tilted head, {multiple people}, lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worstquality, low quality, normal quality, jpegartifacts, signature, watermark, username, blurry, （bad feet：2）, cropped, poorly drawn hands, poorly drawn face, mutation, deformed, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, extra fingers, fewer digits, extra limbs, extra arms,(extra legs:2), malformed limbs, fused fingers, too many fingers, long neck, cross-eyed,mutated hands, polar lowres, bad body, bad proportions, gross proportions, text, error, missing fingers, missing arms, （missing legs：1.3）, extra digit, extra arms, （extra leg：2）, (extra foot:2), ((repeating hair)),nsfw"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 3,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1255,
+        293
+      ],
+      "size": {
+        "0": 425.27801513671875,
+        "1": 180.6060791015625
+      },
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "link": 627,
+          "name": "clip",
+          "type": "CLIP",
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "label": "条件",
+          "links": [
+            611,
+            614
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "verybadimagenegative_v1.3, ng_deepnegative_v1_75t, (ugly face:0.8),cross-eyed,sketches, (worst quality:2), (low quality:2), (normal quality:2), lowres, normal quality, ((monochrome)), ((grayscale)), skin spots, acnes, skin blemishes, bad anatomy, deepnegative, facing away, tilted head, {multiple people}, lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worstquality, low quality, normal quality, jpegartifacts, signature, watermark, username, blurry, （bad feet：2）, cropped, poorly drawn hands, poorly drawn face, mutation, deformed, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, extra fingers, fewer digits, extra limbs, extra arms,(extra legs:2), malformed limbs, fused fingers, too many fingers, long neck, cross-eyed,mutated hands, polar lowres, bad body, bad proportions, gross proportions, text, error, missing fingers, missing arms, （missing legs：1.3）, extra digit, extra arms, （extra leg：2）, (extra foot:2), ((repeating hair)),nsfw"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 188,
+      "type": "VAEEncode",
+      "pos": [
+        2455,
+        286
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 28,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 457,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 455,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            612
+          ],
+          "shape": 3,
+          "label": "Latent",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 9,
+      "type": "CLIPTextEncode",
+      "pos": [
+        780,
+        850
+      ],
+      "size": {
+        "0": 422.84503173828125,
+        "1": 164.31304931640625
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "link": 570,
+          "name": "clip",
+          "type": "CLIP",
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "label": "条件",
+          "links": [
+            528
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "Best quality,masterpiece,1girl,bare arms,bare shoulders,black hair,blurry background,breasts,brown eyes,cleavage,collarbone,depth of field,dress,earrings,floral print,Dance posture,Dynamic pose,indoor,Upper body,indoors,jewelry,large breasts,lips,long hair,looking at viewer,parted lips,print dress,red flower,sleeveless dress,solo,standing,white dress"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 224,
+      "type": "KSampler",
+      "pos": [
+        1253,
+        839
+      ],
+      "size": {
+        "0": 315,
+        "1": 262
+      },
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 576,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 528,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 529,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 530,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            532
+          ],
+          "shape": 3,
+          "label": "Latent",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        2345735867867,
+        "randomize",
+        20,
+        7,
+        "dpmpp_sde",
+        "karras",
+        1
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    }
+  ],
+  "links": [
+    [
+      332,
+      148,
+      0,
+      16,
+      0,
+      "MODEL"
+    ],
+    [
+      333,
+      148,
+      1,
+      16,
+      1,
+      "CLIP"
+    ],
+    [
+      373,
+      148,
+      2,
+      163,
+      1,
+      "VAE"
+    ],
+    [
+      454,
+      148,
+      2,
+      187,
+      1,
+      "VAE"
+    ],
+    [
+      455,
+      148,
+      2,
+      188,
+      1,
+      "VAE"
+    ],
+    [
+      456,
+      187,
+      0,
+      189,
+      0,
+      "IMAGE"
+    ],
+    [
+      457,
+      189,
+      0,
+      188,
+      0,
+      "IMAGE"
+    ],
+    [
+      460,
+      163,
+      0,
+      191,
+      0,
+      "IMAGE"
+    ],
+    [
+      463,
+      195,
+      0,
+      191,
+      7,
+      "SAM_MODEL"
+    ],
+    [
+      478,
+      207,
+      1,
+      191,
+      2,
+      "CLIP"
+    ],
+    [
+      479,
+      207,
+      1,
+      208,
+      0,
+      "CLIP"
+    ],
+    [
+      480,
+      207,
+      1,
+      209,
+      0,
+      "CLIP"
+    ],
+    [
+      481,
+      208,
+      0,
+      191,
+      4,
+      "CONDITIONING"
+    ],
+    [
+      482,
+      209,
+      0,
+      191,
+      5,
+      "CONDITIONING"
+    ],
+    [
+      483,
+      207,
+      0,
+      210,
+      0,
+      "MODEL"
+    ],
+    [
+      484,
+      210,
+      0,
+      191,
+      1,
+      "MODEL"
+    ],
+    [
+      485,
+      207,
+      2,
+      191,
+      3,
+      "VAE"
+    ],
+    [
+      487,
+      211,
+      0,
+      191,
+      6,
+      "BBOX_DETECTOR"
+    ],
+    [
+      493,
+      214,
+      0,
+      12,
+      0,
+      "MODEL"
+    ],
+    [
+      494,
+      214,
+      1,
+      12,
+      1,
+      "CLIP"
+    ],
+    [
+      528,
+      9,
+      0,
+      224,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      529,
+      10,
+      0,
+      224,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      530,
+      8,
+      0,
+      224,
+      3,
+      "LATENT"
+    ],
+    [
+      532,
+      224,
+      0,
+      225,
+      0,
+      "LATENT"
+    ],
+    [
+      533,
+      214,
+      2,
+      225,
+      1,
+      "VAE"
+    ],
+    [
+      534,
+      225,
+      0,
+      226,
+      0,
+      "IMAGE"
+    ],
+    [
+      559,
+      16,
+      0,
+      234,
+      0,
+      "MODEL"
+    ],
+    [
+      560,
+      16,
+      1,
+      234,
+      1,
+      "CLIP"
+    ],
+    [
+      570,
+      246,
+      1,
+      9,
+      0,
+      "CLIP"
+    ],
+    [
+      571,
+      246,
+      1,
+      10,
+      0,
+      "CLIP"
+    ],
+    [
+      572,
+      245,
+      1,
+      246,
+      1,
+      "CLIP"
+    ],
+    [
+      573,
+      245,
+      0,
+      246,
+      0,
+      "MODEL"
+    ],
+    [
+      574,
+      12,
+      0,
+      245,
+      0,
+      "MODEL"
+    ],
+    [
+      575,
+      12,
+      1,
+      245,
+      1,
+      "CLIP"
+    ],
+    [
+      576,
+      246,
+      0,
+      224,
+      0,
+      "MODEL"
+    ],
+    [
+      577,
+      12,
+      0,
+      247,
+      0,
+      "MODEL"
+    ],
+    [
+      578,
+      12,
+      1,
+      247,
+      1,
+      "CLIP"
+    ],
+    [
+      604,
+      191,
+      0,
+      164,
+      0,
+      "IMAGE"
+    ],
+    [
+      608,
+      262,
+      0,
+      163,
+      0,
+      "LATENT"
+    ],
+    [
+      610,
+      2,
+      0,
+      262,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      611,
+      3,
+      0,
+      262,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      612,
+      188,
+      0,
+      262,
+      3,
+      "LATENT"
+    ],
+    [
+      613,
+      2,
+      0,
+      263,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      614,
+      3,
+      0,
+      263,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      615,
+      263,
+      0,
+      187,
+      0,
+      "LATENT"
+    ],
+    [
+      616,
+      225,
+      0,
+      264,
+      0,
+      "IMAGE"
+    ],
+    [
+      617,
+      148,
+      2,
+      264,
+      1,
+      "VAE"
+    ],
+    [
+      618,
+      264,
+      0,
+      263,
+      3,
+      "LATENT"
+    ],
+    [
+      625,
+      231,
+      0,
+      262,
+      0,
+      "MODEL"
+    ],
+    [
+      626,
+      231,
+      1,
+      2,
+      0,
+      "CLIP"
+    ],
+    [
+      627,
+      231,
+      1,
+      3,
+      0,
+      "CLIP"
+    ],
+    [
+      628,
+      231,
+      0,
+      263,
+      0,
+      "MODEL"
+    ],
+    [
+      629,
+      234,
+      0,
+      266,
+      0,
+      "MODEL"
+    ],
+    [
+      630,
+      234,
+      1,
+      266,
+      1,
+      "CLIP"
+    ],
+    [
+      631,
+      266,
+      0,
+      231,
+      0,
+      "MODEL"
+    ],
+    [
+      632,
+      266,
+      1,
+      231,
+      1,
+      "CLIP"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "整体",
+      "bounding": [
+        9,
+        -7,
+        5020,
+        1603
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.2940834937055266,
+      "offset": [
+        964.2948262678298,
+        417.77915780178216
+      ]
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

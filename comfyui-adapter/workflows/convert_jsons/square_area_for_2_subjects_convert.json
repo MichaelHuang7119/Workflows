@@ -1,0 +1,898 @@
+{
+  "3": {
+    "inputs": {
+      "unet": {
+        "node_": "51",
+        "name_": "unet"
+      },
+      "scheduler": {
+        "node_": "55",
+        "name_": "scheduler"
+      },
+      "timesteps": {
+        "node_": "55",
+        "name_": "timesteps"
+      },
+      "latents_in": {
+        "node_": "56",
+        "name_": "latents"
+      },
+      "positive": {
+        "node_": "67",
+        "name_": "forward"
+      },
+      "middle": null,
+      "negative": {
+        "node_": "78",
+        "name_": "forward"
+      },
+      "generators": {
+        "node_": "53",
+        "name_": "generators"
+      },
+      "cfg_scale": 7,
+      "cfg2_scale": 1.0,
+      "return_with_leftover_noise": "disable",
+      "batch_size": 1,
+      "model_type": "v1"
+    },
+    "node_type": "SampleLoop"
+  },
+  "5": {
+    "inputs": {
+      "width": 1280,
+      "height": 704,
+      "batch_size": 1,
+      "channel_size": 4,
+      "init_value": 0.0
+    },
+    "node_type": "MakeTensors"
+  },
+  "6": {
+    "inputs": {
+      "text_encoder": {
+        "node_": "51",
+        "name_": "text_encoder"
+      },
+      "text_encoder2": {
+        "node_": "51",
+        "name_": "text_encoder2"
+      },
+      "text_encoder3": {
+        "node_": "51",
+        "name_": "text_encoder3"
+      },
+      "tokenizer": {
+        "node_": "51",
+        "name_": "tokenizer"
+      },
+      "tokenizer2": {
+        "node_": "51",
+        "name_": "tokenizer2"
+      },
+      "tokenizer3": {
+        "node_": "51",
+        "name_": "tokenizer3"
+      },
+      "prompt": "(best quality)1.1 HDR colourful, nature wilderness snow mountain peak, (winter)1.2, on landscape mountain in Switzerland alps sunset, aerial view (cityscape)1.3 skyscrapers modern city satellite view, (sunset)1.1\ngirl with (fennec ears fox ears)0.9, sweater, sitting\n",
+      "model_type": "v1",
+      "clip_skip": 1
+    },
+    "node_type": "EncodeText"
+  },
+  "7": {
+    "inputs": {
+      "text_encoder": {
+        "node_": "51",
+        "name_": "text_encoder"
+      },
+      "text_encoder2": {
+        "node_": "51",
+        "name_": "text_encoder2"
+      },
+      "text_encoder3": {
+        "node_": "51",
+        "name_": "text_encoder3"
+      },
+      "tokenizer": {
+        "node_": "51",
+        "name_": "tokenizer"
+      },
+      "tokenizer2": {
+        "node_": "51",
+        "name_": "tokenizer2"
+      },
+      "tokenizer3": {
+        "node_": "51",
+        "name_": "tokenizer3"
+      },
+      "prompt": "(hands)1.1, text, error, cropped, (worst quality)1.2, (low quality)1.2, normal quality, (jpeg artifacts)1.3, signature, watermark, username, blurry, artist name, monochrome, sketch, censorship, censor, (copyright)1.2, extra legs, (forehead mark)1.1 (depth of field)1.1 (emotionless)1.1 (penis)1.1 (pumpkin)1.1",
+      "model_type": "v1",
+      "clip_skip": 1
+    },
+    "node_type": "EncodeText"
+  },
+  "8": {
+    "inputs": {
+      "latents": {
+        "node_": "3",
+        "name_": "latents"
+      },
+      "vae": {
+        "node_": "20",
+        "name_": "model"
+      }
+    },
+    "node_type": "VaeDecode"
+  },
+  "9": {
+    "inputs": {
+      "key": "9",
+      "value": {
+        "node_": "79",
+        "name_": "images"
+      }
+    },
+    "node_type": "TaskOutput"
+  },
+  "20": {
+    "inputs": {
+      "cls": "AutoencoderKL",
+      "path": "/data/yjw/ComfyUI/models/vae/vae-ft-mse-840000-ema-pruned.safetensors",
+      "kwargs": {
+        "config": "/data/yjw/ComfyUI/models/configs/stable-diffusion-v1-5/vae"
+      }
+    },
+    "node_type": "ModelFromSingleFile"
+  },
+  "22": {
+    "inputs": {
+      "method": "nearest-exact",
+      "width": 240,
+      "height": 136,
+      "tensor_in": {
+        "node_": "3",
+        "name_": "latents"
+      }
+    },
+    "node_type": "ResizeTensors"
+  },
+  "24": {
+    "inputs": {
+      "unet": {
+        "node_": "51",
+        "name_": "unet"
+      },
+      "scheduler": {
+        "node_": "82",
+        "name_": "scheduler"
+      },
+      "timesteps": {
+        "node_": "82",
+        "name_": "timesteps"
+      },
+      "latents_in": {
+        "node_": "83",
+        "name_": "latents"
+      },
+      "positive": {
+        "node_": "86",
+        "name_": "forward"
+      },
+      "middle": null,
+      "negative": {
+        "node_": "89",
+        "name_": "forward"
+      },
+      "generators": {
+        "node_": "80",
+        "name_": "generators"
+      },
+      "cfg_scale": 5,
+      "cfg2_scale": 1.0,
+      "return_with_leftover_noise": "disable",
+      "batch_size": 1,
+      "model_type": "v1"
+    },
+    "node_type": "SampleLoop"
+  },
+  "26": {
+    "inputs": {
+      "text_encoder": {
+        "node_": "51",
+        "name_": "text_encoder"
+      },
+      "text_encoder2": {
+        "node_": "51",
+        "name_": "text_encoder2"
+      },
+      "text_encoder3": {
+        "node_": "51",
+        "name_": "text_encoder3"
+      },
+      "tokenizer": {
+        "node_": "51",
+        "name_": "tokenizer"
+      },
+      "tokenizer2": {
+        "node_": "51",
+        "name_": "tokenizer2"
+      },
+      "tokenizer3": {
+        "node_": "51",
+        "name_": "tokenizer3"
+      },
+      "prompt": "masterpiece (realistic)1.1 (best quality)1.1 HDR girl colourful of (flat chest)0.9, (fox ears)0.9, twintails messy hair, eyes, sweater, long sleeves, sweatpants pants, gloves, nature wilderness sitting on snow mountain peak aerial view, (:d)0.5 (blush)0.9, (winter)0.9, mountain in Switzerland, comfortable, aerial view (cityscape)1.2 skyscrapers modern city satellite view, (sunset)1.1\n",
+      "model_type": "v1",
+      "clip_skip": 1
+    },
+    "node_type": "EncodeText"
+  },
+  "27": {
+    "inputs": {
+      "text_encoder": {
+        "node_": "51",
+        "name_": "text_encoder"
+      },
+      "text_encoder2": {
+        "node_": "51",
+        "name_": "text_encoder2"
+      },
+      "text_encoder3": {
+        "node_": "51",
+        "name_": "text_encoder3"
+      },
+      "tokenizer": {
+        "node_": "51",
+        "name_": "tokenizer"
+      },
+      "tokenizer2": {
+        "node_": "51",
+        "name_": "tokenizer2"
+      },
+      "tokenizer3": {
+        "node_": "51",
+        "name_": "tokenizer3"
+      },
+      "prompt": "(hands)1.1, text, error, cropped, (worst quality)1.2, (low quality)1.2, normal quality, (jpeg artifacts)1.3, signature, watermark, username, blurry, artist name, monochrome, sketch, censorship, censor, (copyright)1.2, extra legs, (forehead mark)1.1 (depth of field)1.1 (emotionless)1.1 (penis)1.1 (pumpkin)1.1",
+      "model_type": "v1",
+      "clip_skip": 1
+    },
+    "node_type": "EncodeText"
+  },
+  "31": {
+    "inputs": {
+      "latents": {
+        "node_": "24",
+        "name_": "latents"
+      },
+      "vae": {
+        "node_": "20",
+        "name_": "model"
+      }
+    },
+    "node_type": "VaeDecode"
+  },
+  "32": {
+    "inputs": {
+      "key": "32",
+      "value": {
+        "node_": "90",
+        "name_": "images"
+      }
+    },
+    "node_type": "TaskOutput"
+  },
+  "45": {
+    "inputs": {
+      "text_encoder": {
+        "node_": "51",
+        "name_": "text_encoder"
+      },
+      "text_encoder2": {
+        "node_": "51",
+        "name_": "text_encoder2"
+      },
+      "text_encoder3": {
+        "node_": "51",
+        "name_": "text_encoder3"
+      },
+      "tokenizer": {
+        "node_": "51",
+        "name_": "tokenizer"
+      },
+      "tokenizer2": {
+        "node_": "51",
+        "name_": "tokenizer2"
+      },
+      "tokenizer3": {
+        "node_": "51",
+        "name_": "tokenizer3"
+      },
+      "prompt": "(best quality)1.1 HDR girl colourful of (flat chest)0.9, fennec ears  fox ears, blonde twintails medium (messy hair)1.2, eyes, sweater, (pink)0.8 , long sleeves, sweatpants (pants)1.1, gloves, nature wilderness (sitting)1.3 on snow mountain peak, (:d)0.5 (blush)0.9, (winter)1.2, on landscape mountain in Switzerland alps sunset, comfortable, (spread legs)1.1, aerial view (cityscape)1.3 skyscrapers modern city satellite view, (sunset)1.1",
+      "model_type": "v1",
+      "clip_skip": 1
+    },
+    "node_type": "EncodeText"
+  },
+  "48": {
+    "inputs": {
+      "text_encoder": {
+        "node_": "51",
+        "name_": "text_encoder"
+      },
+      "text_encoder2": {
+        "node_": "51",
+        "name_": "text_encoder2"
+      },
+      "text_encoder3": {
+        "node_": "51",
+        "name_": "text_encoder3"
+      },
+      "tokenizer": {
+        "node_": "51",
+        "name_": "tokenizer"
+      },
+      "tokenizer2": {
+        "node_": "51",
+        "name_": "tokenizer2"
+      },
+      "tokenizer3": {
+        "node_": "51",
+        "name_": "tokenizer3"
+      },
+      "prompt": "(best quality)1.1 HDR girl colourful of (flat chest)0.9, fennec ears  fox ears, (red hair)1.1 long (messy hair)1.2, black eyes, sweater, long sleeves, sweatpants (pants)1.1, gloves, nature wilderness (sitting)1.3 on snow mountain peak, (:d)0.5 (blush)0.9, (winter)1.2, on landscape mountain in Switzerland alps sunset, comfortable, (spread legs)1.1, aerial view (cityscape)1.3 skyscrapers modern city satellite view, sunset",
+      "model_type": "v1",
+      "clip_skip": 1
+    },
+    "node_type": "EncodeText"
+  },
+  "51": {
+    "inputs": {
+      "path": "/data/yjw/ComfyUI/models/checkpoints/Anything-V3.0.ckpt",
+      "cls": "StableDiffusionImg2ImgPipeline",
+      "kwargs": {
+        "config": "/data/yjw/ComfyUI/models/configs/stable-diffusion-v1-5"
+      }
+    },
+    "node_type": "PipeFromSingleFile"
+  },
+  "53": {
+    "inputs": {
+      "seeds": 397826772266080
+    },
+    "node_type": "MakeGenerators"
+  },
+  "54": {
+    "inputs": {
+      "cls": "DPMSolverSinglestepScheduler",
+      "init_kwargs": {
+        "num_train_timesteps": 1000,
+        "beta_start": 0.00085,
+        "beta_end": 0.012,
+        "beta_schedule": "scaled_linear",
+        "trained_betas": null,
+        "solver_order": 2,
+        "prediction_type": "epsilon",
+        "thresholding": false,
+        "dynamic_thresholding_ratio": 0.995,
+        "sample_max_value": 1.0,
+        "algorithm_type": "sde-dpmsolver++",
+        "solver_type": "midpoint",
+        "lower_order_final": false,
+        "use_karras_sigmas": false,
+        "final_sigmas_type": "zero",
+        "lambda_min_clipped": -Infinity,
+        "variance_type": null
+      }
+    },
+    "node_type": "MakeScheduler"
+  },
+  "55": {
+    "inputs": {
+      "scheduler_in": {
+        "node_": "54",
+        "name_": "scheduler"
+      },
+      "scheduler_step": 13,
+      "start_step": 0,
+      "end_step": 12
+    },
+    "node_type": "SetTimesteps"
+  },
+  "56": {
+    "inputs": {
+      "scheduler": {
+        "node_": "55",
+        "name_": "scheduler"
+      },
+      "latents_in": {
+        "node_": "5",
+        "name_": "tensor"
+      },
+      "generators": {
+        "node_": "53",
+        "name_": "generators"
+      },
+      "timesteps": {
+        "node_": "55",
+        "name_": "timesteps"
+      }
+    },
+    "node_type": "AddNoise"
+  },
+  "57": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "48",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "58": {
+    "inputs": {
+      "dict_from": {
+        "node_": "57",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "48",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "59": {
+    "inputs": {
+      "dict_from": {
+        "node_": "58",
+        "name_": "dict_to"
+      },
+      "key": "area",
+      "value": [
+        80,
+        80,
+        8,
+        80
+      ]
+    },
+    "node_type": "UpdateDict"
+  },
+  "60": {
+    "inputs": {
+      "dict_from": {
+        "node_": "59",
+        "name_": "dict_to"
+      },
+      "key": "area_strength",
+      "value": 1
+    },
+    "node_type": "UpdateDict"
+  },
+  "61": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "45",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "62": {
+    "inputs": {
+      "dict_from": {
+        "node_": "61",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "45",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "63": {
+    "inputs": {
+      "dict_from": {
+        "node_": "62",
+        "name_": "dict_to"
+      },
+      "key": "area",
+      "value": [
+        80,
+        80,
+        8,
+        0
+      ]
+    },
+    "node_type": "UpdateDict"
+  },
+  "64": {
+    "inputs": {
+      "dict_from": {
+        "node_": "63",
+        "name_": "dict_to"
+      },
+      "key": "area_strength",
+      "value": 1
+    },
+    "node_type": "UpdateDict"
+  },
+  "65": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "6",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "66": {
+    "inputs": {
+      "dict_from": {
+        "node_": "65",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "6",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "67": {
+    "inputs": {
+      "dict1": {
+        "node_": "60",
+        "name_": "dict_to"
+      },
+      "dict2": {
+        "node_": "64",
+        "name_": "dict_to"
+      },
+      "dict3": {
+        "node_": "66",
+        "name_": "dict_to"
+      },
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "68": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "7",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "69": {
+    "inputs": {
+      "dict_from": {
+        "node_": "68",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "7",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "70": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "7",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "71": {
+    "inputs": {
+      "dict_from": {
+        "node_": "70",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "48",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "72": {
+    "inputs": {
+      "dict_from": {
+        "node_": "71",
+        "name_": "dict_to"
+      },
+      "key": "area",
+      "value": [
+        80,
+        80,
+        8,
+        80
+      ]
+    },
+    "node_type": "UpdateDict"
+  },
+  "73": {
+    "inputs": {
+      "dict_from": {
+        "node_": "72",
+        "name_": "dict_to"
+      },
+      "key": "area_strength",
+      "value": 1
+    },
+    "node_type": "UpdateDict"
+  },
+  "74": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "7",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "75": {
+    "inputs": {
+      "dict_from": {
+        "node_": "74",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "45",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "76": {
+    "inputs": {
+      "dict_from": {
+        "node_": "75",
+        "name_": "dict_to"
+      },
+      "key": "area",
+      "value": [
+        80,
+        80,
+        8,
+        0
+      ]
+    },
+    "node_type": "UpdateDict"
+  },
+  "77": {
+    "inputs": {
+      "dict_from": {
+        "node_": "76",
+        "name_": "dict_to"
+      },
+      "key": "area_strength",
+      "value": 1
+    },
+    "node_type": "UpdateDict"
+  },
+  "78": {
+    "inputs": {
+      "dict1": {
+        "node_": "69",
+        "name_": "dict_to"
+      },
+      "dict2": {
+        "node_": "73",
+        "name_": "dict_to"
+      },
+      "dict3": {
+        "node_": "77",
+        "name_": "dict_to"
+      },
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "79": {
+    "inputs": {
+      "images_in": {
+        "node_": "8",
+        "name_": "images"
+      }
+    },
+    "node_type": "Tensor2Image"
+  },
+  "80": {
+    "inputs": {
+      "seeds": 240926604602097
+    },
+    "node_type": "MakeGenerators"
+  },
+  "81": {
+    "inputs": {
+      "cls": "DPMSolverSinglestepScheduler",
+      "init_kwargs": {
+        "num_train_timesteps": 1000,
+        "beta_start": 0.00085,
+        "beta_end": 0.012,
+        "beta_schedule": "scaled_linear",
+        "trained_betas": null,
+        "solver_order": 2,
+        "prediction_type": "epsilon",
+        "thresholding": false,
+        "dynamic_thresholding_ratio": 0.995,
+        "sample_max_value": 1.0,
+        "algorithm_type": "sde-dpmsolver++",
+        "solver_type": "midpoint",
+        "lower_order_final": false,
+        "use_karras_sigmas": false,
+        "final_sigmas_type": "zero",
+        "lambda_min_clipped": -Infinity,
+        "variance_type": null
+      }
+    },
+    "node_type": "MakeScheduler"
+  },
+  "82": {
+    "inputs": {
+      "scheduler_in": {
+        "node_": "81",
+        "name_": "scheduler"
+      },
+      "scheduler_step": 15,
+      "start_step": 7,
+      "end_step": 14
+    },
+    "node_type": "SetTimesteps"
+  },
+  "83": {
+    "inputs": {
+      "scheduler": {
+        "node_": "82",
+        "name_": "scheduler"
+      },
+      "latents_in": {
+        "node_": "22",
+        "name_": "tensor"
+      },
+      "generators": {
+        "node_": "80",
+        "name_": "generators"
+      },
+      "timesteps": {
+        "node_": "82",
+        "name_": "timesteps"
+      }
+    },
+    "node_type": "AddNoise"
+  },
+  "84": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "26",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "85": {
+    "inputs": {
+      "dict_from": {
+        "node_": "84",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "26",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "86": {
+    "inputs": {
+      "dict1": {
+        "node_": "85",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "87": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "27",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "88": {
+    "inputs": {
+      "dict_from": {
+        "node_": "87",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "27",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "89": {
+    "inputs": {
+      "dict1": {
+        "node_": "88",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "90": {
+    "inputs": {
+      "images_in": {
+        "node_": "31",
+        "name_": "images"
+      }
+    },
+    "node_type": "Tensor2Image"
+  }
+}

@@ -1,0 +1,1198 @@
+{
+  "last_node_id": 131,
+  "last_link_id": 203,
+  "nodes": [
+    {
+      "id": 110,
+      "type": "ModelSamplingFlux",
+      "pos": {
+        "0": 3312,
+        "1": 3120
+      },
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 187,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            169
+          ],
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ModelSamplingFlux"
+      },
+      "widgets_values": [
+        1.15,
+        0.5,
+        1024,
+        1024
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 63,
+      "type": "VAELoader",
+      "pos": {
+        "0": 3312,
+        "1": 3300
+      },
+      "size": {
+        "0": 311.81634521484375,
+        "1": 60.429901123046875
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            151,
+            152,
+            183
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "flux-ae.safetensors"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 72,
+      "type": "ConditioningZeroOut",
+      "pos": {
+        "0": 3672,
+        "1": 3012
+      },
+      "size": {
+        "0": 288,
+        "1": 26
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 96,
+          "label": "条件"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            178
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ConditioningZeroOut"
+      },
+      "widgets_values": [],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 95,
+      "type": "VAEEncode",
+      "pos": {
+        "0": 4344,
+        "1": 2796
+      },
+      "size": {
+        "0": 240,
+        "1": 48
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 176,
+          "label": "图像"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 151,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            124
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      },
+      "widgets_values": [],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 96,
+      "type": "VAEDecode",
+      "pos": {
+        "0": 4608,
+        "1": 2700
+      },
+      "size": {
+        "0": 312,
+        "1": 48
+      },
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 125,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 152,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            132,
+            171
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": [],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 71,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": 3672,
+        "1": 2844
+      },
+      "size": {
+        "0": 300,
+        "1": 108
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 95,
+          "label": "CLIP"
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 197,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            96,
+            198
+          ],
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "best quality,masterpiece",
+        true
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 99,
+      "type": "Image Comparer (rgthree)",
+      "pos": {
+        "0": 3216,
+        "1": 2172
+      },
+      "size": {
+        "0": 612,
+        "1": 432
+      },
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image_a",
+          "type": "IMAGE",
+          "link": 160,
+          "dir": 3,
+          "label": "图像_A"
+        },
+        {
+          "name": "image_b",
+          "type": "IMAGE",
+          "link": 132,
+          "dir": 3,
+          "label": "图像_B"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "comparer_mode": "Slide"
+      },
+      "widgets_values": [
+        [
+          {
+            "name": "A",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_xbehn_00003_.png&type=temp&subfolder=&rand=0.11684850732180374"
+          },
+          {
+            "name": "B",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_xbehn_00004_.png&type=temp&subfolder=&rand=0.7106427056563416"
+          }
+        ]
+      ]
+    },
+    {
+      "id": 64,
+      "type": "DualCLIPLoader",
+      "pos": {
+        "0": 3660,
+        "1": 2688
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            95
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "clip_l.safetensors",
+        "t5xxl_fp16.safetensors",
+        "flux"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 112,
+      "type": "PreviewImage",
+      "pos": {
+        "0": 3840,
+        "1": 2172
+      },
+      "size": {
+        "0": 612,
+        "1": 432
+      },
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 171,
+          "label": "图像"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": [],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 120,
+      "type": "Molmo7BDbnb",
+      "pos": {
+        "0": 3660,
+        "1": 3132
+      },
+      "size": {
+        "0": 400,
+        "1": 268
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 194,
+          "label": "image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            195
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Molmo7BDbnb"
+      },
+      "widgets_values": [
+        "Detailed Analysis",
+        "",
+        3500515249,
+        "fixed",
+        350,
+        0.6,
+        40,
+        0.9,
+        true,
+        true
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 118,
+      "type": "LoraLoaderModelOnly",
+      "pos": {
+        "0": 3312,
+        "1": 2988
+      },
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 186,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            187
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "Flux\\Aesthetic_Amateur_Photo_V3.safetensors",
+        0.8
+      ],
+      "color": "#322",
+      "bgcolor": "#533",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 115,
+      "type": "ControlNetApplyAdvanced",
+      "pos": {
+        "0": 4008,
+        "1": 2688
+      },
+      "size": {
+        "0": 315,
+        "1": 186
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 199,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 178,
+          "label": "负面条件"
+        },
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 185,
+          "label": "ControlNet"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 184,
+          "label": "图像"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 183,
+          "label": "vae"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            200
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            182
+          ],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "负面条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetApplyAdvanced"
+      },
+      "widgets_values": [
+        1,
+        0,
+        1
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 91,
+      "type": "KSampler",
+      "pos": {
+        "0": 4608,
+        "1": 2808
+      },
+      "size": {
+        "0": 312,
+        "1": 480
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 169,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 200,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 182,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 124,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            125
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        350785270227241,
+        "fixed",
+        25,
+        1,
+        "euler",
+        "normal",
+        1
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 117,
+      "type": "ControlNetLoader",
+      "pos": {
+        "0": 4008,
+        "1": 2928
+      },
+      "size": [
+        456,
+        72
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "links": [
+            185
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "ControlNet"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetLoader"
+      },
+      "widgets_values": [
+        "FLUX\\flux.1-controlnet-Upscaler.safetensors"
+      ],
+      "color": "#322",
+      "bgcolor": "#533",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 78,
+      "type": "LoraLoaderModelOnly",
+      "pos": {
+        "0": 3312,
+        "1": 2844
+      },
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 102,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            186
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "Flux\\Flux_Ultimator.safetensors",
+        0.5
+      ],
+      "color": "#322",
+      "bgcolor": "#533",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 121,
+      "type": "ShowText|pysssss",
+      "pos": {
+        "0": 4092,
+        "1": 3120
+      },
+      "size": {
+        "0": 396,
+        "1": 276
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 195,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            197
+          ],
+          "slot_index": 0,
+          "shape": 6,
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        " This image is a family portrait of Asian descent, likely from the 1960s or 70s based on its style. The scene depicts a family of three: a father, mother, and young daughter. They are positioned centrally, with the daughter between the parents. The portrait is in color but has a muted, vintage appearance consistent with its apparent age.\n\nThe composition follows traditional family portrait posing, with the parents flanking their child. The father wears a white shirt, the mother a floral-patterned top, and the daughter a pink outfit with pigtails. This color choice adds a touch of vibrancy to the otherwise subdued palette.\n\nLighting appears to be natural, illuminating the subjects evenly without harsh shadows. This lighting helps to highlight the family members' features while maintaining the soft, nostalgic feel of the era.\n\nThe image has a slightly blurry quality, which could be due to the age of the photograph or the scanning process. This blurriness adds to the vintage aesthetic and may make some finer details difficult to discern.\n\nAn interesting detail is the brown border surrounding the photograph. This border, which appears to be an integral part of the image rather than a frame, enhances the overall aged and weathered look of the portrait.\n\nThe style of clothing and overall aesthetic of the photograph reflect its time period, capturing a moment in the lives of what appears to be a happy, traditional Asian family. The presence of the daughter's pigtails and the mother's floral top add youthful energy to the image, while the father's more subdued attire provides a sense of stability and structure to the family portrait."
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 93,
+      "type": "FluxGuidance",
+      "pos": {
+        "0": 4344,
+        "1": 2688
+      },
+      "size": {
+        "0": 245.32948303222656,
+        "1": 58
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 198,
+          "label": "条件"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            199
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FluxGuidance"
+      },
+      "widgets_values": [
+        3.5
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 70,
+      "type": "UNETLoader",
+      "pos": {
+        "0": 3312,
+        "1": 2688
+      },
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            102
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "flux1-dev-fp8.safetensors",
+        "fp8_e4m3fn"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 79,
+      "type": "LoadImage",
+      "pos": {
+        "0": 2928,
+        "1": 2844
+      },
+      "size": {
+        "0": 315,
+        "1": 314.00006103515625
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            160,
+            175,
+            184,
+            194
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "images-test1.jpg",
+        "image"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 105,
+      "type": "ImageScaleBy",
+      "pos": {
+        "0": 2928,
+        "1": 2688
+      },
+      "size": {
+        "0": 312,
+        "1": 84
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 175,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            176
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageScaleBy"
+      },
+      "widgets_values": [
+        "lanczos",
+        4
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 131,
+      "type": "Note",
+      "pos": {
+        "0": 2676,
+        "1": 2208
+      },
+      "size": [
+        384,
+        108
+      ],
+      "flags": {
+        "pinned": true
+      },
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "说明文档\nhttps://xiaobot.net/post/27770e61-18df-4920-9dc9-cc4c79191d5f\n由于AI技术更新迭代，请以文档更新为准\n更多内容收录在⬇️\nhttps://xiaobot.net/p/GoToComfyUI\n网盘\nhttps://pan.quark.cn/s/8144fe0b40b9\n视频\nhttps://www.bilibili.com/video/BV1SL2JY4E7U/"
+      ],
+      "color": "#222",
+      "bgcolor": "#000",
+      "category": "Official"
+    }
+  ],
+  "links": [
+    [
+      95,
+      64,
+      0,
+      71,
+      0,
+      "CLIP"
+    ],
+    [
+      96,
+      71,
+      0,
+      72,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      102,
+      70,
+      0,
+      78,
+      0,
+      "MODEL"
+    ],
+    [
+      124,
+      95,
+      0,
+      91,
+      3,
+      "LATENT"
+    ],
+    [
+      125,
+      91,
+      0,
+      96,
+      0,
+      "LATENT"
+    ],
+    [
+      132,
+      96,
+      0,
+      99,
+      1,
+      "IMAGE"
+    ],
+    [
+      151,
+      63,
+      0,
+      95,
+      1,
+      "VAE"
+    ],
+    [
+      152,
+      63,
+      0,
+      96,
+      1,
+      "VAE"
+    ],
+    [
+      160,
+      79,
+      0,
+      99,
+      0,
+      "IMAGE"
+    ],
+    [
+      169,
+      110,
+      0,
+      91,
+      0,
+      "MODEL"
+    ],
+    [
+      171,
+      96,
+      0,
+      112,
+      0,
+      "IMAGE"
+    ],
+    [
+      175,
+      79,
+      0,
+      105,
+      0,
+      "IMAGE"
+    ],
+    [
+      176,
+      105,
+      0,
+      95,
+      0,
+      "IMAGE"
+    ],
+    [
+      178,
+      72,
+      0,
+      115,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      182,
+      115,
+      1,
+      91,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      183,
+      63,
+      0,
+      115,
+      4,
+      "VAE"
+    ],
+    [
+      184,
+      79,
+      0,
+      115,
+      3,
+      "IMAGE"
+    ],
+    [
+      185,
+      117,
+      0,
+      115,
+      2,
+      "CONTROL_NET"
+    ],
+    [
+      186,
+      78,
+      0,
+      118,
+      0,
+      "MODEL"
+    ],
+    [
+      187,
+      118,
+      0,
+      110,
+      0,
+      "MODEL"
+    ],
+    [
+      194,
+      79,
+      0,
+      120,
+      0,
+      "IMAGE"
+    ],
+    [
+      195,
+      120,
+      0,
+      121,
+      0,
+      "STRING"
+    ],
+    [
+      197,
+      121,
+      0,
+      71,
+      1,
+      "STRING"
+    ],
+    [
+      198,
+      71,
+      0,
+      93,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      199,
+      93,
+      0,
+      115,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      200,
+      115,
+      0,
+      91,
+      1,
+      "CONDITIONING"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "老照片修复-CY-V1",
+      "bounding": [
+        2664,
+        2100,
+        408,
+        240
+      ],
+      "color": "#444",
+      "font_size": 48,
+      "flags": {
+        "pinned": true
+      }
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9229599817708111,
+      "offset": [
+        -2128.109266789975,
+        -1931.1065892003107
+      ]
+    },
+    "workspace_info": {
+      "id": "_VZWTA8dMOB6KT8ucjVEw",
+      "saveLock": false,
+      "cloudID": null,
+      "coverMediaPath": null
+    }
+  },
+  "version": 0.4
+}

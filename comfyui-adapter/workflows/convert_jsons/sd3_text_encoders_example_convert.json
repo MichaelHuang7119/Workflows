@@ -1,0 +1,388 @@
+{
+  "3": {
+    "inputs": {
+      "unet": {
+        "node_": "4",
+        "name_": "unet"
+      },
+      "scheduler": {
+        "node_": "58",
+        "name_": "scheduler"
+      },
+      "timesteps": {
+        "node_": "58",
+        "name_": "timesteps"
+      },
+      "latents_in": {
+        "node_": "59",
+        "name_": "latents"
+      },
+      "positive": {
+        "node_": "62",
+        "name_": "forward"
+      },
+      "middle": null,
+      "negative": {
+        "node_": "65",
+        "name_": "forward"
+      },
+      "generators": {
+        "node_": "56",
+        "name_": "generators"
+      },
+      "cfg_scale": 5.45,
+      "cfg2_scale": 1.0,
+      "return_with_leftover_noise": "disable",
+      "batch_size": 1,
+      "model_type": "sd3"
+    },
+    "node_type": "SampleLoop"
+  },
+  "4": {
+    "inputs": {
+      "path": "/data/yjw/ComfyUI/models/checkpoints/sd3_medium.safetensors",
+      "cls": "StableDiffusion3Pipeline",
+      "kwargs": {
+        "config": "/data/yjw/ComfyUI/models/configs/stable-diffusion-3-medium-diffusers"
+      }
+    },
+    "node_type": "PipeFromSingleFile"
+  },
+  "8": {
+    "inputs": {
+      "latents": {
+        "node_": "3",
+        "name_": "latents"
+      },
+      "vae": {
+        "node_": "4",
+        "name_": "vae"
+      }
+    },
+    "node_type": "VaeDecode"
+  },
+  "9": {
+    "inputs": {
+      "key": "9",
+      "value": {
+        "node_": "66",
+        "name_": "images"
+      }
+    },
+    "node_type": "TaskOutput"
+  },
+  "16": {
+    "inputs": {
+      "text_encoder": null,
+      "text_encoder2": null,
+      "text_encoder3": {
+        "node_": "54",
+        "name_": "model"
+      },
+      "tokenizer": null,
+      "tokenizer2": null,
+      "tokenizer3": {
+        "node_": "55",
+        "name_": "model"
+      },
+      "prompt": "a bottle with a rainbow galaxy inside it on top of a wooden table on a snowy mountain top with the ocean and clouds in the background",
+      "model_type": "sd3",
+      "clip_skip": 0
+    },
+    "node_type": "EncodeText"
+  },
+  "40": {
+    "inputs": {
+      "text_encoder": null,
+      "text_encoder2": null,
+      "text_encoder3": {
+        "node_": "54",
+        "name_": "model"
+      },
+      "tokenizer": null,
+      "tokenizer2": null,
+      "tokenizer3": {
+        "node_": "55",
+        "name_": "model"
+      },
+      "prompt": "",
+      "model_type": "sd3",
+      "clip_skip": 0
+    },
+    "node_type": "EncodeText"
+  },
+  "53": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1,
+      "channel_size": 16,
+      "init_value": 0.0609
+    },
+    "node_type": "MakeTensors"
+  },
+  "54": {
+    "inputs": {
+      "cls": "T5EncoderModel",
+      "path": "/data/yjw/ComfyUI/models/configs/stable-diffusion-3-medium-diffusers/text_encoder_3",
+      "kwargs": {
+        "variant": "fp16"
+      }
+    },
+    "node_type": "ModelFromPretrained"
+  },
+  "55": {
+    "inputs": {
+      "cls": "T5TokenizerFast",
+      "path": "/data/yjw/ComfyUI/models/configs/stable-diffusion-3-medium-diffusers/tokenizer_3",
+      "kwargs": {
+        "variant": "fp16"
+      }
+    },
+    "node_type": "ModelFromPretrained"
+  },
+  "56": {
+    "inputs": {
+      "seeds": 1023174949987877
+    },
+    "node_type": "MakeGenerators"
+  },
+  "57": {
+    "inputs": {
+      "cls": "FlowMatchEulerDiscreteScheduler",
+      "init_kwargs": {
+        "num_train_timesteps": 1000,
+        "shift": 1.0
+      }
+    },
+    "node_type": "MakeScheduler"
+  },
+  "58": {
+    "inputs": {
+      "scheduler_in": {
+        "node_": "57",
+        "name_": "scheduler"
+      },
+      "scheduler_step": 30,
+      "start_step": 0,
+      "end_step": 29
+    },
+    "node_type": "SetTimesteps"
+  },
+  "59": {
+    "inputs": {
+      "scheduler": {
+        "node_": "58",
+        "name_": "scheduler"
+      },
+      "latents_in": {
+        "node_": "53",
+        "name_": "tensor"
+      },
+      "generators": {
+        "node_": "56",
+        "name_": "generators"
+      },
+      "timesteps": {
+        "node_": "58",
+        "name_": "timesteps"
+      }
+    },
+    "node_type": "AddNoise"
+  },
+  "60": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "16",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "61": {
+    "inputs": {
+      "dict_from": {
+        "node_": "60",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "16",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "62": {
+    "inputs": {
+      "dict1": {
+        "node_": "61",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "63": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "40",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "64": {
+    "inputs": {
+      "dict_from": {
+        "node_": "63",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "40",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "65": {
+    "inputs": {
+      "dict1": {
+        "node_": "64",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "66": {
+    "inputs": {
+      "images_in": {
+        "node_": "8",
+        "name_": "images"
+      }
+    },
+    "node_type": "Tensor2Image"
+  },
+  "67": {
+    "inputs": {
+      "cls": "CLIPTextModelWithProjection",
+      "path": "/data/yjw/ComfyUI/models/configs/stable-diffusion-3-medium-diffusers/text_encoder",
+      "kwargs": {
+        "variant": "fp16"
+      }
+    },
+    "node_type": "ModelFromPretrained"
+  },
+  "68": {
+    "inputs": {
+      "cls": "CLIPTextModelWithProjection",
+      "path": "/data/yjw/ComfyUI/models/configs/stable-diffusion-3-medium-diffusers/text_encoder_2",
+      "kwargs": {
+        "variant": "fp16"
+      }
+    },
+    "node_type": "ModelFromPretrained"
+  },
+  "69": {
+    "inputs": {
+      "cls": "CLIPTokenizer",
+      "path": "/data/yjw/ComfyUI/models/configs/stable-diffusion-3-medium-diffusers/tokenizer",
+      "kwargs": {
+        "variant": "fp16"
+      }
+    },
+    "node_type": "ModelFromPretrained"
+  },
+  "70": {
+    "inputs": {
+      "cls": "CLIPTokenizer",
+      "path": "/data/yjw/ComfyUI/models/configs/stable-diffusion-3-medium-diffusers/tokenizer_2",
+      "kwargs": {
+        "variant": "fp16"
+      }
+    },
+    "node_type": "ModelFromPretrained"
+  },
+  "71": {
+    "inputs": {
+      "cls": "CLIPTextModelWithProjection",
+      "path": "/data/yjw/ComfyUI/models/configs/stable-diffusion-3-medium-diffusers/text_encoder",
+      "kwargs": {
+        "variant": "fp16"
+      }
+    },
+    "node_type": "ModelFromPretrained"
+  },
+  "72": {
+    "inputs": {
+      "cls": "CLIPTextModelWithProjection",
+      "path": "/data/yjw/ComfyUI/models/configs/stable-diffusion-3-medium-diffusers/text_encoder_2",
+      "kwargs": {
+        "variant": "fp16"
+      }
+    },
+    "node_type": "ModelFromPretrained"
+  },
+  "73": {
+    "inputs": {
+      "cls": "T5EncoderModel",
+      "path": "/data/yjw/ComfyUI/models/configs/stable-diffusion-3-medium-diffusers/text_encoder_3",
+      "kwargs": {
+        "variant": "fp16"
+      }
+    },
+    "node_type": "ModelFromPretrained"
+  },
+  "74": {
+    "inputs": {
+      "cls": "CLIPTokenizer",
+      "path": "/data/yjw/ComfyUI/models/configs/stable-diffusion-3-medium-diffusers/tokenizer",
+      "kwargs": {
+        "variant": "fp16"
+      }
+    },
+    "node_type": "ModelFromPretrained"
+  },
+  "75": {
+    "inputs": {
+      "cls": "CLIPTokenizer",
+      "path": "/data/yjw/ComfyUI/models/configs/stable-diffusion-3-medium-diffusers/tokenizer_2",
+      "kwargs": {
+        "variant": "fp16"
+      }
+    },
+    "node_type": "ModelFromPretrained"
+  },
+  "76": {
+    "inputs": {
+      "cls": "T5TokenizerFast",
+      "path": "/data/yjw/ComfyUI/models/configs/stable-diffusion-3-medium-diffusers/tokenizer_3",
+      "kwargs": {
+        "variant": "fp16"
+      }
+    },
+    "node_type": "ModelFromPretrained"
+  }
+}

@@ -1,0 +1,2600 @@
+{
+  "24": {
+    "inputs": {
+      "path": "/data/yjw/ComfyUI/models/checkpoints/v1-5-pruned-emaonly.safetensors",
+      "cls": "StableDiffusionImg2ImgPipeline",
+      "kwargs": {
+        "config": "/data/yjw/ComfyUI/models/configs/stable-diffusion-v1-5"
+      }
+    },
+    "node_type": "PipeFromSingleFile"
+  },
+  "25": {
+    "inputs": {
+      "text_encoder": {
+        "node_": "24",
+        "name_": "text_encoder"
+      },
+      "text_encoder2": {
+        "node_": "24",
+        "name_": "text_encoder2"
+      },
+      "text_encoder3": {
+        "node_": "24",
+        "name_": "text_encoder3"
+      },
+      "tokenizer": {
+        "node_": "24",
+        "name_": "tokenizer"
+      },
+      "tokenizer2": {
+        "node_": "24",
+        "name_": "tokenizer2"
+      },
+      "tokenizer3": {
+        "node_": "24",
+        "name_": "tokenizer3"
+      },
+      "prompt": "",
+      "model_type": "v1",
+      "clip_skip": 0
+    },
+    "node_type": "EncodeText"
+  },
+  "26": {
+    "inputs": {
+      "text_encoder": {
+        "node_": "24",
+        "name_": "text_encoder"
+      },
+      "text_encoder2": {
+        "node_": "24",
+        "name_": "text_encoder2"
+      },
+      "text_encoder3": {
+        "node_": "24",
+        "name_": "text_encoder3"
+      },
+      "tokenizer": {
+        "node_": "24",
+        "name_": "tokenizer"
+      },
+      "tokenizer2": {
+        "node_": "24",
+        "name_": "tokenizer2"
+      },
+      "tokenizer3": {
+        "node_": "24",
+        "name_": "tokenizer3"
+      },
+      "prompt": "",
+      "model_type": "v1",
+      "clip_skip": 0
+    },
+    "node_type": "EncodeText"
+  },
+  "31": {
+    "inputs": {
+      "image_path": "/data/yjw/ComfyUI/input/example.png"
+    },
+    "node_type": "LoadImage"
+  },
+  "35": {
+    "inputs": {
+      "path": "/data/yjw/ComfyUI/models/upscale_models/RealESRGAN_x4plus.pth",
+      "kwargs": {}
+    },
+    "node_type": "LoadModel"
+  },
+  "36": {
+    "inputs": {
+      "key": "36",
+      "value": {
+        "node_": "193",
+        "name_": "images"
+      }
+    },
+    "node_type": "TaskOutput"
+  },
+  "37": {
+    "inputs": {
+      "upscale_model": {
+        "node_": "35",
+        "name_": "model"
+      },
+      "image_in": {
+        "node_": "31",
+        "name_": "image"
+      }
+    },
+    "node_type": "ImageUpscaleWithModel"
+  },
+  "38": {
+    "inputs": {
+      "tensor_in": {
+        "node_": "37",
+        "name_": "image"
+      },
+      "method": "lanczos",
+      "width": 1536,
+      "height": 1536
+    },
+    "node_type": "ResizeTensors"
+  },
+  "39": {
+    "inputs": {
+      "width": 1536,
+      "height": 1536,
+      "batch_size": 1,
+      "channel_size": 1,
+      "init_value": 0.0
+    },
+    "node_type": "MakeTensors"
+  },
+  "40": {
+    "inputs": {
+      "tensor": {
+        "node_": "39",
+        "name_": "tensor"
+      },
+      "x1": 0,
+      "y1": 0,
+      "x2": 512,
+      "y2": 512,
+      "value": 1.0
+    },
+    "node_type": "Rectangle"
+  },
+  "41": {
+    "inputs": {
+      "tensor_in": {
+        "node_": "40",
+        "name_": "tensor"
+      },
+      "method": "guass",
+      "blur_radius": 8,
+      "sigma": 1.0
+    },
+    "node_type": "Blur"
+  },
+  "42": {
+    "inputs": {
+      "tensor_in": {
+        "node_": "38",
+        "name_": "t"
+      },
+      "x1": 0,
+      "y1": 0,
+      "x2": 544,
+      "y2": 544
+    },
+    "node_type": "Crop"
+  },
+  "43": {
+    "inputs": {
+      "image": {
+        "node_": "42",
+        "name_": "tensor"
+      },
+      "vae": {
+        "node_": "24",
+        "name_": "vae"
+      },
+      "mask_in": null,
+      "grow_mask_by": 0
+    },
+    "node_type": "VaeEncode"
+  },
+  "44": {
+    "inputs": {
+      "unet": {
+        "node_": "24",
+        "name_": "unet"
+      },
+      "scheduler": {
+        "node_": "47",
+        "name_": "scheduler"
+      },
+      "timesteps": {
+        "node_": "47",
+        "name_": "timesteps"
+      },
+      "latents_in": {
+        "node_": "48",
+        "name_": "latents"
+      },
+      "positive": {
+        "node_": "51",
+        "name_": "forward"
+      },
+      "middle": null,
+      "negative": {
+        "node_": "54",
+        "name_": "forward"
+      },
+      "generators": {
+        "node_": "45",
+        "name_": "generators"
+      },
+      "cfg_scale": 8,
+      "cfg2_scale": 1.0,
+      "return_with_leftover_noise": "disable",
+      "batch_size": 1,
+      "model_type": "v1"
+    },
+    "node_type": "SampleLoop"
+  },
+  "45": {
+    "inputs": {
+      "seeds": 316022923609604
+    },
+    "node_type": "MakeGenerators"
+  },
+  "46": {
+    "inputs": {
+      "cls": "EulerDiscreteScheduler",
+      "init_kwargs": {
+        "num_train_timesteps": 1000,
+        "beta_start": 0.00085,
+        "beta_end": 0.012,
+        "beta_schedule": "scaled_linear",
+        "trained_betas": null,
+        "prediction_type": "epsilon",
+        "interpolation_type": "linear",
+        "use_karras_sigmas": false,
+        "sigma_min": null,
+        "sigma_max": null,
+        "timestep_spacing": "linspace",
+        "timestep_type": "discrete",
+        "steps_offset": 0,
+        "rescale_betas_zero_snr": false,
+        "final_sigmas_type": "zero"
+      }
+    },
+    "node_type": "MakeScheduler"
+  },
+  "47": {
+    "inputs": {
+      "scheduler_in": {
+        "node_": "46",
+        "name_": "scheduler"
+      },
+      "scheduler_step": 100,
+      "start_step": 80,
+      "end_step": 99
+    },
+    "node_type": "SetTimesteps"
+  },
+  "48": {
+    "inputs": {
+      "scheduler": {
+        "node_": "47",
+        "name_": "scheduler"
+      },
+      "latents_in": {
+        "node_": "43",
+        "name_": "latents"
+      },
+      "generators": {
+        "node_": "45",
+        "name_": "generators"
+      },
+      "timesteps": {
+        "node_": "47",
+        "name_": "timesteps"
+      }
+    },
+    "node_type": "AddNoise"
+  },
+  "49": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "25",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "50": {
+    "inputs": {
+      "dict_from": {
+        "node_": "49",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "25",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "51": {
+    "inputs": {
+      "dict1": {
+        "node_": "50",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "52": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "26",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "53": {
+    "inputs": {
+      "dict_from": {
+        "node_": "52",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "26",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "54": {
+    "inputs": {
+      "dict1": {
+        "node_": "53",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "55": {
+    "inputs": {
+      "latents": {
+        "node_": "44",
+        "name_": "latent"
+      },
+      "vae": {
+        "node_": "24",
+        "name_": "vae"
+      }
+    },
+    "node_type": "VaeDecode"
+  },
+  "56": {
+    "inputs": {
+      "destination": {
+        "node_": "38",
+        "name_": "t"
+      },
+      "source": {
+        "node_": "55",
+        "name_": "images"
+      },
+      "mask": {
+        "node_": "41",
+        "name_": "tensor"
+      },
+      "x": 0,
+      "y": 0
+    },
+    "node_type": "Paste"
+  },
+  "57": {
+    "inputs": {
+      "tensor": {
+        "node_": "40",
+        "name_": "tensor"
+      },
+      "x1": 512,
+      "y1": 0,
+      "x2": 1024,
+      "y2": 512,
+      "value": 1.0
+    },
+    "node_type": "Rectangle"
+  },
+  "58": {
+    "inputs": {
+      "tensor_in": {
+        "node_": "57",
+        "name_": "tensor"
+      },
+      "method": "guass",
+      "blur_radius": 8,
+      "sigma": 1.0
+    },
+    "node_type": "Blur"
+  },
+  "59": {
+    "inputs": {
+      "tensor_in": {
+        "node_": "56",
+        "name_": "t"
+      },
+      "x1": 480,
+      "y1": 0,
+      "x2": 1056,
+      "y2": 544
+    },
+    "node_type": "Crop"
+  },
+  "60": {
+    "inputs": {
+      "image": {
+        "node_": "59",
+        "name_": "tensor"
+      },
+      "vae": {
+        "node_": "24",
+        "name_": "vae"
+      },
+      "mask_in": null,
+      "grow_mask_by": 0
+    },
+    "node_type": "VaeEncode"
+  },
+  "61": {
+    "inputs": {
+      "unet": {
+        "node_": "24",
+        "name_": "unet"
+      },
+      "scheduler": {
+        "node_": "64",
+        "name_": "scheduler"
+      },
+      "timesteps": {
+        "node_": "64",
+        "name_": "timesteps"
+      },
+      "latents_in": {
+        "node_": "65",
+        "name_": "latents"
+      },
+      "positive": {
+        "node_": "68",
+        "name_": "forward"
+      },
+      "middle": null,
+      "negative": {
+        "node_": "71",
+        "name_": "forward"
+      },
+      "generators": {
+        "node_": "62",
+        "name_": "generators"
+      },
+      "cfg_scale": 8,
+      "cfg2_scale": 1.0,
+      "return_with_leftover_noise": "disable",
+      "batch_size": 1,
+      "model_type": "v1"
+    },
+    "node_type": "SampleLoop"
+  },
+  "62": {
+    "inputs": {
+      "seeds": 316022923609604
+    },
+    "node_type": "MakeGenerators"
+  },
+  "63": {
+    "inputs": {
+      "cls": "EulerDiscreteScheduler",
+      "init_kwargs": {
+        "num_train_timesteps": 1000,
+        "beta_start": 0.00085,
+        "beta_end": 0.012,
+        "beta_schedule": "scaled_linear",
+        "trained_betas": null,
+        "prediction_type": "epsilon",
+        "interpolation_type": "linear",
+        "use_karras_sigmas": false,
+        "sigma_min": null,
+        "sigma_max": null,
+        "timestep_spacing": "linspace",
+        "timestep_type": "discrete",
+        "steps_offset": 0,
+        "rescale_betas_zero_snr": false,
+        "final_sigmas_type": "zero"
+      }
+    },
+    "node_type": "MakeScheduler"
+  },
+  "64": {
+    "inputs": {
+      "scheduler_in": {
+        "node_": "63",
+        "name_": "scheduler"
+      },
+      "scheduler_step": 100,
+      "start_step": 80,
+      "end_step": 99
+    },
+    "node_type": "SetTimesteps"
+  },
+  "65": {
+    "inputs": {
+      "scheduler": {
+        "node_": "64",
+        "name_": "scheduler"
+      },
+      "latents_in": {
+        "node_": "60",
+        "name_": "latents"
+      },
+      "generators": {
+        "node_": "62",
+        "name_": "generators"
+      },
+      "timesteps": {
+        "node_": "64",
+        "name_": "timesteps"
+      }
+    },
+    "node_type": "AddNoise"
+  },
+  "66": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "25",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "67": {
+    "inputs": {
+      "dict_from": {
+        "node_": "66",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "25",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "68": {
+    "inputs": {
+      "dict1": {
+        "node_": "67",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "69": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "26",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "70": {
+    "inputs": {
+      "dict_from": {
+        "node_": "69",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "26",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "71": {
+    "inputs": {
+      "dict1": {
+        "node_": "70",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "72": {
+    "inputs": {
+      "latents": {
+        "node_": "61",
+        "name_": "latent"
+      },
+      "vae": {
+        "node_": "24",
+        "name_": "vae"
+      }
+    },
+    "node_type": "VaeDecode"
+  },
+  "73": {
+    "inputs": {
+      "destination": {
+        "node_": "56",
+        "name_": "t"
+      },
+      "source": {
+        "node_": "72",
+        "name_": "images"
+      },
+      "mask": {
+        "node_": "58",
+        "name_": "tensor"
+      },
+      "x": 480,
+      "y": 0
+    },
+    "node_type": "Paste"
+  },
+  "74": {
+    "inputs": {
+      "tensor": {
+        "node_": "57",
+        "name_": "tensor"
+      },
+      "x1": 1024,
+      "y1": 0,
+      "x2": 1536,
+      "y2": 512,
+      "value": 1.0
+    },
+    "node_type": "Rectangle"
+  },
+  "75": {
+    "inputs": {
+      "tensor_in": {
+        "node_": "74",
+        "name_": "tensor"
+      },
+      "method": "guass",
+      "blur_radius": 8,
+      "sigma": 1.0
+    },
+    "node_type": "Blur"
+  },
+  "76": {
+    "inputs": {
+      "tensor_in": {
+        "node_": "73",
+        "name_": "t"
+      },
+      "x1": 992,
+      "y1": 0,
+      "x2": 1536,
+      "y2": 544
+    },
+    "node_type": "Crop"
+  },
+  "77": {
+    "inputs": {
+      "image": {
+        "node_": "76",
+        "name_": "tensor"
+      },
+      "vae": {
+        "node_": "24",
+        "name_": "vae"
+      },
+      "mask_in": null,
+      "grow_mask_by": 0
+    },
+    "node_type": "VaeEncode"
+  },
+  "78": {
+    "inputs": {
+      "unet": {
+        "node_": "24",
+        "name_": "unet"
+      },
+      "scheduler": {
+        "node_": "81",
+        "name_": "scheduler"
+      },
+      "timesteps": {
+        "node_": "81",
+        "name_": "timesteps"
+      },
+      "latents_in": {
+        "node_": "82",
+        "name_": "latents"
+      },
+      "positive": {
+        "node_": "85",
+        "name_": "forward"
+      },
+      "middle": null,
+      "negative": {
+        "node_": "88",
+        "name_": "forward"
+      },
+      "generators": {
+        "node_": "79",
+        "name_": "generators"
+      },
+      "cfg_scale": 8,
+      "cfg2_scale": 1.0,
+      "return_with_leftover_noise": "disable",
+      "batch_size": 1,
+      "model_type": "v1"
+    },
+    "node_type": "SampleLoop"
+  },
+  "79": {
+    "inputs": {
+      "seeds": 316022923609604
+    },
+    "node_type": "MakeGenerators"
+  },
+  "80": {
+    "inputs": {
+      "cls": "EulerDiscreteScheduler",
+      "init_kwargs": {
+        "num_train_timesteps": 1000,
+        "beta_start": 0.00085,
+        "beta_end": 0.012,
+        "beta_schedule": "scaled_linear",
+        "trained_betas": null,
+        "prediction_type": "epsilon",
+        "interpolation_type": "linear",
+        "use_karras_sigmas": false,
+        "sigma_min": null,
+        "sigma_max": null,
+        "timestep_spacing": "linspace",
+        "timestep_type": "discrete",
+        "steps_offset": 0,
+        "rescale_betas_zero_snr": false,
+        "final_sigmas_type": "zero"
+      }
+    },
+    "node_type": "MakeScheduler"
+  },
+  "81": {
+    "inputs": {
+      "scheduler_in": {
+        "node_": "80",
+        "name_": "scheduler"
+      },
+      "scheduler_step": 100,
+      "start_step": 80,
+      "end_step": 99
+    },
+    "node_type": "SetTimesteps"
+  },
+  "82": {
+    "inputs": {
+      "scheduler": {
+        "node_": "81",
+        "name_": "scheduler"
+      },
+      "latents_in": {
+        "node_": "77",
+        "name_": "latents"
+      },
+      "generators": {
+        "node_": "79",
+        "name_": "generators"
+      },
+      "timesteps": {
+        "node_": "81",
+        "name_": "timesteps"
+      }
+    },
+    "node_type": "AddNoise"
+  },
+  "83": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "25",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "84": {
+    "inputs": {
+      "dict_from": {
+        "node_": "83",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "25",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "85": {
+    "inputs": {
+      "dict1": {
+        "node_": "84",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "86": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "26",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "87": {
+    "inputs": {
+      "dict_from": {
+        "node_": "86",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "26",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "88": {
+    "inputs": {
+      "dict1": {
+        "node_": "87",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "89": {
+    "inputs": {
+      "latents": {
+        "node_": "78",
+        "name_": "latent"
+      },
+      "vae": {
+        "node_": "24",
+        "name_": "vae"
+      }
+    },
+    "node_type": "VaeDecode"
+  },
+  "90": {
+    "inputs": {
+      "destination": {
+        "node_": "73",
+        "name_": "t"
+      },
+      "source": {
+        "node_": "89",
+        "name_": "images"
+      },
+      "mask": {
+        "node_": "75",
+        "name_": "tensor"
+      },
+      "x": 992,
+      "y": 0
+    },
+    "node_type": "Paste"
+  },
+  "91": {
+    "inputs": {
+      "tensor": {
+        "node_": "74",
+        "name_": "tensor"
+      },
+      "x1": 0,
+      "y1": 512,
+      "x2": 512,
+      "y2": 1024,
+      "value": 1.0
+    },
+    "node_type": "Rectangle"
+  },
+  "92": {
+    "inputs": {
+      "tensor_in": {
+        "node_": "91",
+        "name_": "tensor"
+      },
+      "method": "guass",
+      "blur_radius": 8,
+      "sigma": 1.0
+    },
+    "node_type": "Blur"
+  },
+  "93": {
+    "inputs": {
+      "tensor_in": {
+        "node_": "90",
+        "name_": "t"
+      },
+      "x1": 0,
+      "y1": 480,
+      "x2": 544,
+      "y2": 1056
+    },
+    "node_type": "Crop"
+  },
+  "94": {
+    "inputs": {
+      "image": {
+        "node_": "93",
+        "name_": "tensor"
+      },
+      "vae": {
+        "node_": "24",
+        "name_": "vae"
+      },
+      "mask_in": null,
+      "grow_mask_by": 0
+    },
+    "node_type": "VaeEncode"
+  },
+  "95": {
+    "inputs": {
+      "unet": {
+        "node_": "24",
+        "name_": "unet"
+      },
+      "scheduler": {
+        "node_": "98",
+        "name_": "scheduler"
+      },
+      "timesteps": {
+        "node_": "98",
+        "name_": "timesteps"
+      },
+      "latents_in": {
+        "node_": "99",
+        "name_": "latents"
+      },
+      "positive": {
+        "node_": "102",
+        "name_": "forward"
+      },
+      "middle": null,
+      "negative": {
+        "node_": "105",
+        "name_": "forward"
+      },
+      "generators": {
+        "node_": "96",
+        "name_": "generators"
+      },
+      "cfg_scale": 8,
+      "cfg2_scale": 1.0,
+      "return_with_leftover_noise": "disable",
+      "batch_size": 1,
+      "model_type": "v1"
+    },
+    "node_type": "SampleLoop"
+  },
+  "96": {
+    "inputs": {
+      "seeds": 316022923609604
+    },
+    "node_type": "MakeGenerators"
+  },
+  "97": {
+    "inputs": {
+      "cls": "EulerDiscreteScheduler",
+      "init_kwargs": {
+        "num_train_timesteps": 1000,
+        "beta_start": 0.00085,
+        "beta_end": 0.012,
+        "beta_schedule": "scaled_linear",
+        "trained_betas": null,
+        "prediction_type": "epsilon",
+        "interpolation_type": "linear",
+        "use_karras_sigmas": false,
+        "sigma_min": null,
+        "sigma_max": null,
+        "timestep_spacing": "linspace",
+        "timestep_type": "discrete",
+        "steps_offset": 0,
+        "rescale_betas_zero_snr": false,
+        "final_sigmas_type": "zero"
+      }
+    },
+    "node_type": "MakeScheduler"
+  },
+  "98": {
+    "inputs": {
+      "scheduler_in": {
+        "node_": "97",
+        "name_": "scheduler"
+      },
+      "scheduler_step": 100,
+      "start_step": 80,
+      "end_step": 99
+    },
+    "node_type": "SetTimesteps"
+  },
+  "99": {
+    "inputs": {
+      "scheduler": {
+        "node_": "98",
+        "name_": "scheduler"
+      },
+      "latents_in": {
+        "node_": "94",
+        "name_": "latents"
+      },
+      "generators": {
+        "node_": "96",
+        "name_": "generators"
+      },
+      "timesteps": {
+        "node_": "98",
+        "name_": "timesteps"
+      }
+    },
+    "node_type": "AddNoise"
+  },
+  "100": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "25",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "101": {
+    "inputs": {
+      "dict_from": {
+        "node_": "100",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "25",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "102": {
+    "inputs": {
+      "dict1": {
+        "node_": "101",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "103": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "26",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "104": {
+    "inputs": {
+      "dict_from": {
+        "node_": "103",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "26",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "105": {
+    "inputs": {
+      "dict1": {
+        "node_": "104",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "106": {
+    "inputs": {
+      "latents": {
+        "node_": "95",
+        "name_": "latent"
+      },
+      "vae": {
+        "node_": "24",
+        "name_": "vae"
+      }
+    },
+    "node_type": "VaeDecode"
+  },
+  "107": {
+    "inputs": {
+      "destination": {
+        "node_": "90",
+        "name_": "t"
+      },
+      "source": {
+        "node_": "106",
+        "name_": "images"
+      },
+      "mask": {
+        "node_": "92",
+        "name_": "tensor"
+      },
+      "x": 0,
+      "y": 480
+    },
+    "node_type": "Paste"
+  },
+  "108": {
+    "inputs": {
+      "tensor": {
+        "node_": "91",
+        "name_": "tensor"
+      },
+      "x1": 512,
+      "y1": 512,
+      "x2": 1024,
+      "y2": 1024,
+      "value": 1.0
+    },
+    "node_type": "Rectangle"
+  },
+  "109": {
+    "inputs": {
+      "tensor_in": {
+        "node_": "108",
+        "name_": "tensor"
+      },
+      "method": "guass",
+      "blur_radius": 8,
+      "sigma": 1.0
+    },
+    "node_type": "Blur"
+  },
+  "110": {
+    "inputs": {
+      "tensor_in": {
+        "node_": "107",
+        "name_": "t"
+      },
+      "x1": 480,
+      "y1": 480,
+      "x2": 1056,
+      "y2": 1056
+    },
+    "node_type": "Crop"
+  },
+  "111": {
+    "inputs": {
+      "image": {
+        "node_": "110",
+        "name_": "tensor"
+      },
+      "vae": {
+        "node_": "24",
+        "name_": "vae"
+      },
+      "mask_in": null,
+      "grow_mask_by": 0
+    },
+    "node_type": "VaeEncode"
+  },
+  "112": {
+    "inputs": {
+      "unet": {
+        "node_": "24",
+        "name_": "unet"
+      },
+      "scheduler": {
+        "node_": "115",
+        "name_": "scheduler"
+      },
+      "timesteps": {
+        "node_": "115",
+        "name_": "timesteps"
+      },
+      "latents_in": {
+        "node_": "116",
+        "name_": "latents"
+      },
+      "positive": {
+        "node_": "119",
+        "name_": "forward"
+      },
+      "middle": null,
+      "negative": {
+        "node_": "122",
+        "name_": "forward"
+      },
+      "generators": {
+        "node_": "113",
+        "name_": "generators"
+      },
+      "cfg_scale": 8,
+      "cfg2_scale": 1.0,
+      "return_with_leftover_noise": "disable",
+      "batch_size": 1,
+      "model_type": "v1"
+    },
+    "node_type": "SampleLoop"
+  },
+  "113": {
+    "inputs": {
+      "seeds": 316022923609604
+    },
+    "node_type": "MakeGenerators"
+  },
+  "114": {
+    "inputs": {
+      "cls": "EulerDiscreteScheduler",
+      "init_kwargs": {
+        "num_train_timesteps": 1000,
+        "beta_start": 0.00085,
+        "beta_end": 0.012,
+        "beta_schedule": "scaled_linear",
+        "trained_betas": null,
+        "prediction_type": "epsilon",
+        "interpolation_type": "linear",
+        "use_karras_sigmas": false,
+        "sigma_min": null,
+        "sigma_max": null,
+        "timestep_spacing": "linspace",
+        "timestep_type": "discrete",
+        "steps_offset": 0,
+        "rescale_betas_zero_snr": false,
+        "final_sigmas_type": "zero"
+      }
+    },
+    "node_type": "MakeScheduler"
+  },
+  "115": {
+    "inputs": {
+      "scheduler_in": {
+        "node_": "114",
+        "name_": "scheduler"
+      },
+      "scheduler_step": 100,
+      "start_step": 80,
+      "end_step": 99
+    },
+    "node_type": "SetTimesteps"
+  },
+  "116": {
+    "inputs": {
+      "scheduler": {
+        "node_": "115",
+        "name_": "scheduler"
+      },
+      "latents_in": {
+        "node_": "111",
+        "name_": "latents"
+      },
+      "generators": {
+        "node_": "113",
+        "name_": "generators"
+      },
+      "timesteps": {
+        "node_": "115",
+        "name_": "timesteps"
+      }
+    },
+    "node_type": "AddNoise"
+  },
+  "117": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "25",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "118": {
+    "inputs": {
+      "dict_from": {
+        "node_": "117",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "25",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "119": {
+    "inputs": {
+      "dict1": {
+        "node_": "118",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "120": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "26",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "121": {
+    "inputs": {
+      "dict_from": {
+        "node_": "120",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "26",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "122": {
+    "inputs": {
+      "dict1": {
+        "node_": "121",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "123": {
+    "inputs": {
+      "latents": {
+        "node_": "112",
+        "name_": "latent"
+      },
+      "vae": {
+        "node_": "24",
+        "name_": "vae"
+      }
+    },
+    "node_type": "VaeDecode"
+  },
+  "124": {
+    "inputs": {
+      "destination": {
+        "node_": "107",
+        "name_": "t"
+      },
+      "source": {
+        "node_": "123",
+        "name_": "images"
+      },
+      "mask": {
+        "node_": "109",
+        "name_": "tensor"
+      },
+      "x": 480,
+      "y": 480
+    },
+    "node_type": "Paste"
+  },
+  "125": {
+    "inputs": {
+      "tensor": {
+        "node_": "108",
+        "name_": "tensor"
+      },
+      "x1": 1024,
+      "y1": 512,
+      "x2": 1536,
+      "y2": 1024,
+      "value": 1.0
+    },
+    "node_type": "Rectangle"
+  },
+  "126": {
+    "inputs": {
+      "tensor_in": {
+        "node_": "125",
+        "name_": "tensor"
+      },
+      "method": "guass",
+      "blur_radius": 8,
+      "sigma": 1.0
+    },
+    "node_type": "Blur"
+  },
+  "127": {
+    "inputs": {
+      "tensor_in": {
+        "node_": "124",
+        "name_": "t"
+      },
+      "x1": 992,
+      "y1": 480,
+      "x2": 1536,
+      "y2": 1056
+    },
+    "node_type": "Crop"
+  },
+  "128": {
+    "inputs": {
+      "image": {
+        "node_": "127",
+        "name_": "tensor"
+      },
+      "vae": {
+        "node_": "24",
+        "name_": "vae"
+      },
+      "mask_in": null,
+      "grow_mask_by": 0
+    },
+    "node_type": "VaeEncode"
+  },
+  "129": {
+    "inputs": {
+      "unet": {
+        "node_": "24",
+        "name_": "unet"
+      },
+      "scheduler": {
+        "node_": "132",
+        "name_": "scheduler"
+      },
+      "timesteps": {
+        "node_": "132",
+        "name_": "timesteps"
+      },
+      "latents_in": {
+        "node_": "133",
+        "name_": "latents"
+      },
+      "positive": {
+        "node_": "136",
+        "name_": "forward"
+      },
+      "middle": null,
+      "negative": {
+        "node_": "139",
+        "name_": "forward"
+      },
+      "generators": {
+        "node_": "130",
+        "name_": "generators"
+      },
+      "cfg_scale": 8,
+      "cfg2_scale": 1.0,
+      "return_with_leftover_noise": "disable",
+      "batch_size": 1,
+      "model_type": "v1"
+    },
+    "node_type": "SampleLoop"
+  },
+  "130": {
+    "inputs": {
+      "seeds": 316022923609604
+    },
+    "node_type": "MakeGenerators"
+  },
+  "131": {
+    "inputs": {
+      "cls": "EulerDiscreteScheduler",
+      "init_kwargs": {
+        "num_train_timesteps": 1000,
+        "beta_start": 0.00085,
+        "beta_end": 0.012,
+        "beta_schedule": "scaled_linear",
+        "trained_betas": null,
+        "prediction_type": "epsilon",
+        "interpolation_type": "linear",
+        "use_karras_sigmas": false,
+        "sigma_min": null,
+        "sigma_max": null,
+        "timestep_spacing": "linspace",
+        "timestep_type": "discrete",
+        "steps_offset": 0,
+        "rescale_betas_zero_snr": false,
+        "final_sigmas_type": "zero"
+      }
+    },
+    "node_type": "MakeScheduler"
+  },
+  "132": {
+    "inputs": {
+      "scheduler_in": {
+        "node_": "131",
+        "name_": "scheduler"
+      },
+      "scheduler_step": 100,
+      "start_step": 80,
+      "end_step": 99
+    },
+    "node_type": "SetTimesteps"
+  },
+  "133": {
+    "inputs": {
+      "scheduler": {
+        "node_": "132",
+        "name_": "scheduler"
+      },
+      "latents_in": {
+        "node_": "128",
+        "name_": "latents"
+      },
+      "generators": {
+        "node_": "130",
+        "name_": "generators"
+      },
+      "timesteps": {
+        "node_": "132",
+        "name_": "timesteps"
+      }
+    },
+    "node_type": "AddNoise"
+  },
+  "134": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "25",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "135": {
+    "inputs": {
+      "dict_from": {
+        "node_": "134",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "25",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "136": {
+    "inputs": {
+      "dict1": {
+        "node_": "135",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "137": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "26",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "138": {
+    "inputs": {
+      "dict_from": {
+        "node_": "137",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "26",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "139": {
+    "inputs": {
+      "dict1": {
+        "node_": "138",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "140": {
+    "inputs": {
+      "latents": {
+        "node_": "129",
+        "name_": "latent"
+      },
+      "vae": {
+        "node_": "24",
+        "name_": "vae"
+      }
+    },
+    "node_type": "VaeDecode"
+  },
+  "141": {
+    "inputs": {
+      "destination": {
+        "node_": "124",
+        "name_": "t"
+      },
+      "source": {
+        "node_": "140",
+        "name_": "images"
+      },
+      "mask": {
+        "node_": "126",
+        "name_": "tensor"
+      },
+      "x": 960,
+      "y": 480
+    },
+    "node_type": "Paste"
+  },
+  "142": {
+    "inputs": {
+      "tensor": {
+        "node_": "125",
+        "name_": "tensor"
+      },
+      "x1": 0,
+      "y1": 1024,
+      "x2": 512,
+      "y2": 1536,
+      "value": 1.0
+    },
+    "node_type": "Rectangle"
+  },
+  "143": {
+    "inputs": {
+      "tensor_in": {
+        "node_": "142",
+        "name_": "tensor"
+      },
+      "method": "guass",
+      "blur_radius": 8,
+      "sigma": 1.0
+    },
+    "node_type": "Blur"
+  },
+  "144": {
+    "inputs": {
+      "tensor_in": {
+        "node_": "141",
+        "name_": "t"
+      },
+      "x1": 0,
+      "y1": 992,
+      "x2": 544,
+      "y2": 1536
+    },
+    "node_type": "Crop"
+  },
+  "145": {
+    "inputs": {
+      "image": {
+        "node_": "144",
+        "name_": "tensor"
+      },
+      "vae": {
+        "node_": "24",
+        "name_": "vae"
+      },
+      "mask_in": null,
+      "grow_mask_by": 0
+    },
+    "node_type": "VaeEncode"
+  },
+  "146": {
+    "inputs": {
+      "unet": {
+        "node_": "24",
+        "name_": "unet"
+      },
+      "scheduler": {
+        "node_": "149",
+        "name_": "scheduler"
+      },
+      "timesteps": {
+        "node_": "149",
+        "name_": "timesteps"
+      },
+      "latents_in": {
+        "node_": "150",
+        "name_": "latents"
+      },
+      "positive": {
+        "node_": "153",
+        "name_": "forward"
+      },
+      "middle": null,
+      "negative": {
+        "node_": "156",
+        "name_": "forward"
+      },
+      "generators": {
+        "node_": "147",
+        "name_": "generators"
+      },
+      "cfg_scale": 8,
+      "cfg2_scale": 1.0,
+      "return_with_leftover_noise": "disable",
+      "batch_size": 1,
+      "model_type": "v1"
+    },
+    "node_type": "SampleLoop"
+  },
+  "147": {
+    "inputs": {
+      "seeds": 316022923609604
+    },
+    "node_type": "MakeGenerators"
+  },
+  "148": {
+    "inputs": {
+      "cls": "EulerDiscreteScheduler",
+      "init_kwargs": {
+        "num_train_timesteps": 1000,
+        "beta_start": 0.00085,
+        "beta_end": 0.012,
+        "beta_schedule": "scaled_linear",
+        "trained_betas": null,
+        "prediction_type": "epsilon",
+        "interpolation_type": "linear",
+        "use_karras_sigmas": false,
+        "sigma_min": null,
+        "sigma_max": null,
+        "timestep_spacing": "linspace",
+        "timestep_type": "discrete",
+        "steps_offset": 0,
+        "rescale_betas_zero_snr": false,
+        "final_sigmas_type": "zero"
+      }
+    },
+    "node_type": "MakeScheduler"
+  },
+  "149": {
+    "inputs": {
+      "scheduler_in": {
+        "node_": "148",
+        "name_": "scheduler"
+      },
+      "scheduler_step": 100,
+      "start_step": 80,
+      "end_step": 99
+    },
+    "node_type": "SetTimesteps"
+  },
+  "150": {
+    "inputs": {
+      "scheduler": {
+        "node_": "149",
+        "name_": "scheduler"
+      },
+      "latents_in": {
+        "node_": "145",
+        "name_": "latents"
+      },
+      "generators": {
+        "node_": "147",
+        "name_": "generators"
+      },
+      "timesteps": {
+        "node_": "149",
+        "name_": "timesteps"
+      }
+    },
+    "node_type": "AddNoise"
+  },
+  "151": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "25",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "152": {
+    "inputs": {
+      "dict_from": {
+        "node_": "151",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "25",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "153": {
+    "inputs": {
+      "dict1": {
+        "node_": "152",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "154": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "26",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "155": {
+    "inputs": {
+      "dict_from": {
+        "node_": "154",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "26",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "156": {
+    "inputs": {
+      "dict1": {
+        "node_": "155",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "157": {
+    "inputs": {
+      "latents": {
+        "node_": "146",
+        "name_": "latent"
+      },
+      "vae": {
+        "node_": "24",
+        "name_": "vae"
+      }
+    },
+    "node_type": "VaeDecode"
+  },
+  "158": {
+    "inputs": {
+      "destination": {
+        "node_": "141",
+        "name_": "t"
+      },
+      "source": {
+        "node_": "157",
+        "name_": "images"
+      },
+      "mask": {
+        "node_": "143",
+        "name_": "tensor"
+      },
+      "x": 0,
+      "y": 992
+    },
+    "node_type": "Paste"
+  },
+  "159": {
+    "inputs": {
+      "tensor": {
+        "node_": "142",
+        "name_": "tensor"
+      },
+      "x1": 512,
+      "y1": 1024,
+      "x2": 1024,
+      "y2": 1536,
+      "value": 1.0
+    },
+    "node_type": "Rectangle"
+  },
+  "160": {
+    "inputs": {
+      "tensor_in": {
+        "node_": "159",
+        "name_": "tensor"
+      },
+      "method": "guass",
+      "blur_radius": 8,
+      "sigma": 1.0
+    },
+    "node_type": "Blur"
+  },
+  "161": {
+    "inputs": {
+      "tensor_in": {
+        "node_": "158",
+        "name_": "t"
+      },
+      "x1": 480,
+      "y1": 992,
+      "x2": 1056,
+      "y2": 1536
+    },
+    "node_type": "Crop"
+  },
+  "162": {
+    "inputs": {
+      "image": {
+        "node_": "161",
+        "name_": "tensor"
+      },
+      "vae": {
+        "node_": "24",
+        "name_": "vae"
+      },
+      "mask_in": null,
+      "grow_mask_by": 0
+    },
+    "node_type": "VaeEncode"
+  },
+  "163": {
+    "inputs": {
+      "unet": {
+        "node_": "24",
+        "name_": "unet"
+      },
+      "scheduler": {
+        "node_": "166",
+        "name_": "scheduler"
+      },
+      "timesteps": {
+        "node_": "166",
+        "name_": "timesteps"
+      },
+      "latents_in": {
+        "node_": "167",
+        "name_": "latents"
+      },
+      "positive": {
+        "node_": "170",
+        "name_": "forward"
+      },
+      "middle": null,
+      "negative": {
+        "node_": "173",
+        "name_": "forward"
+      },
+      "generators": {
+        "node_": "164",
+        "name_": "generators"
+      },
+      "cfg_scale": 8,
+      "cfg2_scale": 1.0,
+      "return_with_leftover_noise": "disable",
+      "batch_size": 1,
+      "model_type": "v1"
+    },
+    "node_type": "SampleLoop"
+  },
+  "164": {
+    "inputs": {
+      "seeds": 316022923609604
+    },
+    "node_type": "MakeGenerators"
+  },
+  "165": {
+    "inputs": {
+      "cls": "EulerDiscreteScheduler",
+      "init_kwargs": {
+        "num_train_timesteps": 1000,
+        "beta_start": 0.00085,
+        "beta_end": 0.012,
+        "beta_schedule": "scaled_linear",
+        "trained_betas": null,
+        "prediction_type": "epsilon",
+        "interpolation_type": "linear",
+        "use_karras_sigmas": false,
+        "sigma_min": null,
+        "sigma_max": null,
+        "timestep_spacing": "linspace",
+        "timestep_type": "discrete",
+        "steps_offset": 0,
+        "rescale_betas_zero_snr": false,
+        "final_sigmas_type": "zero"
+      }
+    },
+    "node_type": "MakeScheduler"
+  },
+  "166": {
+    "inputs": {
+      "scheduler_in": {
+        "node_": "165",
+        "name_": "scheduler"
+      },
+      "scheduler_step": 100,
+      "start_step": 80,
+      "end_step": 99
+    },
+    "node_type": "SetTimesteps"
+  },
+  "167": {
+    "inputs": {
+      "scheduler": {
+        "node_": "166",
+        "name_": "scheduler"
+      },
+      "latents_in": {
+        "node_": "162",
+        "name_": "latents"
+      },
+      "generators": {
+        "node_": "164",
+        "name_": "generators"
+      },
+      "timesteps": {
+        "node_": "166",
+        "name_": "timesteps"
+      }
+    },
+    "node_type": "AddNoise"
+  },
+  "168": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "25",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "169": {
+    "inputs": {
+      "dict_from": {
+        "node_": "168",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "25",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "170": {
+    "inputs": {
+      "dict1": {
+        "node_": "169",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "171": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "26",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "172": {
+    "inputs": {
+      "dict_from": {
+        "node_": "171",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "26",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "173": {
+    "inputs": {
+      "dict1": {
+        "node_": "172",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "174": {
+    "inputs": {
+      "latents": {
+        "node_": "163",
+        "name_": "latent"
+      },
+      "vae": {
+        "node_": "24",
+        "name_": "vae"
+      }
+    },
+    "node_type": "VaeDecode"
+  },
+  "175": {
+    "inputs": {
+      "destination": {
+        "node_": "158",
+        "name_": "t"
+      },
+      "source": {
+        "node_": "174",
+        "name_": "images"
+      },
+      "mask": {
+        "node_": "160",
+        "name_": "tensor"
+      },
+      "x": 480,
+      "y": 960
+    },
+    "node_type": "Paste"
+  },
+  "176": {
+    "inputs": {
+      "tensor": {
+        "node_": "159",
+        "name_": "tensor"
+      },
+      "x1": 1024,
+      "y1": 1024,
+      "x2": 1536,
+      "y2": 1536,
+      "value": 1.0
+    },
+    "node_type": "Rectangle"
+  },
+  "177": {
+    "inputs": {
+      "tensor_in": {
+        "node_": "176",
+        "name_": "tensor"
+      },
+      "method": "guass",
+      "blur_radius": 8,
+      "sigma": 1.0
+    },
+    "node_type": "Blur"
+  },
+  "178": {
+    "inputs": {
+      "tensor_in": {
+        "node_": "175",
+        "name_": "t"
+      },
+      "x1": 992,
+      "y1": 992,
+      "x2": 1536,
+      "y2": 1536
+    },
+    "node_type": "Crop"
+  },
+  "179": {
+    "inputs": {
+      "image": {
+        "node_": "178",
+        "name_": "tensor"
+      },
+      "vae": {
+        "node_": "24",
+        "name_": "vae"
+      },
+      "mask_in": null,
+      "grow_mask_by": 0
+    },
+    "node_type": "VaeEncode"
+  },
+  "180": {
+    "inputs": {
+      "unet": {
+        "node_": "24",
+        "name_": "unet"
+      },
+      "scheduler": {
+        "node_": "183",
+        "name_": "scheduler"
+      },
+      "timesteps": {
+        "node_": "183",
+        "name_": "timesteps"
+      },
+      "latents_in": {
+        "node_": "184",
+        "name_": "latents"
+      },
+      "positive": {
+        "node_": "187",
+        "name_": "forward"
+      },
+      "middle": null,
+      "negative": {
+        "node_": "190",
+        "name_": "forward"
+      },
+      "generators": {
+        "node_": "181",
+        "name_": "generators"
+      },
+      "cfg_scale": 8,
+      "cfg2_scale": 1.0,
+      "return_with_leftover_noise": "disable",
+      "batch_size": 1,
+      "model_type": "v1"
+    },
+    "node_type": "SampleLoop"
+  },
+  "181": {
+    "inputs": {
+      "seeds": 316022923609604
+    },
+    "node_type": "MakeGenerators"
+  },
+  "182": {
+    "inputs": {
+      "cls": "EulerDiscreteScheduler",
+      "init_kwargs": {
+        "num_train_timesteps": 1000,
+        "beta_start": 0.00085,
+        "beta_end": 0.012,
+        "beta_schedule": "scaled_linear",
+        "trained_betas": null,
+        "prediction_type": "epsilon",
+        "interpolation_type": "linear",
+        "use_karras_sigmas": false,
+        "sigma_min": null,
+        "sigma_max": null,
+        "timestep_spacing": "linspace",
+        "timestep_type": "discrete",
+        "steps_offset": 0,
+        "rescale_betas_zero_snr": false,
+        "final_sigmas_type": "zero"
+      }
+    },
+    "node_type": "MakeScheduler"
+  },
+  "183": {
+    "inputs": {
+      "scheduler_in": {
+        "node_": "182",
+        "name_": "scheduler"
+      },
+      "scheduler_step": 100,
+      "start_step": 80,
+      "end_step": 99
+    },
+    "node_type": "SetTimesteps"
+  },
+  "184": {
+    "inputs": {
+      "scheduler": {
+        "node_": "183",
+        "name_": "scheduler"
+      },
+      "latents_in": {
+        "node_": "179",
+        "name_": "latents"
+      },
+      "generators": {
+        "node_": "181",
+        "name_": "generators"
+      },
+      "timesteps": {
+        "node_": "183",
+        "name_": "timesteps"
+      }
+    },
+    "node_type": "AddNoise"
+  },
+  "185": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "25",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "186": {
+    "inputs": {
+      "dict_from": {
+        "node_": "185",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "25",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "187": {
+    "inputs": {
+      "dict1": {
+        "node_": "186",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "188": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "26",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "189": {
+    "inputs": {
+      "dict_from": {
+        "node_": "188",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "26",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "190": {
+    "inputs": {
+      "dict1": {
+        "node_": "189",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "191": {
+    "inputs": {
+      "latents": {
+        "node_": "180",
+        "name_": "latent"
+      },
+      "vae": {
+        "node_": "24",
+        "name_": "vae"
+      }
+    },
+    "node_type": "VaeDecode"
+  },
+  "192": {
+    "inputs": {
+      "destination": {
+        "node_": "175",
+        "name_": "t"
+      },
+      "source": {
+        "node_": "191",
+        "name_": "images"
+      },
+      "mask": {
+        "node_": "177",
+        "name_": "tensor"
+      },
+      "x": 992,
+      "y": 992
+    },
+    "node_type": "Paste"
+  },
+  "193": {
+    "inputs": {
+      "images_in": {
+        "node_": "192",
+        "name_": "t"
+      }
+    },
+    "node_type": "Tensor2Image"
+  }
+}

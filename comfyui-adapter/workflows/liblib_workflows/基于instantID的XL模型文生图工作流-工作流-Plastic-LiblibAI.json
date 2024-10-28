@@ -1,0 +1,224 @@
+{
+  "2": {
+    "inputs": {
+      "instantid_file": "ip-adapter.bin"
+    },
+    "class_type": "InstantIDModelLoader",
+    "_meta": {
+      "title": "InstnatID模型加载器"
+    }
+  },
+  "3": {
+    "inputs": {
+      "provider": "CUDA"
+    },
+    "class_type": "InstantIDFaceAnalysis",
+    "_meta": {
+      "title": "InstantID面部分析"
+    }
+  },
+  "5": {
+    "inputs": {
+      "control_net_name": "SDXL\\diffusion_pytorch_model.safetensors",
+      "model": [
+        "6",
+        0
+      ]
+    },
+    "class_type": "DiffControlNetLoader",
+    "_meta": {
+      "title": "DiffControlNet加载器"
+    }
+  },
+  "6": {
+    "inputs": {
+      "lora_name": "SDXL\\users_LORA_608777125641770691_xsgb.safetensors",
+      "strength_model": 1,
+      "strength_clip": 1,
+      "model": [
+        "13",
+        0
+      ],
+      "clip": [
+        "13",
+        1
+      ]
+    },
+    "class_type": "LoraLoader",
+    "_meta": {
+      "title": "LoRA加载器"
+    }
+  },
+  "7": {
+    "inputs": {
+      "facedetection": "retinaface_resnet50",
+      "image": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "CropFace",
+    "_meta": {
+      "title": "裁剪面部"
+    }
+  },
+  "8": {
+    "inputs": {
+      "image": "4 (4).png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "加载图像"
+    }
+  },
+  "9": {
+    "inputs": {
+      "ip_weight": 0.9500000000000001,
+      "cn_strength": 0.7000000000000001,
+      "start_at": 0,
+      "end_at": 0.901,
+      "noise": 0,
+      "combine_embeds": "average",
+      "instantid": [
+        "2",
+        0
+      ],
+      "insightface": [
+        "3",
+        0
+      ],
+      "control_net": [
+        "5",
+        0
+      ],
+      "image": [
+        "8",
+        0
+      ],
+      "model": [
+        "6",
+        0
+      ],
+      "positive": [
+        "11",
+        0
+      ],
+      "negative": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "ApplyInstantIDAdvanced",
+    "_meta": {
+      "title": "应用InstantID(高级)"
+    }
+  },
+  "10": {
+    "inputs": {
+      "add_noise": "enable",
+      "noise_seed": 349387084593072,
+      "steps": 30,
+      "cfg": 7,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "ddim_uniform",
+      "start_at_step": 0,
+      "end_at_step": 10000,
+      "return_with_leftover_noise": "disable",
+      "model": [
+        "9",
+        0
+      ],
+      "positive": [
+        "9",
+        1
+      ],
+      "negative": [
+        "9",
+        2
+      ],
+      "latent_image": [
+        "14",
+        0
+      ]
+    },
+    "class_type": "KSamplerAdvanced",
+    "_meta": {
+      "title": "K采样器(高级)"
+    }
+  },
+  "11": {
+    "inputs": {
+      "text": "Male, white shirt, historical attire, high-definition, short hair",
+      "clip": [
+        "6",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码器"
+    }
+  },
+  "12": {
+    "inputs": {
+      "text": "",
+      "clip": [
+        "6",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP文本编码器"
+    }
+  },
+  "13": {
+    "inputs": {
+      "ckpt_name": "SDXL\\XL Outline Color勾线彩画风_0.9beta.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Checkpoint加载器(简易)"
+    }
+  },
+  "14": {
+    "inputs": {
+      "width": 1232,
+      "height": 1648,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "空Latent"
+    }
+  },
+  "15": {
+    "inputs": {
+      "samples": [
+        "10",
+        0
+      ],
+      "vae": [
+        "13",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解码"
+    }
+  },
+  "16": {
+    "inputs": {
+      "images": [
+        "15",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "预览图像"
+    }
+  }
+}

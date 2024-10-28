@@ -1,0 +1,787 @@
+{
+  "last_node_id": 121,
+  "last_link_id": 164,
+  "nodes": [
+    {
+      "id": 72,
+      "type": "KSampler",
+      "pos": [
+        2925.269872353634,
+        384.8701456483611
+      ],
+      "size": {
+        "0": 395,
+        "1": 640
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 74,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 120,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 121,
+          "label": "负面条件",
+          "slot_index": 2
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 126,
+          "label": "Latent",
+          "slot_index": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            83
+          ],
+          "shape": 3,
+          "label": "Latent",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        38802181763872,
+        "randomize",
+        25,
+        4.98,
+        "euler",
+        "ddim_uniform",
+        1
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 75,
+      "type": "MZ_ChatGLM3_V2",
+      "pos": [
+        1985.4366661768765,
+        525.2698038514859
+      ],
+      "size": {
+        "0": 390,
+        "1": 185
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "chatglm3_model",
+          "type": "CHATGLM3MODEL",
+          "link": 79,
+          "label": "chatglm3_model"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            119
+          ],
+          "shape": 3,
+          "label": "CONDITIONING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MZ_ChatGLM3_V2"
+      },
+      "widgets_values": [
+        "nsfw，脸部阴影，低分辨率，jpeg伪影、模糊、糟糕，黑脸，霓虹灯"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 99,
+      "type": "INPAINT_VAEEncodeInpaintConditioning",
+      "pos": [
+        2555.269872353634,
+        524.8701456483609
+      ],
+      "size": {
+        "0": 292.20001220703125,
+        "1": 106
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 118,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 119,
+          "label": "负面条件"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 123,
+          "label": "VAE"
+        },
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 122,
+          "label": "图像"
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 130,
+          "label": "遮罩"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            120
+          ],
+          "shape": 3,
+          "label": "正面条件",
+          "slot_index": 0
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            121
+          ],
+          "shape": 3,
+          "label": "负面条件",
+          "slot_index": 1
+        },
+        {
+          "name": "latent_inpaint",
+          "type": "LATENT",
+          "links": [],
+          "shape": 3,
+          "label": "局部重绘Latent",
+          "slot_index": 2
+        },
+        {
+          "name": "latent_samples",
+          "type": "LATENT",
+          "links": [
+            126
+          ],
+          "shape": 3,
+          "label": "采样Latent",
+          "slot_index": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "INPAINT_VAEEncodeInpaintConditioning"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 102,
+      "type": "MaskPreview+",
+      "pos": [
+        2425.269872353634,
+        784.8701456483604
+      ],
+      "size": {
+        "0": 210,
+        "1": 246
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 132,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MaskPreview+"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 71,
+      "type": "MZ_KolorsUNETLoaderV2",
+      "pos": [
+        1375.4366661768763,
+        375.269803851486
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            74
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MZ_KolorsUNETLoaderV2"
+      },
+      "widgets_values": [
+        "kolors\\Kolors-Inpainting.safetensors"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 73,
+      "type": "MZ_ChatGLM3Loader",
+      "pos": [
+        1375.4366661768763,
+        505.26980385148636
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "chatglm3_model",
+          "type": "CHATGLM3MODEL",
+          "links": [
+            78,
+            79
+          ],
+          "shape": 3,
+          "label": "chatglm3_model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MZ_ChatGLM3Loader"
+      },
+      "widgets_values": [
+        "chatglm3-fp16.safetensors"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 77,
+      "type": "VAELoader",
+      "pos": [
+        1365.4366661768763,
+        615.2698038514851
+      ],
+      "size": {
+        "0": 315,
+        "1": 60
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            84,
+            123
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "sdxl_vae.safetensors"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 78,
+      "type": "LoadImage",
+      "pos": [
+        1355.269872353634,
+        734.8701456483603
+      ],
+      "size": {
+        "0": 343.6590576171875,
+        "1": 536.4891357421875
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            122
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            129,
+            132
+          ],
+          "shape": 3,
+          "label": "遮罩",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "clipspace/clipspace-mask-10347907.300000012.png [input]",
+        "image"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 79,
+      "type": "VAEDecode",
+      "pos": [
+        3335.2698723536337,
+        384.8701456483611
+      ],
+      "size": {
+        "0": 450,
+        "1": 50
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 83,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 84,
+          "label": "VAE",
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            85
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 80,
+      "type": "PreviewImage",
+      "pos": [
+        3345.5208889985092,
+        495.13605924132816
+      ],
+      "size": {
+        "0": 445,
+        "1": 535
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 85,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 101,
+      "type": "MaskPreview+",
+      "pos": [
+        2666.5208889985106,
+        775.1360592413266
+      ],
+      "size": {
+        "0": 210,
+        "1": 246
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 131,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MaskPreview+"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 100,
+      "type": "GrowMaskWithBlur",
+      "pos": [
+        2075.52088899851,
+        785.1360592413266
+      ],
+      "size": {
+        "0": 315,
+        "1": 246
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 129,
+          "label": "遮罩"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": [
+            130,
+            131
+          ],
+          "shape": 3,
+          "label": "遮罩",
+          "slot_index": 0
+        },
+        {
+          "name": "mask_inverted",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "反转遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "GrowMaskWithBlur"
+      },
+      "widgets_values": [
+        10,
+        0,
+        true,
+        false,
+        10,
+        1,
+        1,
+        false
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 74,
+      "type": "MZ_ChatGLM3_V2",
+      "pos": [
+        1995.4366661768765,
+        315.269803851486
+      ],
+      "size": {
+        "0": 385,
+        "1": 170
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "chatglm3_model",
+          "type": "CHATGLM3MODEL",
+          "link": 78,
+          "label": "chatglm3_model"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            118
+          ],
+          "shape": 3,
+          "label": "CONDITIONING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MZ_ChatGLM3_V2"
+      },
+      "widgets_values": [
+        "卫衣"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 121,
+      "type": "Note",
+      "pos": [
+        708,
+        285
+      ],
+      "size": {
+        "0": 611.7407836914062,
+        "1": 542.9984130859375
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "该工作流是Kolors局部重绘功能\n\n官方自带的有问题，我这套很完美\n\n详细文章教程：https://mp.weixin.qq.com/s/arNTwGxlDwkZdn3eyJ0Ncw\n\n\n链接我\n1：公众号：AI绘画趣味学\n2：「AI绘画趣味学」免费星球：https://t.zsxq.com/17kb0847s\n3：个人微信：dudumd886\n\n\n其他推荐链接：\n\nAI聚合网站：https://52aibot.com/\n\nGPT4共享账号：https://buy.52aibot.com/"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    }
+  ],
+  "links": [
+    [
+      74,
+      71,
+      0,
+      72,
+      0,
+      "MODEL"
+    ],
+    [
+      78,
+      73,
+      0,
+      74,
+      0,
+      "CHATGLM3MODEL"
+    ],
+    [
+      79,
+      73,
+      0,
+      75,
+      0,
+      "CHATGLM3MODEL"
+    ],
+    [
+      83,
+      72,
+      0,
+      79,
+      0,
+      "LATENT"
+    ],
+    [
+      84,
+      77,
+      0,
+      79,
+      1,
+      "VAE"
+    ],
+    [
+      85,
+      79,
+      0,
+      80,
+      0,
+      "IMAGE"
+    ],
+    [
+      118,
+      74,
+      0,
+      99,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      119,
+      75,
+      0,
+      99,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      120,
+      99,
+      0,
+      72,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      121,
+      99,
+      1,
+      72,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      122,
+      78,
+      0,
+      99,
+      3,
+      "IMAGE"
+    ],
+    [
+      123,
+      77,
+      0,
+      99,
+      2,
+      "VAE"
+    ],
+    [
+      126,
+      99,
+      3,
+      72,
+      3,
+      "LATENT"
+    ],
+    [
+      129,
+      78,
+      1,
+      100,
+      0,
+      "MASK"
+    ],
+    [
+      130,
+      100,
+      0,
+      99,
+      4,
+      "MASK"
+    ],
+    [
+      131,
+      100,
+      0,
+      101,
+      0,
+      "MASK"
+    ],
+    [
+      132,
+      78,
+      1,
+      102,
+      0,
+      "MASK"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "局部重绘",
+      "bounding": [
+        1345,
+        240,
+        2455,
+        1040
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "嘟嘟AI绘画趣味学",
+      "bounding": [
+        2179,
+        84,
+        547,
+        80
+      ],
+      "color": "#b06634",
+      "font_size": 60,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7247295000000024,
+      "offset": {
+        "0": -659.6697828291739,
+        "1": 189.0224348637441
+      }
+    },
+    "workspace_info": {
+      "id": "b81_g5dLtoCvg3kuh4hqr",
+      "saveLock": false,
+      "cloudID": null,
+      "coverMediaPath": null
+    }
+  },
+  "version": 0.4
+}

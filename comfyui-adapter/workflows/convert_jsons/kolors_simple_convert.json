@@ -1,0 +1,377 @@
+{
+  "5": {
+    "inputs": {
+      "unet": {
+        "node_": "68",
+        "name_": "model"
+      },
+      "scheduler": {
+        "node_": "74",
+        "name_": "scheduler"
+      },
+      "timesteps": {
+        "node_": "74",
+        "name_": "timesteps"
+      },
+      "latents_in": {
+        "node_": "75",
+        "name_": "latents"
+      },
+      "positive": {
+        "node_": "84",
+        "name_": "forward"
+      },
+      "middle": null,
+      "negative": {
+        "node_": "87",
+        "name_": "forward"
+      },
+      "generators": {
+        "node_": "72",
+        "name_": "generators"
+      },
+      "cfg_scale": 4.54,
+      "cfg2_scale": 1.0,
+      "return_with_leftover_noise": "disable",
+      "batch_size": 1,
+      "model_type": "kolors"
+    },
+    "node_type": "SampleLoop"
+  },
+  "7": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1,
+      "channel_size": 4,
+      "init_value": 0.0
+    },
+    "node_type": "MakeTensors"
+  },
+  "9": {
+    "inputs": {
+      "latents": {
+        "node_": "5",
+        "name_": "latents"
+      },
+      "vae": {
+        "node_": "69",
+        "name_": "model"
+      }
+    },
+    "node_type": "VaeDecode"
+  },
+  "11": {
+    "inputs": {
+      "key": "11",
+      "value": {
+        "node_": "88",
+        "name_": "images"
+      }
+    },
+    "node_type": "TaskOutput"
+  },
+  "65": {
+    "inputs": {
+      "text_encoder": {
+        "node_": "70",
+        "name_": "model"
+      },
+      "text_encoder2": null,
+      "text_encoder3": null,
+      "tokenizer": {
+        "node_": "71",
+        "name_": "model"
+      },
+      "tokenizer2": null,
+      "tokenizer3": null,
+      "prompt": "新海诚风格，丰富的色彩，穿着绿色衬衫的女人站在田野里，唯美风景，清新明亮，斑驳的光影，最好的质量，超细节，8K画质。",
+      "model_type": "kolors",
+      "clip_skip": 0
+    },
+    "node_type": "EncodeText"
+  },
+  "67": {
+    "inputs": {
+      "text_encoder": {
+        "node_": "70",
+        "name_": "model"
+      },
+      "text_encoder2": null,
+      "text_encoder3": null,
+      "tokenizer": {
+        "node_": "71",
+        "name_": "model"
+      },
+      "tokenizer2": null,
+      "tokenizer3": null,
+      "prompt": "nsfw，脸部阴影，低分辨率，jpeg伪影、模糊、糟糕，黑脸，霓虹灯",
+      "model_type": "kolors",
+      "clip_skip": 0
+    },
+    "node_type": "EncodeText"
+  },
+  "68": {
+    "inputs": {
+      "cls": "UNet2DConditionModel",
+      "path": "/data/yjw/ComfyUI/models/configs/Kolors-diffusers/unet",
+      "kwargs": {
+        "variant": "fp16"
+      }
+    },
+    "node_type": "ModelFromPretrained"
+  },
+  "69": {
+    "inputs": {
+      "cls": "AutoencoderKL",
+      "path": "/data/yjw/ComfyUI/models/configs/Kolors-diffusers/vae",
+      "kwargs": {
+        "variant": "fp16"
+      }
+    },
+    "node_type": "ModelFromPretrained"
+  },
+  "70": {
+    "inputs": {
+      "cls": "ChatGLMModel",
+      "path": "/data/yjw/ComfyUI/models/configs/Kolors-diffusers/text_encoder",
+      "kwargs": {
+        "variant": "fp16"
+      }
+    },
+    "node_type": "ModelFromPretrained"
+  },
+  "71": {
+    "inputs": {
+      "cls": "ChatGLMTokenizer",
+      "path": "/data/yjw/ComfyUI/models/configs/Kolors-diffusers/tokenizer",
+      "kwargs": {
+        "variant": "fp16"
+      }
+    },
+    "node_type": "ModelFromPretrained"
+  },
+  "72": {
+    "inputs": {
+      "seeds": 976295390285206
+    },
+    "node_type": "MakeGenerators"
+  },
+  "73": {
+    "inputs": {
+      "cls": "EulerDiscreteScheduler",
+      "init_kwargs": {
+        "num_train_timesteps": 1000,
+        "beta_start": 0.00085,
+        "beta_end": 0.012,
+        "beta_schedule": "scaled_linear",
+        "trained_betas": null,
+        "prediction_type": "epsilon",
+        "interpolation_type": "linear",
+        "use_karras_sigmas": false,
+        "sigma_min": null,
+        "sigma_max": null,
+        "timestep_spacing": "linspace",
+        "timestep_type": "discrete",
+        "steps_offset": 0,
+        "rescale_betas_zero_snr": false,
+        "final_sigmas_type": "zero"
+      }
+    },
+    "node_type": "MakeScheduler"
+  },
+  "74": {
+    "inputs": {
+      "scheduler_in": {
+        "node_": "73",
+        "name_": "scheduler"
+      },
+      "scheduler_step": 25,
+      "start_step": 0,
+      "end_step": 24
+    },
+    "node_type": "SetTimesteps"
+  },
+  "75": {
+    "inputs": {
+      "scheduler": {
+        "node_": "74",
+        "name_": "scheduler"
+      },
+      "latents_in": {
+        "node_": "7",
+        "name_": "tensor"
+      },
+      "generators": {
+        "node_": "72",
+        "name_": "generators"
+      },
+      "timesteps": {
+        "node_": "74",
+        "name_": "timesteps"
+      }
+    },
+    "node_type": "AddNoise"
+  },
+  "76": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "65",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "77": {
+    "inputs": {
+      "dict_from": {
+        "node_": "76",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "65",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "78": {
+    "inputs": {
+      "dict_from": {
+        "node_": "77",
+        "name_": "dict_to"
+      },
+      "key": "width",
+      "value": 1024
+    },
+    "node_type": "UpdateDict"
+  },
+  "79": {
+    "inputs": {
+      "dict_from": {
+        "node_": "78",
+        "name_": "dict_to"
+      },
+      "key": "height",
+      "value": 1024
+    },
+    "node_type": "UpdateDict"
+  },
+  "80": {
+    "inputs": {
+      "dict_from": {
+        "node_": "79",
+        "name_": "dict_to"
+      },
+      "key": "crop_w",
+      "value": 0
+    },
+    "node_type": "UpdateDict"
+  },
+  "81": {
+    "inputs": {
+      "dict_from": {
+        "node_": "80",
+        "name_": "dict_to"
+      },
+      "key": "crop_h",
+      "value": 0
+    },
+    "node_type": "UpdateDict"
+  },
+  "82": {
+    "inputs": {
+      "dict_from": {
+        "node_": "81",
+        "name_": "dict_to"
+      },
+      "key": "target_width",
+      "value": 1024
+    },
+    "node_type": "UpdateDict"
+  },
+  "83": {
+    "inputs": {
+      "dict_from": {
+        "node_": "82",
+        "name_": "dict_to"
+      },
+      "key": "target_height",
+      "value": 1024
+    },
+    "node_type": "UpdateDict"
+  },
+  "84": {
+    "inputs": {
+      "dict1": {
+        "node_": "83",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "85": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "67",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "86": {
+    "inputs": {
+      "dict_from": {
+        "node_": "85",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "67",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "87": {
+    "inputs": {
+      "dict1": {
+        "node_": "86",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "88": {
+    "inputs": {
+      "images_in": {
+        "node_": "9",
+        "name_": "images"
+      }
+    },
+    "node_type": "Tensor2Image"
+  }
+}

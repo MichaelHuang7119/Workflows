@@ -1,0 +1,271 @@
+{
+  "3": {
+    "inputs": {
+      "unet": {
+        "node_": "4",
+        "name_": "unet"
+      },
+      "scheduler": {
+        "node_": "36",
+        "name_": "scheduler"
+      },
+      "timesteps": {
+        "node_": "36",
+        "name_": "timesteps"
+      },
+      "latents_in": {
+        "node_": "37",
+        "name_": "latents"
+      },
+      "positive": {
+        "node_": "40",
+        "name_": "forward"
+      },
+      "middle": null,
+      "negative": {
+        "node_": "44",
+        "name_": "forward"
+      },
+      "generators": {
+        "node_": "34",
+        "name_": "generators"
+      },
+      "cfg_scale": 3.96,
+      "cfg2_scale": 1.0,
+      "return_with_leftover_noise": "disable",
+      "batch_size": 1,
+      "model_type": "sd3"
+    },
+    "node_type": "SampleLoop"
+  },
+  "4": {
+    "inputs": {
+      "path": "/data/yjw/ComfyUI/models/checkpoints/sd3_medium_incl_clips_t5xxlfp8.safetensors",
+      "cls": "StableDiffusion3Pipeline",
+      "kwargs": {
+        "config": "/data/yjw/ComfyUI/models/configs/stable-diffusion-3-medium-diffusers"
+      }
+    },
+    "node_type": "PipeFromSingleFile"
+  },
+  "6": {
+    "inputs": {
+      "text_encoder": {
+        "node_": "4",
+        "name_": "text_encoder"
+      },
+      "text_encoder2": {
+        "node_": "4",
+        "name_": "text_encoder2"
+      },
+      "text_encoder3": {
+        "node_": "4",
+        "name_": "text_encoder3"
+      },
+      "tokenizer": {
+        "node_": "4",
+        "name_": "tokenizer"
+      },
+      "tokenizer2": {
+        "node_": "4",
+        "name_": "tokenizer2"
+      },
+      "tokenizer3": {
+        "node_": "4",
+        "name_": "tokenizer3"
+      },
+      "prompt": "happy cute anime fox girl with massive fluffy fennec ears, blonde fluffy hair long hair blue eyes wearing a pink scarf a white shirt and a golden belt a long blue maxi skirt with a black coat hands in pockets and white socks rainbow sneakers in space black background standing on planet mars mountains with a star galaxy milky way sky",
+      "model_type": "sd3",
+      "clip_skip": 0
+    },
+    "node_type": "EncodeText"
+  },
+  "8": {
+    "inputs": {
+      "latents": {
+        "node_": "3",
+        "name_": "latents"
+      },
+      "vae": {
+        "node_": "4",
+        "name_": "vae"
+      }
+    },
+    "node_type": "VaeDecode"
+  },
+  "9": {
+    "inputs": {
+      "key": "9",
+      "value": {
+        "node_": "45",
+        "name_": "images"
+      }
+    },
+    "node_type": "TaskOutput"
+  },
+  "33": {
+    "inputs": {
+      "width": 1024,
+      "height": 1280,
+      "batch_size": 1,
+      "channel_size": 16,
+      "init_value": 0.0609
+    },
+    "node_type": "MakeTensors"
+  },
+  "34": {
+    "inputs": {
+      "seeds": 117191185158512
+    },
+    "node_type": "MakeGenerators"
+  },
+  "35": {
+    "inputs": {
+      "cls": "FlowMatchEulerDiscreteScheduler",
+      "init_kwargs": {
+        "num_train_timesteps": 1000,
+        "shift": 1.0
+      }
+    },
+    "node_type": "MakeScheduler"
+  },
+  "36": {
+    "inputs": {
+      "scheduler_in": {
+        "node_": "35",
+        "name_": "scheduler"
+      },
+      "scheduler_step": 32,
+      "start_step": 0,
+      "end_step": 31
+    },
+    "node_type": "SetTimesteps"
+  },
+  "37": {
+    "inputs": {
+      "scheduler": {
+        "node_": "36",
+        "name_": "scheduler"
+      },
+      "latents_in": {
+        "node_": "33",
+        "name_": "tensor"
+      },
+      "generators": {
+        "node_": "34",
+        "name_": "generators"
+      },
+      "timesteps": {
+        "node_": "36",
+        "name_": "timesteps"
+      }
+    },
+    "node_type": "AddNoise"
+  },
+  "38": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "6",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "39": {
+    "inputs": {
+      "dict_from": {
+        "node_": "38",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "6",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "40": {
+    "inputs": {
+      "dict1": {
+        "node_": "39",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "41": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "6",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "42": {
+    "inputs": {
+      "dict_from": {
+        "node_": "41",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "6",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "43": {
+    "inputs": {
+      "dict_from": {
+        "node_": "42",
+        "name_": "dict_to"
+      },
+      "key": "zero",
+      "value": true
+    },
+    "node_type": "UpdateDict"
+  },
+  "44": {
+    "inputs": {
+      "dict1": {
+        "node_": "43",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "45": {
+    "inputs": {
+      "images_in": {
+        "node_": "8",
+        "name_": "images"
+      }
+    },
+    "node_type": "Tensor2Image"
+  }
+}

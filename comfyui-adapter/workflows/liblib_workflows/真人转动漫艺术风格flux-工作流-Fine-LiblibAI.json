@@ -1,0 +1,821 @@
+{
+  "last_node_id": 51,
+  "last_link_id": 121,
+  "nodes": [
+    {
+      "id": 7,
+      "type": "VAEDecode",
+      "pos": [
+        1992,
+        691
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 6,
+          "slot_index": 0,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 7,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            101
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 8,
+      "type": "VAELoader",
+      "pos": [
+        1510,
+        1350
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            7
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 39,
+      "type": "PreviewImage",
+      "pos": [
+        882,
+        71
+      ],
+      "size": {
+        "0": 210,
+        "1": 246
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 113,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 19,
+      "type": "CLIPTextEncodeFlux",
+      "pos": [
+        794,
+        1109
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 117,
+          "slot_index": 0,
+          "label": "clip"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            116
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "CONDITIONING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeFlux"
+      },
+      "widgets_values": [
+        "bad hand",
+        "bad hand",
+        4
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 14,
+      "type": "ApplyFluxControlNet",
+      "pos": [
+        812,
+        1513
+      ],
+      "size": {
+        "0": 393,
+        "1": 78
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "controlnet",
+          "type": "FluxControlNet",
+          "link": 118,
+          "label": "controlnet"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 114,
+          "slot_index": 1,
+          "label": "image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "controlnet_condition",
+          "type": "ControlNetCondition",
+          "links": [
+            28
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "controlnet_condition"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ApplyFluxControlNet"
+      },
+      "widgets_values": [
+        0.7000000000000001
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 13,
+      "type": "LoadFluxControlNet",
+      "pos": [
+        -234,
+        1247
+      ],
+      "size": {
+        "0": 462.577880859375,
+        "1": 289.8813171386719
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "ControlNet",
+          "type": "FluxControlNet",
+          "links": [
+            118
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "ControlNet"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadFluxControlNet"
+      },
+      "widgets_values": [
+        "flux-dev-fp8",
+        "XLabs-flux-canny-controlnet_v3"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 16,
+      "type": "LoadImage",
+      "pos": [
+        -298,
+        477
+      ],
+      "size": [
+        384.1290303556646,
+        541.450306792857
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            112
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "15.png",
+        "image"
+      ],
+      "_widget_cache_map": {
+        "05533-2623366728-1girl, solo, outdoors, brown eyes, black hair, jacket, jewelry, mailbox, looking at audience, orange pants, construction, earrin.png": {
+          "value": "img/081e9f07d9bd4c2ba090efde163518f9/b1340abd0d94f5df8a39736bbf38917d291da43b9de1b9cfc7069bea541f8238.png",
+          "name": "05533-2623366728-1girl, solo, outdoors, brown eyes, black hair, jacket, jewelry, mailbox, looking at audience, orange pants, construction, earrin.png",
+          "url": "https://liblibai-tmp-image.vibrou.com/img/081e9f07d9bd4c2ba090efde163518f9/b1340abd0d94f5df8a39736bbf38917d291da43b9de1b9cfc7069bea541f8238.png"
+        },
+        "0e602000373ce4d192eff709b1cc452f44cdbf96eda44d71770d3e69d8583081.png": {
+          "value": "img/081e9f07d9bd4c2ba090efde163518f9/0ec65aab8d0f414062aef7161bc0f942fd24103cdc878c33bfca6dfbf6c6bfa3.png",
+          "name": "0e602000373ce4d192eff709b1cc452f44cdbf96eda44d71770d3e69d8583081.png",
+          "url": "https://liblibai-tmp-image.vibrou.com/img/081e9f07d9bd4c2ba090efde163518f9/0ec65aab8d0f414062aef7161bc0f942fd24103cdc878c33bfca6dfbf6c6bfa3.png"
+        },
+        "4-6.png": {
+          "value": "img/e9dbe3e4a9d646f2b8eaf5760d0607d0/14f69d274aff315d08c209a725121d3c727f2b78c88f8730ebc27cc1aa8b5fe3.png",
+          "name": "4-6.png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/e9dbe3e4a9d646f2b8eaf5760d0607d0/14f69d274aff315d08c209a725121d3c727f2b78c88f8730ebc27cc1aa8b5fe3.png"
+        },
+        "00020-1808276918.png": {
+          "value": "img/e9dbe3e4a9d646f2b8eaf5760d0607d0/792b79ffd7523360a5040bbe7cc74698888ceede79909790d22fa2ab6f8d69a1.png",
+          "name": "00020-1808276918.png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/e9dbe3e4a9d646f2b8eaf5760d0607d0/792b79ffd7523360a5040bbe7cc74698888ceede79909790d22fa2ab6f8d69a1.png"
+        },
+        "15.png": {
+          "value": "img/e5c05143074646b7ae70a88b81ec6c2a/ef91e35926d6089a4c118a884a3e77d0daf5f24da6c93a647aabef63bc2df401.png",
+          "name": "15.png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/e5c05143074646b7ae70a88b81ec6c2a/ef91e35926d6089a4c118a884a3e77d0daf5f24da6c93a647aabef63bc2df401.png"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 5,
+      "type": "CLIPTextEncodeFlux",
+      "pos": [
+        797,
+        773
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 2,
+          "slot_index": 0,
+          "label": "clip"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            18
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "CONDITIONING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeFlux"
+      },
+      "widgets_values": [
+        "erciyuan,1 girls,Animation style,Forest background,\n",
+        "erciyuan,1 girls,Animation style,Forest background,\n\n\n",
+        4
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 4,
+      "type": "DualCLIPLoader",
+      "pos": [
+        149,
+        853
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            2,
+            117
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "clip_l",
+        "t5xxl_fp8_e4m3fn",
+        "flux"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 32,
+      "type": "UNETLoader",
+      "pos": [
+        757,
+        382
+      ],
+      "size": {
+        "0": 378.8608093261719,
+        "1": 132.08126831054688
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            121
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "F.1基础算法模型-哩布在线可运行_F.1-dev-fp8",
+        "fp8_e4m3fn"
+      ],
+      "_widget_cache_map": {
+        "基础模型_F.1": {
+          "name": "基础模型_F.1",
+          "value": 2295774
+        },
+        "F.1基础算法模型-哩布在线可运行_F.1-dev-fp8": {
+          "name": "F.1基础算法模型-哩布在线可运行_F.1-dev-fp8",
+          "value": "412b427ddb674b4dbab9e5abd5ae6057"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 48,
+      "type": "CannyEdgePreprocessor",
+      "pos": [
+        187,
+        549
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 112,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            113,
+            114
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CannyEdgePreprocessor"
+      },
+      "widgets_values": [
+        100,
+        200,
+        768
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 6,
+      "type": "EmptyLatentImage",
+      "pos": [
+        807,
+        584
+      ],
+      "size": {
+        "0": 389.8669128417969,
+        "1": 106
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            66
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        768,
+        1024,
+        1
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 23,
+      "type": "SaveImage",
+      "pos": [
+        2268,
+        295
+      ],
+      "size": [
+        813.0745985763715,
+        1155.9485916145843
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 101,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "canny_res"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 49,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        1227,
+        363
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 121,
+          "label": "模型",
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            120
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "二次元动漫涂鸦艺术插画F.1_v1.0",
+        0.75
+      ],
+      "_widget_cache_map": {
+        "二次元动漫涂鸦艺术插画F.1_v1.0": {
+          "name": "二次元动漫涂鸦艺术插画F.1_v1.0",
+          "value": "7f331058d1aa47399ccc76c96bf9dc90"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 3,
+      "type": "XlabsSampler",
+      "pos": [
+        1410,
+        633
+      ],
+      "size": {
+        "0": 395.26812744140625,
+        "1": 539.4924926757812
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 120,
+          "slot_index": 0,
+          "label": "model"
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 18,
+          "label": "conditioning"
+        },
+        {
+          "name": "neg_conditioning",
+          "type": "CONDITIONING",
+          "link": 116,
+          "label": "neg_conditioning",
+          "slot_index": 2
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 66,
+          "label": "latent_image"
+        },
+        {
+          "name": "controlnet_condition",
+          "type": "ControlNetCondition",
+          "link": 28,
+          "label": "controlnet_condition"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            6
+          ],
+          "shape": 3,
+          "label": "latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "XlabsSampler"
+      },
+      "widgets_values": [
+        0,
+        "fixed",
+        40,
+        2,
+        4.5,
+        0.01
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    }
+  ],
+  "links": [
+    [
+      2,
+      4,
+      0,
+      5,
+      0,
+      "CLIP"
+    ],
+    [
+      6,
+      3,
+      0,
+      7,
+      0,
+      "LATENT"
+    ],
+    [
+      7,
+      8,
+      0,
+      7,
+      1,
+      "VAE"
+    ],
+    [
+      18,
+      5,
+      0,
+      3,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      28,
+      14,
+      0,
+      3,
+      4,
+      "ControlNetCondition"
+    ],
+    [
+      66,
+      6,
+      0,
+      3,
+      3,
+      "LATENT"
+    ],
+    [
+      101,
+      7,
+      0,
+      23,
+      0,
+      "IMAGE"
+    ],
+    [
+      112,
+      16,
+      0,
+      48,
+      0,
+      "IMAGE"
+    ],
+    [
+      113,
+      48,
+      0,
+      39,
+      0,
+      "IMAGE"
+    ],
+    [
+      114,
+      48,
+      0,
+      14,
+      1,
+      "IMAGE"
+    ],
+    [
+      116,
+      19,
+      0,
+      3,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      117,
+      4,
+      0,
+      19,
+      0,
+      "CLIP"
+    ],
+    [
+      118,
+      13,
+      0,
+      14,
+      0,
+      "FluxControlNet"
+    ],
+    [
+      120,
+      49,
+      0,
+      3,
+      0,
+      "MODEL"
+    ],
+    [
+      121,
+      32,
+      0,
+      49,
+      0,
+      "MODEL"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7972024500000222,
+      "offset": [
+        210.57786994665548,
+        3.7674817967551917
+      ]
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

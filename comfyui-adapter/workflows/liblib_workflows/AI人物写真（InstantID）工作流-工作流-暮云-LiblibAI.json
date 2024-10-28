@@ -1,0 +1,820 @@
+{
+  "last_node_id": 19,
+  "last_link_id": 27,
+  "nodes": [
+    {
+      "id": 14,
+      "type": "LoadImage",
+      "pos": [
+        -505,
+        38
+      ],
+      "size": [
+        461.87534938320107,
+        392.9052713790172
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            13
+          ],
+          "shape": 3
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "00065-175430610 (9).jpeg",
+        "image"
+      ],
+      "locked": true
+    },
+    {
+      "id": 13,
+      "type": "DiffControlNetLoader",
+      "pos": [
+        -498,
+        579
+      ],
+      "size": [
+        448.48652501186234,
+        58
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 21,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "links": [
+            12
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DiffControlNetLoader"
+      },
+      "widgets_values": [
+        "diffusion_pytorch_model.safetensors"
+      ],
+      "locked": true
+    },
+    {
+      "id": 12,
+      "type": "InstantIDFaceAnalysis",
+      "pos": [
+        -494,
+        679
+      ],
+      "size": [
+        445.5513087643035,
+        69.21578511192706
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "FACEANALYSIS",
+          "type": "FACEANALYSIS",
+          "links": [
+            11
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "InstantIDFaceAnalysis"
+      },
+      "widgets_values": [
+        "CUDA"
+      ],
+      "locked": true
+    },
+    {
+      "id": 10,
+      "type": "ApplyInstantID",
+      "pos": [
+        -489,
+        790
+      ],
+      "size": [
+        434.1625250118623,
+        266
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "instantid",
+          "type": "INSTANTID",
+          "link": 10,
+          "slot_index": 0
+        },
+        {
+          "name": "insightface",
+          "type": "FACEANALYSIS",
+          "link": 11,
+          "slot_index": 1
+        },
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 12,
+          "slot_index": 2
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 13,
+          "slot_index": 3
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 14,
+          "slot_index": 4
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 26
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 25
+        },
+        {
+          "name": "image_kps",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            15
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            18
+          ],
+          "shape": 3,
+          "slot_index": 1
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            20
+          ],
+          "shape": 3,
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ApplyInstantID"
+      },
+      "widgets_values": [
+        0.8,
+        0,
+        1
+      ],
+      "locked": true
+    },
+    {
+      "id": 4,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        -33,
+        33
+      ],
+      "size": [
+        472.7457818783182,
+        107.36605513145867
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            14,
+            21
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            5,
+            27
+          ],
+          "slot_index": 1
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            8
+          ],
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "leosamsHelloworldSDXL_helloworldSDXL32DPO.safetensors"
+      ],
+      "locked": true
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [
+        -26,
+        190
+      ],
+      "size": [
+        464.1649575069807,
+        48.17683288719613
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 7
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            9
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "locked": true
+    },
+    {
+      "id": 11,
+      "type": "InstantIDModelLoader",
+      "pos": [
+        -501,
+        477
+      ],
+      "size": [
+        455.7457412594208,
+        60.38549478294749
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "INSTANTID",
+          "type": "INSTANTID",
+          "links": [
+            10
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "InstantIDModelLoader"
+      },
+      "widgets_values": [
+        "ip-adapter.bin"
+      ],
+      "locked": true
+    },
+    {
+      "id": 7,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -22,
+        282
+      ],
+      "size": [
+        425.27801513671875,
+        180.6060791015625
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 5
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 23,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            26
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "locked": true
+    },
+    {
+      "id": 19,
+      "type": "CLIPTextEncode",
+      "pos": [
+        221,
+        281
+      ],
+      "size": [
+        425.27801513671875,
+        180.6060791015625
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 27
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 24,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            25
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "color": "#322",
+      "bgcolor": "#533",
+      "locked": true
+    },
+    {
+      "id": 18,
+      "type": "SDXLPromptStyler",
+      "pos": [
+        -33,
+        325
+      ],
+      "size": [
+        468.35930876430416,
+        313.85827853538893
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "positive_prompt_text_g",
+          "type": "STRING",
+          "links": [
+            23
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "negative_prompt_text_g",
+          "type": "STRING",
+          "links": [
+            24
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SDXLPromptStyler"
+      },
+      "widgets_values": [
+        "(elegant art space:1.25),photography,upper_body, fashionable and elegant girl,CN QHC,indigo,splash ink blue painting background,the blue flowers,, (masterpiece:1,2), best quality, masterpiece, highres, original, extremely detailed wallpaper, perfect lighting,(extremely detailed CG:1.2）",
+        "EasyNegative,ng_deepnegative_v1_75t,, lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry, (worst quality:2),(low quality:2),(normal quality:2),lowres,normal quality,((monochrome)),((grayscale)),skin spots,acnes,skin blemishes,age spot,backlight,(ugly:1.331),(duplicate:1.331),(morbid:1.21),(mutilated:1.21),(tranny:1.331),deformed eyes,deformed lips,mutated hands,(poorly drawn hands:1.331),blurry,(bad anatomy:1.21),(bad proportions:1.331),three arms,extra limbs,extra legs,extra arms,extra hands,(more than 2 nipples:1.331),(missing arms:1.331),(extra legs:1.331),(fused fingers:1.61051),(too many fingers:1.61051),(unclear eyes:1.331),bad hands,missing fingers,extra digit,(futa:1.1),bad body,pubic hair,glans,easynegative,three feet,four feet,glow skin,(worst quality:2),(low quality:2),(normal quality:2),lowres,normal quality,((monochrome)),((grayscale)),skin spots,acnes,skin blemishes,age spot,backlight,(ugly:1.331),(duplicate:1.331),(morbid:1.21),(mutilated:1.21),(tranny:1.331),deformed eyes,deformed lips,mutated hands,(poorly drawn hands:1.331),blurry,(bad anatomy:1.21),(bad proportions:1.331),three arms,extra limbs,extra legs,extra arms,extra hands,(more than 2 nipples:1.331),(missing arms:1.331),(extra legs:1.331),(fused fingers:1.61051),(too many fingers:1.61051),(unclear eyes:1.331),bad hands,missing fingers,extra digit,(futa:1.1),bad body,pubic hair,glans,three feet,four feet,bridge,shiny skin,skin spots,acnes,skin blemishes,age spot,",
+        "artstyle-psychedelic",
+        "No",
+        "",
+        true
+      ],
+      "locked": true
+    },
+    {
+      "id": 3,
+      "type": "KSampler",
+      "pos": [
+        -32,
+        682
+      ],
+      "size": [
+        468.48895750697966,
+        268.65033946373376
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 15
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 18
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 20
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 22
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            7
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        942717016462216,
+        "randomize",
+        25,
+        2,
+        "dpmpp_3m_sde",
+        "karras",
+        1
+      ],
+      "locked": true
+    },
+    {
+      "id": 15,
+      "type": "CR SDXL Aspect Ratio",
+      "pos": [
+        -34,
+        998
+      ],
+      "size": [
+        470.683390002097,
+        278
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "upscale_factor",
+          "type": "FLOAT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "batch_size",
+          "type": "INT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "empty_latent",
+          "type": "LATENT",
+          "links": [
+            22
+          ],
+          "shape": 3,
+          "slot_index": 4
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR SDXL Aspect Ratio"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        "3:4 portrait 896x1152",
+        "Off",
+        1,
+        4
+      ],
+      "locked": true
+    },
+    {
+      "id": 9,
+      "type": "SaveImage",
+      "pos": [
+        467,
+        38
+      ],
+      "size": [
+        579.461822497215,
+        761.7153161559343
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 9
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "locked": true
+    }
+  ],
+  "links": [
+    [
+      5,
+      4,
+      1,
+      7,
+      0,
+      "CLIP"
+    ],
+    [
+      7,
+      3,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      8,
+      4,
+      2,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      9,
+      8,
+      0,
+      9,
+      0,
+      "IMAGE"
+    ],
+    [
+      10,
+      11,
+      0,
+      10,
+      0,
+      "INSTANTID"
+    ],
+    [
+      11,
+      12,
+      0,
+      10,
+      1,
+      "FACEANALYSIS"
+    ],
+    [
+      12,
+      13,
+      0,
+      10,
+      2,
+      "CONTROL_NET"
+    ],
+    [
+      13,
+      14,
+      0,
+      10,
+      3,
+      "IMAGE"
+    ],
+    [
+      14,
+      4,
+      0,
+      10,
+      4,
+      "MODEL"
+    ],
+    [
+      15,
+      10,
+      0,
+      3,
+      0,
+      "MODEL"
+    ],
+    [
+      18,
+      10,
+      1,
+      3,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      20,
+      10,
+      2,
+      3,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      21,
+      4,
+      0,
+      13,
+      0,
+      "MODEL"
+    ],
+    [
+      22,
+      15,
+      4,
+      3,
+      3,
+      "LATENT"
+    ],
+    [
+      23,
+      18,
+      0,
+      7,
+      1,
+      "STRING"
+    ],
+    [
+      24,
+      18,
+      1,
+      19,
+      1,
+      "STRING"
+    ],
+    [
+      25,
+      19,
+      0,
+      10,
+      6,
+      "CONDITIONING"
+    ],
+    [
+      26,
+      7,
+      0,
+      10,
+      5,
+      "CONDITIONING"
+    ],
+    [
+      27,
+      4,
+      1,
+      19,
+      0,
+      "CLIP"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "workspace_info": {
+      "id": "XA7FM7Do8du0O6rZYKAvZ"
+    },
+    "ds": {
+      "scale": 0.5644739300537773,
+      "offset": [
+        1155.5915279178982,
+        211.53845972497734
+      ]
+    }
+  },
+  "version": 0.4
+}

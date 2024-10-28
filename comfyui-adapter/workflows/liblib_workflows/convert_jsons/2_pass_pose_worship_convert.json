@@ -1,0 +1,752 @@
+{
+  "3": {
+    "inputs": {
+      "unet": {
+        "node_": "39",
+        "name_": "unet"
+      },
+      "scheduler": {
+        "node_": "42",
+        "name_": "scheduler"
+      },
+      "timesteps": {
+        "node_": "42",
+        "name_": "timesteps"
+      },
+      "latents_in": {
+        "node_": "43",
+        "name_": "latents"
+      },
+      "positive": {
+        "node_": "52",
+        "name_": "forward"
+      },
+      "middle": null,
+      "negative": {
+        "node_": "58",
+        "name_": "forward"
+      },
+      "generators": {
+        "node_": "40",
+        "name_": "generators"
+      },
+      "cfg_scale": 8,
+      "cfg2_scale": 1.0,
+      "return_with_leftover_noise": "disable",
+      "batch_size": 1,
+      "model_type": "v1"
+    },
+    "node_type": "SampleLoop"
+  },
+  "5": {
+    "inputs": {
+      "width": 1280,
+      "height": 704,
+      "batch_size": 1,
+      "channel_size": 4,
+      "init_value": 0.0
+    },
+    "node_type": "MakeTensors"
+  },
+  "6": {
+    "inputs": {
+      "text_encoder": {
+        "node_": "39",
+        "name_": "text_encoder"
+      },
+      "text_encoder2": {
+        "node_": "39",
+        "name_": "text_encoder2"
+      },
+      "text_encoder3": {
+        "node_": "39",
+        "name_": "text_encoder3"
+      },
+      "tokenizer": {
+        "node_": "39",
+        "name_": "tokenizer"
+      },
+      "tokenizer2": {
+        "node_": "39",
+        "name_": "tokenizer2"
+      },
+      "tokenizer3": {
+        "node_": "39",
+        "name_": "tokenizer3"
+      },
+      "prompt": "(solo)1.1 girl (flat chest)0.9, fennec ears  fox ears, (messy hair)1.1, eyes, standing (school uniform sweater)1.1 sky clouds nature national park beautiful winter snow (scenery HDR landscape)1.1\n(sunset)1.1\n",
+      "model_type": "v1",
+      "clip_skip": 1
+    },
+    "node_type": "EncodeText"
+  },
+  "7": {
+    "inputs": {
+      "text_encoder": {
+        "node_": "39",
+        "name_": "text_encoder"
+      },
+      "text_encoder2": {
+        "node_": "39",
+        "name_": "text_encoder2"
+      },
+      "text_encoder3": {
+        "node_": "39",
+        "name_": "text_encoder3"
+      },
+      "tokenizer": {
+        "node_": "39",
+        "name_": "tokenizer"
+      },
+      "tokenizer2": {
+        "node_": "39",
+        "name_": "tokenizer2"
+      },
+      "tokenizer3": {
+        "node_": "39",
+        "name_": "tokenizer3"
+      },
+      "prompt": "(hands)1.1, text, error, cropped, (worst quality)1.2, (low quality)1.2, normal quality, (jpeg artifacts)1.3, signature, watermark, username, blurry, artist name, monochrome, sketch, censorship, censor, (copyright)1.2, extra legs, (forehead mark)1.1 (depth of field)1.1 (emotionless)1.1 (penis)1.1 (pumpkin)1.1",
+      "model_type": "v1",
+      "clip_skip": 1
+    },
+    "node_type": "EncodeText"
+  },
+  "8": {
+    "inputs": {
+      "latents": {
+        "node_": "3",
+        "name_": "latents"
+      },
+      "vae": {
+        "node_": "13",
+        "name_": "model"
+      }
+    },
+    "node_type": "VaeDecode"
+  },
+  "9": {
+    "inputs": {
+      "key": "9",
+      "value": {
+        "node_": "59",
+        "name_": "images"
+      }
+    },
+    "node_type": "TaskOutput"
+  },
+  "11": {
+    "inputs": {
+      "cls": "ControlNetModel",
+      "path": "/data/yjw/ComfyUI/models/controlnet/control_openpose.safetensors",
+      "kwargs": {
+        "config": "/data/yjw/ComfyUI/models/configs/control_v11p_sd15_canny"
+      }
+    },
+    "node_type": "ModelFromSingleFile"
+  },
+  "12": {
+    "inputs": {
+      "image_path": "/data/yjw/ComfyUI/input/pose_worship.png"
+    },
+    "node_type": "LoadImage"
+  },
+  "13": {
+    "inputs": {
+      "cls": "AutoencoderKL",
+      "path": "/data/yjw/ComfyUI/models/vae/kl-f8-anime2.ckpt",
+      "kwargs": {
+        "config": "/data/yjw/ComfyUI/models/configs/stable-diffusion-v1-5/vae"
+      }
+    },
+    "node_type": "ModelFromSingleFile"
+  },
+  "14": {
+    "inputs": {
+      "method": "nearest-exact",
+      "width": 240,
+      "height": 136,
+      "tensor_in": {
+        "node_": "3",
+        "name_": "latents"
+      }
+    },
+    "node_type": "ResizeTensors"
+  },
+  "15": {
+    "inputs": {
+      "text_encoder": {
+        "node_": "36",
+        "name_": "text_encoder"
+      },
+      "text_encoder2": {
+        "node_": "36",
+        "name_": "text_encoder2"
+      },
+      "text_encoder3": {
+        "node_": "36",
+        "name_": "text_encoder3"
+      },
+      "tokenizer": {
+        "node_": "36",
+        "name_": "tokenizer"
+      },
+      "tokenizer2": {
+        "node_": "36",
+        "name_": "tokenizer2"
+      },
+      "tokenizer3": {
+        "node_": "36",
+        "name_": "tokenizer3"
+      },
+      "prompt": "girl (flat chest)0.9, (fennec ears)0.8  (fox ears)0.8, (messy hair)1.1, (highlights)1.1, (realistic starry eyes pupil)1.1, standing (school uniform sweater)1.1\nsky clouds nature national park beautiful winter snow scenery HDR landscape\n\n(sunset)1.1\n\n",
+      "model_type": "v1",
+      "clip_skip": 1
+    },
+    "node_type": "EncodeText"
+  },
+  "16": {
+    "inputs": {
+      "unet": {
+        "node_": "36",
+        "name_": "unet"
+      },
+      "scheduler": {
+        "node_": "62",
+        "name_": "scheduler"
+      },
+      "timesteps": {
+        "node_": "62",
+        "name_": "timesteps"
+      },
+      "latents_in": {
+        "node_": "63",
+        "name_": "latents"
+      },
+      "positive": {
+        "node_": "66",
+        "name_": "forward"
+      },
+      "middle": null,
+      "negative": {
+        "node_": "69",
+        "name_": "forward"
+      },
+      "generators": {
+        "node_": "60",
+        "name_": "generators"
+      },
+      "cfg_scale": 5,
+      "cfg2_scale": 1.0,
+      "return_with_leftover_noise": "disable",
+      "batch_size": 1,
+      "model_type": "v1"
+    },
+    "node_type": "SampleLoop"
+  },
+  "17": {
+    "inputs": {
+      "latents": {
+        "node_": "16",
+        "name_": "latents"
+      },
+      "vae": {
+        "node_": "13",
+        "name_": "model"
+      }
+    },
+    "node_type": "VaeDecode"
+  },
+  "18": {
+    "inputs": {
+      "key": "18",
+      "value": {
+        "node_": "70",
+        "name_": "images"
+      }
+    },
+    "node_type": "TaskOutput"
+  },
+  "35": {
+    "inputs": {
+      "text_encoder": {
+        "node_": "36",
+        "name_": "text_encoder"
+      },
+      "text_encoder2": {
+        "node_": "36",
+        "name_": "text_encoder2"
+      },
+      "text_encoder3": {
+        "node_": "36",
+        "name_": "text_encoder3"
+      },
+      "tokenizer": {
+        "node_": "36",
+        "name_": "tokenizer"
+      },
+      "tokenizer2": {
+        "node_": "36",
+        "name_": "tokenizer2"
+      },
+      "tokenizer3": {
+        "node_": "36",
+        "name_": "tokenizer3"
+      },
+      "prompt": "(hands)1.1, text, error, cropped, (worst quality)1.2, (low quality)1.2, normal quality, (jpeg artifacts)1.3, signature, watermark, username, blurry, artist name, monochrome, sketch, censorship, censor, (copyright)1.2, extra legs, (forehead mark)1.1 (depth of field)1.1 (emotionless)1.1 (penis)1.1 (pumpkin)1.1",
+      "model_type": "v1",
+      "clip_skip": 1
+    },
+    "node_type": "EncodeText"
+  },
+  "36": {
+    "inputs": {
+      "path": "/data/yjw/ComfyUI/models/checkpoints/AOM3A3.safetensors",
+      "cls": "StableDiffusionImg2ImgPipeline",
+      "kwargs": {
+        "config": "/data/yjw/ComfyUI/models/configs/stable-diffusion-v1-5"
+      }
+    },
+    "node_type": "PipeFromSingleFile"
+  },
+  "39": {
+    "inputs": {
+      "path": "/data/yjw/ComfyUI/models/checkpoints/Anything-V3.0.ckpt",
+      "cls": "StableDiffusionImg2ImgPipeline",
+      "kwargs": {
+        "config": "/data/yjw/ComfyUI/models/configs/stable-diffusion-v1-5"
+      }
+    },
+    "node_type": "PipeFromSingleFile"
+  },
+  "40": {
+    "inputs": {
+      "seeds": 1071823866653712
+    },
+    "node_type": "MakeGenerators"
+  },
+  "41": {
+    "inputs": {
+      "cls": "DPMSolverSinglestepScheduler",
+      "init_kwargs": {
+        "num_train_timesteps": 1000,
+        "beta_start": 0.00085,
+        "beta_end": 0.012,
+        "beta_schedule": "scaled_linear",
+        "trained_betas": null,
+        "solver_order": 2,
+        "prediction_type": "epsilon",
+        "thresholding": false,
+        "dynamic_thresholding_ratio": 0.995,
+        "sample_max_value": 1.0,
+        "algorithm_type": "sde-dpmsolver++",
+        "solver_type": "midpoint",
+        "lower_order_final": false,
+        "use_karras_sigmas": false,
+        "final_sigmas_type": "zero",
+        "lambda_min_clipped": -Infinity,
+        "variance_type": null
+      }
+    },
+    "node_type": "MakeScheduler"
+  },
+  "42": {
+    "inputs": {
+      "scheduler_in": {
+        "node_": "41",
+        "name_": "scheduler"
+      },
+      "scheduler_step": 10,
+      "start_step": 0,
+      "end_step": 9
+    },
+    "node_type": "SetTimesteps"
+  },
+  "43": {
+    "inputs": {
+      "scheduler": {
+        "node_": "42",
+        "name_": "scheduler"
+      },
+      "latents_in": {
+        "node_": "5",
+        "name_": "tensor"
+      },
+      "generators": {
+        "node_": "40",
+        "name_": "generators"
+      },
+      "timesteps": {
+        "node_": "42",
+        "name_": "timesteps"
+      }
+    },
+    "node_type": "AddNoise"
+  },
+  "44": {
+    "inputs": {
+      "method": "nearest-exact",
+      "width": 1280,
+      "height": 704,
+      "tensor_in": {
+        "node_": "12",
+        "name_": "image"
+      }
+    },
+    "node_type": "ResizeTensors"
+  },
+  "45": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "6",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "46": {
+    "inputs": {
+      "dict_from": {
+        "node_": "45",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "6",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "47": {
+    "inputs": {
+      "dict_from": {
+        "node_": "46",
+        "name_": "dict_to"
+      },
+      "key": "controlnet",
+      "value": {
+        "node_": "11",
+        "name_": "model"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "48": {
+    "inputs": {
+      "dict_from": {
+        "node_": "47",
+        "name_": "dict_to"
+      },
+      "key": "control_image",
+      "value": {
+        "node_": "44",
+        "name_": "image"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "49": {
+    "inputs": {
+      "dict_from": {
+        "node_": "48",
+        "name_": "dict_to"
+      },
+      "key": "control_scale",
+      "value": 1
+    },
+    "node_type": "UpdateDict"
+  },
+  "50": {
+    "inputs": {
+      "dict_from": {
+        "node_": "49",
+        "name_": "dict_to"
+      },
+      "key": "control_start_percent",
+      "value": 0.0
+    },
+    "node_type": "UpdateDict"
+  },
+  "51": {
+    "inputs": {
+      "dict_from": {
+        "node_": "50",
+        "name_": "dict_to"
+      },
+      "key": "control_end_percent",
+      "value": 1.0
+    },
+    "node_type": "UpdateDict"
+  },
+  "52": {
+    "inputs": {
+      "dict1": {
+        "node_": "51",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "53": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "7",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "54": {
+    "inputs": {
+      "dict_from": {
+        "node_": "53",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "7",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "55": {
+    "inputs": {
+      "dict_from": {
+        "node_": "54",
+        "name_": "dict_to"
+      },
+      "key": "controlnet",
+      "value": {
+        "node_": "11",
+        "name_": "model"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "56": {
+    "inputs": {
+      "dict_from": {
+        "node_": "55",
+        "name_": "dict_to"
+      },
+      "key": "control_image",
+      "value": {
+        "node_": "44",
+        "name_": "image"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "57": {
+    "inputs": {
+      "dict_from": {
+        "node_": "56",
+        "name_": "dict_to"
+      },
+      "key": "control_scale",
+      "value": 1
+    },
+    "node_type": "UpdateDict"
+  },
+  "58": {
+    "inputs": {
+      "dict1": {
+        "node_": "57",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "59": {
+    "inputs": {
+      "images_in": {
+        "node_": "8",
+        "name_": "images"
+      }
+    },
+    "node_type": "Tensor2Image"
+  },
+  "60": {
+    "inputs": {
+      "seeds": 284006177305237
+    },
+    "node_type": "MakeGenerators"
+  },
+  "61": {
+    "inputs": {
+      "cls": "DPMSolverSinglestepScheduler",
+      "init_kwargs": {
+        "num_train_timesteps": 1000,
+        "beta_start": 0.00085,
+        "beta_end": 0.012,
+        "beta_schedule": "scaled_linear",
+        "trained_betas": null,
+        "solver_order": 2,
+        "prediction_type": "epsilon",
+        "thresholding": false,
+        "dynamic_thresholding_ratio": 0.995,
+        "sample_max_value": 1.0,
+        "algorithm_type": "sde-dpmsolver++",
+        "solver_type": "midpoint",
+        "lower_order_final": false,
+        "use_karras_sigmas": false,
+        "final_sigmas_type": "zero",
+        "lambda_min_clipped": -Infinity,
+        "variance_type": null
+      }
+    },
+    "node_type": "MakeScheduler"
+  },
+  "62": {
+    "inputs": {
+      "scheduler_in": {
+        "node_": "61",
+        "name_": "scheduler"
+      },
+      "scheduler_step": 15,
+      "start_step": 7,
+      "end_step": 14
+    },
+    "node_type": "SetTimesteps"
+  },
+  "63": {
+    "inputs": {
+      "scheduler": {
+        "node_": "62",
+        "name_": "scheduler"
+      },
+      "latents_in": {
+        "node_": "14",
+        "name_": "tensor"
+      },
+      "generators": {
+        "node_": "60",
+        "name_": "generators"
+      },
+      "timesteps": {
+        "node_": "62",
+        "name_": "timesteps"
+      }
+    },
+    "node_type": "AddNoise"
+  },
+  "64": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "15",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "65": {
+    "inputs": {
+      "dict_from": {
+        "node_": "64",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "15",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "66": {
+    "inputs": {
+      "dict1": {
+        "node_": "65",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "67": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "35",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "68": {
+    "inputs": {
+      "dict_from": {
+        "node_": "67",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "35",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "69": {
+    "inputs": {
+      "dict1": {
+        "node_": "68",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "70": {
+    "inputs": {
+      "images_in": {
+        "node_": "17",
+        "name_": "images"
+      }
+    },
+    "node_type": "Tensor2Image"
+  }
+}

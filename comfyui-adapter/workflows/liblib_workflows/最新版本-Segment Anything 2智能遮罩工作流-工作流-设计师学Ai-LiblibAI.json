@@ -1,0 +1,432 @@
+{
+  "last_node_id": 103,
+  "last_link_id": 232,
+  "nodes": [
+    {
+      "id": 96,
+      "type": "SplineEditor",
+      "pos": [
+        -1456,
+        -1198
+      ],
+      "size": [
+        813,
+        1710
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "mask"
+        },
+        {
+          "name": "coord_str",
+          "type": "STRING",
+          "links": [
+            221
+          ],
+          "shape": 3,
+          "slot_index": 1,
+          "label": "coord_str"
+        },
+        {
+          "name": "float",
+          "type": "FLOAT",
+          "links": null,
+          "shape": 3,
+          "label": "float"
+        },
+        {
+          "name": "count",
+          "type": "INT",
+          "links": null,
+          "shape": 3,
+          "label": "count"
+        },
+        {
+          "name": "normalized_str",
+          "type": "STRING",
+          "links": [],
+          "shape": 3,
+          "label": "normalized_str"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SplineEditor",
+        "points": "SplineEditor"
+      },
+      "widgets_values": [
+        "[{\"x\":418.95704118008996,\"y\":424.09761837248374},{\"x\":440.3761128150639,\"y\":307.57786867822557}]",
+        "[{\"x\":418.95704118008996,\"y\":424.09761837248374},{\"x\":440.3761128150639,\"y\":307.57786867822557}]",
+        768,
+        1280,
+        2,
+        "controlpoints",
+        "linear",
+        0.5,
+        1,
+        "list",
+        0,
+        1,
+        null,
+        null
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 84,
+      "type": "ImageAndMaskPreview",
+      "pos": [
+        781,
+        -201
+      ],
+      "size": [
+        845.2241104686782,
+        943.4924166101905
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 232,
+          "label": "图像"
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 231,
+          "slot_index": 1,
+          "label": "遮罩"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "composite",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageAndMaskPreview"
+      },
+      "widgets_values": [
+        0.5,
+        "255, 0, 0",
+        false
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 66,
+      "type": "DownloadAndLoadSAM2Model",
+      "pos": [
+        -127,
+        -262
+      ],
+      "size": {
+        "0": 351.7801513671875,
+        "1": 130
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "sam2_model",
+          "type": "SAM2MODEL",
+          "links": [
+            228
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "sam2_model"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DownloadAndLoadSAM2Model"
+      },
+      "widgets_values": [
+        "sam2_hiera_base_plus.safetensors",
+        "single_image",
+        "cuda",
+        "bf16"
+      ]
+    },
+    {
+      "id": 98,
+      "type": "Sam2Segmentation",
+      "pos": [
+        415,
+        -149
+      ],
+      "size": {
+        "0": 316.0185852050781,
+        "1": 162
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "sam2_model",
+          "type": "SAM2MODEL",
+          "link": 228,
+          "label": "sam2_model"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 220,
+          "label": "image"
+        },
+        {
+          "name": "bboxes",
+          "type": "BBOX",
+          "link": null,
+          "label": "bboxes",
+          "slot_index": 2
+        },
+        {
+          "name": "coordinates_positive",
+          "type": "STRING",
+          "link": 221,
+          "widget": {
+            "name": "coordinates_positive"
+          },
+          "label": "coordinates_positive"
+        },
+        {
+          "name": "coordinates_negative",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "coordinates_negative"
+          },
+          "label": "coordinates_negative"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": [
+            231
+          ],
+          "shape": 3,
+          "label": "mask",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Sam2Segmentation"
+      },
+      "widgets_values": [
+        true,
+        "",
+        "",
+        false
+      ]
+    },
+    {
+      "id": 72,
+      "type": "ImageResizeKJ",
+      "pos": [
+        -85,
+        -45
+      ],
+      "size": {
+        "0": 315,
+        "1": 242
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 196,
+          "label": "image"
+        },
+        {
+          "name": "get_image_size",
+          "type": "IMAGE",
+          "link": null,
+          "label": "get_image_size"
+        },
+        {
+          "name": "width_input",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "width_input"
+          },
+          "label": "width_input"
+        },
+        {
+          "name": "height_input",
+          "type": "INT",
+          "link": null,
+          "widget": {
+            "name": "height_input"
+          },
+          "label": "height_input"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            220,
+            232
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "IMAGE"
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null,
+          "shape": 3,
+          "label": "width"
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null,
+          "shape": 3,
+          "label": "height"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageResizeKJ"
+      },
+      "widgets_values": [
+        768,
+        1280,
+        "nearest-exact",
+        false,
+        2,
+        0,
+        0
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 83,
+      "type": "LoadImage",
+      "pos": [
+        -584,
+        -72
+      ],
+      "size": [
+        425.47375471850205,
+        684.300369076232
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            196
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "ComfyUI_c818_00001_.png",
+        "image"
+      ],
+      "category": "Primitive Nodes"
+    }
+  ],
+  "links": [
+    [
+      196,
+      83,
+      0,
+      72,
+      0,
+      "IMAGE"
+    ],
+    [
+      220,
+      72,
+      0,
+      98,
+      1,
+      "IMAGE"
+    ],
+    [
+      221,
+      96,
+      1,
+      98,
+      3,
+      "STRING"
+    ],
+    [
+      228,
+      66,
+      0,
+      98,
+      0,
+      "SAM2MODEL"
+    ],
+    [
+      231,
+      98,
+      0,
+      84,
+      1,
+      "MASK"
+    ],
+    [
+      232,
+      72,
+      0,
+      84,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6588450000000043,
+      "offset": [
+        1571.9644541027587,
+        984.7082118303663
+      ]
+    }
+  },
+  "version": 0.4
+}

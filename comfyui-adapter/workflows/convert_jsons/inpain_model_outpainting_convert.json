@@ -1,0 +1,338 @@
+{
+  "3": {
+    "inputs": {
+      "unet": {
+        "node_": "29",
+        "name_": "unet"
+      },
+      "scheduler": {
+        "node_": "33",
+        "name_": "scheduler"
+      },
+      "timesteps": {
+        "node_": "33",
+        "name_": "timesteps"
+      },
+      "latents_in": {
+        "node_": "34",
+        "name_": "latents"
+      },
+      "positive": {
+        "node_": "37",
+        "name_": "forward"
+      },
+      "middle": null,
+      "negative": {
+        "node_": "40",
+        "name_": "forward"
+      },
+      "generators": {
+        "node_": "31",
+        "name_": "generators"
+      },
+      "cfg_scale": 8,
+      "cfg2_scale": 1.0,
+      "return_with_leftover_noise": "disable",
+      "batch_size": 1,
+      "model_type": "inpainting_v2"
+    },
+    "node_type": "SampleLoop"
+  },
+  "6": {
+    "inputs": {
+      "text_encoder": {
+        "node_": "29",
+        "name_": "text_encoder"
+      },
+      "text_encoder2": {
+        "node_": "29",
+        "name_": "text_encoder2"
+      },
+      "text_encoder3": {
+        "node_": "29",
+        "name_": "text_encoder3"
+      },
+      "tokenizer": {
+        "node_": "29",
+        "name_": "tokenizer"
+      },
+      "tokenizer2": {
+        "node_": "29",
+        "name_": "tokenizer2"
+      },
+      "tokenizer3": {
+        "node_": "29",
+        "name_": "tokenizer3"
+      },
+      "prompt": "outdoors in the yosemite national park mountains nature\n\n\n\n",
+      "model_type": "inpainting_v2",
+      "clip_skip": 0
+    },
+    "node_type": "EncodeText"
+  },
+  "7": {
+    "inputs": {
+      "text_encoder": {
+        "node_": "29",
+        "name_": "text_encoder"
+      },
+      "text_encoder2": {
+        "node_": "29",
+        "name_": "text_encoder2"
+      },
+      "text_encoder3": {
+        "node_": "29",
+        "name_": "text_encoder3"
+      },
+      "tokenizer": {
+        "node_": "29",
+        "name_": "tokenizer"
+      },
+      "tokenizer2": {
+        "node_": "29",
+        "name_": "tokenizer2"
+      },
+      "tokenizer3": {
+        "node_": "29",
+        "name_": "tokenizer3"
+      },
+      "prompt": "watermark, text\n",
+      "model_type": "inpainting_v2",
+      "clip_skip": 0
+    },
+    "node_type": "EncodeText"
+  },
+  "8": {
+    "inputs": {
+      "latents": {
+        "node_": "3",
+        "name_": "latents"
+      },
+      "vae": {
+        "node_": "29",
+        "name_": "vae"
+      }
+    },
+    "node_type": "VaeDecode"
+  },
+  "9": {
+    "inputs": {
+      "key": "9",
+      "value": {
+        "node_": "41",
+        "name_": "images"
+      }
+    },
+    "node_type": "TaskOutput"
+  },
+  "20": {
+    "inputs": {
+      "image_path": "/data/yjw/ComfyUI/input/yosemite_outpaint_example.png"
+    },
+    "node_type": "LoadImage"
+  },
+  "26": {
+    "inputs": {
+      "image": {
+        "node_": "30",
+        "name_": "tensor"
+      },
+      "vae": {
+        "node_": "29",
+        "name_": "vae"
+      },
+      "mask_in": {
+        "node_": "30",
+        "name_": "mask"
+      },
+      "grow_mask_by": 8
+    },
+    "node_type": "VaeEncode"
+  },
+  "29": {
+    "inputs": {
+      "path": "/data/yjw/ComfyUI/models/checkpoints/512-inpainting-ema.safetensors",
+      "cls": "StableDiffusionInpaintPipeline",
+      "kwargs": {
+        "config": "/data/yjw/ComfyUI/models/configs/stable-diffusion-2-inpainting"
+      }
+    },
+    "node_type": "PipeFromSingleFile"
+  },
+  "30": {
+    "inputs": {
+      "tensor_in": {
+        "node_": "20",
+        "name_": "image"
+      },
+      "left": 0,
+      "top": 128,
+      "right": 0,
+      "bottom": 128,
+      "feathering": 40
+    },
+    "node_type": "PadTensors"
+  },
+  "31": {
+    "inputs": {
+      "seeds": 152545289528694
+    },
+    "node_type": "MakeGenerators"
+  },
+  "32": {
+    "inputs": {
+      "cls": "UniPCMultistepScheduler",
+      "init_kwargs": {
+        "num_train_timesteps": 1000,
+        "beta_start": 0.00085,
+        "beta_end": 0.012,
+        "beta_schedule": "scaled_linear",
+        "trained_betas": null,
+        "solver_order": 2,
+        "prediction_type": "epsilon",
+        "thresholding": false,
+        "dynamic_thresholding_ratio": 0.995,
+        "sample_max_value": 1.0,
+        "predict_x0": true,
+        "solver_type": "bh2",
+        "lower_order_final": true,
+        "disable_corrector": [],
+        "solver_p": null,
+        "use_karras_sigmas": false,
+        "timestep_spacing": "linspace",
+        "steps_offset": 0,
+        "final_sigmas_type": "sigma_min",
+        "rescale_betas_zero_snr": false
+      }
+    },
+    "node_type": "MakeScheduler"
+  },
+  "33": {
+    "inputs": {
+      "scheduler_in": {
+        "node_": "32",
+        "name_": "scheduler"
+      },
+      "scheduler_step": 20,
+      "start_step": 0,
+      "end_step": 19
+    },
+    "node_type": "SetTimesteps"
+  },
+  "34": {
+    "inputs": {
+      "scheduler": {
+        "node_": "33",
+        "name_": "scheduler"
+      },
+      "latents_in": {
+        "node_": "26",
+        "name_": "latents"
+      },
+      "generators": {
+        "node_": "31",
+        "name_": "generators"
+      },
+      "timesteps": {
+        "node_": "33",
+        "name_": "timesteps"
+      }
+    },
+    "node_type": "AddNoise"
+  },
+  "35": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "6",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "36": {
+    "inputs": {
+      "dict_from": {
+        "node_": "35",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "6",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "37": {
+    "inputs": {
+      "dict1": {
+        "node_": "36",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "38": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "7",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "39": {
+    "inputs": {
+      "dict_from": {
+        "node_": "38",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "7",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "40": {
+    "inputs": {
+      "dict1": {
+        "node_": "39",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "41": {
+    "inputs": {
+      "images_in": {
+        "node_": "8",
+        "name_": "images"
+      }
+    },
+    "node_type": "Tensor2Image"
+  }
+}

@@ -1,0 +1,1097 @@
+{
+  "last_node_id": 82,
+  "last_link_id": 111,
+  "nodes": [
+    {
+      "id": 72,
+      "type": "Reroute",
+      "pos": [
+        702.2942785076168,
+        -344.4784974322602
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 96
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "LATENT",
+          "links": [
+            108
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false
+      },
+      "category": "Official"
+    },
+    {
+      "id": 64,
+      "type": "VAEDecode",
+      "pos": [
+        935.8957287597646,
+        -992.2910503692632
+      ],
+      "size": {
+        "0": 330.580078125,
+        "1": 46
+      },
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 85,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 86,
+          "label": "VAE",
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            109,
+            111
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 13,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        927.8957287597647,
+        -873.2910503692633
+      ],
+      "size": {
+        "0": 349.757080078125,
+        "1": 138.51333618164062
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 37,
+          "slot_index": 0,
+          "label": "噪波生成"
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 30,
+          "slot_index": 1,
+          "label": "引导"
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 19,
+          "slot_index": 2,
+          "label": "采样器"
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 20,
+          "slot_index": 3,
+          "label": "Sigmas"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 108,
+          "slot_index": 4,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            85
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "输出"
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3,
+          "label": "降噪输出"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 25,
+      "type": "RandomNoise",
+      "pos": [
+        932.8957287597646,
+        -649.2910503692632
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            37
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "噪波生成"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        44465663,
+        "randomize"
+      ],
+      "_widget_cache_map": {},
+      "color": "#233",
+      "bgcolor": "#355",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 75,
+      "type": "Note",
+      "pos": [
+        1732.5548952636707,
+        -264.58083587646473
+      ],
+      "size": [
+        381.4336539791043,
+        152.53128453284353
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "这里要提一下，SUPIR 需要使用 SDXL 模型。\n第一栏选择 SUPIR 模型，第二栏选择 SDXL 模型，再选择一个放大倍数即可，我这里选择 2 倍。\nSUPIR-V0Q模型解释：\n使用纸张的默认训练设置。在大多数情况下具有高泛化和亮图像质量:\nSUPIR-V0F:百度网盘、谷歌硬盘\n使用光衰减设置进行训练。SUPIR-VOF的Stage1编码器在面对光衰时仍能保留更多细节。\n这两个模型你可以试着切换看看。但需要注意，开启高清放大需要消耗积分。不开的话同时跑4张8积分。开的话就是56积分。这个友情提示下哈。"
+      ],
+      "_widget_cache_map": {},
+      "color": "#222",
+      "bgcolor": "#000",
+      "category": "Official"
+    },
+    {
+      "id": 73,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        -202.1042712402344,
+        -860.2910503692633
+      ],
+      "size": {
+        "0": 410.71234130859375,
+        "1": 89.48992156982422
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 101,
+          "label": "模型",
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            105,
+            106
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "FLUX1-超写实逼真黑神话-八戒-支持在线生图_f.1-wunengv1",
+        0.8
+      ],
+      "_widget_cache_map": {
+        "XLabs Flux Realism LoRA_ComfyUI版本": {
+          "name": "XLabs Flux Realism LoRA_ComfyUI版本",
+          "value": 2363358
+        },
+        "undefined_0004": {
+          "name": "undefined_0004",
+          "value": 2421245
+        },
+        "20240819-1724080274708-0004_0004": {
+          "name": "20240819-1724080274708-0004_0004",
+          "value": 2421245
+        },
+        "undefined_0005": {
+          "name": "undefined_0005",
+          "value": 2421684
+        },
+        "FLUX1-超写实逼真黑神话-八戒-支持在线生图_f.1-wunengv1": {
+          "name": "FLUX1-超写实逼真黑神话-八戒-支持在线生图_f.1-wunengv1",
+          "value": 2450730
+        }
+      },
+      "color": "#223",
+      "bgcolor": "#335",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 12,
+      "type": "UNETLoader",
+      "pos": [
+        -249.10427124023434,
+        -1034.2910503692633
+      ],
+      "size": {
+        "0": 663.1285400390625,
+        "1": 107.75992584228516
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            101
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "FLUX.1哩布在线可运行-黑暗森林工作室_FLUX.1-dev-fp8",
+        "fp8_e4m3fn"
+      ],
+      "_widget_cache_map": {
+        "黑暗森林工作室-FLUX1-DEV.sft_黑暗flux1-schnell": {
+          "name": "黑暗森林工作室-FLUX1-DEV.sft_黑暗flux1-schnell",
+          "value": 2296389
+        },
+        "Flux1-dev-fp8 11G版_flux1-dev-fp8": {
+          "name": "Flux1-dev-fp8 11G版_flux1-dev-fp8",
+          "value": 2298961
+        },
+        "Flux1-fp8 11G版_flux1-Schnell": {
+          "name": "Flux1-fp8 11G版_flux1-Schnell",
+          "value": 2314771
+        },
+        "FLUX.1哩布在线可运行-黑暗森林工作室_FLUX.1-dev-fp8": {
+          "name": "FLUX.1哩布在线可运行-黑暗森林工作室_FLUX.1-dev-fp8",
+          "value": 2295774
+        }
+      },
+      "color": "#223",
+      "bgcolor": "#335",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 80,
+      "type": "Note",
+      "pos": [
+        489.8957287597656,
+        -1054.2910503692635
+      ],
+      "size": {
+        "0": 303.6134033203125,
+        "1": 153.78294372558594
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "UNET的模型一般建议不动，你如果比较熟悉，可以更换其他的模型，这个需要你在模型库提前加载。\nlora的模型适配FLUX模型，你可以选择八戒，也可以换悟空，只要是flux的模型都可以，参数看作者的建议，0.8-1.2不等。\n如果你不清楚，剪映就直接一键生成。"
+      ],
+      "_widget_cache_map": {},
+      "color": "#223",
+      "bgcolor": "#335",
+      "category": "Official"
+    },
+    {
+      "id": 22,
+      "type": "BasicGuider",
+      "pos": [
+        529.8957287597656,
+        -844.2910503692633
+      ],
+      "size": {
+        "0": 317.47467041015625,
+        "1": 48.507537841796875
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 105,
+          "slot_index": 0,
+          "label": "模型"
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 40,
+          "slot_index": 1,
+          "label": "条件"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            30
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "引导"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicGuider"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 17,
+      "type": "BasicScheduler",
+      "pos": [
+        519.8957287597656,
+        -730.2910503692632
+      ],
+      "size": {
+        "0": 339.8432312011719,
+        "1": 106
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 106,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            20
+          ],
+          "shape": 3,
+          "label": "Sigmas"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicScheduler"
+      },
+      "widgets_values": [
+        "simple",
+        30,
+        1
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 81,
+      "type": "Note",
+      "pos": [
+        965.895728759764,
+        -342.2910503692626
+      ],
+      "size": [
+        285.33776527187797,
+        96.60923757506396
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "随机种子如果默认不变，你会生成和我的工图片一样的图。如果你想换其他的，建议你随机调整下种子数。"
+      ],
+      "_widget_cache_map": {},
+      "color": "#233",
+      "bgcolor": "#355",
+      "category": "Official"
+    },
+    {
+      "id": 16,
+      "type": "KSamplerSelect",
+      "pos": [
+        937.8957287597644,
+        -487.29105036926285
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            19
+          ],
+          "shape": 3,
+          "label": "采样器"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "euler"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 11,
+      "type": "DualCLIPLoader",
+      "pos": [
+        -233.058830078125,
+        -708.8910178527834
+      ],
+      "size": [
+        489.33416748046875,
+        121.01634979248047
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            10
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp8_e4m3fn",
+        "clip_l",
+        "flux"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 77,
+      "type": "PreviewImage",
+      "pos": [
+        1954,
+        -1122
+      ],
+      "size": [
+        614.0568458105413,
+        665.9557638506969
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 111,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 79,
+      "type": "Note",
+      "pos": [
+        -180,
+        -13
+      ],
+      "size": [
+        303.61340865854777,
+        153.78294080748492
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "默认宽高比2:3,1024x1536,如果横屏建议16:9，像素设置1920x1080"
+      ],
+      "_widget_cache_map": {},
+      "color": "#332922",
+      "bgcolor": "#593930",
+      "category": "Official"
+    },
+    {
+      "id": 70,
+      "type": "EmptyLatentImage",
+      "pos": [
+        -183,
+        -228
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            96
+          ],
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1536,
+        4
+      ],
+      "_widget_cache_map": {},
+      "color": "#332922",
+      "bgcolor": "#593930",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 78,
+      "type": "Note",
+      "pos": [
+        409,
+        -64
+      ],
+      "size": [
+        356.10696783567573,
+        214.77351110001132
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "这个提示词结构\n【主体】+【服饰】+【动作】+【道具】+【渲染词】\n下排的是设置了一些英文海报字幕，如果你不需要就删掉，引号部分的词可以替换，引号的词汇一般都可以直接识别"
+      ],
+      "_widget_cache_map": {},
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Official"
+    },
+    {
+      "id": 10,
+      "type": "VAELoader",
+      "pos": [
+        -214,
+        -467
+      ],
+      "size": [
+        475.4566650390625,
+        71.6128921508789
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            86
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 82,
+      "type": "Note",
+      "pos": [
+        1250,
+        -27
+      ],
+      "size": [
+        213.43350260009765,
+        186.10333806152357
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "管理组部分，\n如果你不想放大，消耗积分，你就把高清放大组设置为bypass,就不会启动，就会显示紫色。\n如果启动，就是蓝标always"
+      ],
+      "_widget_cache_map": {},
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        377,
+        -485
+      ],
+      "size": {
+        "0": 476.4019775390625,
+        "1": 336.4773864746094
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 10,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            40
+          ],
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "\nwuneng,Ta man ,Green clothes, scarf, beads around the neck, harrow in handFashion styling, hippop,fashion wear, fashion pieces, subversive styling, shoes, color matching, Fashion color mixing, UE5,C4D, Ray tracing, Fashion poster\nlooking_at_viewer, simple_background,close-up,cute emote\n\nEnglish artist_name, English dated, english_text,English  cover, English cover_page, album_cover, barcode, English magazine_cover, fake_cover,write\"GUOGUO\",all genlish Language，\nhigh resolution, best quality, highres,\n\nhuge future-style text \"WUNENG FASHION\" displayed, excellent word design,\n"
+      ],
+      "_widget_cache_map": {},
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 74,
+      "type": "SUPIR_Upscale",
+      "pos": [
+        1719,
+        -65
+      ],
+      "size": {
+        "0": 400,
+        "1": 818
+      },
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 109,
+          "label": "图像"
+        },
+        {
+          "name": "captions",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "captions"
+          },
+          "label": "captions"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "upscaled_image",
+          "type": "IMAGE",
+          "links": [
+            110
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SUPIR_Upscale"
+      },
+      "widgets_values": [
+        "SUPIR-v0Q_fp16.safetensors",
+        "None-BayounettaXL_v1",
+        114,
+        "randomize",
+        "lanczos",
+        2,
+        45,
+        -1,
+        4,
+        "high quality, detailed",
+        "bad quality, blurry, messy",
+        5,
+        1.003,
+        1,
+        4,
+        0,
+        "Wavelet",
+        true,
+        true,
+        512,
+        64,
+        "",
+        "auto",
+        "auto",
+        1,
+        false,
+        1024,
+        512,
+        false,
+        false,
+        "RestoreEDMSampler"
+      ],
+      "_widget_cache_map": {
+        "Flux1-fp8 11G版_flux1-Schnell": {
+          "name": "Flux1-fp8 11G版_flux1-Schnell",
+          "value": 2314771
+        },
+        "可图kolors-base-1.0-vae-fp16_kolors-base-1.0": {
+          "name": "可图kolors-base-1.0-vae-fp16_kolors-base-1.0",
+          "value": 2179271
+        },
+        "Dream Tech XL | 筑梦工业XL_v5.0 - 与光同尘": {
+          "name": "Dream Tech XL | 筑梦工业XL_v5.0 - 与光同尘",
+          "value": 1751458
+        },
+        "None-BayounettaXL_v1": {
+          "name": "None-BayounettaXL_v1",
+          "value": 1475263
+        }
+      },
+      "color": "#222",
+      "bgcolor": "#000",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 65,
+      "type": "PreviewImage",
+      "pos": [
+        2271,
+        -172
+      ],
+      "size": [
+        793.0470672922484,
+        1233.5711524757871
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 110,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "color": "#222",
+      "bgcolor": "#000",
+      "category": "Primitive Nodes"
+    }
+  ],
+  "links": [
+    [
+      10,
+      11,
+      0,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      19,
+      16,
+      0,
+      13,
+      2,
+      "SAMPLER"
+    ],
+    [
+      20,
+      17,
+      0,
+      13,
+      3,
+      "SIGMAS"
+    ],
+    [
+      30,
+      22,
+      0,
+      13,
+      1,
+      "GUIDER"
+    ],
+    [
+      37,
+      25,
+      0,
+      13,
+      0,
+      "NOISE"
+    ],
+    [
+      40,
+      6,
+      0,
+      22,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      85,
+      13,
+      0,
+      64,
+      0,
+      "LATENT"
+    ],
+    [
+      86,
+      10,
+      0,
+      64,
+      1,
+      "VAE"
+    ],
+    [
+      96,
+      70,
+      0,
+      72,
+      0,
+      "*"
+    ],
+    [
+      101,
+      12,
+      0,
+      73,
+      0,
+      "MODEL"
+    ],
+    [
+      105,
+      73,
+      0,
+      22,
+      0,
+      "MODEL"
+    ],
+    [
+      106,
+      73,
+      0,
+      17,
+      0,
+      "MODEL"
+    ],
+    [
+      108,
+      72,
+      0,
+      13,
+      4,
+      "LATENT"
+    ],
+    [
+      109,
+      64,
+      0,
+      74,
+      0,
+      "IMAGE"
+    ],
+    [
+      110,
+      74,
+      0,
+      65,
+      0,
+      "IMAGE"
+    ],
+    [
+      111,
+      64,
+      0,
+      77,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "文生图",
+      "bounding": [
+        -311,
+        -1167,
+        1850,
+        1621
+      ],
+      "color": "#3f789e",
+      "font_size": 60,
+      "locked": false
+    },
+    {
+      "title": "高清放大",
+      "bounding": [
+        1670,
+        -361,
+        1438,
+        1528
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "直出图片",
+      "bounding": [
+        1673,
+        -1226,
+        1289,
+        830
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1,
+      "offset": [
+        349.1042712402343,
+        1222
+      ]
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

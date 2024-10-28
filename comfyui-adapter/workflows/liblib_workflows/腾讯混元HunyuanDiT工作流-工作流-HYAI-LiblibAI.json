@@ -1,0 +1,883 @@
+{
+  "last_node_id": 42,
+  "last_link_id": 39,
+  "nodes": [
+    {
+      "id": 9,
+      "type": "VAEDecode",
+      "pos": [
+        -2209.300024414064,
+        637.5797796630862
+      ],
+      "size": {
+        "0": 140,
+        "1": 46
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 9,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 17,
+          "label": "VAE",
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            32
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "color": "#2a363b",
+      "bgcolor": "#3f5159",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 7,
+      "type": "KSampler",
+      "pos": [
+        -2462.3000244140644,
+        635.5797796630862
+      ],
+      "size": {
+        "0": 210,
+        "1": 262
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 16,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 6,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 7,
+          "label": "负面条件",
+          "slot_index": 2
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 19,
+          "label": "Latent",
+          "slot_index": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            9
+          ],
+          "shape": 3,
+          "label": "Latent",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        1087390238679617,
+        "randomize",
+        30,
+        6,
+        "ddim",
+        "karras",
+        1
+      ],
+      "color": "#223",
+      "bgcolor": "#335",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 2,
+      "type": "HYDiTTextEncoderLoader",
+      "pos": [
+        -3381.300024414064,
+        758.579779663086
+      ],
+      "size": {
+        "0": 260.3999938964844,
+        "1": 150
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            1,
+            3
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "CLIP"
+        },
+        {
+          "name": "T5",
+          "type": "T5",
+          "links": [
+            2,
+            4
+          ],
+          "shape": 3,
+          "slot_index": 1,
+          "label": "T5"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "HYDiTTextEncoderLoader"
+      },
+      "widgets_values": [
+        "hydit\\pytorch_model.bin",
+        "HunyuanDiT\\mT5-xl-encoder-fp16.safetensors",
+        "cpu",
+        "default"
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    },
+    {
+      "id": 20,
+      "type": "SDXLEmptyLatentSizePicker+",
+      "pos": [
+        -2760.300024414064,
+        741.579779663086
+      ],
+      "size": {
+        "0": 268.79998779296875,
+        "1": 170
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            19
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SDXLEmptyLatentSizePicker+"
+      },
+      "widgets_values": [
+        "768x1280 (0.6)",
+        1,
+        0,
+        0
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 5,
+      "type": "HYDiTCheckpointLoader",
+      "pos": [
+        -3374.300024414064,
+        624.5797796630862
+      ],
+      "size": {
+        "0": 243.60000610351562,
+        "1": 82
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            16
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "model"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "HYDiTCheckpointLoader"
+      },
+      "widgets_values": [
+        "Special\\HunYuanDiT.pt",
+        "G/2-1.2"
+      ],
+      "color": "#323",
+      "bgcolor": "#535",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 6,
+      "type": "HYDiTTextEncodeSimple",
+      "pos": [
+        -3064.300024414064,
+        851.579779663086
+      ],
+      "size": {
+        "0": 251.39187622070312,
+        "1": 108.25540161132812
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "link": 3,
+          "label": "CLIP"
+        },
+        {
+          "name": "T5",
+          "type": "T5",
+          "link": 4,
+          "label": "T5"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            7
+          ],
+          "shape": 3,
+          "label": "CONDITIONING",
+          "slot_index": 0
+        }
+      ],
+      "title": "负向提示词",
+      "properties": {
+        "Node name for S&R": "HYDiTTextEncodeSimple"
+      },
+      "widgets_values": [
+        "左右，四宫格，九宫格，错误的眼睛，糟糕的人脸，裸体，画布框架，毁容，糟糕的艺术，变形，多余的肢体，黑白，模糊的颜色，模糊，重复，病态，残缺，框架"
+      ],
+      "color": "#332922",
+      "bgcolor": "#593930",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 3,
+      "type": "HYDiTTextEncodeSimple",
+      "pos": [
+        -3064.300024414064,
+        625.5797796630862
+      ],
+      "size": {
+        "0": 255.82989501953125,
+        "1": 171.60250854492188
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "link": 1,
+          "label": "CLIP"
+        },
+        {
+          "name": "T5",
+          "type": "T5",
+          "link": 2,
+          "label": "T5"
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 39,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            6
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "CONDITIONING"
+        }
+      ],
+      "title": "正向提示词",
+      "properties": {
+        "Node name for S&R": "HYDiTTextEncodeSimple"
+      },
+      "widgets_values": [
+        "枯藤老树昏鸦，小桥流水人家。"
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 37,
+      "type": "GPT Sampler [n-suite]",
+      "pos": [
+        -2741,
+        21
+      ],
+      "size": {
+        "0": 268.79998779296875,
+        "1": 500
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "link": 34
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 35
+        },
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "link": 36,
+          "widget": {
+            "name": "prompt"
+          },
+          "slot_index": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            37,
+            39
+          ],
+          "shape": 6,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "GPT Sampler [n-suite]"
+      },
+      "widgets_values": [
+        2048,
+        0.7,
+        0.5,
+        0,
+        "disable",
+        "STOPTOKEN",
+        0,
+        0,
+        1.17647,
+        40,
+        1,
+        "disable",
+        "NO",
+        "### Instruction: ",
+        "### Response: ",
+        50,
+        "",
+        "3683"
+      ],
+      "color": "#223",
+      "bgcolor": "#335",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 38,
+      "type": "ShowText|pysssss",
+      "pos": [
+        -2446,
+        28
+      ],
+      "size": {
+        "0": 332.513671875,
+        "1": 251.56466674804688
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 37,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [],
+          "shape": 6,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        " The image depicts a fantastical scene featuring two characters. On one side, there is a large creature with a gaping mouth filled with sharp teeth. This creature appears to be in motion or possibly roaring, given its wide-open mouth and the expression of aggression on its face.\n\nOn the other side, standing slightly behind and below the creature's head, is a smaller figure that seems to be observing or interacting with the larger creature. The small figure has wings, suggesting it might be some kind of mythical bird or creature. It appears to be facing towards the large creature, possibly engaging in dialogue or confrontation.\n\nThe background is dark and indistinct, providing a stark contrast that makes both characters stand out prominently. There are no visible texts within the image. The style of the drawing is detailed and realistic, with careful attention given to shading and texture to create depth and realism in the scene. "
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 41,
+      "type": "ArgosTranslateTextNode",
+      "pos": [
+        -3030,
+        220
+      ],
+      "size": {
+        "0": 210,
+        "1": 133.56466674804688
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "links": [
+            36
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ArgosTranslateTextNode"
+      },
+      "widgets_values": [
+        "chinese",
+        "english",
+        "详细描述图片，作为AI绘图的提示词"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 40,
+      "type": "Llava Clip Loader [n-suite]",
+      "pos": [
+        -3363,
+        27
+      ],
+      "size": {
+        "0": 277.20001220703125,
+        "1": 58
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "llava_clip",
+          "type": "LLAVA_CLIP",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Llava Clip Loader [n-suite]"
+      },
+      "widgets_values": [
+        "mmproj-model-f16.gguf"
+      ],
+      "color": "#323",
+      "bgcolor": "#535",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 39,
+      "type": "LoadImage",
+      "pos": [
+        -3374,
+        139
+      ],
+      "size": {
+        "0": 309.8101806640625,
+        "1": 314.00006103515625
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            35
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "932.webp",
+        "image"
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 11,
+      "type": "VAELoader",
+      "pos": [
+        -2456.3000244140644,
+        951.5797796630854
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            17
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "hydit_diffusion_pytorch_model.bin"
+      ],
+      "color": "#323",
+      "bgcolor": "#535",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 31,
+      "type": "SaveImage",
+      "pos": [
+        -2016,
+        -2
+      ],
+      "size": {
+        "0": 641.8637084960938,
+        "1": 1005.53466796875
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 32
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "HYDiT/ComfyUI"
+      ],
+      "color": "#233",
+      "bgcolor": "#355",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 36,
+      "type": "GPT Loader Simple [n-suite]",
+      "pos": [
+        -3053,
+        22
+      ],
+      "size": {
+        "0": 277.20001220703125,
+        "1": 130
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "llava_clip",
+          "type": "LLAVA_CLIP",
+          "link": null,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "CUSTOM",
+          "links": [
+            34
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "GPT Loader Simple [n-suite]"
+      },
+      "widgets_values": [
+        "loyal-piano-m7.Q5_K_M.gguf",
+        27,
+        8,
+        2048
+      ],
+      "color": "#323",
+      "bgcolor": "#535"
+    }
+  ],
+  "links": [
+    [
+      1,
+      2,
+      0,
+      3,
+      0,
+      "CLIP"
+    ],
+    [
+      2,
+      2,
+      1,
+      3,
+      1,
+      "T5"
+    ],
+    [
+      3,
+      2,
+      0,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      4,
+      2,
+      1,
+      6,
+      1,
+      "T5"
+    ],
+    [
+      6,
+      3,
+      0,
+      7,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      7,
+      6,
+      0,
+      7,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      9,
+      7,
+      0,
+      9,
+      0,
+      "LATENT"
+    ],
+    [
+      16,
+      5,
+      0,
+      7,
+      0,
+      "MODEL"
+    ],
+    [
+      17,
+      11,
+      0,
+      9,
+      1,
+      "VAE"
+    ],
+    [
+      19,
+      20,
+      0,
+      7,
+      3,
+      "LATENT"
+    ],
+    [
+      32,
+      9,
+      0,
+      31,
+      0,
+      "IMAGE"
+    ],
+    [
+      34,
+      36,
+      0,
+      37,
+      0,
+      "CUSTOM"
+    ],
+    [
+      35,
+      39,
+      0,
+      37,
+      1,
+      "IMAGE"
+    ],
+    [
+      36,
+      41,
+      0,
+      37,
+      2,
+      "STRING"
+    ],
+    [
+      37,
+      37,
+      0,
+      38,
+      0,
+      "STRING"
+    ],
+    [
+      39,
+      37,
+      0,
+      3,
+      2,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "GPT图片识别生成提示词",
+      "bounding": [
+        -3395,
+        -53,
+        1333,
+        584
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "HunyuanDiT文生图",
+      "bounding": [
+        -3392,
+        551,
+        1332,
+        469
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8264462809917354,
+      "offset": {
+        "0": 4346.930370357699,
+        "1": 383.9508246105471
+      }
+    },
+    "workspace_info": {
+      "id": "HP5ohigHkkYClWMBa_WxJ"
+    }
+  },
+  "version": 0.4
+}

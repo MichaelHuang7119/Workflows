@@ -1,0 +1,1170 @@
+{
+  "last_node_id": 220,
+  "last_link_id": 317,
+  "nodes": [
+    {
+      "id": 25,
+      "type": "VAELoader",
+      "pos": [
+        -840,
+        -540
+      ],
+      "size": {
+        "0": 310,
+        "1": 60
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            40
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "sdxl_vae.safetensors"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "KSampler",
+      "pos": [
+        -1180,
+        -910
+      ],
+      "size": [
+        310,
+        470
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 205,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 202,
+          "label": "正面条件",
+          "slot_index": 1
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 203,
+          "label": "负面条件",
+          "slot_index": 2
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 204,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            297
+          ],
+          "slot_index": 0,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        1036831787269075,
+        "randomize",
+        35,
+        4,
+        "dpmpp_2m_sde",
+        "karras",
+        1
+      ]
+    },
+    {
+      "id": 201,
+      "type": "easy imageSize",
+      "pos": [
+        -830,
+        -430
+      ],
+      "size": [
+        300,
+        96.00000381469727
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 299,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "width_int",
+          "type": "INT",
+          "links": [
+            300
+          ],
+          "shape": 3,
+          "label": "宽度",
+          "slot_index": 0
+        },
+        {
+          "name": "height_int",
+          "type": "INT",
+          "links": [
+            301
+          ],
+          "shape": 3,
+          "label": "高度",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy imageSize"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 200,
+      "type": "EmptyLatentImage",
+      "pos": [
+        -470,
+        -430
+      ],
+      "size": [
+        220,
+        90
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "width",
+          "type": "INT",
+          "link": 300,
+          "widget": {
+            "name": "width"
+          },
+          "label": "宽度"
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "link": 301,
+          "widget": {
+            "name": "height"
+          },
+          "label": "高度"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            298
+          ],
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        512,
+        512,
+        1
+      ]
+    },
+    {
+      "id": 140,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        -840,
+        -910
+      ],
+      "size": {
+        "0": 315,
+        "1": 98
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            302
+          ],
+          "slot_index": 0,
+          "label": "模型"
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            303
+          ],
+          "slot_index": 1,
+          "label": "CLIP"
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            238
+          ],
+          "slot_index": 2,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "majicMIX\\majicmixRealistic_v7.safetensors"
+      ]
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [
+        -480,
+        -540
+      ],
+      "size": {
+        "0": 240,
+        "1": 50
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 297,
+          "label": "Latent",
+          "slot_index": 0
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 40,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            262,
+            288,
+            299,
+            307
+          ],
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 146,
+      "type": "BMAB Context",
+      "pos": [
+        -840,
+        -790
+      ],
+      "size": {
+        "0": 315,
+        "1": 194
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "seed_in",
+          "type": "SEED",
+          "link": null,
+          "label": "seed_in"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BMAB context",
+          "type": "CONTEXT",
+          "links": [
+            218
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "BMAB context"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BMAB Context"
+      },
+      "widgets_values": [
+        156727495472635,
+        "randomize",
+        20,
+        3,
+        "dpmpp_sde",
+        "karras",
+        null
+      ]
+    },
+    {
+      "id": 145,
+      "type": "BMAB Integrator",
+      "pos": [
+        -500,
+        -910
+      ],
+      "size": {
+        "0": 260,
+        "1": 334
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 302,
+          "label": "model"
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 303,
+          "label": "clip"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 238,
+          "label": "vae"
+        },
+        {
+          "name": "context",
+          "type": "CONTEXT",
+          "link": 218,
+          "label": "context"
+        },
+        {
+          "name": "seed_in",
+          "type": "SEED",
+          "link": null,
+          "label": "seed_in"
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "link": 298,
+          "label": "latent",
+          "slot_index": 5
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": null,
+          "label": "image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BMAB bind",
+          "type": "BMAB bind",
+          "links": [
+            259
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "BMAB bind"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BMAB Integrator"
+      },
+      "widgets_values": [
+        -2,
+        "none",
+        "A1111",
+        "(high quality), (masterpiece), (detailed), 8K, Elegant portrait captures (1girl:1.3) in exquisite (Mandarin collar qipao:1.2), holding traditional (folding fan:1.2), (silk fabric:1.2) of qipao flows gracefully, (delicate hand:1.2) poised with fan, (soft lighting:1.2) highlights intricate details, Shot with Canon EOS R5 and RF 85mm f1.2 L USM DS lens, in style of Chen Man, Trending on Artstation.",
+        "drawing,painting,crayon,sketch,graphite,impressionist,noisy,blurry,soft,deformed,ugly,(deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime:1.4),text,close up,cropped,out of frame,worst quality,low quality,jpeg artifacts,ugly,duplicate,morbid,mutilated,extra fingers,mutated hands,poorly drawn hands,poorly drawn face,mutation,deformed,blurry,dehydrated,bad anatomy,bad proportions,extra limbs,cloned face,disfigured,gross proportions,malformed limbs,missing arms,missing legs,extra arms,extra legs,fused fingers,too many fingers,long neck,((nsfw)),sketches,tattoo,(beard:1.3),(EasyNegative:1.3),badhandv4,(worst quality:2),(low quality:2),(normal quality:2),lowers,normal quality,\nfacing away,looking away,text,error,extra digit,fewer digits,cropped,jpeg artifacts,signature,watermark,username,blurry,skin spots,acnes,skin blemishes,bad anatomy,fat,bad feet,cropped,poorly drawn hands,poorly drawn face,mutation,deformed,tilted head.bad anatomy.bad hands,extra fingers,fewer digits.,extra limbs.extra arms,extra legs,malformed limbs.fused fingers,too many fingers,long neck,cross-eyed,mutated hands,bad body,bad proportions,gross proportions,text,error,missing fingers,missing arms,missing legs,extra digit,extra arms,extra leg,extra foot,missing fingers,(Worst quality,low quality,lowres:1.2),error,cropped,jpeg artifacts,out of frame,watermark,signature,",
+        null
+      ]
+    },
+    {
+      "id": 215,
+      "type": "SaveImage",
+      "pos": [
+        120,
+        -350
+      ],
+      "size": [
+        320,
+        270
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 314,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ]
+    },
+    {
+      "id": 205,
+      "type": "PreviewImage",
+      "pos": [
+        -820,
+        -280
+      ],
+      "size": [
+        200,
+        250
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 307,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 218,
+      "type": "Note",
+      "pos": [
+        -110,
+        -280
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "右边是经过脸部细化的图"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 217,
+      "type": "Note",
+      "pos": [
+        -610,
+        -120
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "第一次采样的图"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 216,
+      "type": "PreviewImage",
+      "pos": [
+        460,
+        -970
+      ],
+      "size": [
+        1380,
+        920
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 316,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 194,
+      "type": "CR Simple Image Compare",
+      "pos": [
+        140,
+        -670
+      ],
+      "size": {
+        "0": 300,
+        "1": 266
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image1",
+          "type": "IMAGE",
+          "link": 288,
+          "label": "图像1"
+        },
+        {
+          "name": "image2",
+          "type": "IMAGE",
+          "link": 289,
+          "label": "图像2"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            316
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "显示帮助"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Simple Image Compare"
+      },
+      "widgets_values": [
+        "Original image",
+        "Enhance facial details",
+        100,
+        "impact.ttf",
+        50,
+        "normal",
+        20
+      ]
+    },
+    {
+      "id": 147,
+      "type": "BMAB Face Detailer",
+      "pos": [
+        -220,
+        -910
+      ],
+      "size": [
+        320,
+        570
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "bind",
+          "type": "BMAB bind",
+          "link": 259,
+          "label": "bind"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 262,
+          "label": "image",
+          "slot_index": 1
+        },
+        {
+          "name": "lora",
+          "type": "BMAB lora",
+          "link": 317,
+          "label": "lora",
+          "slot_index": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BMAB bind",
+          "type": "BMAB bind",
+          "links": [
+            280
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "BMAB bind"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            279
+          ],
+          "shape": 3,
+          "slot_index": 1,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BMAB Face Detailer"
+      },
+      "widgets_values": [
+        20,
+        3,
+        "Use same sampler",
+        "Use same scheduler",
+        0.45,
+        32,
+        10,
+        1024,
+        1024,
+        "bmab_face_nm_yolov8n.pt",
+        1,
+        "Size"
+      ]
+    },
+    {
+      "id": 220,
+      "type": "BMAB LoRA Loader",
+      "pos": [
+        -530,
+        -290
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "lora",
+          "type": "BMAB lora",
+          "link": null,
+          "label": "lora"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "lora",
+          "type": "BMAB lora",
+          "links": [
+            317
+          ],
+          "shape": 3,
+          "label": "lora"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BMAB LoRA Loader"
+      },
+      "widgets_values": [
+        "1.0xl\\3D模型丨可爱化SDXL版_v1.0.safetensors",
+        1,
+        1
+      ]
+    },
+    {
+      "id": 128,
+      "type": "easy fullLoader",
+      "pos": [
+        -1630,
+        -960
+      ],
+      "size": [
+        440,
+        630
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model_override",
+          "type": "MODEL",
+          "link": null,
+          "label": "模型（可选）"
+        },
+        {
+          "name": "clip_override",
+          "type": "CLIP",
+          "link": null,
+          "label": "CLIP（可选）"
+        },
+        {
+          "name": "vae_override",
+          "type": "VAE",
+          "link": null,
+          "label": "VAE（可选）"
+        },
+        {
+          "name": "optional_lora_stack",
+          "type": "LORA_STACK",
+          "link": null,
+          "label": "LoRA堆（可选）"
+        },
+        {
+          "name": "optional_controlnet_stack",
+          "type": "CONTROL_NET_STACK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "pipe",
+          "type": "PIPE_LINE",
+          "links": null,
+          "shape": 3,
+          "label": "节点束"
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            205
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 1
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "links": [],
+          "shape": 3,
+          "slot_index": 2
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "links": [],
+          "shape": 3,
+          "slot_index": 3
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            202
+          ],
+          "shape": 3,
+          "slot_index": 4
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            203
+          ],
+          "shape": 3,
+          "slot_index": 5
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            204
+          ],
+          "shape": 3,
+          "slot_index": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy fullLoader"
+      },
+      "widgets_values": [
+        "1.0XL\\leosamsHelloworldXL_helloworldXL60.safetensors",
+        "Default",
+        "Baked VAE",
+        -2,
+        "None",
+        1,
+        1,
+        "width x height (custom)",
+        1024,
+        1280,
+        "(high quality), (masterpiece), (detailed), 8K, Enchanting photograph showcases (1girl:1.3) in exquisite (qipao:1.2), poised beside tranquil (creek:1.3), (bamboo forest:1.2) backdrop adds natural elegance, (flowing fabric:1.2) of qipao contrasts with serene water, (dappled sunlight:1.2) through bamboo creates captivating light play, Shot with Nikon Z7 II and NIKKOR Z 85mm f1.8 S lens, in style of Fan Ho, Trending on 500px.",
+        "none",
+        "A1111",
+        "drawing,painting,crayon,sketch,graphite,impressionist,noisy,blurry,soft,deformed,ugly,(deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime:1.4),text,close up,cropped,out of frame,worst quality,low quality,jpeg artifacts,ugly,duplicate,morbid,mutilated,extra fingers,mutated hands,poorly drawn hands,poorly drawn face,mutation,deformed,blurry,dehydrated,bad anatomy,bad proportions,extra limbs,cloned face,disfigured,gross proportions,malformed limbs,missing arms,missing legs,extra arms,extra legs,fused fingers,too many fingers,long neck,((nsfw)),sketches,tattoo,(beard:1.3),(EasyNegative:1.3),badhandv4,(worst quality:2),(low quality:2),(normal quality:2),lowers,normal quality,\nfacing away,looking away,text,error,extra digit,fewer digits,cropped,jpeg artifacts,signature,watermark,username,blurry,skin spots,acnes,skin blemishes,bad anatomy,fat,bad feet,cropped,poorly drawn hands,poorly drawn face,mutation,deformed,tilted head.bad anatomy.bad hands,extra fingers,fewer digits.,extra limbs.extra arms,extra legs,malformed limbs.fused fingers,too many fingers,long neck,cross-eyed,mutated hands,bad body,bad proportions,gross proportions,text,error,missing fingers,missing arms,missing legs,extra digit,extra arms,extra leg,extra foot,missing fingers,(Worst quality,low quality,lowres:1.2),error,cropped,jpeg artifacts,out of frame,watermark,signature,",
+        "none",
+        "A1111",
+        1,
+        false
+      ]
+    },
+    {
+      "id": 173,
+      "type": "BMAB Basic",
+      "pos": [
+        140,
+        -910
+      ],
+      "size": {
+        "0": 310,
+        "1": 200
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "bind",
+          "type": "BMAB bind",
+          "link": 280,
+          "label": "bind",
+          "slot_index": 0
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 279,
+          "label": "image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "BMAB bind",
+          "type": "BMAB bind",
+          "links": null,
+          "shape": 3,
+          "label": "BMAB bind",
+          "slot_index": 0
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            289,
+            314
+          ],
+          "shape": 3,
+          "label": "image",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BMAB Basic"
+      },
+      "widgets_values": [
+        1,
+        0.9500000000000001,
+        1,
+        0.9500000000000001,
+        0,
+        0
+      ]
+    }
+  ],
+  "links": [
+    [
+      40,
+      25,
+      0,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      202,
+      128,
+      4,
+      3,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      203,
+      128,
+      5,
+      3,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      204,
+      128,
+      6,
+      3,
+      3,
+      "LATENT"
+    ],
+    [
+      205,
+      128,
+      1,
+      3,
+      0,
+      "MODEL"
+    ],
+    [
+      218,
+      146,
+      0,
+      145,
+      3,
+      "CONTEXT"
+    ],
+    [
+      238,
+      140,
+      2,
+      145,
+      2,
+      "VAE"
+    ],
+    [
+      259,
+      145,
+      0,
+      147,
+      0,
+      "BMAB bind"
+    ],
+    [
+      262,
+      8,
+      0,
+      147,
+      1,
+      "IMAGE"
+    ],
+    [
+      279,
+      147,
+      1,
+      173,
+      1,
+      "IMAGE"
+    ],
+    [
+      280,
+      147,
+      0,
+      173,
+      0,
+      "BMAB bind"
+    ],
+    [
+      288,
+      8,
+      0,
+      194,
+      0,
+      "IMAGE"
+    ],
+    [
+      289,
+      173,
+      1,
+      194,
+      1,
+      "IMAGE"
+    ],
+    [
+      297,
+      3,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      298,
+      200,
+      0,
+      145,
+      5,
+      "LATENT"
+    ],
+    [
+      299,
+      8,
+      0,
+      201,
+      0,
+      "IMAGE"
+    ],
+    [
+      300,
+      201,
+      0,
+      200,
+      0,
+      "INT"
+    ],
+    [
+      301,
+      201,
+      1,
+      200,
+      1,
+      "INT"
+    ],
+    [
+      302,
+      140,
+      0,
+      145,
+      0,
+      "MODEL"
+    ],
+    [
+      303,
+      140,
+      1,
+      145,
+      1,
+      "CLIP"
+    ],
+    [
+      307,
+      8,
+      0,
+      205,
+      0,
+      "IMAGE"
+    ],
+    [
+      314,
+      173,
+      1,
+      215,
+      0,
+      "IMAGE"
+    ],
+    [
+      316,
+      194,
+      0,
+      216,
+      0,
+      "IMAGE"
+    ],
+    [
+      317,
+      220,
+      0,
+      147,
+      2,
+      "BMAB lora"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "修脸",
+      "bounding": [
+        -850,
+        -1040,
+        2700,
+        1000
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "文生图",
+      "bounding": [
+        -1640,
+        -1040,
+        780,
+        730
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.14641000000000046,
+      "offset": {
+        "0": 5557.48828125,
+        "1": 3606.052001953125
+      }
+    },
+    "workspace_info": {
+      "id": "MzIRIYs2ZeUkGIV1Pfspt",
+      "saveLock": false,
+      "cloudID": null,
+      "coverMediaPath": null
+    }
+  },
+  "version": 0.4
+}

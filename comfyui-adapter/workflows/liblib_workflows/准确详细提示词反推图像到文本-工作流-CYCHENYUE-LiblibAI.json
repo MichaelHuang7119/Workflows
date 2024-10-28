@@ -1,0 +1,1099 @@
+{
+  "last_node_id": 77,
+  "last_link_id": 92,
+  "nodes": [
+    {
+      "id": 16,
+      "type": "DualCLIPLoader",
+      "pos": {
+        "0": 1812,
+        "1": 624
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            29
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "clip_l.safetensors",
+        "t5xxl_fp8_e4m3fn.safetensors",
+        "flux"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 18,
+      "type": "VAELoader",
+      "pos": {
+        "0": 1812,
+        "1": 792
+      },
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            23,
+            42
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "flux-ae.sft"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 17,
+      "type": "ModelSamplingFlux",
+      "pos": {
+        "0": 2148,
+        "1": 468
+      },
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 17,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            19
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ModelSamplingFlux"
+      },
+      "widgets_values": [
+        1.15,
+        0.5,
+        1024,
+        1024
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 23,
+      "type": "VAEDecode",
+      "pos": {
+        "0": 2484,
+        "1": 468
+      },
+      "size": {
+        "0": 312,
+        "1": 48
+      },
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 22,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 23,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            78
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": [],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 33,
+      "type": "ControlNetLoader",
+      "pos": {
+        "0": 2136,
+        "1": 204
+      },
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "links": [
+            34
+          ],
+          "shape": 3,
+          "label": "ControlNet"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetLoader"
+      },
+      "widgets_values": [
+        "FLUX\\flux1-devInstantX-Controlnet-Union.safetensors"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 32,
+      "type": "SetUnionControlNetType",
+      "pos": {
+        "0": 2148,
+        "1": 312
+      },
+      "size": {
+        "0": 300,
+        "1": 60
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 34,
+          "label": "ControlNet"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "links": [
+            33
+          ],
+          "shape": 3,
+          "label": "ControlNet"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SetUnionControlNetType"
+      },
+      "widgets_values": [
+        "auto"
+      ]
+    },
+    {
+      "id": 15,
+      "type": "UNETLoader",
+      "pos": {
+        "0": 1812,
+        "1": 480
+      },
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            17
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "flux1-dev-fp8.safetensors",
+        "fp8_e4m3fn"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 31,
+      "type": "ControlNetApplyAdvanced",
+      "pos": {
+        "0": 2472,
+        "1": 204
+      },
+      "size": {
+        "0": 315,
+        "1": 186
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 40,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 41,
+          "label": "负面条件"
+        },
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 33,
+          "label": "ControlNet"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 36,
+          "label": "图像"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 42
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            38
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            39
+          ],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "负面条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetApplyAdvanced"
+      },
+      "widgets_values": [
+        0.6,
+        0,
+        0.6
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 20,
+      "type": "KSampler",
+      "pos": {
+        "0": 2496,
+        "1": 576
+      },
+      "size": {
+        "0": 300,
+        "1": 480
+      },
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 19,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 38,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 39,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 20,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            22
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        604769844760365,
+        "fixed",
+        25,
+        1,
+        "euler",
+        "beta",
+        1
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 61,
+      "type": "PreviewImage",
+      "pos": {
+        "0": 1236,
+        "1": 192
+      },
+      "size": {
+        "0": 528,
+        "1": 876
+      },
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 78,
+          "label": "图像"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": [],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 34,
+      "type": "DepthAnythingV2Preprocessor",
+      "pos": {
+        "0": 1800,
+        "1": 216
+      },
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 91,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            36
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DepthAnythingV2Preprocessor"
+      },
+      "widgets_values": [
+        "depth_anything_v2_vitl.pth",
+        1024
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 10,
+      "type": "Molmo7BDbnb",
+      "pos": {
+        "0": 648,
+        "1": 192
+      },
+      "size": {
+        "0": 552,
+        "1": 312
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 51,
+          "label": "image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            90
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Molmo7BDbnb"
+      },
+      "widgets_values": [
+        "Detailed Analysis",
+        "",
+        2612399490,
+        "fixed",
+        350,
+        0.6,
+        40,
+        0.9,
+        true
+      ]
+    },
+    {
+      "id": 74,
+      "type": "Note",
+      "pos": {
+        "0": 1788,
+        "1": 60
+      },
+      "size": [
+        252,
+        60
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "Union CN显存消耗比较大，看设备情况开启"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 75,
+      "type": "Note",
+      "pos": {
+        "0": 12,
+        "1": -156
+      },
+      "size": [
+        804,
+        132
+      ],
+      "flags": {
+        "pinned": true
+      },
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "说明文档\nhttps://xiaobot.net/post/7acb0de5-1c96-4075-9949-35b92695c710\n由于AI技术更新迭代，请以文档更新为准\n更多内容收录在⬇️\nhttps://xiaobot.net/p/GoToComfyUI\n网盘\nhttps://pan.quark.cn/s/882aea39f59c\nComfyUI-Molmo 节点\nhttps://github.com/CY-CHENYUE/ComfyUI-Molmo"
+      ],
+      "color": "#222",
+      "bgcolor": "#000",
+      "category": "Official"
+    },
+    {
+      "id": 25,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": 2148,
+        "1": 648
+      },
+      "size": [
+        312,
+        96
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 29,
+          "label": "CLIP"
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 92,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            24,
+            26,
+            40
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "Agentic AI: A new technique, also referred to as Autonomous AI, agents aim to be more autonomous than traditional AI. Models can make decisions with less supervision, learn from interactions and take proactive steps.",
+        true
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 21,
+      "type": "ConditioningZeroOut",
+      "pos": {
+        "0": 2148,
+        "1": 792
+      },
+      "size": {
+        "0": 317.4000244140625,
+        "1": 26
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 26,
+          "label": "条件"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            41
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ConditioningZeroOut"
+      },
+      "widgets_values": [],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 24,
+      "type": "FluxGuidance",
+      "pos": {
+        "0": 2148,
+        "1": 876
+      },
+      "size": {
+        "0": 317.4000244140625,
+        "1": 58
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 24,
+          "label": "条件"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FluxGuidance"
+      },
+      "widgets_values": [
+        2.5
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 22,
+      "type": "EmptyLatentImage",
+      "pos": {
+        "0": 2148,
+        "1": 996
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            20
+          ],
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        768,
+        1280,
+        1
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 42,
+      "type": "LoadImage",
+      "pos": {
+        "0": 144,
+        "1": 192
+      },
+      "size": {
+        "0": 480,
+        "1": 888
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            51,
+            91
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "10.jpg",
+        "image"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 77,
+      "type": "Fast Groups Bypasser (rgthree)",
+      "pos": {
+        "0": 888,
+        "1": -216
+      },
+      "size": [
+        372,
+        84
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": null,
+          "label": "可选连接"
+        }
+      ],
+      "properties": {
+        "matchColors": "",
+        "matchTitle": "",
+        "showNav": true,
+        "sort": "position",
+        "customSortAlphabet": "",
+        "toggleRestriction": "default"
+      }
+    },
+    {
+      "id": 73,
+      "type": "ShowText|pysssss",
+      "pos": {
+        "0": 660,
+        "1": 576
+      },
+      "size": [
+        540,
+        516
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 90,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            92
+          ],
+          "shape": 6,
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        " This image is a color photograph in portrait orientation, capturing a lively scene in a coffee shop. The style is photographic representationalism, focusing on realism.\n\nThe theme is centered around coffee culture and social interaction. The scene depicts three people sitting around a square wooden table, all smiling and laughing, with a coffee cup in front of the central woman. This suggests a friendly gathering or casual meeting.\n\nThe composition is centered around the table and the three individuals, creating a focal point in the image. The background reveals coffee-making equipment, including a machine with a glass front and a shelf above it holding bags of coffee beans and white cups.\n\nLighting plays a crucial role in the image, with a warm yellow light bulb hanging from the ceiling in the top left corner, casting a cozy ambiance over the scene. This lighting adds to the inviting atmosphere of the coffee shop.\n\nAdditional notable information includes:\n1. The woman in the center is wearing a gray sweater and holding a black coffee cup.\n2. The man on the left is wearing a blue shirt with rolled-up sleeves and has a beard.\n3. The man on the right is also in a blue shirt, has a beard, and is looking at the woman.\n4. A woman's hand is visible on the left side of the image, though she is not fully in frame.\n\nThe image captures a moment of joy and connection in a modern coffee shop setting, emphasizing the importance of human interaction in today's society."
+      ],
+      "category": "Custom Nodes"
+    }
+  ],
+  "links": [
+    [
+      17,
+      15,
+      0,
+      17,
+      0,
+      "MODEL"
+    ],
+    [
+      19,
+      17,
+      0,
+      20,
+      0,
+      "MODEL"
+    ],
+    [
+      20,
+      22,
+      0,
+      20,
+      3,
+      "LATENT"
+    ],
+    [
+      22,
+      20,
+      0,
+      23,
+      0,
+      "LATENT"
+    ],
+    [
+      23,
+      18,
+      0,
+      23,
+      1,
+      "VAE"
+    ],
+    [
+      24,
+      25,
+      0,
+      24,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      26,
+      25,
+      0,
+      21,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      29,
+      16,
+      0,
+      25,
+      0,
+      "CLIP"
+    ],
+    [
+      33,
+      32,
+      0,
+      31,
+      2,
+      "CONTROL_NET"
+    ],
+    [
+      34,
+      33,
+      0,
+      32,
+      0,
+      "CONTROL_NET"
+    ],
+    [
+      36,
+      34,
+      0,
+      31,
+      3,
+      "IMAGE"
+    ],
+    [
+      38,
+      31,
+      0,
+      20,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      39,
+      31,
+      1,
+      20,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      40,
+      25,
+      0,
+      31,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      41,
+      21,
+      0,
+      31,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      42,
+      18,
+      0,
+      31,
+      4,
+      "VAE"
+    ],
+    [
+      51,
+      42,
+      0,
+      10,
+      0,
+      "IMAGE"
+    ],
+    [
+      78,
+      23,
+      0,
+      61,
+      0,
+      "IMAGE"
+    ],
+    [
+      90,
+      10,
+      0,
+      73,
+      0,
+      "STRING"
+    ],
+    [
+      91,
+      42,
+      0,
+      34,
+      0,
+      "IMAGE"
+    ],
+    [
+      92,
+      73,
+      0,
+      25,
+      1,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "Union CN",
+      "bounding": [
+        1788,
+        132,
+        1007,
+        270
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "title": "MOLMO图像到文本提示词反推-CY-V1",
+      "bounding": [
+        0,
+        -264,
+        828,
+        252
+      ],
+      "color": "#444",
+      "font_size": 48,
+      "flags": {
+        "pinned": true
+      }
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6934334949441732,
+      "offset": [
+        662.3566030710232,
+        348.5306521145223
+      ]
+    },
+    "workspace_info": {
+      "id": "j8h6EcQgSfeDbh2o4ikh6",
+      "saveLock": false,
+      "cloudID": null,
+      "coverMediaPath": null
+    }
+  },
+  "version": 0.4
+}

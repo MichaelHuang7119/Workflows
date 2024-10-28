@@ -1,0 +1,478 @@
+{
+  "last_node_id": 76,
+  "last_link_id": 109,
+  "nodes": [
+    {
+      "id": 65,
+      "type": "Note",
+      "pos": [
+        940,
+        -170
+      ],
+      "size": {
+        "0": 305.6477966308594,
+        "1": 82.26087951660156
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "1、路径，设置一个图片保存的路径，这里会对图片重命名，为了让图片和tag文件名相同，请不要把图片和tag输出同一个文件夹。"
+      ],
+      "color": "#323",
+      "bgcolor": "#535",
+      "category": "Official"
+    },
+    {
+      "id": 63,
+      "type": "Note",
+      "pos": [
+        -50,
+        -170
+      ],
+      "size": {
+        "0": 314.68511962890625,
+        "1": 109.29734802246094
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "1、文件夹选择对应文件夹\n2、起始索引默认0，这个是从第几张训练集开始，如果想从第10张开始，那就填写9.\n3、加载图片的数量\n4、路径填入你训练集所在目录。"
+      ],
+      "color": "#322",
+      "bgcolor": "#533",
+      "category": "Official"
+    },
+    {
+      "id": 62,
+      "type": "Note",
+      "pos": [
+        308,
+        -172
+      ],
+      "size": {
+        "0": 235.51608276367188,
+        "1": 75.10962677001953
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "1、这个工作流打标的模型使用的是WD14反推提示词，你也可以换成chatgpt节点来打标。"
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Official"
+    },
+    {
+      "id": 67,
+      "type": "CR Load Image List",
+      "pos": [
+        -50,
+        20
+      ],
+      "size": {
+        "0": 315,
+        "1": 150
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            102,
+            104
+          ],
+          "shape": 6,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Load Image List"
+      },
+      "widgets_values": [
+        "FT",
+        0,
+        8,
+        "input/FT"
+      ],
+      "color": "#322",
+      "bgcolor": "#533",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 57,
+      "type": "Image Save",
+      "pos": [
+        1300,
+        20
+      ],
+      "size": {
+        "0": 310,
+        "1": 650
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 105
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "files",
+          "type": "STRING",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Image Save"
+      },
+      "widgets_values": [
+        "TP",
+        "ComfyUI",
+        "_",
+        3,
+        "false",
+        "png",
+        300,
+        100,
+        "true",
+        "false",
+        "false",
+        "false",
+        "true",
+        "true",
+        "true"
+      ],
+      "color": "#323",
+      "bgcolor": "#535",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 61,
+      "type": "WD14Tagger|pysssss",
+      "pos": [
+        310,
+        10
+      ],
+      "size": {
+        "0": 241.07371520996094,
+        "1": 570
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 102,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            109
+          ],
+          "shape": 6,
+          "label": "字符串",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "WD14Tagger|pysssss"
+      },
+      "widgets_values": [
+        "wd-v1-4-moat-tagger-v2",
+        0.35,
+        0.85,
+        false,
+        false,
+        "",
+        "food, no_humans, shadow, candy, realistic, food_focus, still_life",
+        "food, no_humans, traditional_media, candy, painting_\\(medium\\), colorful, abstract, still_life, acrylic_paint_\\(medium\\)",
+        "food, no_humans, candy, chocolate, food_focus, too_many, still_life, sweets",
+        "simple_background, white_background, bow, food, no_humans, candy, lollipop, doughnut, colorful, food_focus, sweets, swirl_lollipop",
+        "simple_background, white_background, food, no_humans, candy, lollipop, food_focus, swirl_lollipop",
+        "food, no_humans, fruit, candy, cake, lollipop, strawberry, food_focus, candy_cane, sweets, swirl_lollipop",
+        "simple_background, food, no_humans, blue_background, candy, lollipop, food_focus, candy_wrapper",
+        "simple_background, food, no_humans, candy, purple_background, outline, lollipop, food_focus, swirl_lollipop"
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 68,
+      "type": "ImageScale",
+      "pos": [
+        950,
+        10
+      ],
+      "size": {
+        "0": 315,
+        "1": 130
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 104,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            105
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageScale"
+      },
+      "widgets_values": [
+        "nearest-exact",
+        1024,
+        1024,
+        "disabled"
+      ],
+      "color": "#323",
+      "bgcolor": "#535",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 64,
+      "type": "Note",
+      "pos": [
+        590,
+        -170
+      ],
+      "size": [
+        311.959787091179,
+        107.62245716898241
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "1、路径，请设置一个文本保存的路径，最好是在comfyui文件夹内的新建一个。\na：设置开头提示词，可加触发词\nc：设置结尾提示词"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 56,
+      "type": "Save Text File",
+      "pos": [
+        580,
+        210
+      ],
+      "size": {
+        "0": 320,
+        "1": 178
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 108,
+          "widget": {
+            "name": "text"
+          },
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Save Text File"
+      },
+      "widgets_values": [
+        "",
+        "output/WB",
+        "ComfyUI",
+        "_",
+        3,
+        ".txt",
+        "utf-8"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 76,
+      "type": "Evaluate Strings",
+      "pos": [
+        580,
+        0
+      ],
+      "size": [
+        315,
+        154
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "b",
+          "type": "STRING",
+          "link": 109,
+          "widget": {
+            "name": "b"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            108
+          ],
+          "shape": 3,
+          "label": "字符串",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Evaluate Strings"
+      },
+      "widgets_values": [
+        "a + b + c",
+        "False",
+        "Candy Illus\\(style\\),",
+        " World",
+        ""
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "shape": 1,
+      "category": "Custom Nodes"
+    }
+  ],
+  "links": [
+    [
+      102,
+      67,
+      0,
+      61,
+      0,
+      "IMAGE"
+    ],
+    [
+      104,
+      67,
+      0,
+      68,
+      0,
+      "IMAGE"
+    ],
+    [
+      105,
+      68,
+      0,
+      57,
+      0,
+      "IMAGE"
+    ],
+    [
+      108,
+      76,
+      0,
+      56,
+      0,
+      "STRING"
+    ],
+    [
+      109,
+      61,
+      0,
+      76,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "反推打标工作流",
+      "bounding": [
+        -83,
+        -261,
+        1734,
+        975
+      ],
+      "color": "#3f789e",
+      "font_size": 24
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7247295000000012,
+      "offset": [
+        238.0722438251814,
+        300.87708817862676
+      ]
+    },
+    "workspace_info": {
+      "id": "6YAzdWblfEHclCtRPXdv8"
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

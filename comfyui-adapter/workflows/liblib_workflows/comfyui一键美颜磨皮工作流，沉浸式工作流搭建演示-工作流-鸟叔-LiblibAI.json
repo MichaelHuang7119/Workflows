@@ -1,0 +1,1411 @@
+{
+  "last_node_id": 661,
+  "last_link_id": 1156,
+  "nodes": [
+    {
+      "id": 635,
+      "type": "SmoothMask",
+      "pos": [
+        880,
+        130
+      ],
+      "size": [
+        210,
+        60
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 1123,
+          "label": "遮罩"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            1124
+          ],
+          "shape": 3,
+          "label": "遮罩",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SmoothMask"
+      },
+      "widgets_values": [
+        1
+      ]
+    },
+    {
+      "id": 645,
+      "type": "Zoe-DepthMapPreprocessor",
+      "pos": [
+        1790,
+        680
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1131,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1130
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Zoe-DepthMapPreprocessor"
+      },
+      "widgets_values": [
+        512
+      ]
+    },
+    {
+      "id": 642,
+      "type": "ACN_AdvancedControlNetApply",
+      "pos": [
+        2190,
+        550
+      ],
+      "size": {
+        "0": 355.20001220703125,
+        "1": 286
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 1140,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 1141,
+          "label": "负面条件"
+        },
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 1129,
+          "label": "ControlNet"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1130,
+          "label": "图像"
+        },
+        {
+          "name": "mask_optional",
+          "type": "MASK",
+          "link": null,
+          "label": "遮罩"
+        },
+        {
+          "name": "timestep_kf",
+          "type": "TIMESTEP_KEYFRAME",
+          "link": null,
+          "label": "帧间隔"
+        },
+        {
+          "name": "latent_kf_override",
+          "type": "LATENT_KEYFRAME",
+          "link": null,
+          "label": "覆盖Latent关键帧"
+        },
+        {
+          "name": "weights_override",
+          "type": "CONTROL_NET_WEIGHTS",
+          "link": null,
+          "label": "覆盖ControlNet权重"
+        },
+        {
+          "name": "model_optional",
+          "type": "MODEL",
+          "link": 1142,
+          "label": "模型(可选)"
+        },
+        {
+          "name": "vae_optional",
+          "type": "VAE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            1144
+          ],
+          "shape": 3,
+          "label": "正面条件",
+          "slot_index": 0
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            1145
+          ],
+          "shape": 3,
+          "label": "负面条件",
+          "slot_index": 1
+        },
+        {
+          "name": "model_opt",
+          "type": "MODEL",
+          "links": [
+            1143
+          ],
+          "shape": 3,
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ACN_AdvancedControlNetApply"
+      },
+      "widgets_values": [
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 647,
+      "type": "VAEEncode",
+      "pos": [
+        1800,
+        800
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 1148,
+          "label": "图像"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 1149,
+          "label": "VAE",
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            1150
+          ],
+          "shape": 3,
+          "label": "Latent",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      }
+    },
+    {
+      "id": 648,
+      "type": "SetLatentNoiseMask",
+      "pos": [
+        2070,
+        880
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 1150,
+          "label": "Latent"
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 1152,
+          "label": "遮罩"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            1151
+          ],
+          "shape": 3,
+          "label": "Latent",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SetLatentNoiseMask"
+      }
+    },
+    {
+      "id": 646,
+      "type": "easy fullkSampler",
+      "pos": [
+        2610,
+        130
+      ],
+      "size": [
+        320,
+        390
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pipe",
+          "type": "PIPE_LINE",
+          "link": 1138,
+          "label": "节点束"
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 1143,
+          "label": "模型（可选）"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 1144,
+          "label": "正面条件（可选）"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 1145,
+          "label": "负面条件（可选）"
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "link": 1151,
+          "label": "Latent（可选）",
+          "slot_index": 4
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 1146
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 1133
+        },
+        {
+          "name": "xyPlot",
+          "type": "XYPLOT",
+          "link": null
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "pipe",
+          "type": "PIPE_LINE",
+          "links": null,
+          "shape": 3,
+          "label": "节点束"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            1153
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 1
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": null,
+          "shape": 3,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "links": null,
+          "shape": 3,
+          "label": "随机种"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy fullkSampler"
+      },
+      "widgets_values": [
+        35,
+        4,
+        "dpmpp_2m_sde",
+        "karras",
+        0.42,
+        "Hide",
+        0,
+        "ComfyUI",
+        633375008142519,
+        "randomize"
+      ]
+    },
+    {
+      "id": 649,
+      "type": "CR Simple Image Compare",
+      "pos": [
+        2960,
+        130
+      ],
+      "size": {
+        "0": 400,
+        "1": 265.9999694824219
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image1",
+          "type": "IMAGE",
+          "link": 1154,
+          "label": "图像1"
+        },
+        {
+          "name": "image2",
+          "type": "IMAGE",
+          "link": 1153,
+          "label": "图像2"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            1155
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "显示帮助"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Simple Image Compare"
+      },
+      "widgets_values": [
+        "Before",
+        "After",
+        100,
+        "AlumniSansCollegiateOne-Regular.ttf",
+        50,
+        "normal",
+        20
+      ]
+    },
+    {
+      "id": 650,
+      "type": "SaveImage",
+      "pos": [
+        2590,
+        570
+      ],
+      "size": [
+        800,
+        670
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 1155,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ]
+    },
+    {
+      "id": 644,
+      "type": "CannyEdgePreprocessor",
+      "pos": [
+        1800,
+        250
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1132,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1128
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CannyEdgePreprocessor"
+      },
+      "widgets_values": [
+        100,
+        200,
+        512
+      ]
+    },
+    {
+      "id": 640,
+      "type": "ACN_AdvancedControlNetApply",
+      "pos": [
+        2190,
+        160
+      ],
+      "size": {
+        "0": 355.20001220703125,
+        "1": 286
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 1134,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 1135,
+          "label": "负面条件"
+        },
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 1127,
+          "label": "ControlNet"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1128,
+          "label": "图像"
+        },
+        {
+          "name": "mask_optional",
+          "type": "MASK",
+          "link": null,
+          "label": "遮罩"
+        },
+        {
+          "name": "timestep_kf",
+          "type": "TIMESTEP_KEYFRAME",
+          "link": null,
+          "label": "帧间隔"
+        },
+        {
+          "name": "latent_kf_override",
+          "type": "LATENT_KEYFRAME",
+          "link": null,
+          "label": "覆盖Latent关键帧"
+        },
+        {
+          "name": "weights_override",
+          "type": "CONTROL_NET_WEIGHTS",
+          "link": null,
+          "label": "覆盖ControlNet权重"
+        },
+        {
+          "name": "model_optional",
+          "type": "MODEL",
+          "link": 1139,
+          "label": "模型(可选)"
+        },
+        {
+          "name": "vae_optional",
+          "type": "VAE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            1140
+          ],
+          "shape": 3,
+          "label": "正面条件",
+          "slot_index": 0
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            1141
+          ],
+          "shape": 3,
+          "label": "负面条件",
+          "slot_index": 1
+        },
+        {
+          "name": "model_opt",
+          "type": "MODEL",
+          "links": [
+            1142
+          ],
+          "shape": 3,
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ACN_AdvancedControlNetApply"
+      },
+      "widgets_values": [
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "id": 641,
+      "type": "ControlNetLoaderAdvanced",
+      "pos": [
+        1790,
+        120
+      ],
+      "size": {
+        "0": 367.79998779296875,
+        "1": 58
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "timestep_keyframe",
+          "type": "TIMESTEP_KEYFRAME",
+          "link": null,
+          "label": "帧间隔"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "links": [
+            1127
+          ],
+          "shape": 3,
+          "label": "ControlNet",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetLoaderAdvanced"
+      },
+      "widgets_values": [
+        "control_v11p_sd15_canny.pth"
+      ]
+    },
+    {
+      "id": 643,
+      "type": "ControlNetLoaderAdvanced",
+      "pos": [
+        1760,
+        550
+      ],
+      "size": {
+        "0": 367.79998779296875,
+        "1": 58
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "timestep_keyframe",
+          "type": "TIMESTEP_KEYFRAME",
+          "link": null,
+          "label": "帧间隔"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "links": [
+            1129
+          ],
+          "shape": 3,
+          "label": "ControlNet",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetLoaderAdvanced"
+      },
+      "widgets_values": [
+        "control_v11f1p_sd15_depth.pth"
+      ]
+    },
+    {
+      "id": 638,
+      "type": "PreviewImage",
+      "pos": [
+        540,
+        350
+      ],
+      "size": [
+        390,
+        410
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 1126,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 632,
+      "type": "LoadImage",
+      "pos": [
+        100,
+        120
+      ],
+      "size": [
+        410,
+        650
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1122,
+            1131,
+            1132,
+            1148,
+            1154
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "pasted/image (274).png",
+        "image"
+      ]
+    },
+    {
+      "id": 637,
+      "type": "MaskToImage",
+      "pos": [
+        1060,
+        290
+      ],
+      "size": {
+        "0": 210,
+        "1": 26
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 1125,
+          "label": "遮罩"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1126
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MaskToImage"
+      }
+    },
+    {
+      "id": 636,
+      "type": "Mask Gaussian Region",
+      "pos": [
+        1100,
+        120
+      ],
+      "size": [
+        210,
+        60
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "masks",
+          "type": "MASK",
+          "link": 1124,
+          "label": "遮罩"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MASKS",
+          "type": "MASK",
+          "links": [
+            1125,
+            1152
+          ],
+          "shape": 3,
+          "label": "遮罩",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Mask Gaussian Region"
+      },
+      "widgets_values": [
+        5
+      ]
+    },
+    {
+      "id": 634,
+      "type": "ColorToMask",
+      "pos": [
+        540,
+        130
+      ],
+      "size": {
+        "0": 315,
+        "1": 178
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 1122,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            1123
+          ],
+          "shape": 3,
+          "label": "遮罩",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ColorToMask"
+      },
+      "widgets_values": [
+        false,
+        233,
+        173,
+        140,
+        130,
+        16
+      ]
+    },
+    {
+      "id": 651,
+      "type": "Note",
+      "pos": [
+        540,
+        -80
+      ],
+      "size": [
+        380,
+        180
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "上面的红色绿色蓝色所代表的RGB颜色的数值。填入你所选图片的肤色RGB数值即可。\n\n阈值控制范围，看遮罩预览图调整即可\n\n下面的平滑参数和高斯模糊参数看着效果调整\n\n交流可以加V：Call_me_wenxi"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 639,
+      "type": "easy fullLoader",
+      "pos": [
+        1350,
+        110
+      ],
+      "size": [
+        390,
+        930
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model_override",
+          "type": "MODEL",
+          "link": null,
+          "label": "模型（可选）"
+        },
+        {
+          "name": "clip_override",
+          "type": "CLIP",
+          "link": null,
+          "label": "CLIP（可选）"
+        },
+        {
+          "name": "vae_override",
+          "type": "VAE",
+          "link": null,
+          "label": "VAE（可选）"
+        },
+        {
+          "name": "optional_lora_stack",
+          "type": "LORA_STACK",
+          "link": null,
+          "label": "LoRA堆（可选）"
+        },
+        {
+          "name": "optional_controlnet_stack",
+          "type": "CONTROL_NET_STACK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "pipe",
+          "type": "PIPE_LINE",
+          "links": [
+            1138
+          ],
+          "shape": 3,
+          "label": "节点束",
+          "slot_index": 0
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            1139
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 1
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "links": [
+            1146,
+            1149
+          ],
+          "shape": 3,
+          "slot_index": 2
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "links": [
+            1133
+          ],
+          "shape": 3,
+          "slot_index": 3
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            1134
+          ],
+          "shape": 3,
+          "slot_index": 4
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            1135
+          ],
+          "shape": 3,
+          "slot_index": 5
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy fullLoader"
+      },
+      "widgets_values": [
+        "majicMIX\\majicmixRealistic_v7.safetensors",
+        "Default",
+        "Baked VAE",
+        -1,
+        "None",
+        1,
+        1,
+        "width x height (custom)",
+        512,
+        512,
+        "(high quality), (masterpiece), (detailed), 8K, close-up portrait，1girl:1.3，realistic skin:1.2，natural beauty:1.2",
+        "none",
+        "comfy",
+        "lowres,worst quality,low quality,monochrome,old photo,lackluster,oversaturated,grayscale,blurry,color\ncast,faded,drawing,paiting,crayon,disfigured,sketch,impressionist,text,signature,watermark,username,deformed,ugly,nsfw,",
+        "none",
+        "comfy",
+        1,
+        false
+      ]
+    }
+  ],
+  "links": [
+    [
+      1122,
+      632,
+      0,
+      634,
+      0,
+      "IMAGE"
+    ],
+    [
+      1123,
+      634,
+      0,
+      635,
+      0,
+      "MASK"
+    ],
+    [
+      1124,
+      635,
+      0,
+      636,
+      0,
+      "MASK"
+    ],
+    [
+      1125,
+      636,
+      0,
+      637,
+      0,
+      "MASK"
+    ],
+    [
+      1126,
+      637,
+      0,
+      638,
+      0,
+      "IMAGE"
+    ],
+    [
+      1127,
+      641,
+      0,
+      640,
+      2,
+      "CONTROL_NET"
+    ],
+    [
+      1128,
+      644,
+      0,
+      640,
+      3,
+      "IMAGE"
+    ],
+    [
+      1129,
+      643,
+      0,
+      642,
+      2,
+      "CONTROL_NET"
+    ],
+    [
+      1130,
+      645,
+      0,
+      642,
+      3,
+      "IMAGE"
+    ],
+    [
+      1131,
+      632,
+      0,
+      645,
+      0,
+      "IMAGE"
+    ],
+    [
+      1132,
+      632,
+      0,
+      644,
+      0,
+      "IMAGE"
+    ],
+    [
+      1133,
+      639,
+      3,
+      646,
+      6,
+      "CLIP"
+    ],
+    [
+      1134,
+      639,
+      4,
+      640,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      1135,
+      639,
+      5,
+      640,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      1138,
+      639,
+      0,
+      646,
+      0,
+      "PIPE_LINE"
+    ],
+    [
+      1139,
+      639,
+      1,
+      640,
+      8,
+      "MODEL"
+    ],
+    [
+      1140,
+      640,
+      0,
+      642,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      1141,
+      640,
+      1,
+      642,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      1142,
+      640,
+      2,
+      642,
+      8,
+      "MODEL"
+    ],
+    [
+      1143,
+      642,
+      2,
+      646,
+      1,
+      "MODEL"
+    ],
+    [
+      1144,
+      642,
+      0,
+      646,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      1145,
+      642,
+      1,
+      646,
+      3,
+      "CONDITIONING"
+    ],
+    [
+      1146,
+      639,
+      2,
+      646,
+      5,
+      "VAE"
+    ],
+    [
+      1148,
+      632,
+      0,
+      647,
+      0,
+      "IMAGE"
+    ],
+    [
+      1149,
+      639,
+      2,
+      647,
+      1,
+      "VAE"
+    ],
+    [
+      1150,
+      647,
+      0,
+      648,
+      0,
+      "LATENT"
+    ],
+    [
+      1151,
+      648,
+      0,
+      646,
+      4,
+      "LATENT"
+    ],
+    [
+      1152,
+      636,
+      0,
+      648,
+      1,
+      "MASK"
+    ],
+    [
+      1153,
+      646,
+      1,
+      649,
+      1,
+      "IMAGE"
+    ],
+    [
+      1154,
+      632,
+      0,
+      649,
+      0,
+      "IMAGE"
+    ],
+    [
+      1155,
+      649,
+      0,
+      650,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "Group",
+      "bounding": [
+        1330,
+        -110,
+        2090,
+        1390
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "Group",
+      "bounding": [
+        110,
+        -120,
+        1190,
+        1400
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.15981738189075845,
+      "offset": [
+        2826.214827809211,
+        2474.454631079926
+      ]
+    }
+  },
+  "version": 0.4
+}

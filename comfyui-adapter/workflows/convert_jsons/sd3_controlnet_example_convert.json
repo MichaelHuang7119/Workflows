@@ -1,0 +1,525 @@
+{
+  "3": {
+    "inputs": {
+      "unet": {
+        "node_": "4",
+        "name_": "unet"
+      },
+      "scheduler": {
+        "node_": "54",
+        "name_": "scheduler"
+      },
+      "timesteps": {
+        "node_": "54",
+        "name_": "timesteps"
+      },
+      "latents_in": {
+        "node_": "55",
+        "name_": "latents"
+      },
+      "positive": {
+        "node_": "66",
+        "name_": "forward"
+      },
+      "middle": null,
+      "negative": {
+        "node_": "77",
+        "name_": "forward"
+      },
+      "generators": {
+        "node_": "52",
+        "name_": "generators"
+      },
+      "cfg_scale": 4.5,
+      "cfg2_scale": 1.0,
+      "return_with_leftover_noise": "disable",
+      "batch_size": 1,
+      "model_type": "sd3"
+    },
+    "node_type": "SampleLoop"
+  },
+  "4": {
+    "inputs": {
+      "path": "/data/yjw/ComfyUI/models/checkpoints/sd3_medium_incl_clips_t5xxlfp8.safetensors",
+      "cls": "StableDiffusion3Pipeline",
+      "kwargs": {
+        "config": "/data/yjw/ComfyUI/models/configs/stable-diffusion-3-medium-diffusers"
+      }
+    },
+    "node_type": "PipeFromSingleFile"
+  },
+  "6": {
+    "inputs": {
+      "text_encoder": {
+        "node_": "4",
+        "name_": "text_encoder"
+      },
+      "text_encoder2": {
+        "node_": "4",
+        "name_": "text_encoder2"
+      },
+      "text_encoder3": {
+        "node_": "4",
+        "name_": "text_encoder3"
+      },
+      "tokenizer": {
+        "node_": "4",
+        "name_": "tokenizer"
+      },
+      "tokenizer2": {
+        "node_": "4",
+        "name_": "tokenizer2"
+      },
+      "tokenizer3": {
+        "node_": "4",
+        "name_": "tokenizer3"
+      },
+      "prompt": "happy cute anime fox girl with massive fluffy fennec ears and blonde fluffy hair long hair blue eyes wearing a red scarf a pink sweater and blue jeans\n\nstanding in a beautiful forest with mountains\n\n",
+      "model_type": "sd3",
+      "clip_skip": 0
+    },
+    "node_type": "EncodeText"
+  },
+  "8": {
+    "inputs": {
+      "latents": {
+        "node_": "3",
+        "name_": "latents"
+      },
+      "vae": {
+        "node_": "4",
+        "name_": "vae"
+      }
+    },
+    "node_type": "VaeDecode"
+  },
+  "9": {
+    "inputs": {
+      "key": "9",
+      "value": {
+        "node_": "78",
+        "name_": "images"
+      }
+    },
+    "node_type": "TaskOutput"
+  },
+  "33": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1,
+      "channel_size": 16,
+      "init_value": 0.0609
+    },
+    "node_type": "MakeTensors"
+  },
+  "45": {
+    "inputs": {
+      "image_path": "/data/yjw/ComfyUI/input/input_scribble_example.png"
+    },
+    "node_type": "LoadImage"
+  },
+  "46": {
+    "inputs": {
+      "cls": "SD3ControlNetModel",
+      "path": "/data/yjw/ComfyUI/models/configs/SD3-Controlnet-Canny",
+      "kwargs": {}
+    },
+    "node_type": "ModelFromPretrained"
+  },
+  "47": {
+    "inputs": {
+      "image_in": {
+        "node_": "48",
+        "name_": "tensor"
+      },
+      "low_threshold": 0.4,
+      "high_threshold": 0.8
+    },
+    "node_type": "Canny"
+  },
+  "48": {
+    "inputs": {
+      "method": "bilinear",
+      "width": 1024,
+      "height": 1024,
+      "tensor_in": {
+        "node_": "51",
+        "name_": "tensor"
+      }
+    },
+    "node_type": "ResizeTensors"
+  },
+  "49": {
+    "inputs": {
+      "key": "49",
+      "value": {
+        "node_": "79",
+        "name_": "images"
+      }
+    },
+    "node_type": "TaskOutput"
+  },
+  "51": {
+    "inputs": {
+      "tensor_in": {
+        "node_": "45",
+        "name_": "image"
+      },
+      "x1": 0,
+      "y1": 0,
+      "x2": 512,
+      "y2": 512
+    },
+    "node_type": "Crop"
+  },
+  "52": {
+    "inputs": {
+      "seeds": 535024431016476
+    },
+    "node_type": "MakeGenerators"
+  },
+  "53": {
+    "inputs": {
+      "cls": "FlowMatchEulerDiscreteScheduler",
+      "init_kwargs": {
+        "num_train_timesteps": 1000,
+        "shift": 1.0
+      }
+    },
+    "node_type": "MakeScheduler"
+  },
+  "54": {
+    "inputs": {
+      "scheduler_in": {
+        "node_": "53",
+        "name_": "scheduler"
+      },
+      "scheduler_step": 32,
+      "start_step": 0,
+      "end_step": 31
+    },
+    "node_type": "SetTimesteps"
+  },
+  "55": {
+    "inputs": {
+      "scheduler": {
+        "node_": "54",
+        "name_": "scheduler"
+      },
+      "latents_in": {
+        "node_": "33",
+        "name_": "tensor"
+      },
+      "generators": {
+        "node_": "52",
+        "name_": "generators"
+      },
+      "timesteps": {
+        "node_": "54",
+        "name_": "timesteps"
+      }
+    },
+    "node_type": "AddNoise"
+  },
+  "56": {
+    "inputs": {
+      "method": "nearest-exact",
+      "width": 1024,
+      "height": 1024,
+      "tensor_in": {
+        "node_": "47",
+        "name_": "image"
+      }
+    },
+    "node_type": "ResizeTensors"
+  },
+  "57": {
+    "inputs": {
+      "method": "nearest-exact",
+      "width": 1024,
+      "height": 1024,
+      "tensor_in": {
+        "node_": "47",
+        "name_": "image"
+      }
+    },
+    "node_type": "ResizeTensors"
+  },
+  "58": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "6",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "59": {
+    "inputs": {
+      "dict_from": {
+        "node_": "58",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "6",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "60": {
+    "inputs": {
+      "dict_from": {
+        "node_": "59",
+        "name_": "dict_to"
+      },
+      "key": "control_vae",
+      "value": {
+        "node_": "4",
+        "name_": "vae"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "61": {
+    "inputs": {
+      "dict_from": {
+        "node_": "60",
+        "name_": "dict_to"
+      },
+      "key": "controlnet",
+      "value": {
+        "node_": "46",
+        "name_": "model"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "62": {
+    "inputs": {
+      "dict_from": {
+        "node_": "61",
+        "name_": "dict_to"
+      },
+      "key": "control_image",
+      "value": {
+        "node_": "56",
+        "name_": "tensor"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "63": {
+    "inputs": {
+      "dict_from": {
+        "node_": "62",
+        "name_": "dict_to"
+      },
+      "key": "control_scale",
+      "value": 0.5700000000000001
+    },
+    "node_type": "UpdateDict"
+  },
+  "64": {
+    "inputs": {
+      "dict_from": {
+        "node_": "63",
+        "name_": "dict_to"
+      },
+      "key": "control_start_percent",
+      "value": 0
+    },
+    "node_type": "UpdateDict"
+  },
+  "65": {
+    "inputs": {
+      "dict_from": {
+        "node_": "64",
+        "name_": "dict_to"
+      },
+      "key": "control_end_percent",
+      "value": 1
+    },
+    "node_type": "UpdateDict"
+  },
+  "66": {
+    "inputs": {
+      "dict1": {
+        "node_": "65",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "67": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "6",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "68": {
+    "inputs": {
+      "dict_from": {
+        "node_": "67",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "6",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "69": {
+    "inputs": {
+      "dict_from": {
+        "node_": "68",
+        "name_": "dict_to"
+      },
+      "key": "zero",
+      "value": true
+    },
+    "node_type": "UpdateDict"
+  },
+  "70": {
+    "inputs": {
+      "dict_from": {
+        "node_": "69",
+        "name_": "dict_to"
+      },
+      "key": "control_vae",
+      "value": {
+        "node_": "4",
+        "name_": "vae"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "71": {
+    "inputs": {
+      "dict_from": {
+        "node_": "70",
+        "name_": "dict_to"
+      },
+      "key": "controlnet",
+      "value": {
+        "node_": "46",
+        "name_": "model"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "72": {
+    "inputs": {
+      "dict_from": {
+        "node_": "71",
+        "name_": "dict_to"
+      },
+      "key": "control_image",
+      "value": {
+        "node_": "57",
+        "name_": "tensor"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "73": {
+    "inputs": {
+      "dict_from": {
+        "node_": "72",
+        "name_": "dict_to"
+      },
+      "key": "control_scale",
+      "value": 0.5700000000000001
+    },
+    "node_type": "UpdateDict"
+  },
+  "74": {
+    "inputs": {
+      "dict_from": {
+        "node_": "73",
+        "name_": "dict_to"
+      },
+      "key": "control_start_percent",
+      "value": 0
+    },
+    "node_type": "UpdateDict"
+  },
+  "75": {
+    "inputs": {
+      "dict_from": {
+        "node_": "74",
+        "name_": "dict_to"
+      },
+      "key": "control_end_percent",
+      "value": 1
+    },
+    "node_type": "UpdateDict"
+  },
+  "76": {
+    "inputs": {
+      "dict_from": {
+        "node_": "75",
+        "name_": "dict_to"
+      },
+      "key": "control_apply_to_uncond",
+      "value": false
+    },
+    "node_type": "UpdateDict"
+  },
+  "77": {
+    "inputs": {
+      "dict1": {
+        "node_": "76",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "78": {
+    "inputs": {
+      "images_in": {
+        "node_": "8",
+        "name_": "images"
+      }
+    },
+    "node_type": "Tensor2Image"
+  },
+  "79": {
+    "inputs": {
+      "images_in": {
+        "node_": "47",
+        "name_": "image"
+      }
+    },
+    "node_type": "Tensor2Image"
+  }
+}

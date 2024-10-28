@@ -1,0 +1,792 @@
+{
+  "last_node_id": 56,
+  "last_link_id": 82,
+  "nodes": [
+    {
+      "id": 14,
+      "type": "VideoLinearCFGGuidance",
+      "pos": [
+        550,
+        300
+      ],
+      "size": {
+        "0": 309.3751220703125,
+        "1": 58
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 23,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            39
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VideoLinearCFGGuidance"
+      },
+      "widgets_values": [
+        1
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 3,
+      "type": "KSampler",
+      "pos": [
+        546,
+        397
+      ],
+      "size": {
+        "0": 298.5486145019531,
+        "1": 262
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 39,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 40,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 17,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 18,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            7
+          ],
+          "slot_index": 0,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        27041998,
+        "fixed",
+        25,
+        3,
+        "dpmpp_2m",
+        "karras",
+        1
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [
+        873,
+        293
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 7,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 26,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            62
+          ],
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 41,
+      "type": "ImageCASharpening+",
+      "pos": [
+        870,
+        375
+      ],
+      "size": {
+        "0": 217.61888122558594,
+        "1": 58
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 62,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            61
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageCASharpening+"
+      },
+      "widgets_values": [
+        0.25
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 53,
+      "type": "Note",
+      "pos": [
+        1301,
+        133
+      ],
+      "size": {
+        "0": 317.0176696777344,
+        "1": 114.03514099121094
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "跑出来图片没动是因为 需要加载，等待一会就好了"
+      ],
+      "_widget_cache_map": {},
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 55,
+      "type": "Note",
+      "pos": [
+        197,
+        708
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "尺寸要一致，最多1024"
+      ],
+      "_widget_cache_map": {},
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 15,
+      "type": "ImageOnlyCheckpointLoader",
+      "pos": [
+        167,
+        295
+      ],
+      "size": {
+        "0": 369.6000061035156,
+        "1": 98
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            23
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "模型"
+        },
+        {
+          "name": "CLIP_VISION",
+          "type": "CLIP_VISION",
+          "links": [
+            24
+          ],
+          "shape": 3,
+          "slot_index": 1,
+          "label": "CLIP视觉"
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            25,
+            26
+          ],
+          "shape": 3,
+          "slot_index": 2,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageOnlyCheckpointLoader"
+      },
+      "widgets_values": [
+        "svd-fp16_svd-fp16"
+      ],
+      "_widget_cache_map": {
+        "svd-fp16_svd-fp16": {
+          "name": "svd-fp16_svd-fp16",
+          "value": 1626474
+        },
+        "svd 25曾_1.0": {
+          "name": "svd 25曾_1.0",
+          "value": 720507
+        }
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 12,
+      "type": "SVD_img2vid_Conditioning",
+      "pos": [
+        175,
+        434
+      ],
+      "size": {
+        "0": 354.39697265625,
+        "1": 219.3333740234375
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip_vision",
+          "type": "CLIP_VISION",
+          "link": 24,
+          "label": "CLIP视觉"
+        },
+        {
+          "name": "init_image",
+          "type": "IMAGE",
+          "link": 41,
+          "slot_index": 1,
+          "label": "图像"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 25
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            40
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            17
+          ],
+          "shape": 3,
+          "slot_index": 1,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            18
+          ],
+          "shape": 3,
+          "slot_index": 2,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SVD_img2vid_Conditioning"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        24,
+        35,
+        6,
+        0.03
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 23,
+      "type": "LoadImage",
+      "pos": [
+        -395.91210464752754,
+        402
+      ],
+      "size": {
+        "0": 371.3804931640625,
+        "1": 624.07470703125
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            41
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "269776-5c6e52e81bc84da2b75944cc62f47bfaee06c9f92ffb896a2e44f7c0fde4e383.png",
+        "image"
+      ],
+      "_widget_cache_map": {
+        "output5.png": {
+          "value": "img/46987de339ac47e0965172f7ccd1b939/ddf34226c5936aa178d3b95002a5746aeb3c16ad908edf98a8af5b63adca4fe2.png",
+          "name": "output5.png",
+          "url": "https://liblibai-tmp-image.vibrou.com/img/46987de339ac47e0965172f7ccd1b939/ddf34226c5936aa178d3b95002a5746aeb3c16ad908edf98a8af5b63adca4fe2.png"
+        },
+        "output98.png": {
+          "value": "img/46987de339ac47e0965172f7ccd1b939/622a624c834fa736125cec2a7952dfc00259d283bdedc9b272c0eba9e74a2093.png",
+          "name": "output98.png",
+          "url": "https://liblibai-tmp-image.vibrou.com/img/46987de339ac47e0965172f7ccd1b939/622a624c834fa736125cec2a7952dfc00259d283bdedc9b272c0eba9e74a2093.png"
+        },
+        "111.jpg": {
+          "value": "img/46987de339ac47e0965172f7ccd1b939/7d688e34df37068fad0de5f924a7fbc54146f5ae00221b03e044a8cef0936cf3.jpg",
+          "name": "111.jpg",
+          "url": "https://liblibai-tmp-image.vibrou.com/img/46987de339ac47e0965172f7ccd1b939/7d688e34df37068fad0de5f924a7fbc54146f5ae00221b03e044a8cef0936cf3.jpg"
+        },
+        "382902-bf6560e7eafd334b0bcec6a4acd560d2f7ef3b4a61dc6555c7c8b9fcb0658084.png": {
+          "value": "img/46987de339ac47e0965172f7ccd1b939/bf6560e7eafd334b0bcec6a4acd560d2f7ef3b4a61dc6555c7c8b9fcb0658084.png",
+          "name": "382902-bf6560e7eafd334b0bcec6a4acd560d2f7ef3b4a61dc6555c7c8b9fcb0658084.png",
+          "url": "https://liblibai-tmp-image.vibrou.com/img/46987de339ac47e0965172f7ccd1b939/bf6560e7eafd334b0bcec6a4acd560d2f7ef3b4a61dc6555c7c8b9fcb0658084.png"
+        },
+        "269776-5c6e52e81bc84da2b75944cc62f47bfaee06c9f92ffb896a2e44f7c0fde4e383.png": {
+          "value": "img/46987de339ac47e0965172f7ccd1b939/5c6e52e81bc84da2b75944cc62f47bfaee06c9f92ffb896a2e44f7c0fde4e383.png",
+          "name": "269776-5c6e52e81bc84da2b75944cc62f47bfaee06c9f92ffb896a2e44f7c0fde4e383.png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/46987de339ac47e0965172f7ccd1b939/5c6e52e81bc84da2b75944cc62f47bfaee06c9f92ffb896a2e44f7c0fde4e383.png"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 42,
+      "type": "RIFE VFI",
+      "pos": [
+        857,
+        471
+      ],
+      "size": {
+        "0": 242.79273986816406,
+        "1": 198
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "frames",
+          "type": "IMAGE",
+          "link": 61,
+          "label": "图像"
+        },
+        {
+          "name": "optional_interpolation_states",
+          "type": "INTERPOLATION_STATES",
+          "link": null,
+          "label": "插值规则(可选)"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            81
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RIFE VFI"
+      },
+      "widgets_values": [
+        "rife49.pth",
+        24,
+        4,
+        false,
+        true,
+        1
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 54,
+      "type": "VHS_VideoCombine",
+      "pos": [
+        1690,
+        108
+      ],
+      "size": [
+        1481.9195556640625,
+        1949.9195556640625
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 82,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "audio",
+          "type": "VHS_AUDIO",
+          "link": null,
+          "label": "音频"
+        },
+        {
+          "name": "meta_batch",
+          "type": "VHS_BatchManager",
+          "link": null,
+          "label": "批次管理"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": null,
+          "shape": 3,
+          "label": "文件名"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VHS_VideoCombine"
+      },
+      "widgets_values": {
+        "frame_rate": 24,
+        "loop_count": 0,
+        "filename_prefix": ".\\SVD\\svd1-1",
+        "format": "video/ffmpeg-gif",
+        "dither": "sierra2_4a",
+        "pingpong": false,
+        "save_output": true,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "output.gif",
+            "subfolder": "SVD\\Lagerbox",
+            "type": "output",
+            "format": "image/gif",
+            "url": "https://liblibai-tmp-image.vibrou.com/sd-images/3aacc05e0fa0d70149f854b11e8fb03e964ae98bb476c62926490612f9b0f5f2.gif?Token=527e78c622e24c989af219ac4714b4b8",
+            "coverUrl": "https://liblibai-tmp-image.vibrou.com/sd-images/c7b95b9cd6dc3ea5788e405829b3a00fbc75286e030e1423f5374ccd947fcd93.jpg?Token=527e78c622e24c989af219ac4714b4b8"
+          }
+        }
+      },
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 56,
+      "type": "FILM VFI",
+      "pos": [
+        1134,
+        496
+      ],
+      "size": {
+        "0": 443.4000244140625,
+        "1": 126
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "frames",
+          "type": "IMAGE",
+          "link": 81,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "optional_interpolation_states",
+          "type": "INTERPOLATION_STATES",
+          "link": null,
+          "label": "插值规则(可选)"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            82
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FILM VFI"
+      },
+      "widgets_values": [
+        "film_net_fp32.pt",
+        10,
+        5
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    }
+  ],
+  "links": [
+    [
+      7,
+      3,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      17,
+      12,
+      1,
+      3,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      18,
+      12,
+      2,
+      3,
+      3,
+      "LATENT"
+    ],
+    [
+      23,
+      15,
+      0,
+      14,
+      0,
+      "MODEL"
+    ],
+    [
+      24,
+      15,
+      1,
+      12,
+      0,
+      "CLIP_VISION"
+    ],
+    [
+      25,
+      15,
+      2,
+      12,
+      2,
+      "VAE"
+    ],
+    [
+      26,
+      15,
+      2,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      39,
+      14,
+      0,
+      3,
+      0,
+      "MODEL"
+    ],
+    [
+      40,
+      12,
+      0,
+      3,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      41,
+      23,
+      0,
+      12,
+      1,
+      "IMAGE"
+    ],
+    [
+      61,
+      41,
+      0,
+      42,
+      0,
+      "IMAGE"
+    ],
+    [
+      62,
+      8,
+      0,
+      41,
+      0,
+      "IMAGE"
+    ],
+    [
+      81,
+      42,
+      0,
+      56,
+      0,
+      "IMAGE"
+    ],
+    [
+      82,
+      56,
+      0,
+      54,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "图片导入",
+      "bounding": [
+        -487,
+        218,
+        637,
+        798
+      ],
+      "color": "#3f789e",
+      "font_size": 100,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ],
+    "ds": {
+      "scale": 0.7972024500000076,
+      "offset": [
+        756.910722962584,
+        -222.60070619264744
+      ]
+    }
+  },
+  "version": 0.4
+}

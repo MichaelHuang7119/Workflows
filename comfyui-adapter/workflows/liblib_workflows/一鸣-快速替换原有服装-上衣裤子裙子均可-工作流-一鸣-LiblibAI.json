@@ -1,0 +1,434 @@
+{
+  "last_node_id": 17,
+  "last_link_id": 18,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "CatVTONWrapper",
+      "pos": [
+        1175,
+        269
+      ],
+      "size": {
+        "0": 249.14654541015625,
+        "1": 218
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1,
+          "slot_index": 0,
+          "label": "image"
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 16,
+          "label": "mask"
+        },
+        {
+          "name": "refer_image",
+          "type": "IMAGE",
+          "link": 7,
+          "slot_index": 2,
+          "label": "refer_image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            8
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CatVTONWrapper"
+      },
+      "widgets_values": [
+        25,
+        "bf16",
+        769363946026704,
+        "randomize",
+        50,
+        3
+      ]
+    },
+    {
+      "id": 2,
+      "type": "LoadImage",
+      "pos": [
+        426,
+        265
+      ],
+      "size": {
+        "0": 315,
+        "1": 314
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1,
+            17
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            16
+          ],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "clipspace/clipspace-mask-3198061.png [input]",
+        "image"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 7,
+      "type": "LoadImage",
+      "pos": [
+        423.8330804322959,
+        634.8506567754802
+      ],
+      "size": {
+        "0": 315,
+        "1": 314
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            7
+          ],
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "2.jpg",
+        "image"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 8,
+      "type": "PreviewImage",
+      "pos": [
+        1524,
+        265
+      ],
+      "size": {
+        "0": 507.6882629394531,
+        "1": 692.8519287109375
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 8,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 11,
+      "type": "LayerMask: MaskPreview",
+      "pos": [
+        1174,
+        603
+      ],
+      "size": {
+        "0": 251.91729736328125,
+        "1": 352.49163818359375
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 18,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LayerMask: MaskPreview"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 13,
+      "type": "Note",
+      "pos": [
+        1177,
+        203
+      ],
+      "size": {
+        "0": 420.2965087890625,
+        "1": 213.82237243652344
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 1,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "FP16\n性能：由于内存占用少，计算速度快，FP16可以显著提高图像处理的效率。\n图像质量：在大多数情况下，FP16的精度足够，但在极端情况下（如非常细腻的图像处理），可能会出现一些数值误差，导致图像质量略有下降。\n\nBF16\n性能：与FP16类似，BF16也能提高计算速度和减少内存占用。\n图像质量：由于保留了FP32的指数范围，BF16在处理非常大或非常小的数值时更稳定，能在较低内存占用下保持较高的图像质量。\n\nFP32\n性能：内存占用大，计算速度相对较慢。\n图像质量：最高的数值精度和最广的数值范围，能提供最佳的图像质量，适用于需要极高精度的图像处理任务。"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 14,
+      "type": "Note",
+      "pos": [
+        809,
+        550
+      ],
+      "size": {
+        "0": 260.1144104003906,
+        "1": 73.73361206054688
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 0,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "利用提示词自动选择物体蒙版\n例如：prompt：t-shirt（T恤）"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 15,
+      "type": "Note",
+      "pos": [
+        187,
+        319
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "人物实景图或者白底图"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 16,
+      "type": "Note",
+      "pos": [
+        179,
+        784
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "需要替换的服装"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 17,
+      "type": "LayerMask: SegmentAnythingUltra V2",
+      "pos": [
+        809,
+        611
+      ],
+      "size": {
+        "0": 315,
+        "1": 342
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 17,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": [
+            18
+          ],
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LayerMask: SegmentAnythingUltra V2"
+      },
+      "widgets_values": [
+        "sam_vit_h (2.56GB)",
+        "GroundingDINO_SwinT_OGC (694MB)",
+        0.3,
+        "VITMatte",
+        6,
+        6,
+        0.01,
+        0.99,
+        true,
+        "subject",
+        "cuda",
+        2
+      ],
+      "category": "Custom Nodes"
+    }
+  ],
+  "links": [
+    [
+      1,
+      2,
+      0,
+      1,
+      0,
+      "IMAGE"
+    ],
+    [
+      7,
+      7,
+      0,
+      1,
+      2,
+      "IMAGE"
+    ],
+    [
+      8,
+      1,
+      0,
+      8,
+      0,
+      "IMAGE"
+    ],
+    [
+      16,
+      2,
+      1,
+      1,
+      1,
+      "MASK"
+    ],
+    [
+      17,
+      2,
+      0,
+      17,
+      0,
+      "IMAGE"
+    ],
+    [
+      18,
+      17,
+      1,
+      11,
+      0,
+      "MASK"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7972024500000114,
+      "offset": [
+        117.44129151570462,
+        310.7277288510302
+      ]
+    },
+    "workspace_info": {
+      "id": "rSSKnewM0TUmzXE2lzwNh",
+      "saveLock": false,
+      "cloudID": null,
+      "coverMediaPath": null
+    }
+  },
+  "version": 0.4
+}

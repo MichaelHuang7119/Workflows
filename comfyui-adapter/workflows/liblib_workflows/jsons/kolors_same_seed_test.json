@@ -1,0 +1,1008 @@
+{
+  "last_node_id": 72,
+  "last_link_id": 119,
+  "nodes": [
+    {
+      "id": 70,
+      "type": "DownloadAndLoadKolorsModel",
+      "pos": [
+        220,
+        1785
+      ],
+      "size": {
+        "0": 395,
+        "1": 82
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "kolors_model",
+          "type": "KOLORSMODEL",
+          "links": [
+            115
+          ],
+          "shape": 3,
+          "label": "kolors_model"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DownloadAndLoadKolorsModel"
+      },
+      "widgets_values": [
+        "Kwai-Kolors/Kolors",
+        "fp16"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "KSampler",
+      "pos": [
+        745,
+        1130
+      ],
+      "size": {
+        "0": 315,
+        "1": 475
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 108,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 69,
+          "label": "正面条件",
+          "slot_index": 1
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 70,
+          "label": "负面条件",
+          "slot_index": 2
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 6,
+          "label": "Latent",
+          "slot_index": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            8
+          ],
+          "shape": 3,
+          "label": "Latent",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        66,
+        "fixed",
+        25,
+        4.97,
+        "euler",
+        "ddim_uniform",
+        1
+      ]
+    },
+    {
+      "id": 59,
+      "type": "MZ_ApplyCUDAGenerator",
+      "pos": [
+        345,
+        1400
+      ],
+      "size": {
+        "0": 365,
+        "1": 90
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 90,
+          "label": "model"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            108
+          ],
+          "shape": 3,
+          "label": "MODEL",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MZ_ApplyCUDAGenerator"
+      }
+    },
+    {
+      "id": 62,
+      "type": "KSampler",
+      "pos": [
+        735,
+        525
+      ],
+      "size": {
+        "0": 315,
+        "1": 475
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 109,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 110,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 112,
+          "label": "负面条件",
+          "slot_index": 2
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 101,
+          "label": "Latent",
+          "slot_index": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            102
+          ],
+          "shape": 3,
+          "label": "Latent",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        66,
+        "fixed",
+        25,
+        5,
+        "euler",
+        "ddim_uniform",
+        1
+      ]
+    },
+    {
+      "id": 46,
+      "type": "MZ_ChatGLM3Embeds2Conditioning",
+      "pos": [
+        325,
+        1150
+      ],
+      "size": {
+        "0": 380,
+        "1": 200
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "kolors_embeds",
+          "type": "KOLORS_EMBEDS",
+          "link": 118,
+          "label": "kolors_embeds"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            69,
+            110
+          ],
+          "shape": 3,
+          "label": "positive",
+          "slot_index": 0
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            70,
+            112
+          ],
+          "shape": 3,
+          "label": "negative"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MZ_ChatGLM3Embeds2Conditioning"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        0,
+        0,
+        1024,
+        1024
+      ]
+    },
+    {
+      "id": 9,
+      "type": "VAEDecode",
+      "pos": [
+        1095,
+        1195
+      ],
+      "size": {
+        "0": 250,
+        "1": 90
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 8,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 9,
+          "label": "VAE",
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            10
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 11,
+      "type": "PreviewImage",
+      "pos": [
+        1505,
+        1120
+      ],
+      "size": {
+        "0": 480,
+        "1": 490
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 10,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 7,
+      "type": "EmptyLatentImage",
+      "pos": [
+        205,
+        1925
+      ],
+      "size": {
+        "0": 425,
+        "1": 270
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            6,
+            101,
+            113
+          ],
+          "shape": 3,
+          "label": "Latent",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1
+      ]
+    },
+    {
+      "id": 69,
+      "type": "KolorsSampler",
+      "pos": [
+        745,
+        1785
+      ],
+      "size": {
+        "0": 315,
+        "1": 266
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "kolors_model",
+          "type": "KOLORSMODEL",
+          "link": 115,
+          "label": "kolors_model",
+          "slot_index": 0
+        },
+        {
+          "name": "kolors_embeds",
+          "type": "KOLORS_EMBEDS",
+          "link": 117,
+          "label": "kolors_embeds",
+          "slot_index": 1
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "link": 113,
+          "label": "latent",
+          "slot_index": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            116
+          ],
+          "shape": 3,
+          "label": "latent",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KolorsSampler"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        66,
+        "fixed",
+        25,
+        5,
+        "EulerDiscreteScheduler",
+        1
+      ]
+    },
+    {
+      "id": 50,
+      "type": "VAEDecode",
+      "pos": [
+        1120,
+        1790
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 116,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 77,
+          "label": "VAE",
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            78
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 51,
+      "type": "PreviewImage",
+      "pos": [
+        1505,
+        1765
+      ],
+      "size": {
+        "0": 480,
+        "1": 495
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 78,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 68,
+      "type": "MZ_ApplySDXLSamplingSettings",
+      "pos": [
+        305,
+        520
+      ],
+      "size": {
+        "0": 395,
+        "1": 60
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 106,
+          "label": "model"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            109
+          ],
+          "shape": 3,
+          "label": "MODEL",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MZ_ApplySDXLSamplingSettings"
+      }
+    },
+    {
+      "id": 66,
+      "type": "VAEDecode",
+      "pos": [
+        1070,
+        535
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 102,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 103,
+          "label": "VAE",
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            104
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 67,
+      "type": "PreviewImage",
+      "pos": [
+        1495,
+        520
+      ],
+      "size": {
+        "0": 485,
+        "1": 460
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 104,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 20,
+      "type": "MZ_KolorsUNETLoaderV2",
+      "pos": [
+        -430,
+        1050
+      ],
+      "size": {
+        "0": 400,
+        "1": 60
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            90,
+            106
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MZ_KolorsUNETLoaderV2"
+      },
+      "widgets_values": [
+        "kolors-unet.safetensors"
+      ]
+    },
+    {
+      "id": 71,
+      "type": "KolorsTextEncode",
+      "pos": [
+        -440,
+        1165
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "chatglm3_model",
+          "type": "CHATGLM3MODEL",
+          "link": 119,
+          "label": "chatglm3_model",
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "kolors_embeds",
+          "type": "KOLORS_EMBEDS",
+          "links": [
+            117,
+            118
+          ],
+          "shape": 3,
+          "label": "kolors_embeds",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KolorsTextEncode"
+      },
+      "widgets_values": [
+        "一位18岁中国女生 的 HDR 照片。高动态范围，生动，细节丰富，阴影和高光清晰，逼真，强烈，对比度增强，细节丰富",
+        "平坦、低对比度、过饱和、曝光不足、曝光过度、模糊、嘈杂",
+        1
+      ]
+    },
+    {
+      "id": 72,
+      "type": "MZ_ChatGLM3Loader",
+      "pos": [
+        -415,
+        1445
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "chatglm3_model",
+          "type": "CHATGLM3MODEL",
+          "links": [
+            119
+          ],
+          "shape": 3,
+          "label": "chatglm3_model"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MZ_ChatGLM3Loader"
+      },
+      "widgets_values": [
+        "chatglm3-8bit.safetensors"
+      ]
+    },
+    {
+      "id": 10,
+      "type": "VAELoader",
+      "pos": [
+        -460,
+        775
+      ],
+      "size": {
+        "0": 430,
+        "1": 215
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            9,
+            77,
+            103
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "sdxl.vae.safetensors"
+      ]
+    }
+  ],
+  "links": [
+    [
+      6,
+      7,
+      0,
+      5,
+      3,
+      "LATENT"
+    ],
+    [
+      8,
+      5,
+      0,
+      9,
+      0,
+      "LATENT"
+    ],
+    [
+      9,
+      10,
+      0,
+      9,
+      1,
+      "VAE"
+    ],
+    [
+      10,
+      9,
+      0,
+      11,
+      0,
+      "IMAGE"
+    ],
+    [
+      69,
+      46,
+      0,
+      5,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      70,
+      46,
+      1,
+      5,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      77,
+      10,
+      0,
+      50,
+      1,
+      "VAE"
+    ],
+    [
+      78,
+      50,
+      0,
+      51,
+      0,
+      "IMAGE"
+    ],
+    [
+      90,
+      20,
+      0,
+      59,
+      0,
+      "MODEL"
+    ],
+    [
+      101,
+      7,
+      0,
+      62,
+      3,
+      "LATENT"
+    ],
+    [
+      102,
+      62,
+      0,
+      66,
+      0,
+      "LATENT"
+    ],
+    [
+      103,
+      10,
+      0,
+      66,
+      1,
+      "VAE"
+    ],
+    [
+      104,
+      66,
+      0,
+      67,
+      0,
+      "IMAGE"
+    ],
+    [
+      106,
+      20,
+      0,
+      68,
+      0,
+      "MODEL"
+    ],
+    [
+      108,
+      59,
+      0,
+      5,
+      0,
+      "MODEL"
+    ],
+    [
+      109,
+      68,
+      0,
+      62,
+      0,
+      "MODEL"
+    ],
+    [
+      110,
+      46,
+      0,
+      62,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      112,
+      46,
+      1,
+      62,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      113,
+      7,
+      0,
+      69,
+      2,
+      "LATENT"
+    ],
+    [
+      115,
+      70,
+      0,
+      69,
+      0,
+      "KOLORSMODEL"
+    ],
+    [
+      116,
+      69,
+      0,
+      50,
+      0,
+      "LATENT"
+    ],
+    [
+      117,
+      71,
+      0,
+      69,
+      1,
+      "KOLORS_EMBEDS"
+    ],
+    [
+      118,
+      71,
+      0,
+      46,
+      0,
+      "KOLORS_EMBEDS"
+    ],
+    [
+      119,
+      72,
+      0,
+      71,
+      0,
+      "CHATGLM3MODEL"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "ComfyUI-KwaiKolorsWrapper",
+      "bounding": [
+        155,
+        1685,
+        1935,
+        650
+      ],
+      "color": "#3f789e",
+      "font_size": 24
+    },
+    {
+      "title": "MZ-V2",
+      "bounding": [
+        155,
+        1040,
+        1925,
+        580
+      ],
+      "color": "#3f789e",
+      "font_size": 24
+    },
+    {
+      "title": "MZ-SDXLSamplingSettings",
+      "bounding": [
+        150,
+        440,
+        1930,
+        570
+      ],
+      "color": "#3f789e",
+      "font_size": 24
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1,
+      "offset": [
+        596.66650390625,
+        -440
+      ]
+    },
+    "workspace_info": {
+      "id": "2zFfThTiJqdB5Zd1s42k6"
+    }
+  },
+  "version": 0.4
+}

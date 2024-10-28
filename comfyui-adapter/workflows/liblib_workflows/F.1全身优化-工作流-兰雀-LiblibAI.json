@@ -1,0 +1,617 @@
+{
+  "last_node_id": 82,
+  "last_link_id": 134,
+  "nodes": [
+    {
+      "id": 81,
+      "type": "FaceDetailer",
+      "pos": [
+        485,
+        -50
+      ],
+      "size": {
+        "0": 713.766357421875,
+        "1": 1191.8497314453125
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 125,
+          "label": "图像"
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 132,
+          "label": "模型",
+          "slot_index": 1
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 131,
+          "label": "CLIP",
+          "slot_index": 2
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 130,
+          "label": "VAE",
+          "slot_index": 3
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 129,
+          "label": "正面条件",
+          "slot_index": 4
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 128,
+          "label": "负面条件"
+        },
+        {
+          "name": "bbox_detector",
+          "type": "BBOX_DETECTOR",
+          "link": 133,
+          "label": "BBox检测"
+        },
+        {
+          "name": "sam_model_opt",
+          "type": "SAM_MODEL",
+          "link": null,
+          "label": "SAM模型"
+        },
+        {
+          "name": "segm_detector_opt",
+          "type": "SEGM_DETECTOR",
+          "link": 134,
+          "label": "Segm检测"
+        },
+        {
+          "name": "detailer_hook",
+          "type": "DETAILER_HOOK",
+          "link": null,
+          "label": "细化约束"
+        },
+        {
+          "name": "scheduler_func_opt",
+          "type": "SCHEDULER_FUNC",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            124
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "cropped_refined",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 6,
+          "label": "细化图像"
+        },
+        {
+          "name": "cropped_enhanced_alpha",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 6,
+          "label": "细化部分"
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        },
+        {
+          "name": "detailer_pipe",
+          "type": "DETAILER_PIPE",
+          "links": null,
+          "shape": 3,
+          "label": "细化节点束"
+        },
+        {
+          "name": "cnet_images",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 6,
+          "label": "ControlNet图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FaceDetailer"
+      },
+      "widgets_values": [
+        512,
+        true,
+        1024,
+        0,
+        "randomize",
+        20,
+        8,
+        "euler",
+        "normal",
+        0.2,
+        5,
+        true,
+        true,
+        0.5,
+        10,
+        3,
+        "center-1",
+        0,
+        0.93,
+        0,
+        0.7,
+        "False",
+        10,
+        "",
+        1,
+        false,
+        20
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        170,
+        1220
+      ],
+      "size": {
+        "0": 210,
+        "1": 76
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "link": 10,
+          "label": "CLIP",
+          "type": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            129
+          ],
+          "label": "条件",
+          "type": "CONDITIONING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 69,
+      "type": "LoadImage",
+      "pos": [
+        -278,
+        -58
+      ],
+      "size": [
+        759.5148262173884,
+        1166.1547747146942
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "shape": 3,
+          "name": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            125
+          ],
+          "label": "图像",
+          "type": "IMAGE"
+        },
+        {
+          "shape": 3,
+          "name": "MASK",
+          "links": [],
+          "label": "遮罩",
+          "type": "MASK"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "01165-1022691658-(full body_1.1),masterpiece,bestquality,8k,officialart,cinematiclight,ultrahighres,1girl,(wavy hair_1.1),drop earrings,necklace,.png",
+        "image"
+      ],
+      "_widget_cache_map": {
+        "output (30).png": {
+          "value": "img/46987de339ac47e0965172f7ccd1b939/39f782e36b40509f69b6a3333ed0668132ad61a817d256f78bcdc27fcf45b698.png",
+          "name": "output (30).png",
+          "url": "https://liblibai-tmp-image.vibrou.com/img/46987de339ac47e0965172f7ccd1b939/39f782e36b40509f69b6a3333ed0668132ad61a817d256f78bcdc27fcf45b698.png"
+        },
+        "4c8d539af24b36e17f14093b1d2c42071bebd007820c0a02be138104787b75c8.png": {
+          "value": "img/46987de339ac47e0965172f7ccd1b939/4c8d539af24b36e17f14093b1d2c42071bebd007820c0a02be138104787b75c8.png",
+          "name": "4c8d539af24b36e17f14093b1d2c42071bebd007820c0a02be138104787b75c8.png",
+          "url": "https://liblibai-tmp-image.vibrou.com/img/46987de339ac47e0965172f7ccd1b939/4c8d539af24b36e17f14093b1d2c42071bebd007820c0a02be138104787b75c8.png"
+        },
+        "01165-1022691658-(full body_1.1),masterpiece,bestquality,8k,officialart,cinematiclight,ultrahighres,1girl,(wavy hair_1.1),drop earrings,necklace,.png": {
+          "value": "img/46987de339ac47e0965172f7ccd1b939/e8d69a324331977fad413fbef61d209d5695bae6136e4e445b89a2243394d599.png",
+          "name": "01165-1022691658-(full body_1.1),masterpiece,bestquality,8k,officialart,cinematiclight,ultrahighres,1girl,(wavy hair_1.1),drop earrings,necklace,.png",
+          "url": "https://liblibai-tmp-image.vibrou.com/img/46987de339ac47e0965172f7ccd1b939/e8d69a324331977fad413fbef61d209d5695bae6136e4e445b89a2243394d599.png"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 12,
+      "type": "UNETLoader",
+      "pos": [
+        -256,
+        1146
+      ],
+      "size": [
+        731.8890176788173,
+        112.98556915376537
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "shape": 3,
+          "name": "MODEL",
+          "slot_index": 0,
+          "links": [
+            132
+          ],
+          "label": "模型",
+          "type": "MODEL"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "FLUX.1哩布在线可运行-黑暗森林工作室_FLUX.1-dev-fp8",
+        "fp8_e4m3fn"
+      ],
+      "_widget_cache_map": {
+        "FLUX.1哩布在线可运行-黑暗森林工作室_FLUX.1-dev-fp8": {
+          "name": "FLUX.1哩布在线可运行-黑暗森林工作室_FLUX.1-dev-fp8",
+          "value": 2295774
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 10,
+      "type": "VAELoader",
+      "pos": [
+        1263,
+        1171
+      ],
+      "size": [
+        755.584902143296,
+        72.60191290684833
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "shape": 3,
+          "name": "VAE",
+          "slot_index": 0,
+          "links": [
+            130
+          ],
+          "type": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 11,
+      "type": "DualCLIPLoader",
+      "pos": [
+        485,
+        1183
+      ],
+      "size": [
+        750.0314791075295,
+        121.35537540561512
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "shape": 3,
+          "name": "CLIP",
+          "slot_index": 0,
+          "links": [
+            10,
+            121,
+            131
+          ],
+          "label": "CLIP",
+          "type": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp8_e4m3fn",
+        "clip_l",
+        "flux"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 78,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -212,
+        1307
+      ],
+      "size": {
+        "0": 210,
+        "1": 76
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "link": 121,
+          "slot_index": 0,
+          "label": "CLIP",
+          "type": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "shape": 3,
+          "name": "CONDITIONING",
+          "links": [
+            128
+          ],
+          "label": "条件",
+          "type": "CONDITIONING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 82,
+      "type": "UltralyticsDetectorProvider",
+      "pos": [
+        10,
+        1315
+      ],
+      "size": {
+        "0": 315,
+        "1": 78
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "BBOX_DETECTOR",
+          "type": "BBOX_DETECTOR",
+          "links": [
+            133
+          ],
+          "shape": 3,
+          "label": "BBox检测",
+          "slot_index": 0
+        },
+        {
+          "name": "SEGM_DETECTOR",
+          "type": "SEGM_DETECTOR",
+          "links": [
+            134
+          ],
+          "shape": 3,
+          "label": "SEGM检测",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UltralyticsDetectorProvider"
+      },
+      "widgets_values": [
+        "segm/person_yolov8m-seg"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 79,
+      "type": "PreviewImage",
+      "pos": [
+        1210,
+        -47
+      ],
+      "size": [
+        1040.9678374315645,
+        1171.536176656288
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "link": 124,
+          "label": "图像",
+          "type": "IMAGE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    }
+  ],
+  "links": [
+    [
+      10,
+      11,
+      0,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      121,
+      11,
+      0,
+      78,
+      0,
+      "CLIP"
+    ],
+    [
+      124,
+      81,
+      0,
+      79,
+      0,
+      "IMAGE"
+    ],
+    [
+      125,
+      69,
+      0,
+      81,
+      0,
+      "IMAGE"
+    ],
+    [
+      128,
+      78,
+      0,
+      81,
+      5,
+      "CONDITIONING"
+    ],
+    [
+      129,
+      6,
+      0,
+      81,
+      4,
+      "CONDITIONING"
+    ],
+    [
+      130,
+      10,
+      0,
+      81,
+      3,
+      "VAE"
+    ],
+    [
+      131,
+      11,
+      0,
+      81,
+      2,
+      "CLIP"
+    ],
+    [
+      132,
+      12,
+      0,
+      81,
+      1,
+      "MODEL"
+    ],
+    [
+      133,
+      82,
+      0,
+      81,
+      6,
+      "BBOX_DETECTOR"
+    ],
+    [
+      134,
+      82,
+      1,
+      81,
+      8,
+      "SEGM_DETECTOR"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ],
+    "ds": {
+      "scale": 0.5445000000000011,
+      "offset": [
+        591.6569988196327,
+        369.9118622431537
+      ]
+    }
+  },
+  "version": 0.4
+}

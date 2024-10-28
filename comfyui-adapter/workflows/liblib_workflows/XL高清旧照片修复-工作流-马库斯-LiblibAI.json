@@ -1,0 +1,933 @@
+{
+  "last_node_id": 22,
+  "last_link_id": 36,
+  "nodes": [
+    {
+      "id": 16,
+      "type": "IPAdapterUnifiedLoaderFaceID",
+      "pos": [
+        1470,
+        290
+      ],
+      "size": {
+        "0": 315,
+        "1": 126
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 32,
+          "label": "模型"
+        },
+        {
+          "name": "ipadapter",
+          "type": "IPADAPTER",
+          "link": null,
+          "label": "IPAdapter"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            27
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "ipadapter",
+          "type": "IPADAPTER",
+          "links": [
+            22
+          ],
+          "shape": 3,
+          "label": "IPAdapter",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "IPAdapterUnifiedLoaderFaceID"
+      },
+      "widgets_values": [
+        "FACEID PLUS V2",
+        0.6,
+        "CUDA"
+      ]
+    },
+    {
+      "id": 15,
+      "type": "IPAdapterFaceID",
+      "pos": [
+        1810,
+        290
+      ],
+      "size": {
+        "0": 317.4000244140625,
+        "1": 322
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 27,
+          "label": "模型"
+        },
+        {
+          "name": "ipadapter",
+          "type": "IPADAPTER",
+          "link": 22,
+          "label": "IPAdapter",
+          "slot_index": 1
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 25,
+          "label": "正面图像"
+        },
+        {
+          "name": "image_negative",
+          "type": "IMAGE",
+          "link": null,
+          "label": "负面图像",
+          "slot_index": 3
+        },
+        {
+          "name": "attn_mask",
+          "type": "MASK",
+          "link": null,
+          "label": "关注层遮罩"
+        },
+        {
+          "name": "clip_vision",
+          "type": "CLIP_VISION",
+          "link": null,
+          "label": "CLIP视觉"
+        },
+        {
+          "name": "insightface",
+          "type": "INSIGHTFACE",
+          "link": null,
+          "label": "InsightFace"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            21
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "face_image",
+          "type": "IMAGE",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "IPAdapterFaceID"
+      },
+      "widgets_values": [
+        1,
+        1,
+        "linear",
+        "concat",
+        0,
+        1,
+        "V only"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 2,
+      "type": "ImageResize+",
+      "pos": [
+        1470,
+        660
+      ],
+      "size": [
+        310,
+        220
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            23,
+            28
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": [
+            30
+          ],
+          "shape": 3,
+          "label": "宽度",
+          "slot_index": 1
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": [
+            31
+          ],
+          "shape": 3,
+          "label": "高度",
+          "slot_index": 2
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageResize+"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        "nearest",
+        "keep proportion",
+        "always",
+        0
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 17,
+      "type": "PrepImageForClipVision",
+      "pos": [
+        1470,
+        490
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 23,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            25
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PrepImageForClipVision"
+      },
+      "widgets_values": [
+        "LANCZOS",
+        "top",
+        0
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 19,
+      "type": "easy globalSeed",
+      "pos": [
+        2150,
+        750
+      ],
+      "size": [
+        310,
+        130
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "properties": {
+        "Node name for S&R": "easy globalSeed"
+      },
+      "widgets_values": [
+        208760002478982,
+        true,
+        "randomize",
+        354961183381466
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 6,
+      "type": "easy fullkSampler",
+      "pos": [
+        2150,
+        290
+      ],
+      "size": [
+        320,
+        410
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pipe",
+          "type": "PIPE_LINE",
+          "link": 35,
+          "label": "节点束"
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 21,
+          "label": "模型（可选）"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 16,
+          "label": "正面条件（可选）"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 17,
+          "label": "负面条件（可选）"
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "link": null,
+          "label": "Latent（可选）"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": null
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": null
+        },
+        {
+          "name": "xyPlot",
+          "type": "XYPLOT",
+          "link": null
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "pipe",
+          "type": "PIPE_LINE",
+          "links": null,
+          "shape": 3,
+          "label": "节点束"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            36
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 1
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": null,
+          "shape": 3,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "links": null,
+          "shape": 3,
+          "label": "随机种"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy fullkSampler"
+      },
+      "widgets_values": [
+        8,
+        2,
+        "dpmpp_sde",
+        "karras",
+        1,
+        "Hide",
+        0,
+        "ComfyUI",
+        208760002478982,
+        "randomize"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 22,
+      "type": "SaveImage",
+      "pos": [
+        670,
+        290
+      ],
+      "size": [
+        400,
+        590
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 36,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 13,
+      "type": "ControlNetApplyAdvanced",
+      "pos": [
+        1810,
+        710
+      ],
+      "size": [
+        320,
+        170
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 33,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 34,
+          "label": "负面条件"
+        },
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 19,
+          "label": "ControlNet",
+          "slot_index": 2
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 28,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            16
+          ],
+          "shape": 3,
+          "label": "正面条件",
+          "slot_index": 0
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            17
+          ],
+          "shape": 3,
+          "label": "负面条件",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetApplyAdvanced"
+      },
+      "widgets_values": [
+        0.9500000000000001,
+        0,
+        0.9
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 14,
+      "type": "ControlNetLoader",
+      "pos": [
+        1810,
+        660
+      ],
+      "size": {
+        "0": 300,
+        "1": 82
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "links": [
+            19
+          ],
+          "shape": 3,
+          "label": "ControlNet",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ControlNetLoader"
+      },
+      "widgets_values": [
+        "CN-anytest_v4-marged.safetensors",
+        null
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 1,
+      "type": "LoadImage",
+      "pos": [
+        280,
+        290
+      ],
+      "size": [
+        370,
+        590
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "1 (2).webp",
+        "image"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 21,
+      "type": "easy fullLoader",
+      "pos": [
+        1090,
+        290
+      ],
+      "size": [
+        360,
+        590
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model_override",
+          "type": "MODEL",
+          "link": null,
+          "label": "模型（可选）"
+        },
+        {
+          "name": "clip_override",
+          "type": "CLIP",
+          "link": null,
+          "label": "CLIP（可选）"
+        },
+        {
+          "name": "vae_override",
+          "type": "VAE",
+          "link": null,
+          "label": "VAE（可选）"
+        },
+        {
+          "name": "optional_lora_stack",
+          "type": "LORA_STACK",
+          "link": null,
+          "label": "LoRA堆（可选）"
+        },
+        {
+          "name": "optional_controlnet_stack",
+          "type": "CONTROL_NET_STACK",
+          "link": null
+        },
+        {
+          "name": "empty_latent_width",
+          "type": "INT",
+          "link": 30,
+          "widget": {
+            "name": "empty_latent_width"
+          },
+          "label": "宽度"
+        },
+        {
+          "name": "empty_latent_height",
+          "type": "INT",
+          "link": 31,
+          "widget": {
+            "name": "empty_latent_height"
+          },
+          "label": "高度"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "pipe",
+          "type": "PIPE_LINE",
+          "links": [
+            35
+          ],
+          "shape": 3,
+          "label": "节点束",
+          "slot_index": 0
+        },
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            32
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 1
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            33
+          ],
+          "shape": 3,
+          "slot_index": 4
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            34
+          ],
+          "shape": 3,
+          "slot_index": 5
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy fullLoader"
+      },
+      "widgets_values": [
+        "Lykon\\XL_DreamShaper_v2.1.safetensors",
+        "Default",
+        "Baked VAE",
+        -1,
+        "None",
+        1,
+        1,
+        "width x height (custom)",
+        512,
+        512,
+        "a colorful portrait photo,young chinese boy,1980s, simple background, high quality, realistic, 4k\n\nBlack_clothes,",
+        "none",
+        "comfy",
+        "embedding:造型\\EasyNegativeV2, text,",
+        "none",
+        "comfy",
+        1,
+        false
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      2,
+      0,
+      "IMAGE"
+    ],
+    [
+      16,
+      13,
+      0,
+      6,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      17,
+      13,
+      1,
+      6,
+      3,
+      "CONDITIONING"
+    ],
+    [
+      19,
+      14,
+      0,
+      13,
+      2,
+      "CONTROL_NET"
+    ],
+    [
+      21,
+      15,
+      0,
+      6,
+      1,
+      "MODEL"
+    ],
+    [
+      22,
+      16,
+      1,
+      15,
+      1,
+      "IPADAPTER"
+    ],
+    [
+      23,
+      2,
+      0,
+      17,
+      0,
+      "IMAGE"
+    ],
+    [
+      25,
+      17,
+      0,
+      15,
+      2,
+      "IMAGE"
+    ],
+    [
+      27,
+      16,
+      0,
+      15,
+      0,
+      "MODEL"
+    ],
+    [
+      28,
+      2,
+      0,
+      13,
+      3,
+      "IMAGE"
+    ],
+    [
+      30,
+      2,
+      1,
+      21,
+      5,
+      "INT"
+    ],
+    [
+      31,
+      2,
+      2,
+      21,
+      6,
+      "INT"
+    ],
+    [
+      32,
+      21,
+      1,
+      16,
+      0,
+      "MODEL"
+    ],
+    [
+      33,
+      21,
+      4,
+      13,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      34,
+      21,
+      5,
+      13,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      35,
+      21,
+      0,
+      6,
+      0,
+      "PIPE_LINE"
+    ],
+    [
+      36,
+      6,
+      1,
+      22,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "老照片修复",
+      "bounding": [
+        260,
+        190,
+        2230,
+        710
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7247295000000094,
+      "offset": {
+        "0": -122.53713615135976,
+        "1": 134.5431527338396
+      }
+    }
+  },
+  "version": 0.4
+}

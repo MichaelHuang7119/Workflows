@@ -1,0 +1,305 @@
+{
+  "3": {
+    "inputs": {
+      "unet": {
+        "node_": "4",
+        "name_": "unet"
+      },
+      "scheduler": {
+        "node_": "12",
+        "name_": "scheduler"
+      },
+      "timesteps": {
+        "node_": "12",
+        "name_": "timesteps"
+      },
+      "latents_in": {
+        "node_": "13",
+        "name_": "latents"
+      },
+      "positive": {
+        "node_": "16",
+        "name_": "forward"
+      },
+      "middle": null,
+      "negative": {
+        "node_": "19",
+        "name_": "forward"
+      },
+      "generators": {
+        "node_": "10",
+        "name_": "generators"
+      },
+      "cfg_scale": 8,
+      "cfg2_scale": 1.0,
+      "return_with_leftover_noise": "disable",
+      "batch_size": 1,
+      "model_type": "v1"
+    },
+    "node_type": "SampleLoop"
+  },
+  "4": {
+    "inputs": {
+      "path": "/data/yjw/ComfyUI/models/checkpoints/v1-5-pruned-emaonly.safetensors",
+      "cls": "StableDiffusionImg2ImgPipeline",
+      "kwargs": {
+        "config": "/data/yjw/ComfyUI/models/configs/stable-diffusion-v1-5"
+      }
+    },
+    "node_type": "PipeFromSingleFile"
+  },
+  "5": {
+    "inputs": {
+      "width": 512,
+      "height": 512,
+      "batch_size": 1,
+      "channel_size": 4,
+      "init_value": 0.0
+    },
+    "node_type": "MakeTensors"
+  },
+  "6": {
+    "inputs": {
+      "text_encoder": {
+        "node_": "4",
+        "name_": "text_encoder"
+      },
+      "text_encoder2": {
+        "node_": "4",
+        "name_": "text_encoder2"
+      },
+      "text_encoder3": {
+        "node_": "4",
+        "name_": "text_encoder3"
+      },
+      "tokenizer": {
+        "node_": "4",
+        "name_": "tokenizer"
+      },
+      "tokenizer2": {
+        "node_": "4",
+        "name_": "tokenizer2"
+      },
+      "tokenizer3": {
+        "node_": "4",
+        "name_": "tokenizer3"
+      },
+      "prompt": "beautiful scenery nature glass bottle landscape, , purple galaxy bottle,",
+      "model_type": "v1",
+      "clip_skip": 0
+    },
+    "node_type": "EncodeText"
+  },
+  "7": {
+    "inputs": {
+      "text_encoder": {
+        "node_": "4",
+        "name_": "text_encoder"
+      },
+      "text_encoder2": {
+        "node_": "4",
+        "name_": "text_encoder2"
+      },
+      "text_encoder3": {
+        "node_": "4",
+        "name_": "text_encoder3"
+      },
+      "tokenizer": {
+        "node_": "4",
+        "name_": "tokenizer"
+      },
+      "tokenizer2": {
+        "node_": "4",
+        "name_": "tokenizer2"
+      },
+      "tokenizer3": {
+        "node_": "4",
+        "name_": "tokenizer3"
+      },
+      "prompt": "text, watermark",
+      "model_type": "v1",
+      "clip_skip": 0
+    },
+    "node_type": "EncodeText"
+  },
+  "8": {
+    "inputs": {
+      "latents": {
+        "node_": "3",
+        "name_": "latents"
+      },
+      "vae": {
+        "node_": "4",
+        "name_": "vae"
+      }
+    },
+    "node_type": "VaeDecode"
+  },
+  "9": {
+    "inputs": {
+      "key": "9",
+      "value": {
+        "node_": "20",
+        "name_": "images"
+      }
+    },
+    "node_type": "TaskOutput"
+  },
+  "10": {
+    "inputs": {
+      "seeds": 156680208700286
+    },
+    "node_type": "MakeGenerators"
+  },
+  "11": {
+    "inputs": {
+      "cls": "EulerDiscreteScheduler",
+      "init_kwargs": {
+        "num_train_timesteps": 1000,
+        "beta_start": 0.00085,
+        "beta_end": 0.012,
+        "beta_schedule": "scaled_linear",
+        "trained_betas": null,
+        "prediction_type": "epsilon",
+        "interpolation_type": "linear",
+        "use_karras_sigmas": false,
+        "sigma_min": null,
+        "sigma_max": null,
+        "timestep_spacing": "linspace",
+        "timestep_type": "discrete",
+        "steps_offset": 0,
+        "rescale_betas_zero_snr": false,
+        "final_sigmas_type": "zero"
+      }
+    },
+    "node_type": "MakeScheduler"
+  },
+  "12": {
+    "inputs": {
+      "scheduler_in": {
+        "node_": "11",
+        "name_": "scheduler"
+      },
+      "scheduler_step": 20,
+      "start_step": 0,
+      "end_step": 19
+    },
+    "node_type": "SetTimesteps"
+  },
+  "13": {
+    "inputs": {
+      "scheduler": {
+        "node_": "12",
+        "name_": "scheduler"
+      },
+      "latents_in": {
+        "node_": "5",
+        "name_": "tensor"
+      },
+      "generators": {
+        "node_": "10",
+        "name_": "generators"
+      },
+      "timesteps": {
+        "node_": "12",
+        "name_": "timesteps"
+      }
+    },
+    "node_type": "AddNoise"
+  },
+  "14": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "6",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "15": {
+    "inputs": {
+      "dict_from": {
+        "node_": "14",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "6",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "16": {
+    "inputs": {
+      "dict1": {
+        "node_": "15",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "17": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "7",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "18": {
+    "inputs": {
+      "dict_from": {
+        "node_": "17",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "7",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "19": {
+    "inputs": {
+      "dict1": {
+        "node_": "18",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "20": {
+    "inputs": {
+      "images_in": {
+        "node_": "8",
+        "name_": "images"
+      }
+    },
+    "node_type": "Tensor2Image"
+  }
+}

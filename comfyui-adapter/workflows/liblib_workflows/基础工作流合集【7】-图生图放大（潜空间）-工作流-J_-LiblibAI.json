@@ -1,0 +1,577 @@
+{
+  "last_node_id": 67,
+  "last_link_id": 25,
+  "nodes": [
+    {
+      "id": 61,
+      "type": "KSampler",
+      "pos": [
+        1909,
+        276
+      ],
+      "size": {
+        "0": 300,
+        "1": 474
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 14,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 15,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 16,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 18,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            19
+          ],
+          "slot_index": 0,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        279442234078709,
+        "randomize",
+        25,
+        5,
+        "dpmpp_2m",
+        "karras",
+        0.65
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 66,
+      "type": "VAEEncode",
+      "pos": [
+        1297,
+        277
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 22,
+          "label": "图像"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 24,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            23
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 7,
+      "type": "CLIPTextEncode",
+      "pos": [
+        790,
+        480
+      ],
+      "size": {
+        "0": 370,
+        "1": 160
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 5,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            16
+          ],
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "text, watermark,horror,zombie, nsfw,"
+      ],
+      "_widget_cache_map": {},
+      "color": "#322",
+      "bgcolor": "#533",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 60,
+      "type": "LatentUpscaleBy",
+      "pos": [
+        1549,
+        270
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 23,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            18
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LatentUpscaleBy"
+      },
+      "widgets_values": [
+        "nearest-exact",
+        1.5
+      ],
+      "_widget_cache_map": {},
+      "color": "#223",
+      "bgcolor": "#335",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 62,
+      "type": "VAEDecode",
+      "pos": [
+        2249,
+        279
+      ],
+      "size": {
+        "0": 140,
+        "1": 60
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 19,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 20,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            21
+          ],
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        790,
+        280
+      ],
+      "size": {
+        "0": 370,
+        "1": 160
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 3,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            15
+          ],
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "beautiful scenery nature glass bottle landscape, , purple galaxy bottle,"
+      ],
+      "_widget_cache_map": {},
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 63,
+      "type": "SaveImage",
+      "pos": [
+        2421,
+        275
+      ],
+      "size": {
+        "0": 322.79486083984375,
+        "1": 381.4424133300781
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 21,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 64,
+      "type": "Note",
+      "pos": [
+        1933,
+        794
+      ],
+      "size": {
+        "0": 270,
+        "1": 250
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "\n\n放大的倍数越大，需要的去噪值越高，0.55~0.65的去噪值是比较好的"
+      ],
+      "_widget_cache_map": {},
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 4,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        407,
+        274
+      ],
+      "size": {
+        "0": 328.5366516113281,
+        "1": 98
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            14
+          ],
+          "slot_index": 0,
+          "label": "模型"
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            3,
+            5
+          ],
+          "slot_index": 1,
+          "label": "CLIP"
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            20,
+            24
+          ],
+          "slot_index": 2,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "Realistic Vision V5.1_V5.1"
+      ],
+      "_widget_cache_map": {
+        "Realistic Vision V5.1_V5.1": {
+          "name": "Realistic Vision V5.1_V5.1",
+          "value": 27957
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 65,
+      "type": "LoadImage",
+      "pos": [
+        407,
+        426
+      ],
+      "size": {
+        "0": 315,
+        "1": 314
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            22
+          ],
+          "shape": 3,
+          "slot_index": 0,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "%Empty Latent Image.width%x%Empty Latent Image.height%_00001_.png",
+        "image"
+      ],
+      "_widget_cache_map": {
+        "%Empty Latent Image.width%x%Empty Latent Image.height%_00001_.png": {
+          "value": "img/64985f011cb94b84bb2d472719b985d8/208585227e5b6fb73650f88750eddc065fecd75df6794ddfa62bb8716293069a.png",
+          "name": "%Empty Latent Image.width%x%Empty Latent Image.height%_00001_.png",
+          "url": "https://liblibai-tmp-image.vibrou.com/img/64985f011cb94b84bb2d472719b985d8/208585227e5b6fb73650f88750eddc065fecd75df6794ddfa62bb8716293069a.png"
+        }
+      },
+      "category": "Primitive Nodes"
+    }
+  ],
+  "links": [
+    [
+      3,
+      4,
+      1,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      5,
+      4,
+      1,
+      7,
+      0,
+      "CLIP"
+    ],
+    [
+      14,
+      4,
+      0,
+      61,
+      0,
+      "MODEL"
+    ],
+    [
+      15,
+      6,
+      0,
+      61,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      16,
+      7,
+      0,
+      61,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      18,
+      60,
+      0,
+      61,
+      3,
+      "LATENT"
+    ],
+    [
+      19,
+      61,
+      0,
+      62,
+      0,
+      "LATENT"
+    ],
+    [
+      20,
+      4,
+      2,
+      62,
+      1,
+      "VAE"
+    ],
+    [
+      21,
+      62,
+      0,
+      63,
+      0,
+      "IMAGE"
+    ],
+    [
+      22,
+      65,
+      0,
+      66,
+      0,
+      "IMAGE"
+    ],
+    [
+      23,
+      66,
+      0,
+      60,
+      0,
+      "LATENT"
+    ],
+    [
+      24,
+      4,
+      2,
+      66,
+      1,
+      "VAE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.7972024500000005,
+      "offset": {
+        "0": -697.2504385866173,
+        "1": 53.85736684115941
+      }
+    },
+    "workspace_info": {
+      "id": "X2_xaLTHTuAO43bimmjdb"
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

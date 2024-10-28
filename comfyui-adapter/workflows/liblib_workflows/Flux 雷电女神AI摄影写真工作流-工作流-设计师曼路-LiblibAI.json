@@ -1,0 +1,925 @@
+{
+  "last_node_id": 31,
+  "last_link_id": 48,
+  "nodes": [
+    {
+      "id": 22,
+      "type": "BasicGuider",
+      "pos": [
+        -110,
+        69
+      ],
+      "size": {
+        "0": 241.79998779296875,
+        "1": 46
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "link": 42,
+          "name": "model",
+          "type": "MODEL",
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "link": 40,
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "label": "条件",
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "label": "引导",
+          "links": [
+            30
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicGuider"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 16,
+      "type": "KSamplerSelect",
+      "pos": [
+        -109,
+        178
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "label": "采样器",
+          "links": [
+            19
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerSelect"
+      },
+      "widgets_values": [
+        "euler"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 17,
+      "type": "BasicScheduler",
+      "pos": [
+        -106,
+        298
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "link": 38,
+          "name": "model",
+          "type": "MODEL",
+          "label": "模型",
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "label": "Sigmas",
+          "links": [
+            20
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BasicScheduler"
+      },
+      "widgets_values": [
+        "simple",
+        20,
+        1
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 11,
+      "type": "DualCLIPLoader",
+      "pos": [
+        -1116,
+        126
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "label": "CLIP",
+          "links": [
+            43
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp8_e4m3fn",
+        "clip_l",
+        "flux"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 12,
+      "type": "UNETLoader",
+      "pos": [
+        -743,
+        -68
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "label": "模型",
+          "links": [
+            38,
+            41
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "黑暗森林工作室-FLUX.1_FLUX.1-dev-fp8",
+        "fp8_e4m3fn"
+      ],
+      "_widget_cache_map": {
+        "黑暗森林工作室-FLUX.1_FLUX.1-dev-fp8": {
+          "name": "黑暗森林工作室-FLUX.1_FLUX.1-dev-fp8",
+          "value": 2295774
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 13,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        361,
+        -53
+      ],
+      "size": {
+        "0": 355.20001220703125,
+        "1": 106
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "link": 37,
+          "name": "noise",
+          "type": "NOISE",
+          "label": "噪波生成",
+          "slot_index": 0
+        },
+        {
+          "link": 30,
+          "name": "guider",
+          "type": "GUIDER",
+          "label": "引导",
+          "slot_index": 1
+        },
+        {
+          "link": 19,
+          "name": "sampler",
+          "type": "SAMPLER",
+          "label": "采样器",
+          "slot_index": 2
+        },
+        {
+          "link": 20,
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "label": "Sigmas",
+          "slot_index": 3
+        },
+        {
+          "link": 23,
+          "name": "latent_image",
+          "type": "LATENT",
+          "label": "Latent",
+          "slot_index": 4
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "label": "输出",
+          "links": [
+            24
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "label": "降噪输出",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 10,
+      "type": "VAELoader",
+      "pos": [
+        373,
+        137
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "label": "VAE",
+          "links": [
+            12
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 26,
+      "type": "LoraLoader",
+      "pos": [
+        -738,
+        89
+      ],
+      "size": {
+        "0": 315,
+        "1": 126
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 41,
+          "label": "模型"
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 43,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            42
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            44
+          ],
+          "shape": 3,
+          "label": "CLIP",
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoader"
+      },
+      "widgets_values": [
+        "白棱_雷元素-特效(XL,F.1)_FLUX-v1.0",
+        0.7000000000000001,
+        1
+      ],
+      "_widget_cache_map": {
+        "undefined_0004": {
+          "name": "undefined_0004"
+        },
+        "好玩大都市（Playful Metropolis）_1.0": {
+          "name": "好玩大都市（Playful Metropolis）_1.0",
+          "value": "af57e013c79e4a9fb99813d81c37b19a"
+        },
+        "白棱_雷元素-特效(XL,F.1)_FLUX-v1.0": {
+          "name": "白棱_雷元素-特效(XL,F.1)_FLUX-v1.0",
+          "value": "dab58a9433b343239becbe97b8eb59eb"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [
+        776,
+        -47
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "link": 24,
+          "name": "samples",
+          "type": "LATENT",
+          "label": "Latent"
+        },
+        {
+          "link": 12,
+          "name": "vae",
+          "type": "VAE",
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "label": "图像",
+          "links": [
+            46
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 9,
+      "type": "SaveImage",
+      "pos": [
+        1493,
+        -55
+      ],
+      "size": {
+        "0": 513.4130859375,
+        "1": 617.0960693359375
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "link": 48,
+          "name": "images",
+          "type": "IMAGE",
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "Liblib"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 28,
+      "type": "ReActorFaceSwap",
+      "pos": [
+        1136,
+        -51
+      ],
+      "size": {
+        "0": 315,
+        "1": 358
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "input_image",
+          "type": "IMAGE",
+          "link": 46,
+          "label": "目标图像"
+        },
+        {
+          "name": "source_image",
+          "type": "IMAGE",
+          "link": 47,
+          "label": "源图像",
+          "slot_index": 1
+        },
+        {
+          "name": "face_model",
+          "type": "FACE_MODEL",
+          "link": null,
+          "label": "面部模型"
+        },
+        {
+          "name": "face_boost",
+          "type": "FACE_BOOST",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            48
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        },
+        {
+          "name": "FACE_MODEL",
+          "type": "FACE_MODEL",
+          "links": null,
+          "shape": 3,
+          "label": "面部模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ReActorFaceSwap"
+      },
+      "widgets_values": [
+        true,
+        "inswapper_128.onnx",
+        "retinaface_resnet50",
+        "GFPGANv1.4.pth",
+        1,
+        0.5,
+        "no",
+        "no",
+        "0",
+        "0",
+        1
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 5,
+      "type": "EmptyLatentImage",
+      "pos": [
+        -109,
+        463
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "label": "Latent",
+          "links": [
+            23
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        768,
+        1344,
+        1
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 30,
+      "type": "Note",
+      "pos": [
+        -1119,
+        306
+      ],
+      "size": {
+        "0": 346.627197265625,
+        "1": 389.8792419433594
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "关键词第一行保持不变（它是lora触发词与基本描述）\n\n\n后面的是画面描述可根据自己来修改\n或者直接用我给提供的版本\n一、（默认）\n1girl,A magic sword knight,His form is barely tangible,with a soft glow emanating from his gentle contours,The surroundings subtly distort through her ethereal presence,casting a dreamlike ambiance,white lightning,Surrounded by thunder and lightning elemental magic,\n\n\n二、\nhuman girl with floating mecha parts surrounding,In the midst of a vast, stormy desert, a young woman stands confidently, Floating around her are sleek, red and black mecha components, glowing faintly with golden light. Red lightning crackles through the air, intertwining and wrapping around both the girl and the hovering mechanical parts, casting soft shadows on the sand. The perfect symmetry of her face and hands contrasts with the futuristic elements surrounding her. Her ethereal presence subtly distorts the landscape, while the red lightning enhances the dreamlike, electrified atmosphere.\n\n\n三、（动物版）需要把主体文字替换掉 （1girel > cat,no humans）\ncat,no humans,glowing,glowing eyes,blue theme,"
+      ],
+      "_widget_cache_map": {},
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -737,
+        302
+      ],
+      "size": {
+        "0": 422.84503173828125,
+        "1": 164.31304931640625
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "link": 44,
+          "name": "clip",
+          "type": "CLIP",
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "label": "条件",
+          "links": [
+            40
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "bailing_lightning, composed of elements of thunder,thunder,electricity,\n\n1girl,A magic sword knight,His form is barely tangible,with a soft glow emanating from his gentle contours,The surroundings subtly distort through her ethereal presence,casting a dreamlike ambiance,white lightning,Surrounded by thunder and lightning elemental magic,"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 25,
+      "type": "RandomNoise",
+      "pos": [
+        -118,
+        -68
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "label": "噪波生成",
+          "links": [
+            37
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "RandomNoise"
+      },
+      "widgets_values": [
+        315589455885,
+        "randomize"
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 29,
+      "type": "LoadImage",
+      "pos": [
+        782,
+        90
+      ],
+      "size": {
+        "0": 315,
+        "1": 314
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            47
+          ],
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "woman(压缩).jpg",
+        "image"
+      ],
+      "_widget_cache_map": {
+        "portrait-beautiful-pregnant-woman.jpg": {
+          "value": "img/cfb3535674714a25a76a4c13dd9ca929/c09cf97d34785fb6d087198e635f6a8f382c637356b0bcb446ddccca1e63a29f.jpg",
+          "name": "portrait-beautiful-pregnant-woman.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/cfb3535674714a25a76a4c13dd9ca929/c09cf97d34785fb6d087198e635f6a8f382c637356b0bcb446ddccca1e63a29f.jpg"
+        },
+        "Rachel.JPG": {
+          "value": "img/cfb3535674714a25a76a4c13dd9ca929/eddd87b68b34f4a5b8621bfe6e689d80b33bca051cfa76ec2752b2f169154550.JPG",
+          "name": "Rachel.JPG",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/cfb3535674714a25a76a4c13dd9ca929/eddd87b68b34f4a5b8621bfe6e689d80b33bca051cfa76ec2752b2f169154550.JPG"
+        },
+        "manlu.jpg": {
+          "value": "img/cfb3535674714a25a76a4c13dd9ca929/490475f6fca9e41b61865e9b147e11130e7c6466a3c83678e11b51c47cb14812.jpg",
+          "name": "manlu.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/cfb3535674714a25a76a4c13dd9ca929/490475f6fca9e41b61865e9b147e11130e7c6466a3c83678e11b51c47cb14812.jpg"
+        },
+        "Maggie.jpg": {
+          "value": "img/cfb3535674714a25a76a4c13dd9ca929/cac998eaad1d537d8cc1f008101622e97ec9abfeb78f9c1e70b92d9256fd20e1.jpg",
+          "name": "Maggie.jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/cfb3535674714a25a76a4c13dd9ca929/cac998eaad1d537d8cc1f008101622e97ec9abfeb78f9c1e70b92d9256fd20e1.jpg"
+        },
+        "woman(压缩).jpg": {
+          "value": "img/88c5965531b14c9e93bf3570a284b1a6/c40e2ce2ac23eb76cc8ea4c85443cd13671e7a52614cd4f0c7962a4e177479da.jpg",
+          "name": "woman(压缩).jpg",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/88c5965531b14c9e93bf3570a284b1a6/c40e2ce2ac23eb76cc8ea4c85443cd13671e7a52614cd4f0c7962a4e177479da.jpg"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 31,
+      "type": "Note",
+      "pos": [
+        779,
+        465
+      ],
+      "size": [
+        337.5840391000138,
+        68.34802822584197
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "选择自己的照片上传，保证人物五官清晰"
+      ],
+      "_widget_cache_map": {},
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    }
+  ],
+  "links": [
+    [
+      12,
+      10,
+      0,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      19,
+      16,
+      0,
+      13,
+      2,
+      "SAMPLER"
+    ],
+    [
+      20,
+      17,
+      0,
+      13,
+      3,
+      "SIGMAS"
+    ],
+    [
+      23,
+      5,
+      0,
+      13,
+      4,
+      "LATENT"
+    ],
+    [
+      24,
+      13,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      30,
+      22,
+      0,
+      13,
+      1,
+      "GUIDER"
+    ],
+    [
+      37,
+      25,
+      0,
+      13,
+      0,
+      "NOISE"
+    ],
+    [
+      38,
+      12,
+      0,
+      17,
+      0,
+      "MODEL"
+    ],
+    [
+      40,
+      6,
+      0,
+      22,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      41,
+      12,
+      0,
+      26,
+      0,
+      "MODEL"
+    ],
+    [
+      42,
+      26,
+      0,
+      22,
+      0,
+      "MODEL"
+    ],
+    [
+      43,
+      11,
+      0,
+      26,
+      1,
+      "CLIP"
+    ],
+    [
+      44,
+      26,
+      1,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      46,
+      8,
+      0,
+      28,
+      0,
+      "IMAGE"
+    ],
+    [
+      47,
+      29,
+      0,
+      28,
+      1,
+      "IMAGE"
+    ],
+    [
+      48,
+      28,
+      0,
+      9,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.5989500000000018,
+      "offset": {
+        "0": 1097.380635560407,
+        "1": 187.72625747086522
+      }
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

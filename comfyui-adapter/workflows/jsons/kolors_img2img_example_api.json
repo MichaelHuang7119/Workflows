@@ -1,0 +1,126 @@
+{
+  "3": {
+    "inputs": {
+      "images": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "6": {
+    "inputs": {
+      "model": "Kwai-Kolors/Kolors",
+      "precision": "fp16"
+    },
+    "class_type": "DownloadAndLoadKolorsModel",
+    "_meta": {
+      "title": "(Down)load Kolors Model"
+    }
+  },
+  "10": {
+    "inputs": {
+      "samples": [
+        "14",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "11": {
+    "inputs": {
+      "vae_name": "sdxl.vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "12": {
+    "inputs": {
+      "prompt": "illustration a wolf|\ncinematic photograph a cyborg wolf",
+      "negative_prompt": "",
+      "num_images_per_prompt": 1,
+      "chatglm3_model": [
+        "13",
+        0
+      ]
+    },
+    "class_type": "KolorsTextEncode",
+    "_meta": {
+      "title": "Kolors Text Encode"
+    }
+  },
+  "13": {
+    "inputs": {
+      "precision": "quant8"
+    },
+    "class_type": "DownloadAndLoadChatGLM3",
+    "_meta": {
+      "title": "(Down)load ChatGLM3 Model"
+    }
+  },
+  "14": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "seed": 1000102404233414,
+      "steps": 25,
+      "cfg": 5,
+      "scheduler": "EulerDiscreteScheduler",
+      "denoise_strength": 0.75,
+      "kolors_model": [
+        "6",
+        0
+      ],
+      "kolors_embeds": [
+        "12",
+        0
+      ],
+      "latent": [
+        "16",
+        0
+      ]
+    },
+    "class_type": "KolorsSampler",
+    "_meta": {
+      "title": "Kolors Sampler"
+    }
+  },
+  "16": {
+    "inputs": {
+      "pixels": [
+        "17",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE Encode"
+    }
+  },
+  "17": {
+    "inputs": {
+      "image": "ComfyUI_temp_pkpxa_00007_.png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  }
+}

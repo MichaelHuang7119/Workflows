@@ -1,0 +1,1289 @@
+{
+  "last_node_id": 39,
+  "last_link_id": 46,
+  "nodes": [
+    {
+      "id": 10,
+      "type": "ACN_SparseCtrlLoaderAdvanced",
+      "pos": {
+        "0": 460,
+        "1": 360
+      },
+      "size": {
+        "0": 317.4000244140625,
+        "1": 246
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "sparse_method",
+          "type": "SPARSE_METHOD",
+          "link": 10,
+          "slot_index": 0,
+          "label": "Sparse方法"
+        },
+        {
+          "name": "tk_optional",
+          "type": "TIMESTEP_KEYFRAME",
+          "link": null,
+          "slot_index": 1,
+          "label": "帧间隔"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONTROL_NET",
+          "type": "CONTROL_NET",
+          "links": [
+            11
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "ControlNet"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ACN_SparseCtrlLoaderAdvanced"
+      },
+      "widgets_values": [
+        "animatediff\\control\\v3_sd15_sparsectrl_rgb.ckpt",
+        true,
+        1,
+        1,
+        "nearest_hint",
+        1,
+        1,
+        1
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 14,
+      "type": "ACN_SparseCtrlRGBPreprocessor",
+      "pos": {
+        "0": 480,
+        "1": 660
+      },
+      "size": {
+        "0": 210,
+        "1": 74
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 43,
+          "label": "图像"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 15,
+          "label": "VAE"
+        },
+        {
+          "name": "latent_size",
+          "type": "LATENT",
+          "link": 45,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "proc_IMAGE",
+          "type": "IMAGE",
+          "links": [
+            12
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ACN_SparseCtrlRGBPreprocessor"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 22,
+      "type": "ADE_LoopedUniformContextOptions",
+      "pos": {
+        "0": 530,
+        "1": -890
+      },
+      "size": {
+        "0": 317.4000244140625,
+        "1": 246
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "prev_context",
+          "type": "CONTEXT_OPTIONS",
+          "link": null,
+          "label": "前上下文"
+        },
+        {
+          "name": "view_opts",
+          "type": "VIEW_OPTS",
+          "link": null,
+          "label": "视图设置"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONTEXT_OPTS",
+          "type": "CONTEXT_OPTIONS",
+          "links": [
+            20
+          ],
+          "shape": 3,
+          "label": "上下文设置"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ADE_LoopedUniformContextOptions"
+      },
+      "widgets_values": [
+        16,
+        1,
+        4,
+        false,
+        "pyramid",
+        false,
+        0,
+        1
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 11,
+      "type": "ACN_AdvancedControlNetApply",
+      "pos": {
+        "0": 800,
+        "1": 350
+      },
+      "size": {
+        "0": 342.5999755859375,
+        "1": 286
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 30,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 29,
+          "label": "负面条件"
+        },
+        {
+          "name": "control_net",
+          "type": "CONTROL_NET",
+          "link": 11,
+          "label": "ControlNet"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 12,
+          "label": "图像"
+        },
+        {
+          "name": "mask_optional",
+          "type": "MASK",
+          "link": null,
+          "label": "遮罩"
+        },
+        {
+          "name": "timestep_kf",
+          "type": "TIMESTEP_KEYFRAME",
+          "link": null,
+          "slot_index": 5,
+          "label": "帧间隔"
+        },
+        {
+          "name": "latent_kf_override",
+          "type": "LATENT_KEYFRAME",
+          "link": null,
+          "label": "覆盖Latent关键帧"
+        },
+        {
+          "name": "weights_override",
+          "type": "CONTROL_NET_WEIGHTS",
+          "link": null,
+          "label": "覆盖ControlNet权重"
+        },
+        {
+          "name": "model_optional",
+          "type": "MODEL",
+          "link": null,
+          "label": "模型(可选)"
+        },
+        {
+          "name": "vae_optional",
+          "type": "VAE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            31
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            32
+          ],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "负面条件"
+        },
+        {
+          "name": "model_opt",
+          "type": "MODEL",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ACN_AdvancedControlNetApply"
+      },
+      "widgets_values": [
+        1,
+        0,
+        1,
+        ""
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 33,
+      "type": "VAELoader",
+      "pos": {
+        "0": 1281,
+        "1": -490
+      },
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            39
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "vae-ft-mse-840000-ema-pruned.safetensors"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 25,
+      "type": "CLIPSetLastLayer",
+      "pos": {
+        "0": -660,
+        "1": -200
+      },
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 23,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            24
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPSetLastLayer"
+      },
+      "widgets_values": [
+        -2
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 18,
+      "type": "LoraLoader",
+      "pos": {
+        "0": -190,
+        "1": -320
+      },
+      "size": {
+        "0": 315,
+        "1": 126
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 16,
+          "label": "模型"
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 24,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            18
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            25,
+            27
+          ],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoader"
+      },
+      "widgets_values": [
+        "animatediff\\v3_sd15_adapter.ckpt",
+        0.65,
+        1
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 27,
+      "type": "BNK_CLIPTextEncodeAdvanced",
+      "pos": {
+        "0": 388,
+        "1": -152
+      },
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 27,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            29
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BNK_CLIPTextEncodeAdvanced"
+      },
+      "widgets_values": [
+        "embedding:badhandv4, embedding:EasyNegativeV2, ",
+        "none",
+        "A1111"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 19,
+      "type": "ADE_AnimateDiffLoaderWithContext",
+      "pos": {
+        "0": 860,
+        "1": -870
+      },
+      "size": {
+        "0": 315,
+        "1": 230
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 18,
+          "label": "模型"
+        },
+        {
+          "name": "context_options",
+          "type": "CONTEXT_OPTIONS",
+          "link": 20,
+          "label": "上下文设置"
+        },
+        {
+          "name": "motion_lora",
+          "type": "MOTION_LORA",
+          "link": null,
+          "label": "动态LoRA"
+        },
+        {
+          "name": "ad_settings",
+          "type": "AD_SETTINGS",
+          "link": null,
+          "label": "AD设置"
+        },
+        {
+          "name": "sample_settings",
+          "type": "SAMPLE_SETTINGS",
+          "link": null,
+          "label": "采样设置"
+        },
+        {
+          "name": "ad_keyframes",
+          "type": "AD_KEYFRAMES",
+          "link": null,
+          "label": "AD关键帧"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            22
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ADE_AnimateDiffLoaderWithContext"
+      },
+      "widgets_values": [
+        "mm_sd15_v3.safetensors",
+        "sqrt_linear (AnimateDiff)",
+        1,
+        true
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 24,
+      "type": "KSampler //Inspire",
+      "pos": {
+        "0": 902,
+        "1": -417
+      },
+      "size": {
+        "0": 317.4000244140625,
+        "1": 614
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 22,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 31,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 32,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 44,
+          "label": "Latent"
+        },
+        {
+          "name": "scheduler_func_opt",
+          "type": "SCHEDULER_FUNC",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            38
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler //Inspire"
+      },
+      "widgets_values": [
+        0,
+        "fixed",
+        20,
+        6,
+        "dpmpp_2m",
+        "karras",
+        1,
+        "GPU(=A1111)",
+        "incremental",
+        0,
+        0,
+        "linear"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 29,
+      "type": "LoadImage",
+      "pos": {
+        "0": -780,
+        "1": 350
+      },
+      "size": {
+        "0": 318.2325439453125,
+        "1": 342.57867431640625
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            41
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "ComfyUI_temp_cfpmi_00013_.png",
+        "image"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 12,
+      "type": "ACN_SparseCtrlSpreadMethodNode",
+      "pos": {
+        "0": 450,
+        "1": 240
+      },
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SPARSE_METHOD",
+          "type": "SPARSE_METHOD",
+          "links": [
+            10
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "Sparse方法"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ACN_SparseCtrlSpreadMethodNode"
+      },
+      "widgets_values": [
+        "uniform"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 32,
+      "type": "VAEDecode",
+      "pos": {
+        "0": 1302,
+        "1": -374
+      },
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 38,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 39,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            40,
+            46
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 37,
+      "type": "ImageBatch",
+      "pos": {
+        "0": 193,
+        "1": 684
+      },
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image1",
+          "type": "IMAGE",
+          "link": 41,
+          "label": "图像1"
+        },
+        {
+          "name": "image2",
+          "type": "IMAGE",
+          "link": 42,
+          "label": "图像2"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            43
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageBatch"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 17,
+      "type": "CheckpointLoaderSimple",
+      "pos": {
+        "0": -670,
+        "1": -340
+      },
+      "size": {
+        "0": 315,
+        "1": 98
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            16
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            23
+          ],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "CLIP"
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            15
+          ],
+          "shape": 3,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "sd1.5\\动漫必备模型 _ Counterfeit-V2.5_v30.safetensors"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 38,
+      "type": "EmptyLatentImage",
+      "pos": {
+        "0": 28,
+        "1": 191
+      },
+      "size": {
+        "0": 277.9523010253906,
+        "1": 106
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            44,
+            45
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        512,
+        768,
+        16
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 34,
+      "type": "VHS_VideoCombine",
+      "pos": {
+        "0": 2130,
+        "1": -364
+      },
+      "size": [
+        414.3916320800781,
+        895.5874481201172
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 40,
+          "label": "图像"
+        },
+        {
+          "name": "audio",
+          "type": "VHS_AUDIO",
+          "link": null,
+          "label": "音频"
+        },
+        {
+          "name": "meta_batch",
+          "type": "VHS_BatchManager",
+          "link": null,
+          "label": "批次管理"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": null,
+          "shape": 3,
+          "label": "文件名"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VHS_VideoCombine"
+      },
+      "widgets_values": {
+        "frame_rate": 8,
+        "loop_count": 0,
+        "filename_prefix": "AnimateDiff",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "pingpong": false,
+        "save_output": true,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "AnimateDiff_00378.mp4",
+            "subfolder": "",
+            "type": "output",
+            "format": "video/h264-mp4"
+          }
+        }
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 39,
+      "type": "PreviewImage",
+      "pos": {
+        "0": 1688,
+        "1": -319
+      },
+      "size": {
+        "0": 303.4155578613281,
+        "1": 426.13494873046875
+      },
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 46,
+          "label": "图像"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 30,
+      "type": "LoadImage",
+      "pos": {
+        "0": -421,
+        "1": 368
+      },
+      "size": {
+        "0": 315,
+        "1": 314
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            42
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "ComfyUI_temp_cfpmi_00016_.png",
+        "image"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 26,
+      "type": "BNK_CLIPTextEncodeAdvanced",
+      "pos": {
+        "0": 381,
+        "1": -423
+      },
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 25,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            30
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "BNK_CLIPTextEncodeAdvanced"
+      },
+      "widgets_values": [
+        "",
+        "none",
+        "A1111"
+      ],
+      "category": "Custom Nodes"
+    }
+  ],
+  "links": [
+    [
+      10,
+      12,
+      0,
+      10,
+      0,
+      "SPARSE_METHOD"
+    ],
+    [
+      11,
+      10,
+      0,
+      11,
+      2,
+      "CONTROL_NET"
+    ],
+    [
+      12,
+      14,
+      0,
+      11,
+      3,
+      "IMAGE"
+    ],
+    [
+      15,
+      17,
+      2,
+      14,
+      1,
+      "VAE"
+    ],
+    [
+      16,
+      17,
+      0,
+      18,
+      0,
+      "MODEL"
+    ],
+    [
+      18,
+      18,
+      0,
+      19,
+      0,
+      "MODEL"
+    ],
+    [
+      20,
+      22,
+      0,
+      19,
+      1,
+      "CONTEXT_OPTIONS"
+    ],
+    [
+      22,
+      19,
+      0,
+      24,
+      0,
+      "MODEL"
+    ],
+    [
+      23,
+      17,
+      1,
+      25,
+      0,
+      "CLIP"
+    ],
+    [
+      24,
+      25,
+      0,
+      18,
+      1,
+      "CLIP"
+    ],
+    [
+      25,
+      18,
+      1,
+      26,
+      0,
+      "CLIP"
+    ],
+    [
+      27,
+      18,
+      1,
+      27,
+      0,
+      "CLIP"
+    ],
+    [
+      29,
+      27,
+      0,
+      11,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      30,
+      26,
+      0,
+      11,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      31,
+      11,
+      0,
+      24,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      32,
+      11,
+      1,
+      24,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      38,
+      24,
+      0,
+      32,
+      0,
+      "LATENT"
+    ],
+    [
+      39,
+      33,
+      0,
+      32,
+      1,
+      "VAE"
+    ],
+    [
+      40,
+      32,
+      0,
+      34,
+      0,
+      "IMAGE"
+    ],
+    [
+      41,
+      29,
+      0,
+      37,
+      0,
+      "IMAGE"
+    ],
+    [
+      42,
+      30,
+      0,
+      37,
+      1,
+      "IMAGE"
+    ],
+    [
+      43,
+      37,
+      0,
+      14,
+      0,
+      "IMAGE"
+    ],
+    [
+      44,
+      38,
+      0,
+      24,
+      3,
+      "LATENT"
+    ],
+    [
+      45,
+      38,
+      0,
+      14,
+      2,
+      "LATENT"
+    ],
+    [
+      46,
+      32,
+      0,
+      39,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "加载图像",
+      "bounding": [
+        -886,
+        228,
+        835,
+        528
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.5445000000000003,
+      "offset": [
+        1235.3512975128692,
+        1455.675289143461
+      ]
+    }
+  },
+  "version": 0.4
+}

@@ -1,0 +1,1783 @@
+{
+  "last_node_id": 87,
+  "last_link_id": 114,
+  "nodes": [
+    {
+      "id": 23,
+      "type": "VAEEncode",
+      "pos": [
+        -2807,
+        792
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 27,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 83,
+          "label": "图像"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 52,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            53
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 41,
+      "type": "Reroute",
+      "pos": [
+        10,
+        10
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false
+      },
+      "category": "Official"
+    },
+    {
+      "id": 12,
+      "type": "VAEDecode",
+      "pos": [
+        -3099,
+        721
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 32,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 18,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 19,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            56
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 63,
+      "type": "InpaintResize",
+      "pos": [
+        -3259,
+        1043
+      ],
+      "size": {
+        "0": 430.8000183105469,
+        "1": 170
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 87,
+          "label": "image"
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 89,
+          "label": "mask"
+        },
+        {
+          "name": "optional_context_mask",
+          "type": "MASK",
+          "link": null,
+          "label": "optional_context_mask"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            88
+          ],
+          "shape": 3,
+          "label": "image",
+          "slot_index": 0
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "mask"
+        },
+        {
+          "name": "context_mask",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "context_mask"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "InpaintResize"
+      },
+      "widgets_values": [
+        "bicubic",
+        "ensure minimum size",
+        1024,
+        1024,
+        1
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 60,
+      "type": "easy imageRemBg",
+      "pos": [
+        -2938,
+        978
+      ],
+      "size": {
+        "0": 315,
+        "1": 314
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 25,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 88,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            83
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy imageRemBg"
+      },
+      "widgets_values": [
+        "RMBG-1.4",
+        "Preview",
+        "ComfyUI",
+        false
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 1,
+      "type": "UNETLoader",
+      "pos": [
+        -3438,
+        303
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            1
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "基础算法_F.1",
+        "fp8_e4m3fn"
+      ],
+      "_widget_cache_map": {
+        "基础算法_F.1": {
+          "name": "基础算法_F.1",
+          "value": "412b427ddb674b4dbab9e5abd5ae6057"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 21,
+      "type": "CLIPTextEncodeFlux",
+      "pos": [
+        -3420,
+        457
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 29,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 48,
+          "label": "clip"
+        },
+        {
+          "name": "clip_l",
+          "type": "STRING",
+          "link": 113,
+          "widget": {
+            "name": "clip_l"
+          },
+          "label": "clip_l"
+        },
+        {
+          "name": "t5xxl",
+          "type": "STRING",
+          "link": 114,
+          "widget": {
+            "name": "t5xxl"
+          },
+          "label": "t5xxl"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            49,
+            54
+          ],
+          "shape": 3,
+          "label": "CONDITIONING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeFlux"
+      },
+      "widgets_values": [
+        "a dog",
+        "a dog",
+        3.5
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 67,
+      "type": "StringFunction|pysssss",
+      "pos": [
+        -4318,
+        86
+      ],
+      "size": [
+        253.09828302630558,
+        152.6349670203714
+      ],
+      "flags": {},
+      "order": 21,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text_a",
+          "type": "STRING",
+          "link": 99,
+          "widget": {
+            "name": "text_a"
+          },
+          "label": "文本_A",
+          "slot_index": 0
+        },
+        {
+          "name": "text_b",
+          "type": "STRING",
+          "link": 106,
+          "widget": {
+            "name": "text_b"
+          },
+          "label": "文本_B"
+        },
+        {
+          "name": "text_c",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text_c"
+          },
+          "label": "文本_C"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            111
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "StringFunction|pysssss"
+      },
+      "widgets_values": [
+        "append",
+        "yes",
+        "photorealistic, cinematic,realistic, 8K，UE5.",
+        "A detailed, futuristic firearm, possibly an assault rifle, set against a gradient blue background. The firearm is predominantly silver and gold, with intricate designs and textures that suggest advanced technology. It features a scope, a magazine, and a side-mounted trigger mechanism. The overall style is sleek and modern, with a focus on precision and functionality., photorealistic, cinematic, ",
+        ""
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 72,
+      "type": "StringFunction|pysssss",
+      "pos": [
+        -3797,
+        98
+      ],
+      "size": [
+        263.4704460195321,
+        122
+      ],
+      "flags": {},
+      "order": 22,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text_a",
+          "type": "STRING",
+          "link": 103,
+          "widget": {
+            "name": "text_a"
+          },
+          "label": "文本_A",
+          "slot_index": 0
+        },
+        {
+          "name": "text_b",
+          "type": "STRING",
+          "link": 105,
+          "widget": {
+            "name": "text_b"
+          },
+          "label": "文本_B"
+        },
+        {
+          "name": "text_c",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text_c"
+          },
+          "label": "文本_C"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            110
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "字符串"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "StringFunction|pysssss"
+      },
+      "widgets_values": [
+        "append",
+        "yes",
+        "photorealistic, cinematic,realistic, 8K，UE5.",
+        "A detailed, futuristic firearm, possibly an assault rifle, set against a gradient blue background. The firearm is predominantly silver and gold, with intricate designs and textures that suggest advanced technology. It features a scope, a magazine, and a side-mounted trigger mechanism. The overall style is sleek and modern, with a focus on precision and functionality., photorealistic, cinematic, ",
+        ""
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 54,
+      "type": "easy float",
+      "pos": [
+        -4218,
+        1419
+      ],
+      "size": [
+        210,
+        58
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "float",
+          "type": "FLOAT",
+          "links": [
+            80
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "浮点"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy float"
+      },
+      "widgets_values": [
+        7
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 53,
+      "type": "easy float",
+      "pos": [
+        -4438,
+        1423
+      ],
+      "size": [
+        210,
+        58
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "float",
+          "type": "FLOAT",
+          "links": [
+            79
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "浮点"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy float"
+      },
+      "widgets_values": [
+        3
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 65,
+      "type": "easy float",
+      "pos": [
+        -4223,
+        1321
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "float",
+          "type": "FLOAT",
+          "links": [
+            92
+          ],
+          "shape": 3,
+          "label": "浮点",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy float"
+      },
+      "widgets_values": [
+        0.8
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 64,
+      "type": "easy float",
+      "pos": [
+        -4445,
+        1318
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "float",
+          "type": "FLOAT",
+          "links": [
+            90
+          ],
+          "shape": 3,
+          "label": "浮点"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy float"
+      },
+      "widgets_values": [
+        0.6
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 49,
+      "type": "easy float",
+      "pos": [
+        -4657,
+        1316
+      ],
+      "size": [
+        210,
+        58
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "float",
+          "type": "FLOAT",
+          "links": [
+            77
+          ],
+          "shape": 3,
+          "label": "浮点"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy float"
+      },
+      "widgets_values": [
+        0.3
+      ],
+      "_widget_cache_map": {},
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 84,
+      "type": "easy showAnything",
+      "pos": [
+        -3666,
+        1406
+      ],
+      "size": {
+        "0": 210,
+        "1": 26
+      },
+      "flags": {},
+      "order": 23,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "type": "*",
+          "link": 108,
+          "label": "输入任何"
+        }
+      ],
+      "title": "展示",
+      "properties": {
+        "Node name for S&R": "easy showAnything"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 83,
+      "type": "easy showAnything",
+      "pos": [
+        -3684,
+        1303
+      ],
+      "size": {
+        "0": 210,
+        "1": 26
+      },
+      "flags": {},
+      "order": 24,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "type": "*",
+          "link": 109,
+          "label": "输入任何"
+        }
+      ],
+      "title": "展示",
+      "properties": {
+        "Node name for S&R": "easy showAnything"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 73,
+      "type": "DF_Text_Box",
+      "pos": [
+        -4364,
+        838
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            105
+          ],
+          "shape": 3,
+          "label": "STRING",
+          "slot_index": 0
+        }
+      ],
+      "title": "详细",
+      "properties": {
+        "Node name for S&R": "DF_Text_Box"
+      },
+      "widgets_values": [
+        "A highly detailed, semi-futuristic assault rifle with a sleek, modern design and strong emphasis on its structural features. The stock features a distinct triangular structure, designed for stability and control, with smooth geometric lines. The black and metallic color scheme is glossy and reflective, with no markings or emblems. The grip is simple and ergonomic, with no indentations, focusing purely on comfort and functionality. The magazine is solid black, slightly curved, and does not feature any transparent material. A prominent charging handle is located on the side of the rifle, along with a well-defined ejection port for shell casings. The barrel has a compact, tactical design with both front and rear iron sights for precise targeting. The overall weapon showcases modern military aesthetics, emphasizing both its functionality and advanced technology, without any unnecessary visual elements like glowing effects."
+      ],
+      "_widget_cache_map": {},
+      "color": "#332922",
+      "bgcolor": "#593930",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 79,
+      "type": "DF_Text_Box",
+      "pos": [
+        -3948,
+        837
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            106
+          ],
+          "shape": 3,
+          "label": "STRING",
+          "slot_index": 0
+        }
+      ],
+      "title": "简略",
+      "properties": {
+        "Node name for S&R": "DF_Text_Box"
+      },
+      "widgets_values": [
+        "A modern assault rifle with a curved magazine and tactical design."
+      ],
+      "_widget_cache_map": {},
+      "color": "#332922",
+      "bgcolor": "#593930",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 6,
+      "type": "ConditioningZeroOut",
+      "pos": [
+        -3490,
+        671
+      ],
+      "size": {
+        "0": 317.4000244140625,
+        "1": 26
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 30,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 49,
+          "label": "条件"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            55
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ConditioningZeroOut"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 4,
+      "type": "KSampler",
+      "pos": [
+        -3462,
+        744
+      ],
+      "size": {
+        "0": 315,
+        "1": 262
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 31,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 1,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 54,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 55,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 53,
+          "label": "Latent"
+        },
+        {
+          "name": "denoise",
+          "type": "FLOAT",
+          "link": 76,
+          "widget": {
+            "name": "denoise"
+          },
+          "label": "降噪"
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "link": 81,
+          "widget": {
+            "name": "cfg"
+          },
+          "label": "CFG"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            18
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        551838358499864,
+        "randomize",
+        20,
+        7,
+        "uni_pc",
+        "simple",
+        0.7000000000000001
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 10,
+      "type": "LoadImage",
+      "pos": [
+        -3424,
+        1114
+      ],
+      "size": {
+        "0": 315,
+        "1": 314
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            87
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            89
+          ],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "遮罩"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "screenshot-20241006-230144.png",
+        "image"
+      ],
+      "_widget_cache_map": {
+        "screenshot-20241006-230144.png": {
+          "value": "img/dcbf5e15cec94d4badc93d921968085a/16f47b2b8e45d53a0f4c70af27d57edcad3955b0a4267cd4247f52ee3d33113c.png",
+          "name": "screenshot-20241006-230144.png",
+          "url": "https://liblibai-tmp-image.liblib.cloud/img/dcbf5e15cec94d4badc93d921968085a/16f47b2b8e45d53a0f4c70af27d57edcad3955b0a4267cd4247f52ee3d33113c.png"
+        }
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 14,
+      "type": "PreviewImage",
+      "pos": [
+        -3095,
+        1133
+      ],
+      "size": [
+        331.68988045900005,
+        316.4747401673387
+      ],
+      "flags": {},
+      "order": 33,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 56,
+          "label": "图像"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 52,
+      "type": "easy anythingIndexSwitch",
+      "pos": [
+        -3976,
+        1364
+      ],
+      "size": [
+        211.30937222717102,
+        98
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "value0",
+          "type": "*",
+          "link": 79,
+          "label": "value0"
+        },
+        {
+          "name": "value1",
+          "type": "*",
+          "link": 80,
+          "label": "value1"
+        },
+        {
+          "name": "value2",
+          "type": "*",
+          "link": null,
+          "label": "value2"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "value",
+          "type": "*",
+          "links": [
+            81,
+            108
+          ],
+          "shape": 3,
+          "label": "value",
+          "slot_index": 0
+        }
+      ],
+      "title": "文本遵循CFG：（3.0，7.0）",
+      "properties": {
+        "Node name for S&R": "easy anythingIndexSwitch"
+      },
+      "widgets_values": [
+        1
+      ],
+      "_widget_cache_map": {},
+      "color": "#223",
+      "bgcolor": "#335",
+      "shape": 2,
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 82,
+      "type": "easy showAnything",
+      "pos": [
+        -3727,
+        1085
+      ],
+      "size": [
+        291.43726501065066,
+        129.23375670490577
+      ],
+      "flags": {},
+      "order": 28,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "type": "*",
+          "link": 112,
+          "label": "输入任何"
+        }
+      ],
+      "title": "展示",
+      "properties": {
+        "Node name for S&R": "easy showAnything"
+      },
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 85,
+      "type": "easy anythingIndexSwitch",
+      "pos": [
+        -3969,
+        1068
+      ],
+      "size": {
+        "0": 211.3093719482422,
+        "1": 98
+      },
+      "flags": {},
+      "order": 26,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "value0",
+          "type": "*",
+          "link": 110,
+          "label": "value0"
+        },
+        {
+          "name": "value1",
+          "type": "*",
+          "link": 111,
+          "label": "value1"
+        },
+        {
+          "name": "value2",
+          "type": "*",
+          "link": null,
+          "label": "value2"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "value",
+          "type": "*",
+          "links": [
+            112,
+            113,
+            114
+          ],
+          "shape": 3,
+          "label": "value",
+          "slot_index": 0
+        }
+      ],
+      "title": "文本切换（详细，简略）",
+      "properties": {
+        "Node name for S&R": "easy anythingIndexSwitch"
+      },
+      "widgets_values": [
+        0
+      ],
+      "_widget_cache_map": {},
+      "color": "#223",
+      "bgcolor": "#335",
+      "shape": 2,
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 45,
+      "type": "easy anythingIndexSwitch",
+      "pos": [
+        -3976,
+        1210
+      ],
+      "size": [
+        211.30937222717102,
+        118
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "value0",
+          "type": "*",
+          "link": 77,
+          "label": "value0"
+        },
+        {
+          "name": "value1",
+          "type": "*",
+          "link": 90,
+          "label": "value1"
+        },
+        {
+          "name": "value2",
+          "type": "*",
+          "link": 92,
+          "label": "value2"
+        },
+        {
+          "name": "value3",
+          "type": "*",
+          "link": null,
+          "label": "value3"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "value",
+          "type": "*",
+          "links": [
+            76,
+            109
+          ],
+          "shape": 3,
+          "label": "value",
+          "slot_index": 0
+        }
+      ],
+      "title": "降噪（0.3，0.6，0.8）",
+      "properties": {
+        "Node name for S&R": "easy anythingIndexSwitch"
+      },
+      "widgets_values": [
+        1
+      ],
+      "_widget_cache_map": {},
+      "color": "#232",
+      "bgcolor": "#353",
+      "shape": 2,
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 3,
+      "type": "VAELoader",
+      "pos": [
+        -3432,
+        67
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            19,
+            52
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 2,
+      "type": "DualCLIPLoader",
+      "pos": [
+        -3443,
+        160
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 11,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            48
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp8_e4m3fn",
+        "clip_l",
+        "flux"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 55,
+      "type": "Note",
+      "pos": [
+        -4416,
+        1073
+      ],
+      "size": [
+        395.1344022306339,
+        211.5161421596565
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "操作注释",
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "1.微调模式：\n   最小微调 0 0 0\n   标准微调 0 0 1\n   最大微调 1 0 1\n2.重绘模式\n   最小重绘 0 1 0     ----结构可能会弱化\n   标准重绘 0 1 1     \n   最大重绘 1 1 1\n3.发散模式:\n   最小发散 0 2 0\n   标准发散 0 2 1\n   最大发散 1 2 1"
+      ],
+      "_widget_cache_map": {},
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 80,
+      "type": "Note",
+      "pos": [
+        -4357,
+        592
+      ],
+      "size": {
+        "0": 395.1343994140625,
+        "1": 211.51614379882812
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "详细中文",
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "一把极具细节的半未来派突击步枪，带有光滑的现代设计并强调其结构特征。枪托具有明显的三角结构，设计以提高稳定性和控制力，并带有流畅的几何线条。枪身采用黑色和金属色调，表面光滑反光，没有任何标志或图案。握把设计简洁，注重人体工学，没有凹痕，纯粹强调舒适性和功能性。弹匣为纯黑色，稍微弯曲，且不采用透明材料。枪身侧面有一个显眼的拉机柄，以及明确的抛壳口。枪管采用紧凑的战术设计，配有前后准星以确保精确瞄准。整体武器展示了现代军事美学，突出了其功能性和先进技术，没有不必要的视觉元素如光效。"
+      ],
+      "_widget_cache_map": {},
+      "color": "#332922",
+      "bgcolor": "#593930",
+      "category": "Official"
+    },
+    {
+      "id": 81,
+      "type": "Note",
+      "pos": [
+        -3944,
+        590
+      ],
+      "size": {
+        "0": 395.1343994140625,
+        "1": 211.51614379882812
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "简略中文",
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "一把带有弯曲弹匣和战术设计的现代突击步枪。"
+      ],
+      "_widget_cache_map": {},
+      "color": "#332922",
+      "bgcolor": "#593930",
+      "category": "Official"
+    },
+    {
+      "id": 68,
+      "type": "DF_Text_Box",
+      "pos": [
+        -4779,
+        838
+      ],
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            99,
+            103
+          ],
+          "shape": 3,
+          "label": "STRING",
+          "slot_index": 0
+        }
+      ],
+      "title": "风格",
+      "properties": {
+        "Node name for S&R": "DF_Text_Box"
+      },
+      "widgets_values": [
+        "photorealistic, cinematic,realistic, 8K，UE5."
+      ],
+      "_widget_cache_map": {},
+      "color": "#332922",
+      "bgcolor": "#593930",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 87,
+      "type": "Note",
+      "pos": [
+        -5085,
+        846
+      ],
+      "size": [
+        281.35548041070615,
+        181.50382292885934
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "常用 风格",
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "写实风格：photorealistic, cinematic,realistic, 8K，UE5."
+      ],
+      "_widget_cache_map": {},
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 86,
+      "type": "Note",
+      "pos": [
+        -4777,
+        584
+      ],
+      "size": {
+        "0": 395.1343994140625,
+        "1": 211.51614379882812
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "描述注释",
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "1.风格：描述想要的风格即可，不论是详细还是简略模式都采用同一个风格。\n\n2.英文描述：详细和简略两个文本框，分别输入想要的详细英文描述和中文描述。\n注：推荐将图像上传后，要求gpt-4o或者claude3.5来反推midjourney的提示词（包括详细和简略版），然后再让AI修改成最终自己想要的提示词，再粘贴进来。\n\n3.中文描述：在流程里不起什么作用，就是备注一下方便查看。"
+      ],
+      "_widget_cache_map": {},
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      4,
+      0,
+      "MODEL"
+    ],
+    [
+      18,
+      4,
+      0,
+      12,
+      0,
+      "LATENT"
+    ],
+    [
+      19,
+      3,
+      0,
+      12,
+      1,
+      "VAE"
+    ],
+    [
+      48,
+      2,
+      0,
+      21,
+      0,
+      "CLIP"
+    ],
+    [
+      49,
+      21,
+      0,
+      6,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      52,
+      3,
+      0,
+      23,
+      1,
+      "VAE"
+    ],
+    [
+      53,
+      23,
+      0,
+      4,
+      3,
+      "LATENT"
+    ],
+    [
+      54,
+      21,
+      0,
+      4,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      55,
+      6,
+      0,
+      4,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      56,
+      12,
+      0,
+      14,
+      0,
+      "IMAGE"
+    ],
+    [
+      76,
+      45,
+      0,
+      4,
+      4,
+      "FLOAT"
+    ],
+    [
+      77,
+      49,
+      0,
+      45,
+      0,
+      "*"
+    ],
+    [
+      79,
+      53,
+      0,
+      52,
+      0,
+      "*"
+    ],
+    [
+      80,
+      54,
+      0,
+      52,
+      1,
+      "*"
+    ],
+    [
+      81,
+      52,
+      0,
+      4,
+      5,
+      "FLOAT"
+    ],
+    [
+      83,
+      60,
+      0,
+      23,
+      0,
+      "IMAGE"
+    ],
+    [
+      87,
+      10,
+      0,
+      63,
+      0,
+      "IMAGE"
+    ],
+    [
+      88,
+      63,
+      0,
+      60,
+      0,
+      "IMAGE"
+    ],
+    [
+      89,
+      10,
+      1,
+      63,
+      1,
+      "MASK"
+    ],
+    [
+      90,
+      64,
+      0,
+      45,
+      1,
+      "*"
+    ],
+    [
+      92,
+      65,
+      0,
+      45,
+      2,
+      "*"
+    ],
+    [
+      99,
+      68,
+      0,
+      67,
+      0,
+      "STRING"
+    ],
+    [
+      103,
+      68,
+      0,
+      72,
+      0,
+      "STRING"
+    ],
+    [
+      105,
+      73,
+      0,
+      72,
+      1,
+      "STRING"
+    ],
+    [
+      106,
+      79,
+      0,
+      67,
+      1,
+      "STRING"
+    ],
+    [
+      108,
+      52,
+      0,
+      84,
+      0,
+      "*"
+    ],
+    [
+      109,
+      45,
+      0,
+      83,
+      0,
+      "*"
+    ],
+    [
+      110,
+      72,
+      0,
+      85,
+      0,
+      "*"
+    ],
+    [
+      111,
+      67,
+      0,
+      85,
+      1,
+      "*"
+    ],
+    [
+      112,
+      85,
+      0,
+      82,
+      0,
+      "*"
+    ],
+    [
+      113,
+      85,
+      0,
+      21,
+      1,
+      "STRING"
+    ],
+    [
+      114,
+      85,
+      0,
+      21,
+      2,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1.061076460950009,
+      "offset": [
+        4804.939784370545,
+        -615.5772958903091
+      ]
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

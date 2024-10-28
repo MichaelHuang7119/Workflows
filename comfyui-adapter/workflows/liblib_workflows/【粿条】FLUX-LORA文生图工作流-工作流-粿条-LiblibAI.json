@@ -1,0 +1,633 @@
+{
+  "last_node_id": 83,
+  "last_link_id": 116,
+  "nodes": [
+    {
+      "id": 73,
+      "type": "EmptyLatentImage",
+      "pos": {
+        "0": 13,
+        "1": 646
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            106
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1536,
+        4
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 74,
+      "type": "VAEDecode",
+      "pos": {
+        "0": 737,
+        "1": 240
+      },
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 108,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 109,
+          "slot_index": 1,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            107,
+            116
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 79,
+      "type": "Note",
+      "pos": {
+        "0": 395,
+        "1": 118
+      },
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "注意Guidance的值\n2-3之间写实场景\n3-4.5之间非写实场景"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 81,
+      "type": "Note",
+      "pos": {
+        "0": -604,
+        "1": 558
+      },
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "CLIP1：显存＞16GB选择FP16,反之FP8"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 82,
+      "type": "Note",
+      "pos": {
+        "0": 17,
+        "1": 530
+      },
+      "size": {
+        "0": 214.95883178710938,
+        "1": 64.31621551513672
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "分辨率最好＞1024\n默认4张1024*1536，4090测试平均25秒一张\n根据自己配置调整次数与尺寸"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 80,
+      "type": "Note",
+      "pos": {
+        "0": -365,
+        "1": 63
+      },
+      "size": {
+        "0": 487.7752990722656,
+        "1": 91.78186798095703
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "FLUX大模型推荐\n*首次加载大模型会非常慢，稍等几分钟\ndev-22GB版本（质量最佳、速度最慢;不可商用）(显存推荐＞16GB）\nschnell-22GB版本（稍微比dav快一些支持四步生图;APAD 2.0 license许可下商用）（显存推荐＞16GB)\nFP8-11GB版本（支持四步生图;APAD 2.0 license许可下商用）（显存推荐＞8GB)\n剪枝类型：fp8\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 75,
+      "type": "FluxSamplerParams+",
+      "pos": {
+        "0": 387,
+        "1": 233
+      },
+      "size": {
+        "0": 315,
+        "1": 478
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 115,
+          "label": "model"
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 105,
+          "label": "conditioning"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 106,
+          "label": "latent_image"
+        },
+        {
+          "name": "loras",
+          "type": "LORA_PARAMS",
+          "link": null,
+          "label": "loras"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            108
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "latent"
+        },
+        {
+          "name": "params",
+          "type": "SAMPLER_PARAMS",
+          "links": null,
+          "shape": 3,
+          "label": "params"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FluxSamplerParams+"
+      },
+      "widgets_values": [
+        "?",
+        "euler",
+        "simple",
+        "20",
+        "3.5",
+        "",
+        "",
+        "1.0"
+      ]
+    },
+    {
+      "id": 70,
+      "type": "UNETLoader",
+      "pos": {
+        "0": -367,
+        "1": 218
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            113
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "FLUX.1 模型下载版-黑暗森林工作室 _FLUX.1-dev.sft",
+        "fp8_e4m3fn"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 72,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": 12,
+        "1": 232
+      },
+      "size": {
+        "0": 333.19488525390625,
+        "1": 138.51365661621094
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 103,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            105
+          ],
+          "slot_index": 0,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "Matte green protein shaker bottle, BlenderBottle brand, sitting on a rugged rock surface, light gray background, product placement style, sharp focus, dynamic contrasts between light and shadows, text and logo visible on the bottle, neutral tones, realistic texture on rock, professional studio lighting, minimalist art style, directional light casting defined shadows, high-resolution image, earthy color palette, advertising composition.",
+        true
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 69,
+      "type": "DualCLIPLoader",
+      "pos": {
+        "0": -361,
+        "1": 559
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            103,
+            114
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp16.safetensors",
+        "clip_l.safetensors",
+        "flux"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 78,
+      "type": "LoraLoader",
+      "pos": {
+        "0": -368,
+        "1": 373
+      },
+      "size": {
+        "0": 315,
+        "1": 126
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 113,
+          "label": "模型"
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 114,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            115
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoader"
+      },
+      "widgets_values": [
+        "【油条】电商产品超级细腻质感.safetensors",
+        0.8,
+        2
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 71,
+      "type": "VAELoader",
+      "pos": {
+        "0": -366,
+        "1": 731
+      },
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            109
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 76,
+      "type": "PreviewImage",
+      "pos": {
+        "0": 1044,
+        "1": 96
+      },
+      "size": {
+        "0": 556.849609375,
+        "1": 747.4759521484375
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 107,
+          "label": "图像"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 83,
+      "type": "SaveImage",
+      "pos": {
+        "0": 1635,
+        "1": 102
+      },
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 116,
+          "label": "图像"
+        }
+      ],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "category": "Primitive Nodes"
+    }
+  ],
+  "links": [
+    [
+      103,
+      69,
+      0,
+      72,
+      0,
+      "CLIP"
+    ],
+    [
+      105,
+      72,
+      0,
+      75,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      106,
+      73,
+      0,
+      75,
+      2,
+      "LATENT"
+    ],
+    [
+      107,
+      74,
+      0,
+      76,
+      0,
+      "IMAGE"
+    ],
+    [
+      108,
+      75,
+      0,
+      74,
+      0,
+      "LATENT"
+    ],
+    [
+      109,
+      71,
+      0,
+      74,
+      1,
+      "VAE"
+    ],
+    [
+      113,
+      70,
+      0,
+      78,
+      0,
+      "MODEL"
+    ],
+    [
+      114,
+      69,
+      0,
+      78,
+      1,
+      "CLIP"
+    ],
+    [
+      115,
+      78,
+      0,
+      75,
+      0,
+      "MODEL"
+    ],
+    [
+      116,
+      74,
+      0,
+      83,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.814027493868412,
+      "offset": [
+        132.09591531375816,
+        214.30149974214774
+      ]
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

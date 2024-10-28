@@ -1,0 +1,1213 @@
+{
+  "last_node_id": 27,
+  "last_link_id": 34,
+  "nodes": [
+    {
+      "id": 3,
+      "type": "KSampler",
+      "pos": [
+        -2.293887400441618,
+        43.706219266178636
+      ],
+      "size": {
+        "0": 315,
+        "1": 474
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 20,
+          "label": "model"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 15,
+          "label": "positive"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 6,
+          "label": "negative"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 34,
+          "label": "latent_image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            7
+          ],
+          "slot_index": 0,
+          "label": "LATENT"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        605895825222741,
+        "randomize",
+        26,
+        6,
+        "euler_ancestral",
+        "simple",
+        1
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 4,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        -1675.7306694558242,
+        269.1052426348012
+      ],
+      "size": {
+        "0": 315,
+        "1": 98
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            18
+          ],
+          "slot_index": 0,
+          "label": "MODEL"
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            19
+          ],
+          "slot_index": 1,
+          "label": "CLIP"
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [],
+          "slot_index": 2,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "XL\\IP草图灵感专用-idea-CKPT XLv1.safetensors"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 5,
+      "type": "EmptyLatentImage",
+      "pos": [
+        -2.293887400441618,
+        593.7062192661788
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            34
+          ],
+          "slot_index": 0,
+          "label": "LATENT"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        768,
+        1024,
+        1
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 7,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -958,
+        607
+      ],
+      "size": {
+        "0": 425.27801513671875,
+        "1": 180.6060791015625
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 21,
+          "label": "clip"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            6
+          ],
+          "slot_index": 0,
+          "label": "CONDITIONING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "text, watermark"
+      ],
+      "color": "#322",
+      "bgcolor": "#533",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [
+        337.7061125995603,
+        53.70621926617862
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 7,
+          "label": "samples"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 17,
+          "slot_index": 1,
+          "label": "vae"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            9
+          ],
+          "slot_index": 0,
+          "label": "IMAGE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 9,
+      "type": "SaveImage",
+      "pos": [
+        708.9260607319421,
+        14.412509309157429
+      ],
+      "size": {
+        "0": 698.6386108398438,
+        "1": 970.8080444335938
+      },
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 9,
+          "label": "images"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "ComfyUI"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 10,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -840,
+        280
+      ],
+      "size": {
+        "0": 240,
+        "1": 60
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 22,
+          "slot_index": 0,
+          "label": "clip"
+        },
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 16,
+          "slot_index": 1,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            15
+          ],
+          "slot_index": 0,
+          "label": "CONDITIONING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "clay character"
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 11,
+      "type": "Text List to Text",
+      "pos": [
+        -840,
+        400
+      ],
+      "size": {
+        "0": 240,
+        "1": 60
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text_list",
+          "type": "LIST",
+          "link": 11,
+          "slot_index": 0,
+          "label": "text_list"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            13
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text List to Text"
+      },
+      "widgets_values": [
+        ", "
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 12,
+      "type": "Text List",
+      "pos": [
+        -840,
+        60
+      ],
+      "size": {
+        "0": 240,
+        "1": 160
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text_a",
+          "type": "STRING",
+          "link": 26,
+          "slot_index": 0,
+          "widget": {
+            "name": "text_a"
+          },
+          "label": "text_a"
+        },
+        {
+          "name": "text_b",
+          "type": "STRING",
+          "link": 24,
+          "slot_index": 1,
+          "widget": {
+            "name": "text_b"
+          },
+          "label": "text_b"
+        },
+        {
+          "name": "text_c",
+          "type": "STRING",
+          "link": 33,
+          "slot_index": 2,
+          "widget": {
+            "name": "text_c"
+          },
+          "label": "text_c"
+        },
+        {
+          "name": "text_d",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text_d"
+          },
+          "label": "text_d"
+        },
+        {
+          "name": "text_e",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text_e"
+          },
+          "label": "text_e"
+        },
+        {
+          "name": "text_f",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text_f"
+          },
+          "label": "text_f"
+        },
+        {
+          "name": "text_g",
+          "type": "STRING",
+          "link": null,
+          "widget": {
+            "name": "text_g"
+          },
+          "label": "text_g"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LIST",
+          "type": "LIST",
+          "links": [
+            11
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "LIST"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text List"
+      },
+      "widgets_values": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 13,
+      "type": "ShowText|pysssss",
+      "pos": [
+        -560,
+        110
+      ],
+      "size": {
+        "0": 388.6035461425781,
+        "1": 322.4010314941406
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 13,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            16
+          ],
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        [
+          "claymotion, made-of-clay, stopmotion, polymer clay, ultra light clay, High quality, details, cartoonish, 8kï¼\nvolumetric lighting,adorable, 1girl, solo, looking_at_viewer, black_hair, hair_ornament, jewelry, closed_mouth, upper_body, earrings, necklace, blurry, black_eyes, blurry_background, chinese_clothes, gem, beads, realistic, , smile"
+        ],
+        " black and white line drawing, the overall image is cute and simple., A cartoon-style female character. Standing, full body, earrings, she has big eyes, closed mouth, a headdress decorated with leaves and patterns, long hair and draped over her shoulders. She is dressed simply, wearing a tube top and shorts, with a belt around her waist. The character has short limbs, long hair, and a tail behind her, and the overall image is cute and simple. White background."
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 15,
+      "type": "VAELoader",
+      "pos": [
+        337.7061125995603,
+        153.70621926617864
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            17
+          ],
+          "shape": 3,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "sdxl_vae.safetensors"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 16,
+      "type": "LoraLoader",
+      "pos": [
+        -1675.7306694558242,
+        419.1052426348011
+      ],
+      "size": {
+        "0": 292.0050964355469,
+        "1": 126
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 18,
+          "label": "model"
+        },
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 19,
+          "label": "clip"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            20
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "MODEL"
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            21,
+            22
+          ],
+          "slot_index": 1,
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoader"
+      },
+      "widgets_values": [
+        "XL\\ipcaotu_V6XL-000012.safetensors",
+        0.8,
+        1
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 19,
+      "type": "CR Text",
+      "pos": [
+        -1068,
+        229
+      ],
+      "size": {
+        "0": 210.32814025878906,
+        "1": 229.96348571777344
+      },
+      "flags": {
+        "collapsed": false
+      },
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "text",
+          "type": "*",
+          "links": [
+            24
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "text"
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "show_help"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Text"
+      },
+      "widgets_values": [
+        "A cartoon-style female character. Standing, full body, earrings, she has big eyes, closed mouth, a headdress decorated with leaves and patterns, long hair and draped over her shoulders. She is dressed simply, wearing a tube top and shorts, with a belt around her waist. The character has short limbs, long hair, and a tail behind her, and the overall image is cute and simple. White background."
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 21,
+      "type": "CR Text",
+      "pos": [
+        -1030,
+        170
+      ],
+      "size": {
+        "0": 285.4181213378906,
+        "1": 112.59972381591797
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "text",
+          "type": "*",
+          "links": [
+            26
+          ],
+          "shape": 3,
+          "label": "text"
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null,
+          "shape": 3,
+          "label": "show_help"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Text"
+      },
+      "widgets_values": [
+        " black and white line drawing, the overall image is cute and simple."
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 22,
+      "type": "ImageResize+",
+      "pos": [
+        -909.6823269545395,
+        1819.0741572881818
+      ],
+      "size": {
+        "0": 439.0268859863281,
+        "1": 218
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 28,
+          "label": "image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            29,
+            32
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "IMAGE"
+        },
+        {
+          "name": "width",
+          "type": "INT",
+          "links": null,
+          "slot_index": 1,
+          "shape": 3,
+          "label": "width"
+        },
+        {
+          "name": "height",
+          "type": "INT",
+          "links": null,
+          "shape": 3,
+          "label": "height"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageResize+"
+      },
+      "widgets_values": [
+        0,
+        1024,
+        "bicubic",
+        true,
+        "always",
+        32
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 23,
+      "type": "LoadImage",
+      "pos": [
+        -915.6823269545395,
+        1035.0741572881855
+      ],
+      "size": {
+        "0": 440,
+        "1": 720
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 4,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            28
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "IMAGE"
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "MASK"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "view (14).png",
+        "image"
+      ],
+      "color": "#285c53",
+      "bgcolor": "#14483f",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 24,
+      "type": "VAEEncode",
+      "pos": [
+        -409.68232695453975,
+        1199.074157288185
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 29,
+          "label": "pixels"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 31,
+          "label": "vae"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [],
+          "shape": 3,
+          "label": "LATENT"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 25,
+      "type": "VAELoader",
+      "pos": [
+        -409.68232695453975,
+        1299.0741572881846
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 4,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            31
+          ],
+          "shape": 3,
+          "label": "VAE"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "sdxl_vae.safetensors"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 26,
+      "type": "WD14Tagger|pysssss",
+      "pos": [
+        -429.6823269545395,
+        1429.0741572881846
+      ],
+      "size": {
+        "0": 224.29051208496094,
+        "1": 277.0435485839844
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 32,
+          "label": "image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            33
+          ],
+          "slot_index": 0,
+          "shape": 6,
+          "label": "STRING"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "WD14Tagger|pysssss"
+      },
+      "widgets_values": [
+        "wd-vit-tagger-v3",
+        0.35,
+        0.85,
+        "",
+        "1girl, solo, looking_at_viewer, hair_ornament, brown_eyes, jewelry, flower, earrings, parted_lips, hair_flower, lips, makeup, colored_skin, facial_mark, portrait, blue_flower, realistic, forehead_jewel",
+        "flat color,:d,flat color,"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 27,
+      "type": "Note",
+      "pos": [
+        -118,
+        976
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "图生图区域：\n负责细化生图流程"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    }
+  ],
+  "links": [
+    [
+      6,
+      7,
+      0,
+      3,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      7,
+      3,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      9,
+      8,
+      0,
+      9,
+      0,
+      "IMAGE"
+    ],
+    [
+      11,
+      12,
+      0,
+      11,
+      0,
+      "LIST"
+    ],
+    [
+      13,
+      11,
+      0,
+      13,
+      0,
+      "STRING"
+    ],
+    [
+      15,
+      10,
+      0,
+      3,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      16,
+      13,
+      0,
+      10,
+      1,
+      "STRING"
+    ],
+    [
+      17,
+      15,
+      0,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      18,
+      4,
+      0,
+      16,
+      0,
+      "MODEL"
+    ],
+    [
+      19,
+      4,
+      1,
+      16,
+      1,
+      "CLIP"
+    ],
+    [
+      20,
+      16,
+      0,
+      3,
+      0,
+      "MODEL"
+    ],
+    [
+      21,
+      16,
+      1,
+      7,
+      0,
+      "CLIP"
+    ],
+    [
+      22,
+      16,
+      1,
+      10,
+      0,
+      "CLIP"
+    ],
+    [
+      24,
+      19,
+      0,
+      12,
+      1,
+      "STRING"
+    ],
+    [
+      26,
+      21,
+      0,
+      12,
+      0,
+      "STRING"
+    ],
+    [
+      28,
+      23,
+      0,
+      22,
+      0,
+      "IMAGE"
+    ],
+    [
+      29,
+      22,
+      0,
+      24,
+      0,
+      "IMAGE"
+    ],
+    [
+      31,
+      25,
+      0,
+      24,
+      1,
+      "VAE"
+    ],
+    [
+      32,
+      22,
+      0,
+      26,
+      0,
+      "IMAGE"
+    ],
+    [
+      33,
+      26,
+      0,
+      12,
+      2,
+      "STRING"
+    ],
+    [
+      34,
+      5,
+      0,
+      3,
+      3,
+      "LATENT"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "text list",
+      "bounding": [
+        -1180,
+        -77,
+        1073,
+        943
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "ckpt",
+      "bounding": [
+        -1735,
+        186,
+        490,
+        416
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "Group",
+      "bounding": [
+        -1066,
+        907,
+        912,
+        1150
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "Group",
+      "bounding": [
+        -64,
+        -70,
+        639,
+        827
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "Group",
+      "bounding": [
+        657,
+        -67,
+        807,
+        1112
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6830134553650709,
+      "offset": [
+        1219.5007749558229,
+        363.19512704084144
+      ]
+    },
+    "workspace_info": {
+      "id": "QrA71wz6TRuKyzRg20opI"
+    }
+  },
+  "version": 0.4
+}

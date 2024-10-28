@@ -1,0 +1,334 @@
+{
+  "3": {
+    "inputs": {
+      "unet": {
+        "node_": "29",
+        "name_": "unet"
+      },
+      "scheduler": {
+        "node_": "34",
+        "name_": "scheduler"
+      },
+      "timesteps": {
+        "node_": "34",
+        "name_": "timesteps"
+      },
+      "latents_in": {
+        "node_": "35",
+        "name_": "latents"
+      },
+      "positive": {
+        "node_": "38",
+        "name_": "forward"
+      },
+      "middle": null,
+      "negative": {
+        "node_": "41",
+        "name_": "forward"
+      },
+      "generators": {
+        "node_": "32",
+        "name_": "generators"
+      },
+      "cfg_scale": 8,
+      "cfg2_scale": 1.0,
+      "return_with_leftover_noise": "disable",
+      "batch_size": 1,
+      "model_type": "v1"
+    },
+    "node_type": "SampleLoop"
+  },
+  "6": {
+    "inputs": {
+      "text_encoder": {
+        "node_": "29",
+        "name_": "text_encoder"
+      },
+      "text_encoder2": {
+        "node_": "29",
+        "name_": "text_encoder2"
+      },
+      "text_encoder3": {
+        "node_": "29",
+        "name_": "text_encoder3"
+      },
+      "tokenizer": {
+        "node_": "29",
+        "name_": "tokenizer"
+      },
+      "tokenizer2": {
+        "node_": "29",
+        "name_": "tokenizer2"
+      },
+      "tokenizer3": {
+        "node_": "29",
+        "name_": "tokenizer3"
+      },
+      "prompt": "(girl)1.1 blue eyes, blonde hair, in the yosemite national park mountains nature\n",
+      "model_type": "v1",
+      "clip_skip": 1
+    },
+    "node_type": "EncodeText"
+  },
+  "7": {
+    "inputs": {
+      "text_encoder": {
+        "node_": "29",
+        "name_": "text_encoder"
+      },
+      "text_encoder2": {
+        "node_": "29",
+        "name_": "text_encoder2"
+      },
+      "text_encoder3": {
+        "node_": "29",
+        "name_": "text_encoder3"
+      },
+      "tokenizer": {
+        "node_": "29",
+        "name_": "tokenizer"
+      },
+      "tokenizer2": {
+        "node_": "29",
+        "name_": "tokenizer2"
+      },
+      "tokenizer3": {
+        "node_": "29",
+        "name_": "tokenizer3"
+      },
+      "prompt": "watermark, text\n",
+      "model_type": "v1",
+      "clip_skip": 1
+    },
+    "node_type": "EncodeText"
+  },
+  "8": {
+    "inputs": {
+      "latents": {
+        "node_": "3",
+        "name_": "latents"
+      },
+      "vae": {
+        "node_": "30",
+        "name_": "model"
+      }
+    },
+    "node_type": "VaeDecode"
+  },
+  "9": {
+    "inputs": {
+      "key": "9",
+      "value": {
+        "node_": "42",
+        "name_": "images"
+      }
+    },
+    "node_type": "TaskOutput"
+  },
+  "20": {
+    "inputs": {
+      "image_path": "/data/yjw/ComfyUI/input/yosemite_inpaint_example.png"
+    },
+    "node_type": "LoadImage"
+  },
+  "26": {
+    "inputs": {
+      "image": {
+        "node_": "20",
+        "name_": "image"
+      },
+      "vae": {
+        "node_": "30",
+        "name_": "model"
+      },
+      "mask_in": {
+        "node_": "20",
+        "name_": "mask"
+      },
+      "grow_mask_by": 6
+    },
+    "node_type": "VaeEncode"
+  },
+  "29": {
+    "inputs": {
+      "path": "/data/yjw/ComfyUI/models/checkpoints/Anything-V3.0.ckpt",
+      "cls": "StableDiffusionImg2ImgPipeline",
+      "kwargs": {
+        "config": "/data/yjw/ComfyUI/models/configs/stable-diffusion-v1-5"
+      }
+    },
+    "node_type": "PipeFromSingleFile"
+  },
+  "30": {
+    "inputs": {
+      "cls": "AutoencoderKL",
+      "path": "/data/yjw/ComfyUI/models/vae/vae-ft-mse-840000-ema-pruned.safetensors",
+      "kwargs": {
+        "config": "/data/yjw/ComfyUI/models/configs/stable-diffusion-v1-5/vae"
+      }
+    },
+    "node_type": "ModelFromSingleFile"
+  },
+  "32": {
+    "inputs": {
+      "seeds": 171829914789776
+    },
+    "node_type": "MakeGenerators"
+  },
+  "33": {
+    "inputs": {
+      "cls": "UniPCMultistepScheduler",
+      "init_kwargs": {
+        "num_train_timesteps": 1000,
+        "beta_start": 0.00085,
+        "beta_end": 0.012,
+        "beta_schedule": "scaled_linear",
+        "trained_betas": null,
+        "solver_order": 2,
+        "prediction_type": "epsilon",
+        "thresholding": false,
+        "dynamic_thresholding_ratio": 0.995,
+        "sample_max_value": 1.0,
+        "predict_x0": true,
+        "solver_type": "bh2",
+        "lower_order_final": true,
+        "disable_corrector": [],
+        "solver_p": null,
+        "use_karras_sigmas": false,
+        "timestep_spacing": "linspace",
+        "steps_offset": 0,
+        "final_sigmas_type": "sigma_min",
+        "rescale_betas_zero_snr": false
+      }
+    },
+    "node_type": "MakeScheduler"
+  },
+  "34": {
+    "inputs": {
+      "scheduler_in": {
+        "node_": "33",
+        "name_": "scheduler"
+      },
+      "scheduler_step": 20,
+      "start_step": 0,
+      "end_step": 19
+    },
+    "node_type": "SetTimesteps"
+  },
+  "35": {
+    "inputs": {
+      "scheduler": {
+        "node_": "34",
+        "name_": "scheduler"
+      },
+      "latents_in": {
+        "node_": "26",
+        "name_": "latents"
+      },
+      "generators": {
+        "node_": "32",
+        "name_": "generators"
+      },
+      "timesteps": {
+        "node_": "34",
+        "name_": "timesteps"
+      }
+    },
+    "node_type": "AddNoise"
+  },
+  "36": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "6",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "37": {
+    "inputs": {
+      "dict_from": {
+        "node_": "36",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "6",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "38": {
+    "inputs": {
+      "dict1": {
+        "node_": "37",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "39": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "7",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "40": {
+    "inputs": {
+      "dict_from": {
+        "node_": "39",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "7",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "41": {
+    "inputs": {
+      "dict1": {
+        "node_": "40",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "42": {
+    "inputs": {
+      "images_in": {
+        "node_": "8",
+        "name_": "images"
+      }
+    },
+    "node_type": "Tensor2Image"
+  }
+}

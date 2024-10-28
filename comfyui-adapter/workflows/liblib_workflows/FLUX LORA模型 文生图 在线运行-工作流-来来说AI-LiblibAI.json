@@ -1,0 +1,664 @@
+{
+  "last_node_id": 81,
+  "last_link_id": 125,
+  "nodes": [
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [
+        704.5433959960938,
+        583.2105712890625,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "size": {
+        "0": 210,
+        "1": 46
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 125,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 12,
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            9
+          ],
+          "slot_index": 0,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 9,
+      "type": "SaveImage",
+      "pos": [
+        942.5433959960938,
+        580.2105712890625,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "size": {
+        "0": 271.3192443847656,
+        "1": 337.8921203613281
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 9,
+          "label": "图像"
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "comfyui"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 73,
+      "type": "CLIPTextEncode",
+      "pos": [
+        19,
+        677,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "size": {
+        "0": 321.9624938964844,
+        "1": 299.50738525390625
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 109,
+          "label": "CLIP"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            124
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "RAW photo if a highly realistic close-up portrait of a 40-year-old tech founder man. He has a fair, slightly tanned complexion with a few visible fine lines around his eyes and mouth, indicative of his age. His eyes are a sharp blue with a focused, intelligent gaze, framed by slightly bushy eyebrows with a few stray hairs. He has light stubble covering his jawline, adding a rugged touch to his otherwise clean appearance. His hair is dark brown with hints of gray at the temples, neatly styled in a modern, slightly tousled look. His face is square-shaped with high cheekbones and a strong jawline. He wears rectangular, thin-rimmed glasses that complement his professional demeanor. His lips are thin and set in a neutral expression, exuding calm confidence. He is dressed in a casual yet sophisticated outfit: a well-fitted, dark blue blazer over a white dress shirt, with the top button undone, hinting at his laid-back yet professional style. The background is a blurred office environment with hints of modern decor, placing him in his natural workspace. The lighting is soft and natural, highlighting the contours of his face and creating realistic shadows and highlights, enhancing the lifelike quality of the image."
+      ],
+      "_widget_cache_map": {},
+      "color": "#322",
+      "bgcolor": "#533",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 78,
+      "type": "FluxSamplerParams+",
+      "pos": [
+        721,
+        98,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "size": {
+        "0": 327.5999755859375,
+        "1": 286
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 121,
+          "label": "model"
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 124,
+          "label": "conditioning"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 123,
+          "label": "latent_image"
+        },
+        {
+          "name": "loras",
+          "type": "LORA_PARAMS",
+          "link": null,
+          "label": "loras"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            125
+          ],
+          "shape": 3,
+          "label": "latent",
+          "slot_index": 0
+        },
+        {
+          "name": "params",
+          "type": "SAMPLER_PARAMS",
+          "links": null,
+          "shape": 3,
+          "label": "params"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FluxSamplerParams+"
+      },
+      "widgets_values": [
+        "333",
+        "euler",
+        "simple",
+        "20",
+        "3.5",
+        "",
+        "",
+        "1.0"
+      ],
+      "_widget_cache_map": {},
+      "color": "#322",
+      "bgcolor": "#533",
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 12,
+      "type": "UNETLoader",
+      "pos": [
+        12,
+        75,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {
+        "pinned": true
+      },
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            107
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "基础算法_F.1",
+        "default"
+      ],
+      "_widget_cache_map": {
+        "基础算法_F.1": {
+          "name": "基础算法_F.1",
+          "value": "412b427ddb674b4dbab9e5abd5ae6057"
+        }
+      },
+      "color": "#322",
+      "bgcolor": "#533",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 11,
+      "type": "DualCLIPLoader",
+      "pos": [
+        11,
+        195,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            109
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "CLIP"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp8_e4m3fn",
+        "clip_l",
+        "flux"
+      ],
+      "_widget_cache_map": {},
+      "color": "#232",
+      "bgcolor": "#353",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 10,
+      "type": "VAELoader",
+      "pos": [
+        15,
+        346,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            12
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "_widget_cache_map": {},
+      "color": "#223",
+      "bgcolor": "#335",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 72,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        20,
+        471,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 107,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            121
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "模型"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "XLabs F.1 Realism LoRA_V1",
+        0.5
+      ],
+      "_widget_cache_map": {
+        "XLabs F.1 Realism LoRA_V1": {
+          "name": "XLabs F.1 Realism LoRA_V1",
+          "value": "d934fb7dda1949ae82d09ff8e4e4d87e"
+        }
+      },
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 75,
+      "type": "EmptyLatentImage",
+      "pos": [
+        403,
+        88,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "size": {
+        "0": 220.79238891601562,
+        "1": 111.75465393066406
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            123
+          ],
+          "slot_index": 0,
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        832,
+        1344,
+        1
+      ],
+      "_widget_cache_map": {},
+      "color": "#322",
+      "bgcolor": "#533",
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 81,
+      "type": "Note",
+      "pos": [
+        -631,
+        29
+      ],
+      "size": {
+        "0": 598.518798828125,
+        "1": 801.9869995117188
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {
+        "text": "说明"
+      },
+      "widgets_values": [
+        "该工作流适合官方模型或Kjiai FP8模型\n官方模型： https://www.liblib.art/modelinfo/488cd9d58cd4421b9e8000373d7da123 \nKjiai FP8模型：我稍后上传该模型\n\n********************************\n工作流功能 Workflow function\n********************************\n使用FLUX+LORA模型文字生成图片，简称T2I，共9个节点\nGenerate images using FLUX+LORA model text, abbreviated as T2I, with a total of 9 nodes\n\n\n********************************\n使用方法  HOW TO USE\n********************************\n第1组，红色框：加载大模型；绿色框：加载clip模型；蓝色框：加载VAE模型；黄色框：加载FLUX lora模型。\n第2组，红色框：填写提示词。\n第3组，红色框：设置图片大小和生成图片数量.\n第4组，红色框：设置步数，CFG切记设置1，采样器和调度器看自己喜好。设置引导参数，2~5，默认3.5效果不错。\n第5组，等待AI出图。\nGroup 1, red box: load large model; Green box: Load clip model; Blue box: Load VAE model; Yellow box: Load FLUX lora model.\nGroup 2, red box: Fill in prompt words.\nGroup 3, red box: Set image size and number of generated images\nGroup 4, red box: Set the number of steps, remember to set CFG to 1, and choose your own preferences for the sampler and scheduler. Set the boot parameters to 2-5, default 3.5 works well.\nGroup 5, wait for AI to generate the image.\n\n\n**********************************\n下载工作流 Download workflows \n**********************************\n你可以从这里找到更多“来来”制作的工作流下载\nYou can find more \"LAILAI\" production workflows here to download\n\n1、Openart\nhttps://openart.ai/workflows/@lailai\n2、LIBLIB\nhttps://www.liblib.art/userpage/246223f3718d400d980019ede42e6912/publish/workflow\n\n\n********************************\n联系方式 Contact information\n********************************\n如果您在使用过程中遇到任何问题，请通过下述联系方式与我联系,全网同名：来来说AI\nIf you encounter any problems during the use, Please contact me through the following contact information,Same name across the internet: lailai talk AI\n\n1、推特/Twitter\nhttps://x.com/6Lailai\n\n2、油管/youtube\nhttps://www.youtube.com/@laiAIGC\n\n3、TikTok\nhttps://www.tiktok.com/@laiaidesign\n\n4、微信/Wechat\nlaiweb3\n\n1、个人网站/Website\nhttps://lailai.club/\n\n2、微信公众号/Official Account WeChat\n搜索：来来说AI\n\n3、小红书/Red book\nhttps://www.xiaohongshu.com/user/profile/5d552549000000001103c036\n\n4、B站/blibli\nhttps://space.bilibili.com/503941258\n\n5、抖音/douyin\n搜索：来来说AI"
+      ],
+      "_widget_cache_map": {},
+      "color": "#dbd414",
+      "bgcolor": "#c7c000",
+      "category": "Official"
+    }
+  ],
+  "links": [
+    [
+      9,
+      8,
+      0,
+      9,
+      0,
+      "IMAGE"
+    ],
+    [
+      12,
+      10,
+      0,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      107,
+      12,
+      0,
+      72,
+      0,
+      "MODEL"
+    ],
+    [
+      109,
+      11,
+      0,
+      73,
+      0,
+      "CLIP"
+    ],
+    [
+      121,
+      72,
+      0,
+      78,
+      0,
+      "MODEL"
+    ],
+    [
+      123,
+      75,
+      0,
+      78,
+      2,
+      "LATENT"
+    ],
+    [
+      124,
+      73,
+      0,
+      78,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      125,
+      78,
+      0,
+      8,
+      0,
+      "LATENT"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "1（加载模型）",
+      "bounding": [
+        6,
+        2,
+        353,
+        578
+      ],
+      "color": "#A88",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "3（设置大小）",
+      "bounding": [
+        382,
+        9,
+        264,
+        210
+      ],
+      "color": "#8A8",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "2（设置提示词）",
+      "bounding": [
+        -1,
+        599,
+        357,
+        396
+      ],
+      "color": "#ff7300",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "4（设置参数）",
+      "bounding": [
+        682,
+        13,
+        396,
+        422
+      ],
+      "color": "#8AA",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "5（AI出图）",
+      "bounding": [
+        679,
+        494,
+        564,
+        428
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1.0610764609500007,
+      "offset": [
+        1035.0916239286053,
+        106.70899115100005
+      ]
+    },
+    "workspace_info": {
+      "id": "c814af7e-e899-4221-aec9-aa9f4ec91e27"
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

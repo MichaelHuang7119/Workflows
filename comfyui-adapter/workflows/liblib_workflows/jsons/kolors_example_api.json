@@ -1,0 +1,96 @@
+{
+  "3": {
+    "inputs": {
+      "images": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "6": {
+    "inputs": {
+      "model": "Kwai-Kolors/Kolors",
+      "precision": "fp16"
+    },
+    "class_type": "DownloadAndLoadKolorsModel",
+    "_meta": {
+      "title": "(Down)load Kolors Model"
+    }
+  },
+  "10": {
+    "inputs": {
+      "samples": [
+        "14",
+        0
+      ],
+      "vae": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "11": {
+    "inputs": {
+      "vae_name": "sdxl.vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "12": {
+    "inputs": {
+      "prompt": "cinematic photograph of an astronaut riding a horse in space |\nillustration of a cat wearing a top hat and a scarf  |\nphotograph of a goldfish in a bowl |\nanime screencap of a red haired girl",
+      "negative_prompt": "",
+      "num_images_per_prompt": 1,
+      "chatglm3_model": [
+        "13",
+        0
+      ]
+    },
+    "class_type": "KolorsTextEncode",
+    "_meta": {
+      "title": "Kolors Text Encode"
+    }
+  },
+  "13": {
+    "inputs": {
+      "precision": "fp16"
+    },
+    "class_type": "DownloadAndLoadChatGLM3",
+    "_meta": {
+      "title": "(Down)load ChatGLM3 Model"
+    }
+  },
+  "14": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "seed": 1000102404233412,
+      "steps": 25,
+      "cfg": 5,
+      "scheduler": "EulerDiscreteScheduler",
+      "denoise_strength": 1,
+      "kolors_model": [
+        "6",
+        0
+      ],
+      "kolors_embeds": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "KolorsSampler",
+    "_meta": {
+      "title": "Kolors Sampler"
+    }
+  }
+}

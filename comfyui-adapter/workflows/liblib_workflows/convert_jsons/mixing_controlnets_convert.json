@@ -1,0 +1,573 @@
+{
+  "3": {
+    "inputs": {
+      "unet": {
+        "node_": "31",
+        "name_": "unet"
+      },
+      "scheduler": {
+        "node_": "34",
+        "name_": "scheduler"
+      },
+      "timesteps": {
+        "node_": "34",
+        "name_": "timesteps"
+      },
+      "latents_in": {
+        "node_": "35",
+        "name_": "latents"
+      },
+      "positive": {
+        "node_": "50",
+        "name_": "forward"
+      },
+      "middle": null,
+      "negative": {
+        "node_": "59",
+        "name_": "forward"
+      },
+      "generators": {
+        "node_": "32",
+        "name_": "generators"
+      },
+      "cfg_scale": 6,
+      "cfg2_scale": 1.0,
+      "return_with_leftover_noise": "disable",
+      "batch_size": 1,
+      "model_type": "v1"
+    },
+    "node_type": "SampleLoop"
+  },
+  "5": {
+    "inputs": {
+      "width": 768,
+      "height": 768,
+      "batch_size": 1,
+      "channel_size": 4,
+      "init_value": 0.0
+    },
+    "node_type": "MakeTensors"
+  },
+  "7": {
+    "inputs": {
+      "text_encoder": {
+        "node_": "31",
+        "name_": "text_encoder"
+      },
+      "text_encoder2": {
+        "node_": "31",
+        "name_": "text_encoder2"
+      },
+      "text_encoder3": {
+        "node_": "31",
+        "name_": "text_encoder3"
+      },
+      "tokenizer": {
+        "node_": "31",
+        "name_": "tokenizer"
+      },
+      "tokenizer2": {
+        "node_": "31",
+        "name_": "tokenizer2"
+      },
+      "tokenizer3": {
+        "node_": "31",
+        "name_": "tokenizer3"
+      },
+      "prompt": "(hands)1.1, text, error, cropped, (worst quality)1.2, (low quality)1.2, normal quality, (jpeg artifacts)1.3, signature, watermark, username, blurry, artist name, monochrome, sketch, censorship, censor, (copyright)1.2, extra legs, (forehead mark)1.1 (depth of field)1.1 (emotionless)1.1 (penis)1.1",
+      "model_type": "v1",
+      "clip_skip": 0
+    },
+    "node_type": "EncodeText"
+  },
+  "8": {
+    "inputs": {
+      "latents": {
+        "node_": "3",
+        "name_": "latents"
+      },
+      "vae": {
+        "node_": "15",
+        "name_": "model"
+      }
+    },
+    "node_type": "VaeDecode"
+  },
+  "9": {
+    "inputs": {
+      "key": "9",
+      "value": {
+        "node_": "60",
+        "name_": "images"
+      }
+    },
+    "node_type": "TaskOutput"
+  },
+  "15": {
+    "inputs": {
+      "cls": "AutoencoderKL",
+      "path": "/data/yjw/ComfyUI/models/vae/kl-f8-anime2.ckpt",
+      "kwargs": {
+        "config": "/data/yjw/ComfyUI/models/configs/stable-diffusion-v1-5/vae"
+      }
+    },
+    "node_type": "ModelFromSingleFile"
+  },
+  "20": {
+    "inputs": {
+      "image_path": "/data/yjw/ComfyUI/input/house_scribble.png"
+    },
+    "node_type": "LoadImage"
+  },
+  "21": {
+    "inputs": {
+      "image_path": "/data/yjw/ComfyUI/input/pose_present.png"
+    },
+    "node_type": "LoadImage"
+  },
+  "24": {
+    "inputs": {
+      "text_encoder": {
+        "node_": "31",
+        "name_": "text_encoder"
+      },
+      "text_encoder2": {
+        "node_": "31",
+        "name_": "text_encoder2"
+      },
+      "text_encoder3": {
+        "node_": "31",
+        "name_": "text_encoder3"
+      },
+      "tokenizer": {
+        "node_": "31",
+        "name_": "tokenizer"
+      },
+      "tokenizer2": {
+        "node_": "31",
+        "name_": "tokenizer2"
+      },
+      "tokenizer3": {
+        "node_": "31",
+        "name_": "tokenizer3"
+      },
+      "prompt": "(solo)1.1 girl photograph realistic (flat chest)0.9, fennec ears fox ears, (messy hair)1.1 blonde hair, blue eyes, standing, serafuku sweater, (brick house)1.1 (scenery HDR landscape)1.1 (sun clouds)1.1 sky, mountains,\n\n",
+      "model_type": "v1",
+      "clip_skip": 0
+    },
+    "node_type": "EncodeText"
+  },
+  "26": {
+    "inputs": {
+      "cls": "ControlNetModel",
+      "path": "/data/yjw/ComfyUI/models/controlnet/control_scribble.safetensors",
+      "kwargs": {
+        "config": "/data/yjw/ComfyUI/models/configs/control_v11p_sd15_canny"
+      }
+    },
+    "node_type": "ModelFromSingleFile"
+  },
+  "27": {
+    "inputs": {
+      "cls": "ControlNetModel",
+      "path": "/data/yjw/ComfyUI/models/controlnet/control_openpose.safetensors",
+      "kwargs": {
+        "config": "/data/yjw/ComfyUI/models/configs/control_v11p_sd15_canny"
+      }
+    },
+    "node_type": "ModelFromSingleFile"
+  },
+  "31": {
+    "inputs": {
+      "path": "/data/yjw/ComfyUI/models/checkpoints/AOM3A1.safetensors",
+      "cls": "StableDiffusionImg2ImgPipeline",
+      "kwargs": {
+        "config": "/data/yjw/ComfyUI/models/configs/stable-diffusion-v1-5"
+      }
+    },
+    "node_type": "PipeFromSingleFile"
+  },
+  "32": {
+    "inputs": {
+      "seeds": 894480165483805
+    },
+    "node_type": "MakeGenerators"
+  },
+  "33": {
+    "inputs": {
+      "cls": "DPMSolverSinglestepScheduler",
+      "init_kwargs": {
+        "num_train_timesteps": 1000,
+        "beta_start": 0.00085,
+        "beta_end": 0.012,
+        "beta_schedule": "scaled_linear",
+        "trained_betas": null,
+        "solver_order": 2,
+        "prediction_type": "epsilon",
+        "thresholding": false,
+        "dynamic_thresholding_ratio": 0.995,
+        "sample_max_value": 1.0,
+        "algorithm_type": "sde-dpmsolver++",
+        "solver_type": "midpoint",
+        "lower_order_final": false,
+        "use_karras_sigmas": false,
+        "final_sigmas_type": "zero",
+        "lambda_min_clipped": -Infinity,
+        "variance_type": null
+      }
+    },
+    "node_type": "MakeScheduler"
+  },
+  "34": {
+    "inputs": {
+      "scheduler_in": {
+        "node_": "33",
+        "name_": "scheduler"
+      },
+      "scheduler_step": 12,
+      "start_step": 0,
+      "end_step": 11
+    },
+    "node_type": "SetTimesteps"
+  },
+  "35": {
+    "inputs": {
+      "scheduler": {
+        "node_": "34",
+        "name_": "scheduler"
+      },
+      "latents_in": {
+        "node_": "5",
+        "name_": "tensor"
+      },
+      "generators": {
+        "node_": "32",
+        "name_": "generators"
+      },
+      "timesteps": {
+        "node_": "34",
+        "name_": "timesteps"
+      }
+    },
+    "node_type": "AddNoise"
+  },
+  "36": {
+    "inputs": {
+      "method": "nearest-exact",
+      "width": 768,
+      "height": 768,
+      "tensor_in": {
+        "node_": "21",
+        "name_": "image"
+      }
+    },
+    "node_type": "ResizeTensors"
+  },
+  "37": {
+    "inputs": {
+      "method": "nearest-exact",
+      "width": 768,
+      "height": 768,
+      "tensor_in": {
+        "node_": "20",
+        "name_": "image"
+      }
+    },
+    "node_type": "ResizeTensors"
+  },
+  "38": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "24",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "39": {
+    "inputs": {
+      "dict_from": {
+        "node_": "38",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "24",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "40": {
+    "inputs": {
+      "dict_from": {
+        "node_": "39",
+        "name_": "dict_to"
+      },
+      "key": "controlnet",
+      "value": {
+        "node_": "27",
+        "name_": "model"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "41": {
+    "inputs": {
+      "dict_from": {
+        "node_": "40",
+        "name_": "dict_to"
+      },
+      "key": "controlnet",
+      "value": {
+        "node_": "26",
+        "name_": "model"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "42": {
+    "inputs": {
+      "dict_from": {
+        "node_": "41",
+        "name_": "dict_to"
+      },
+      "key": "control_image",
+      "value": {
+        "node_": "36",
+        "name_": "image"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "43": {
+    "inputs": {
+      "dict_from": {
+        "node_": "42",
+        "name_": "dict_to"
+      },
+      "key": "control_image",
+      "value": {
+        "node_": "37",
+        "name_": "image"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "44": {
+    "inputs": {
+      "dict_from": {
+        "node_": "43",
+        "name_": "dict_to"
+      },
+      "key": "control_scale",
+      "value": 1
+    },
+    "node_type": "UpdateDict"
+  },
+  "45": {
+    "inputs": {
+      "dict_from": {
+        "node_": "44",
+        "name_": "dict_to"
+      },
+      "key": "control_scale",
+      "value": 0.8000000000000003
+    },
+    "node_type": "UpdateDict"
+  },
+  "46": {
+    "inputs": {
+      "dict_from": {
+        "node_": "45",
+        "name_": "dict_to"
+      },
+      "key": "control_start_percent",
+      "value": 0.0
+    },
+    "node_type": "UpdateDict"
+  },
+  "47": {
+    "inputs": {
+      "dict_from": {
+        "node_": "46",
+        "name_": "dict_to"
+      },
+      "key": "control_start_percent",
+      "value": 0.0
+    },
+    "node_type": "UpdateDict"
+  },
+  "48": {
+    "inputs": {
+      "dict_from": {
+        "node_": "47",
+        "name_": "dict_to"
+      },
+      "key": "control_end_percent",
+      "value": 1.0
+    },
+    "node_type": "UpdateDict"
+  },
+  "49": {
+    "inputs": {
+      "dict_from": {
+        "node_": "48",
+        "name_": "dict_to"
+      },
+      "key": "control_end_percent",
+      "value": 1.0
+    },
+    "node_type": "UpdateDict"
+  },
+  "50": {
+    "inputs": {
+      "dict1": {
+        "node_": "49",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "51": {
+    "inputs": {
+      "dict_from": null,
+      "key": "prompt_embeds",
+      "value": {
+        "node_": "7",
+        "name_": "prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "52": {
+    "inputs": {
+      "dict_from": {
+        "node_": "51",
+        "name_": "dict_to"
+      },
+      "key": "pooled_prompt_embeds",
+      "value": {
+        "node_": "7",
+        "name_": "pooled_prompt_embeds"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "53": {
+    "inputs": {
+      "dict_from": {
+        "node_": "52",
+        "name_": "dict_to"
+      },
+      "key": "controlnet",
+      "value": {
+        "node_": "27",
+        "name_": "model"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "54": {
+    "inputs": {
+      "dict_from": {
+        "node_": "53",
+        "name_": "dict_to"
+      },
+      "key": "controlnet",
+      "value": {
+        "node_": "26",
+        "name_": "model"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "55": {
+    "inputs": {
+      "dict_from": {
+        "node_": "54",
+        "name_": "dict_to"
+      },
+      "key": "control_image",
+      "value": {
+        "node_": "36",
+        "name_": "image"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "56": {
+    "inputs": {
+      "dict_from": {
+        "node_": "55",
+        "name_": "dict_to"
+      },
+      "key": "control_image",
+      "value": {
+        "node_": "37",
+        "name_": "image"
+      }
+    },
+    "node_type": "UpdateDict"
+  },
+  "57": {
+    "inputs": {
+      "dict_from": {
+        "node_": "56",
+        "name_": "dict_to"
+      },
+      "key": "control_scale",
+      "value": 1
+    },
+    "node_type": "UpdateDict"
+  },
+  "58": {
+    "inputs": {
+      "dict_from": {
+        "node_": "57",
+        "name_": "dict_to"
+      },
+      "key": "control_scale",
+      "value": 0.8000000000000003
+    },
+    "node_type": "UpdateDict"
+  },
+  "59": {
+    "inputs": {
+      "dict1": {
+        "node_": "58",
+        "name_": "dict_to"
+      },
+      "dict2": null,
+      "dict3": null,
+      "dict4": null,
+      "dict5": null,
+      "dict6": null,
+      "dict7": null,
+      "dict8": null,
+      "dict9": null,
+      "dict10": null
+    },
+    "node_type": "ComfyUIMerge"
+  },
+  "60": {
+    "inputs": {
+      "images_in": {
+        "node_": "8",
+        "name_": "images"
+      }
+    },
+    "node_type": "Tensor2Image"
+  }
+}

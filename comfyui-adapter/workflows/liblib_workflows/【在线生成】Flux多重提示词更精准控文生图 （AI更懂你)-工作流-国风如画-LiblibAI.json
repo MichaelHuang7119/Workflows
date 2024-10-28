@@ -1,0 +1,1061 @@
+{
+  "last_node_id": 70,
+  "last_link_id": 111,
+  "nodes": [
+    {
+      "id": 5,
+      "type": "EmptyLatentImage",
+      "pos": [
+        540,
+        170.00001815327843
+      ],
+      "size": [
+        360.48712158203125,
+        106
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "label": "Latent",
+          "links": [
+            76
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        896,
+        1536,
+        1
+      ],
+      "_widget_cache_map": {},
+      "locked": true,
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 45,
+      "type": "KSampler",
+      "pos": [
+        958,
+        77
+      ],
+      "size": [
+        315,
+        262
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 85,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 111,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 82,
+          "label": "负面条件",
+          "slot_index": 2
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 76,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            87
+          ],
+          "shape": 3,
+          "label": "Latent",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        890,
+        "fixed",
+        20,
+        1,
+        "euler",
+        "simple",
+        1
+      ],
+      "_widget_cache_map": {},
+      "locked": true,
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 51,
+      "type": "ConditioningZeroOut",
+      "pos": [
+        543,
+        317.00001815327846
+      ],
+      "size": [
+        353.84619140625,
+        26
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 103,
+          "label": "条件",
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            82
+          ],
+          "shape": 3,
+          "label": "条件"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ConditioningZeroOut"
+      },
+      "locked": true,
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 10,
+      "type": "VAELoader",
+      "pos": [
+        546,
+        387.00001815327846
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "label": "VAE",
+          "links": [
+            12
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.sft"
+      ],
+      "_widget_cache_map": {},
+      "locked": true,
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [
+        969,
+        381
+      ],
+      "size": [
+        210,
+        46
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "link": 87,
+          "name": "samples",
+          "type": "LATENT",
+          "label": "Latent"
+        },
+        {
+          "link": 12,
+          "name": "vae",
+          "type": "VAE",
+          "label": "VAE"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "label": "图像",
+          "links": [
+            86
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "locked": true,
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 59,
+      "type": "Reroute",
+      "pos": [
+        129,
+        533
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 95
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "CLIP",
+          "links": [
+            97,
+            98
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false
+      },
+      "category": "Official"
+    },
+    {
+      "id": 70,
+      "type": "ConditioningConcat",
+      "pos": [
+        543,
+        70
+      ],
+      "size": [
+        360.55084228515625,
+        46
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning_to",
+          "type": "CONDITIONING",
+          "link": 110,
+          "label": "条件到"
+        },
+        {
+          "name": "conditioning_from",
+          "type": "CONDITIONING",
+          "link": 108,
+          "label": "条件从"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            111
+          ],
+          "shape": 3,
+          "label": "条件",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ConditioningConcat"
+      },
+      "locked": true,
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 40,
+      "type": "ConditioningConcat",
+      "pos": [
+        537,
+        488
+      ],
+      "size": [
+        360.15008544921875,
+        46
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "conditioning_to",
+          "type": "CONDITIONING",
+          "link": null,
+          "label": "条件到"
+        },
+        {
+          "name": "conditioning_from",
+          "type": "CONDITIONING",
+          "link": null,
+          "label": "条件从"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [],
+          "shape": 3,
+          "label": "条件",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ConditioningConcat"
+      },
+      "locked": true,
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 12,
+      "type": "UNETLoader",
+      "pos": [
+        -227,
+        57
+      ],
+      "size": [
+        315,
+        82
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "label": "模型",
+          "links": [
+            85,
+            89
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "F.1基础算法模型-哩布在线可运行_F.1-dev-fp8",
+        "fp8_e4m3fn"
+      ],
+      "_widget_cache_map": {
+        "黑暗森林工作室-FLUX.1_FLUX.1-dev-fp8": {
+          "name": "黑暗森林工作室-FLUX.1_FLUX.1-dev-fp8",
+          "value": 2295774
+        },
+        "FLUX.1 Dev 在线运行6-8步提速版_Merged": {
+          "name": "FLUX.1 Dev 在线运行6-8步提速版_Merged",
+          "value": "fc106761bc63407582f7a323593e3b9d"
+        },
+        "Flux1-fp8 11G版_flux1-Schnell": {
+          "name": "Flux1-fp8 11G版_flux1-Schnell",
+          "value": "f2bd47e4fbe642928186a50c4508ac1f"
+        },
+        "Flux.1 Compact | CLIP and VAE included_🟡 Flux.1-Dev fp16": {
+          "name": "Flux.1 Compact | CLIP and VAE included_🟡 Flux.1-Dev fp16",
+          "value": "fb7b744c426f44c2917c00658da92d47"
+        },
+        "F.1.1 Compact | CLIP and VAE included_🟡 Flux.1-Dev fp16": {
+          "name": "F.1.1 Compact | CLIP and VAE included_🟡 Flux.1-Dev fp16",
+          "value": "fb7b744c426f44c2917c00658da92d47"
+        },
+        "F.1基础算法模型-哩布在线可运行_F.1-dev-fp8": {
+          "name": "F.1基础算法模型-哩布在线可运行_F.1-dev-fp8",
+          "value": "412b427ddb674b4dbab9e5abd5ae6057"
+        }
+      },
+      "locked": true,
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 54,
+      "type": "LoraLoaderModelOnly",
+      "pos": [
+        -230,
+        180
+      ],
+      "size": [
+        315,
+        82
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 89,
+          "label": "模型"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            90
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoraLoaderModelOnly"
+      },
+      "widgets_values": [
+        "新世界电商超模 FLUX.1-SuperModel 东方审美_FLUXGIRL",
+        0.6
+      ],
+      "_widget_cache_map": {
+        "新世界电商超模 FLUX.1-SuperModel 东方审美_FLUXGIRL": {
+          "name": "新世界电商超模 FLUX.1-SuperModel 东方审美_FLUXGIRL",
+          "value": "a68c3bb75e864bb3a72a7af26dc9f557"
+        }
+      },
+      "locked": true,
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 57,
+      "type": "ModelSamplingFlux",
+      "pos": [
+        -230,
+        300
+      ],
+      "size": [
+        315,
+        130
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 90,
+          "label": "model"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": null,
+          "shape": 3,
+          "label": "MODEL"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ModelSamplingFlux"
+      },
+      "widgets_values": [
+        1.15,
+        0.5,
+        1024,
+        1024
+      ],
+      "_widget_cache_map": {},
+      "locked": true
+    },
+    {
+      "id": 67,
+      "type": "Note",
+      "pos": [
+        925,
+        -91
+      ],
+      "size": {
+        "0": 353.7081298828125,
+        "1": 69.77240753173828
+      },
+      "flags": {
+        "pinned": true
+      },
+      "order": 4,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "用的习慢性的常规采样器，和官方自定效果一样，顺眼，（但高手们需要改更多参数和更必更多采样模型，可改为官方的自定义采样器）负面条件零化处理。CFG值为1，降噪为重绘度0-1间。"
+      ],
+      "_widget_cache_map": {},
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 68,
+      "type": "Note",
+      "pos": [
+        1300,
+        -95
+      ],
+      "size": {
+        "0": 295.5939025878906,
+        "1": 69.1672134399414
+      },
+      "flags": {
+        "pinned": true
+      },
+      "order": 5,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "用的预览，可改为保存。"
+      ],
+      "_widget_cache_map": {},
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 63,
+      "type": "Note",
+      "pos": [
+        -234,
+        -93
+      ],
+      "size": {
+        "0": 337.4516296386719,
+        "1": 68.0523681640625
+      },
+      "flags": {
+        "pinned": true
+      },
+      "order": 6,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "本地用FP8模型，若更低，需要改加载器，改模型，同时也要改CLIP1的T5模型相配合，DEV FP16细节更多，但不能商用，机器要求高，"
+      ],
+      "_widget_cache_map": {},
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 37,
+      "type": "FluxGuidance",
+      "pos": [
+        135,
+        216
+      ],
+      "size": [
+        371.7790832519531,
+        58
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 105,
+          "label": "conditioning"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            110
+          ],
+          "shape": 3,
+          "label": "CONDITIONING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FluxGuidance"
+      },
+      "widgets_values": [
+        2.5
+      ],
+      "_widget_cache_map": {},
+      "locked": true
+    },
+    {
+      "id": 11,
+      "type": "DualCLIPLoader",
+      "pos": [
+        -220,
+        480
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "label": "CLIP",
+          "links": [
+            95
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "t5xxl_fp8_e4m3fn",
+        "clip_l",
+        "flux"
+      ],
+      "_widget_cache_map": {},
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 65,
+      "type": "Note",
+      "pos": [
+        522,
+        -88
+      ],
+      "size": {
+        "0": 387.13873291015625,
+        "1": 61.50150680541992
+      },
+      "flags": {
+        "pinned": true
+      },
+      "order": 8,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "CLIP连接用的CONCAT条件联连（两个GUIDANCE值可调，真实2-3，自行尝试）也可用COMBINE合并联接。（个人理解前者是叠加，后者是融合混合）"
+      ],
+      "_widget_cache_map": {},
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 66,
+      "type": "Note",
+      "pos": [
+        113,
+        -90
+      ],
+      "size": {
+        "0": 392.600830078125,
+        "1": 65.59718322753906
+      },
+      "flags": {
+        "pinned": true
+      },
+      "order": 9,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "想要更好的出图效果，更懂你的提示，加了双CLIP（CLIP1必用词汇，用逗号分隔：重品质与风格，同于标签,CLIP2用T5纯文本完整自然语言输入）再加了一个常规提示器CLIP，让AI更精准理解你的意思。"
+      ],
+      "_widget_cache_map": {},
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    },
+    {
+      "id": 52,
+      "type": "PreviewImage",
+      "pos": [
+        1315,
+        78
+      ],
+      "size": [
+        265.7681884765625,
+        308.0569152832031
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 86,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "locked": true,
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 26,
+      "type": "CLIPTextEncodeFlux",
+      "pos": [
+        125,
+        328
+      ],
+      "size": [
+        374.9682922363281,
+        190.28050231933594
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 98,
+          "label": "clip",
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            103,
+            108
+          ],
+          "shape": 3,
+          "label": "CONDITIONING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeFlux"
+      },
+      "widgets_values": [
+        "master photography, realistic style,Fashion Model, 1 girl, Fashion,",
+        "1 Fashion model, wearing a fashionable gray trench coat, carrying a pink bag, sexy long legs wearing a pair of red fashion high heels, very stylish walking on the catwalk,",
+        2.2
+      ],
+      "_widget_cache_map": {},
+      "locked": true,
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 36,
+      "type": "CLIPTextEncode",
+      "pos": [
+        127,
+        57
+      ],
+      "size": [
+        383.9195556640625,
+        105.07339477539062
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 97,
+          "label": "CLIP",
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            105
+          ],
+          "shape": 3,
+          "label": "条件",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "aster photography, realistic style,Fashion Model, 1 girl, Fashion,1 Fashion model, wearing a fashionable gray trench coat, carrying a pink bag, sexy long legs wearing a pair of red fashion high heels, very stylish walking on the catwalk,"
+      ],
+      "_widget_cache_map": {},
+      "locked": true,
+      "category": "Primitive Nodes"
+    }
+  ],
+  "links": [
+    [
+      12,
+      10,
+      0,
+      8,
+      1,
+      "VAE"
+    ],
+    [
+      76,
+      5,
+      0,
+      45,
+      3,
+      "LATENT"
+    ],
+    [
+      82,
+      51,
+      0,
+      45,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      85,
+      12,
+      0,
+      45,
+      0,
+      "MODEL"
+    ],
+    [
+      86,
+      8,
+      0,
+      52,
+      0,
+      "IMAGE"
+    ],
+    [
+      87,
+      45,
+      0,
+      8,
+      0,
+      "LATENT"
+    ],
+    [
+      89,
+      12,
+      0,
+      54,
+      0,
+      "MODEL"
+    ],
+    [
+      90,
+      54,
+      0,
+      57,
+      0,
+      "MODEL"
+    ],
+    [
+      95,
+      11,
+      0,
+      59,
+      0,
+      "*"
+    ],
+    [
+      97,
+      59,
+      0,
+      36,
+      0,
+      "CLIP"
+    ],
+    [
+      98,
+      59,
+      0,
+      26,
+      0,
+      "CLIP"
+    ],
+    [
+      103,
+      26,
+      0,
+      51,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      105,
+      36,
+      0,
+      37,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      108,
+      26,
+      0,
+      70,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      110,
+      37,
+      0,
+      70,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      111,
+      70,
+      0,
+      45,
+      1,
+      "CONDITIONING"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "模型及基本加载",
+      "bounding": [
+        -245,
+        -14,
+        353,
+        616
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": true
+    },
+    {
+      "title": "提示词输入",
+      "bounding": [
+        114,
+        -13,
+        403,
+        612
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": true
+    },
+    {
+      "title": "连接及VEA输入",
+      "bounding": [
+        525,
+        -13,
+        399,
+        612
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": true
+    },
+    {
+      "title": "采样器（潜空间）",
+      "bounding": [
+        932,
+        -12,
+        358,
+        610
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": true
+    },
+    {
+      "title": "像素空间",
+      "bounding": [
+        1295,
+        -10,
+        307,
+        611
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": true
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.6303940863128623,
+      "offset": {
+        "0": 487.7670802155168,
+        "1": 219.57174531510847
+      }
+    },
+    "0246.VERSION": [
+      0,
+      0,
+      4
+    ]
+  },
+  "version": 0.4
+}

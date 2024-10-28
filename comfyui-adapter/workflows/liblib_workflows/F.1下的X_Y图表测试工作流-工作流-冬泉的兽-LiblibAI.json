@@ -1,0 +1,928 @@
+{
+  "last_node_id": 62,
+  "last_link_id": 84,
+  "nodes": [
+    {
+      "id": 47,
+      "type": "XY Input: LoRA Plot",
+      "pos": [
+        446.4481300502351,
+        480.7034556338502
+      ],
+      "size": [
+        315,
+        246
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "lora_stack",
+          "type": "LORA_STACK",
+          "link": null,
+          "label": "LoRA堆"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "X",
+          "type": "XY",
+          "links": [
+            64
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "Y",
+          "type": "XY",
+          "links": [
+            65
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "XY Input: LoRA Plot"
+      },
+      "widgets_values": [
+        "X: LoRA Batch, Y: LoRA Weight",
+        "None",
+        1,
+        1,
+        3,
+        "/example_folder",
+        false,
+        "ascending",
+        0,
+        1,
+        5,
+        0,
+        1
+      ],
+      "color": "#223333",
+      "bgcolor": "#335555",
+      "shape": 1,
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 12,
+      "type": "DualCLIPLoader",
+      "pos": [
+        1230,
+        830
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            13,
+            14
+          ],
+          "shape": 3,
+          "label": "CLIP",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "clip_l.safetensors",
+        "t5xxl_fp16.safetensors",
+        "flux"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 9,
+      "type": "UNETLoader",
+      "pos": [
+        1236,
+        671
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            10
+          ],
+          "shape": 3,
+          "label": "模型",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "FLUX_1_dev.sft",
+        "default"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 14,
+      "type": "PreviewImage",
+      "pos": [
+        2021,
+        292
+      ],
+      "size": [
+        1391.5473033007802,
+        1111.18324429271
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 19,
+          "label": "图像"
+        }
+      ],
+      "title": "X/Y图表结果",
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 45,
+      "type": "XY Plot",
+      "pos": [
+        827.4481300502351,
+        499.70345563385
+      ],
+      "size": {
+        "0": 315,
+        "1": 194
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "dependencies",
+          "type": "DEPENDENCIES",
+          "link": 63,
+          "label": "依赖",
+          "slot_index": 0
+        },
+        {
+          "name": "X",
+          "type": "XY",
+          "link": 64,
+          "label": "X"
+        },
+        {
+          "name": "Y",
+          "type": "XY",
+          "link": 65,
+          "label": "Y"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SCRIPT",
+          "type": "SCRIPT",
+          "links": [],
+          "shape": 3,
+          "label": "脚本",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "XY Plot"
+      },
+      "widgets_values": [
+        5,
+        "False",
+        "Horizontal",
+        "True",
+        "Images"
+      ],
+      "color": "#332233",
+      "bgcolor": "#553355",
+      "shape": 1,
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 1,
+      "type": "KSampler Adv. (Efficient)",
+      "pos": [
+        1629,
+        640
+      ],
+      "size": {
+        "0": 325,
+        "1": 634
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 10,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 79,
+          "label": "正面条件",
+          "slot_index": 1
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 17,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 18,
+          "label": "Latent",
+          "slot_index": 3
+        },
+        {
+          "name": "optional_vae",
+          "type": "VAE",
+          "link": 6,
+          "label": "VAE(可选)"
+        },
+        {
+          "name": "script",
+          "type": "SCRIPT",
+          "link": 84,
+          "label": "脚本",
+          "slot_index": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": null,
+          "shape": 3,
+          "label": "模型"
+        },
+        {
+          "name": "CONDITIONING+",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3,
+          "label": "正面条件"
+        },
+        {
+          "name": "CONDITIONING-",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3,
+          "label": "负面条件"
+        },
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3,
+          "label": "Latent"
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": null,
+          "shape": 3,
+          "label": "VAE"
+        },
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            19
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 5
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler Adv. (Efficient)"
+      },
+      "widgets_values": [
+        "enable",
+        1091365357949750,
+        null,
+        30,
+        3.5,
+        "ddim",
+        "ddim_uniform",
+        0,
+        10000,
+        "disable",
+        "auto",
+        "true"
+      ],
+      "color": "#332233",
+      "bgcolor": "#553355",
+      "shape": 1,
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1239,
+        1006
+      ],
+      "size": {
+        "0": 301.19970703125,
+        "1": 120.13147735595703
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 13,
+          "label": "CLIP",
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            79
+          ],
+          "shape": 3,
+          "label": "条件",
+          "slot_index": 0
+        }
+      ],
+      "title": "正向提示词",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "A young Asian woman,"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 5,
+      "type": "Efficient Loader",
+      "pos": [
+        1244,
+        626
+      ],
+      "size": {
+        "0": 400,
+        "1": 462
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "lora_stack",
+          "type": "LORA_STACK",
+          "link": null,
+          "label": "LoRA堆"
+        },
+        {
+          "name": "cnet_stack",
+          "type": "CONTROL_NET_STACK",
+          "link": null,
+          "label": "ControlNet堆"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": null,
+          "shape": 3,
+          "label": "模型"
+        },
+        {
+          "name": "CONDITIONING+",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3,
+          "label": "正面条件"
+        },
+        {
+          "name": "CONDITIONING-",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3,
+          "label": "负面条件"
+        },
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            18
+          ],
+          "shape": 3,
+          "label": "Latent"
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            6
+          ],
+          "shape": 3,
+          "label": "VAE",
+          "slot_index": 4
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": null,
+          "shape": 3,
+          "label": "CLIP"
+        },
+        {
+          "name": "DEPENDENCIES",
+          "type": "DEPENDENCIES",
+          "links": [
+            63,
+            69
+          ],
+          "shape": 3,
+          "label": "依赖",
+          "slot_index": 6
+        }
+      ],
+      "title": "x/y图表依赖",
+      "properties": {
+        "Node name for S&R": "Efficient Loader"
+      },
+      "widgets_values": [
+        "25D_v2.safetensors",
+        "ae.sft",
+        -1,
+        "None",
+        1,
+        1,
+        "CLIP_POSITIVE",
+        "CLIP_NEGATIVE",
+        "none",
+        "comfy",
+        768,
+        768,
+        1
+      ],
+      "color": "#2a363b",
+      "bgcolor": "#3f5159",
+      "shape": 1,
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 13,
+      "type": "CLIPTextEncode",
+      "pos": [
+        1250,
+        1190
+      ],
+      "size": {
+        "0": 287.97198486328125,
+        "1": 76
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 14,
+          "label": "CLIP",
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            17
+          ],
+          "shape": 3,
+          "label": "条件",
+          "slot_index": 0
+        }
+      ],
+      "title": "负面提示词（不填）",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 50,
+      "type": "XY Input: Steps",
+      "pos": [
+        436.6608253719117,
+        991.338977252949
+      ],
+      "size": [
+        315,
+        130
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "X or Y",
+          "type": "XY",
+          "links": [
+            68
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "XY Input: Steps"
+      },
+      "widgets_values": [
+        "steps",
+        3,
+        10,
+        30,
+        0,
+        10,
+        10,
+        20,
+        10,
+        20
+      ],
+      "color": "#223333",
+      "bgcolor": "#335555",
+      "shape": 1,
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 51,
+      "type": "XY Input: CFG Scale",
+      "pos": [
+        433.6608253719117,
+        1172.338977252949
+      ],
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "X or Y",
+          "type": "XY",
+          "links": [
+            67
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "XY Input: CFG Scale"
+      },
+      "widgets_values": [
+        13,
+        1,
+        7
+      ],
+      "color": "#223333",
+      "bgcolor": "#335555",
+      "shape": 1,
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 53,
+      "type": "Fast Groups Bypasser (rgthree)",
+      "pos": {
+        "0": 1598,
+        "1": 396,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "size": [
+        370.23424398768293,
+        106
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "OPT_CONNECTION",
+          "type": "*",
+          "links": null,
+          "label": "可选连接"
+        }
+      ],
+      "properties": {
+        "matchColors": "",
+        "matchTitle": "",
+        "showNav": true,
+        "sort": "position",
+        "customSortAlphabet": "",
+        "toggleRestriction": "default"
+      }
+    },
+    {
+      "id": 49,
+      "type": "XY Plot",
+      "pos": [
+        792,
+        1021
+      ],
+      "size": {
+        "0": 315,
+        "1": 194
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "dependencies",
+          "type": "DEPENDENCIES",
+          "link": 69,
+          "label": "依赖",
+          "slot_index": 0
+        },
+        {
+          "name": "X",
+          "type": "XY",
+          "link": 68,
+          "label": "X"
+        },
+        {
+          "name": "Y",
+          "type": "XY",
+          "link": 67,
+          "label": "Y",
+          "slot_index": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SCRIPT",
+          "type": "SCRIPT",
+          "links": [
+            84
+          ],
+          "shape": 3,
+          "label": "脚本",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "XY Plot"
+      },
+      "widgets_values": [
+        5,
+        "False",
+        "Horizontal",
+        "True",
+        "Plot"
+      ],
+      "color": "#332233",
+      "bgcolor": "#553355",
+      "shape": 1,
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 52,
+      "type": "Note",
+      "pos": [
+        1276,
+        392
+      ],
+      "size": [
+        263.97378245943355,
+        106.06094894879828
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "1、需要测哪一种就打开右边“忽略多组”里找到相对应的“yes”打开\n2、设置好参数\n3、从打开的模块“XY图表”节点的右侧“脚本”处拉线连到“k采样器（高级效率）”的“脚本处”"
+      ],
+      "color": "#432",
+      "bgcolor": "#653",
+      "category": "Official"
+    }
+  ],
+  "links": [
+    [
+      6,
+      5,
+      4,
+      1,
+      4,
+      "VAE"
+    ],
+    [
+      10,
+      9,
+      0,
+      1,
+      0,
+      "MODEL"
+    ],
+    [
+      13,
+      12,
+      0,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      14,
+      12,
+      0,
+      13,
+      0,
+      "CLIP"
+    ],
+    [
+      17,
+      13,
+      0,
+      1,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      18,
+      5,
+      3,
+      1,
+      3,
+      "LATENT"
+    ],
+    [
+      19,
+      1,
+      5,
+      14,
+      0,
+      "IMAGE"
+    ],
+    [
+      63,
+      5,
+      6,
+      45,
+      0,
+      "DEPENDENCIES"
+    ],
+    [
+      64,
+      47,
+      0,
+      45,
+      1,
+      "XY"
+    ],
+    [
+      65,
+      47,
+      1,
+      45,
+      2,
+      "XY"
+    ],
+    [
+      67,
+      51,
+      0,
+      49,
+      2,
+      "XY"
+    ],
+    [
+      68,
+      50,
+      0,
+      49,
+      1,
+      "XY"
+    ],
+    [
+      69,
+      5,
+      6,
+      49,
+      0,
+      "DEPENDENCIES"
+    ],
+    [
+      79,
+      6,
+      0,
+      1,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      84,
+      49,
+      0,
+      1,
+      5,
+      "SCRIPT"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "测lora",
+      "bounding": [
+        405,
+        378,
+        782,
+        445
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    },
+    {
+      "title": "测其他",
+      "bounding": [
+        412,
+        888,
+        780,
+        429
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.5989500000000045,
+      "offset": [
+        -350.7970544919774,
+        -36.169827552334084
+      ]
+    }
+  },
+  "version": 0.4
+}

@@ -1,0 +1,1159 @@
+{
+  "last_node_id": 68,
+  "last_link_id": 104,
+  "nodes": [
+    {
+      "id": 9,
+      "type": "VAEDecode",
+      "pos": [
+        1820,
+        420
+      ],
+      "size": {
+        "0": 340,
+        "1": 50
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 89,
+          "label": "Latent"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 9,
+          "label": "VAE",
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            10
+          ],
+          "shape": 3,
+          "label": "图像",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 10,
+      "type": "VAELoader",
+      "pos": [
+        1820,
+        270
+      ],
+      "size": {
+        "0": 340,
+        "1": 80
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            9
+          ],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "kolors_vae.safetensors"
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 1,
+      "type": "MZ_ChatGLM3Loader",
+      "pos": [
+        570,
+        290
+      ],
+      "size": {
+        "0": 400,
+        "1": 80
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "chatglm3_model",
+          "type": "CHATGLM3MODEL",
+          "links": [
+            27,
+            29
+          ],
+          "shape": 3,
+          "label": "chatglm3_model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MZ_ChatGLM3Loader"
+      },
+      "widgets_values": [
+        "chatglm3-8bit.safetensors"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 49,
+      "type": "MZ_KolorsUNETLoaderV2",
+      "pos": [
+        570,
+        150
+      ],
+      "size": {
+        "0": 390,
+        "1": 90
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            73,
+            77
+          ],
+          "shape": 3,
+          "label": "model",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MZ_KolorsUNETLoaderV2"
+      },
+      "widgets_values": [
+        "kolors-unet.fp16.safetensors"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 67,
+      "type": "Reroute",
+      "pos": [
+        1270,
+        170
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 104,
+          "pos": [
+            37.5,
+            0
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "LATENT",
+          "links": [
+            103
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": true
+      },
+      "category": "Official"
+    },
+    {
+      "id": 7,
+      "type": "EmptyLatentImage",
+      "pos": [
+        1020,
+        540
+      ],
+      "size": {
+        "0": 310,
+        "1": 130
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            6
+          ],
+          "shape": 3,
+          "label": "Latent"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        768,
+        1
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 22,
+      "type": "MZ_ChatGLM3_V2",
+      "pos": [
+        570,
+        700
+      ],
+      "size": {
+        "0": 400,
+        "1": 110
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "chatglm3_model",
+          "type": "CHATGLM3MODEL",
+          "link": 29,
+          "label": "chatglm3_model"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            30,
+            79
+          ],
+          "shape": 3,
+          "label": "CONDITIONING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MZ_ChatGLM3_V2"
+      },
+      "widgets_values": [
+        "骑马"
+      ],
+      "category": "Custom Nodes"
+    },
+    {
+      "id": 5,
+      "type": "KSampler",
+      "pos": [
+        1020,
+        260
+      ],
+      "size": {
+        "0": 310,
+        "1": 230
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 73,
+          "label": "模型",
+          "slot_index": 0
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 35,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 30,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 6,
+          "label": "Latent",
+          "slot_index": 3
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "link": 95,
+          "widget": {
+            "name": "seed"
+          },
+          "label": "随机种",
+          "slot_index": 4
+        },
+        {
+          "name": "sampler_name",
+          "type": "COMBO",
+          "link": 97,
+          "widget": {
+            "name": "sampler_name"
+          },
+          "label": "采样器",
+          "slot_index": 5
+        },
+        {
+          "name": "scheduler",
+          "type": "COMBO",
+          "link": 98,
+          "widget": {
+            "name": "scheduler"
+          },
+          "label": "调度器",
+          "slot_index": 6
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "link": 100,
+          "widget": {
+            "name": "cfg"
+          },
+          "label": "CFG",
+          "slot_index": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            74
+          ],
+          "shape": 3,
+          "label": "Latent",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        368617429964544,
+        "fixed",
+        35,
+        5,
+        "euler_ancestral",
+        "karras",
+        1
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 51,
+      "type": "LatentUpscaleBy",
+      "pos": [
+        1390,
+        190
+      ],
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 74,
+          "label": "Latent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            104
+          ],
+          "shape": 3,
+          "label": "Latent",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LatentUpscaleBy"
+      },
+      "widgets_values": [
+        "nearest-exact",
+        1.5
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 55,
+      "type": "PrimitiveNode",
+      "pos": [
+        1030,
+        720
+      ],
+      "size": [
+        320,
+        80
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "INT",
+          "type": "INT",
+          "links": [
+            94,
+            95
+          ],
+          "slot_index": 0,
+          "widget": {
+            "name": "seed"
+          }
+        }
+      ],
+      "properties": {
+        "Run widget replace on values": false
+      },
+      "widgets_values": [
+        368617429964544,
+        "randomize"
+      ],
+      "color": "#223",
+      "bgcolor": "#335",
+      "category": "Official"
+    },
+    {
+      "id": 66,
+      "type": "PrimitiveNode",
+      "pos": [
+        1390,
+        720
+      ],
+      "size": [
+        320,
+        80
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "FLOAT",
+          "type": "FLOAT",
+          "links": [
+            100,
+            101
+          ],
+          "widget": {
+            "name": "cfg"
+          }
+        }
+      ],
+      "properties": {
+        "Run widget replace on values": false
+      },
+      "widgets_values": [
+        5,
+        "fixed"
+      ],
+      "color": "#223",
+      "bgcolor": "#335",
+      "category": "Official"
+    },
+    {
+      "id": 62,
+      "type": "PrimitiveNode",
+      "pos": [
+        1390,
+        850
+      ],
+      "size": [
+        320,
+        110
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "COMBO",
+          "type": "COMBO",
+          "links": [
+            98,
+            99
+          ],
+          "widget": {
+            "name": "scheduler"
+          }
+        }
+      ],
+      "properties": {
+        "Run widget replace on values": false
+      },
+      "widgets_values": [
+        "karras",
+        "fixed",
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335",
+      "category": "Official"
+    },
+    {
+      "id": 56,
+      "type": "PrimitiveNode",
+      "pos": [
+        1040,
+        850
+      ],
+      "size": [
+        320,
+        110
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "COMBO",
+          "type": "COMBO",
+          "links": [
+            96,
+            97
+          ],
+          "widget": {
+            "name": "sampler_name"
+          }
+        }
+      ],
+      "properties": {
+        "Run widget replace on values": false
+      },
+      "widgets_values": [
+        "euler_ancestral",
+        "fixed",
+        ""
+      ],
+      "color": "#223",
+      "bgcolor": "#335",
+      "category": "Official"
+    },
+    {
+      "id": 11,
+      "type": "PreviewImage",
+      "pos": [
+        1820,
+        530
+      ],
+      "size": [
+        550,
+        430
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 10,
+          "label": "图像"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 52,
+      "type": "KSampler",
+      "pos": [
+        1390,
+        320
+      ],
+      "size": [
+        320,
+        240
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 77,
+          "label": "模型"
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 78,
+          "label": "正面条件"
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 79,
+          "label": "负面条件"
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 103,
+          "label": "Latent"
+        },
+        {
+          "name": "seed",
+          "type": "INT",
+          "link": 94,
+          "widget": {
+            "name": "seed"
+          },
+          "label": "随机种",
+          "slot_index": 4
+        },
+        {
+          "name": "sampler_name",
+          "type": "COMBO",
+          "link": 96,
+          "widget": {
+            "name": "sampler_name"
+          },
+          "label": "采样器",
+          "slot_index": 5
+        },
+        {
+          "name": "scheduler",
+          "type": "COMBO",
+          "link": 99,
+          "widget": {
+            "name": "scheduler"
+          },
+          "label": "调度器",
+          "slot_index": 6
+        },
+        {
+          "name": "cfg",
+          "type": "FLOAT",
+          "link": 101,
+          "widget": {
+            "name": "cfg"
+          },
+          "label": "CFG",
+          "slot_index": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            89
+          ],
+          "shape": 3,
+          "label": "Latent",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        746943406362542,
+        "randomize",
+        20,
+        5,
+        "euler_ancestral",
+        "karras",
+        0.4
+      ],
+      "category": "Primitive Nodes"
+    },
+    {
+      "id": 21,
+      "type": "MZ_ChatGLM3_V2",
+      "pos": [
+        570,
+        430
+      ],
+      "size": {
+        "0": 400,
+        "1": 220
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "chatglm3_model",
+          "type": "CHATGLM3MODEL",
+          "link": 27,
+          "label": "chatglm3_model"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            35,
+            78
+          ],
+          "shape": 3,
+          "label": "CONDITIONING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MZ_ChatGLM3_V2"
+      },
+      "widgets_values": [
+        "夕阳西下，一匹老马，一个古代游子，路边有两棵老树，树上有几只乌鸦，还有一些滕蔓， 旁边是一条小河，河上有座小桥，桥对岸有一户人家，茅草屋，马和人需要有正常的比例。"
+      ],
+      "category": "Custom Nodes"
+    }
+  ],
+  "links": [
+    [
+      6,
+      7,
+      0,
+      5,
+      3,
+      "LATENT"
+    ],
+    [
+      9,
+      10,
+      0,
+      9,
+      1,
+      "VAE"
+    ],
+    [
+      10,
+      9,
+      0,
+      11,
+      0,
+      "IMAGE"
+    ],
+    [
+      27,
+      1,
+      0,
+      21,
+      0,
+      "CHATGLM3MODEL"
+    ],
+    [
+      29,
+      1,
+      0,
+      22,
+      0,
+      "CHATGLM3MODEL"
+    ],
+    [
+      30,
+      22,
+      0,
+      5,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      35,
+      21,
+      0,
+      5,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      73,
+      49,
+      0,
+      5,
+      0,
+      "MODEL"
+    ],
+    [
+      74,
+      5,
+      0,
+      51,
+      0,
+      "LATENT"
+    ],
+    [
+      77,
+      49,
+      0,
+      52,
+      0,
+      "MODEL"
+    ],
+    [
+      78,
+      21,
+      0,
+      52,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      79,
+      22,
+      0,
+      52,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      89,
+      52,
+      0,
+      9,
+      0,
+      "LATENT"
+    ],
+    [
+      94,
+      55,
+      0,
+      52,
+      4,
+      "INT"
+    ],
+    [
+      95,
+      55,
+      0,
+      5,
+      4,
+      "INT"
+    ],
+    [
+      96,
+      56,
+      0,
+      52,
+      5,
+      "COMBO"
+    ],
+    [
+      97,
+      56,
+      0,
+      5,
+      5,
+      "COMBO"
+    ],
+    [
+      98,
+      62,
+      0,
+      5,
+      6,
+      "COMBO"
+    ],
+    [
+      99,
+      62,
+      0,
+      52,
+      6,
+      "COMBO"
+    ],
+    [
+      100,
+      66,
+      0,
+      5,
+      7,
+      "FLOAT"
+    ],
+    [
+      101,
+      66,
+      0,
+      52,
+      7,
+      "FLOAT"
+    ],
+    [
+      103,
+      67,
+      0,
+      52,
+      3,
+      "LATENT"
+    ],
+    [
+      104,
+      51,
+      0,
+      67,
+      0,
+      "*"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9090909090909091,
+      "offset": [
+        -470.99882839043977,
+        17.130693582263167
+      ]
+    },
+    "workspace_info": {
+      "id": "80606be8-3a92-493e-a324-aadc3d6963af",
+      "saveLock": false,
+      "cloudID": null,
+      "coverMediaPath": null
+    },
+    "groupNodes": {
+      "高清修复参数": {
+        "nodes": [
+          {
+            "type": "PrimitiveNode",
+            "pos": [
+              1400,
+              640
+            ],
+            "size": {
+              "0": 290,
+              "1": 80
+            },
+            "flags": {},
+            "order": 4,
+            "mode": 0,
+            "outputs": [
+              {
+                "name": "INT",
+                "type": "INT",
+                "links": [],
+                "slot_index": 0,
+                "widget": {
+                  "name": "seed"
+                }
+              }
+            ],
+            "properties": {
+              "Run widget replace on values": false
+            },
+            "index": 0
+          },
+          {
+            "type": "PrimitiveNode",
+            "pos": [
+              1410,
+              770
+            ],
+            "size": {
+              "0": 270,
+              "1": 160
+            },
+            "flags": {},
+            "order": 5,
+            "mode": 0,
+            "outputs": [
+              {
+                "name": "COMBO",
+                "type": "COMBO",
+                "links": [],
+                "widget": {
+                  "name": "sampler_name"
+                }
+              }
+            ],
+            "properties": {
+              "Run widget replace on values": false
+            },
+            "index": 1
+          },
+          {
+            "type": "PrimitiveNode",
+            "pos": [
+              1430,
+              980
+            ],
+            "size": {
+              "0": 210,
+              "1": 110
+            },
+            "flags": {},
+            "order": 6,
+            "mode": 0,
+            "outputs": [
+              {
+                "name": "COMBO",
+                "type": "COMBO",
+                "links": [],
+                "widget": {
+                  "name": "scheduler"
+                }
+              }
+            ],
+            "properties": {
+              "Run widget replace on values": false
+            },
+            "index": 2
+          }
+        ],
+        "links": [],
+        "external": [
+          [
+            0,
+            0,
+            "INT"
+          ],
+          [
+            1,
+            0,
+            "COMBO"
+          ],
+          [
+            2,
+            0,
+            "COMBO"
+          ]
+        ]
+      },
+      "dd": {
+        "nodes": [
+          {
+            "type": "PrimitiveNode",
+            "pos": [
+              1410,
+              650
+            ],
+            "size": {
+              "0": 290,
+              "1": 80
+            },
+            "flags": {},
+            "order": 4,
+            "mode": 0,
+            "outputs": [
+              {
+                "name": "INT",
+                "type": "INT",
+                "links": [],
+                "slot_index": 0,
+                "widget": {
+                  "name": "seed"
+                }
+              }
+            ],
+            "properties": {
+              "Run widget replace on values": false
+            },
+            "index": 0
+          },
+          {
+            "type": "PrimitiveNode",
+            "pos": [
+              1420,
+              780
+            ],
+            "size": {
+              "0": 270,
+              "1": 160
+            },
+            "flags": {},
+            "order": 5,
+            "mode": 0,
+            "outputs": [
+              {
+                "name": "COMBO",
+                "type": "COMBO",
+                "links": [],
+                "widget": {
+                  "name": "sampler_name"
+                }
+              }
+            ],
+            "properties": {
+              "Run widget replace on values": false
+            },
+            "index": 1
+          },
+          {
+            "type": "PrimitiveNode",
+            "pos": [
+              1440,
+              990
+            ],
+            "size": {
+              "0": 210,
+              "1": 110
+            },
+            "flags": {},
+            "order": 6,
+            "mode": 0,
+            "outputs": [
+              {
+                "name": "COMBO",
+                "type": "COMBO",
+                "links": [],
+                "widget": {
+                  "name": "scheduler"
+                }
+              }
+            ],
+            "properties": {
+              "Run widget replace on values": false
+            },
+            "index": 2
+          }
+        ],
+        "links": [],
+        "external": []
+      }
+    }
+  },
+  "version": 0.4
+}
